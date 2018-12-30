@@ -11,12 +11,15 @@ adb devices -l || true
 # TODO MAYBE Install logcat from fdroid.
 # TODO MAYBE grant permission to logcat.
 # TODO Install protonmail via apkmirror.
-# TODO Maybe install maps.me.
 # TODO Maybe install focus
-# TODO Maybe install firefox (how firefox?)
 # TODO Maybe install dropbox.
-# TODO Maybe install duolingo.
 # TODO Install silence.
 # TODO Set silence as default text app.
 # TODO Set focus as default browser.
 # TODO Install mupdf viewer.
+# TODO Maybe Openvpn.
+# TODO DNS66.
+
+# TODO Maybe install firefox (how firefox?)
+# TODO Maybe install maps.me.
+# TODO Maybe install duolingo.
