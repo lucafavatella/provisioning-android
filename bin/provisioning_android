@@ -9,6 +9,8 @@ adb devices -l || true
 # TODO Install F-Droid.
 # TODO MAYBE Assert F-Droid repos.
 
+# TODO Anysoftkeyboard
+
 # TODO Maybe install checkey.
 
 # TODO DNS66.
@@ -32,3 +34,9 @@ adb devices -l || true
 # TODO Maybe install firefox (how firefox?)
 # TODO Maybe install maps.me.
 # TODO Maybe install duolingo.
+
+# TODO libreoffice viewer
+
+# TODO citymapper?
+
+# TODO VLC?
