@@ -19,3 +19,4 @@ adb devices -l || true
 # TODO Install silence.
 # TODO Set silence as default text app.
 # TODO Set focus as default browser.
+# TODO Install mupdf viewer.
