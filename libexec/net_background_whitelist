@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Reference: https://developer.android.com/training/basics/network-ops/data-saver
+
+PREFIX="Restrict background whitelisted UIDs: "
+
+ls() {
+    adb shell cmd netpolicy list restrict-background-whitelist
+}
+
+suffix() {
+    sed -e "s/^${PREFIX:?}//"
+}
+
+n_lines() {
+    wc -l
+}
+
+List="$(ls)" || exit 1
+{ test 1 -eq $(echo "${List:?}" | n_lines); } || exit 1
+{ echo "${List:?}" | grep -q -e "^${PREFIX:?}"; } || exit 1
+Suffix="$(echo "${List:?}" | suffix)"
+case "${Suffix:?}" in
+    none)
+        Uids=""
+        ;;
+    *)
+        Uids="${Suffix:?}"
+        ;;
+esac
+echo "${Uids?}"
