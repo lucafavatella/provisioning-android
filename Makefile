@@ -6,6 +6,19 @@ space = $(empty) $(empty)
 left_brace := {
 right_brace := }
 
+.PHONY: sprout-report
+sprout-report: \
+	list-devices \
+	list-users \
+	list-package-secondary-level-domains \
+	list-dangerous-permissions \
+	;
+
+.PHONY: sprout-provision
+sprout-provision:
+	$(MAKE) disable-google-packages
+	#$(MAKE) revoke-dangerous-permissions-from-all-packages
+
 .PHONY: list-devices
 list-devices:
 	$(ADB) devices -l
