@@ -11,6 +11,7 @@ sprout-report: \
 	list-devices \
 	list-users \
 	list-package-secondary-level-domains \
+	list-enabled-packages \
 	list-dangerous-permissions \
 	;
 
@@ -35,6 +36,11 @@ packages = $(sort $(patsubst package:%,%,$(shell $(ADB) shell pm list packages))
 .PHONY: list-packages
 list-packages:
 	echo $(packages)
+
+enabled_packages = $(sort $(patsubst package:%,%,$(shell $(ADB) shell pm list packages -e)))
+.PHONY: list-enabled-packages
+list-enabled-packages:
+	echo $(enabled_packages)
 
 packages_slds = $(sort $(foreach p,$(packages),$(shell echo $(p) | cut -d. -f-2)))
 # Secondary and first level domains.
