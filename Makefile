@@ -16,7 +16,7 @@ sprout-report: \
 
 .PHONY: sprout-provision
 sprout-provision:
-	$(MAKE) disable-google-packages
+	$(MAKE) -k disable-google-packages
 	#$(MAKE) revoke-dangerous-permissions-from-all-packages
 
 .PHONY: list-devices
