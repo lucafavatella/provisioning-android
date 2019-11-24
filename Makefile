@@ -1,5 +1,11 @@
 ADB ?= $(shell brew cask info android-platform-tools | grep adb | cut -d' ' -f1)
 
+comma = ,
+empty =
+space = $(empty) $(empty)
+left_brace := {
+right_brace := }
+
 .PHONY: list-devices
 list-devices:
 	$(ADB) devices -l
@@ -42,9 +48,12 @@ dangerous_permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$
 list-dangerous-permissions:
 	echo $(dangerous_permissions)
 
-.PHONY: get-privapp-permissions-%
-get-privapp-permissions-%:
-	$(ADB) shell pm get-privapp-permissions $*
+# From https://source.android.com/devices/tech/config/perms-whitelist
+# > Privileged apps are system apps that are located in a `priv-app` directory on one of the system image partitions.
+privileged_permissions_by_package = $(sort $(subst $(comma)$(space),$(space),$(patsubst %$(right_brace),%,$(patsubst $(left_brace)%,%,$(shell $(ADB) shell pm get-privapp-permissions $(1))))))
+.PHONY: list-privileged-permissions-%
+list-privileged-permissions-%:
+	echo $(call privileged_permissions_by_package,$*)
 
 .SECONDEXPANSION:
 
