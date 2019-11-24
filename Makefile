@@ -38,7 +38,7 @@ packages_by_prefix = $(filter $(1) $(1).%,$(packages))
 .PHONY: disable-google-packages
 disable-google-packages: disable-packages-by-prefix-com.google ;
 
-permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions))))
+permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions -g))))
 .PHONY: list-permissions
 list-permissions:
 	echo $(permissions)
@@ -54,6 +54,13 @@ privileged_permissions_by_package = $(sort $(subst $(comma)$(space),$(space),$(p
 .PHONY: list-privileged-permissions-%
 list-privileged-permissions-%:
 	echo $(call privileged_permissions_by_package,$*)
+
+.PHONY: revoke-dangerous-permissions-from-package-%
+revoke-dangerous-permissions-from-package-%:
+	{ echo "all:" && for P in $(dangerous_permissions); do echo "	echo $(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
+
+.PHONY: revoke-dangerous-permissions-from-all-packages
+revoke-dangerous-permissions-from-all-packages: $(foreach p,$(packages),revoke-dangerous-permissions-from-package-$(p)) ;
 
 .SECONDEXPANSION:
 
