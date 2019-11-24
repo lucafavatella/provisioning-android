@@ -55,7 +55,7 @@ disable-package-%:
 packages_by_prefix = $(filter $(1) $(1).%,$(packages))
 
 .PHONY: disable-google-packages
-disable-google-packages: disable-packages-by-prefix-com.google ;
+disable-google-packages: disable-packages-by-prefix-com.android.vending disable-packages-by-prefix-com.google ;
 
 permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions -g))))
 .PHONY: list-permissions
