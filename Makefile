@@ -19,7 +19,7 @@ sprout-report: \
 .PHONY: sprout-provision
 sprout-provision:
 	-$(MAKE) -k disable-google-packages # TODO Allow error only on com.google.android.apps.work.oobconfig
-	#$(MAKE) revoke-dangerous-permissions-from-all-packages
+	$(MAKE) revoke-dangerous-permissions-from-all-packages
 
 .PHONY: list-devices
 list-devices:
