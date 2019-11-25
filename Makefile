@@ -36,24 +36,24 @@ list-users:
 packages = $(sort $(patsubst package:%,%,$(shell $(ADB) shell pm list packages)))
 .PHONY: list-packages
 list-packages:
-	echo $(packages)
+	@echo $(packages)
 
 enabled_packages = $(sort $(patsubst package:%,%,$(shell $(ADB) shell pm list packages -e)))
 .PHONY: list-enabled-packages
 list-enabled-packages:
-	echo $(enabled_packages)
+	@echo $(enabled_packages)
 
 package_slds = $(sort $(foreach p,$(packages),$(shell echo $(p) | cut -d. -f-2)))
 # Secondary and first level domains.
 .PHONY: list-package-secondary-level-domains
 list-package-secondary-level-domains:
-	echo $(package_slds)
+	@echo $(package_slds)
 
 enabled_package_slds = $(sort $(foreach p,$(enabled_packages),$(shell echo $(p) | cut -d. -f-2)))
 # Secondary and first level domains.
 .PHONY: list-enabled-package-secondary-level-domains
 list-enabled-package-secondary-level-domains:
-	echo $(enabled_package_slds)
+	@echo $(enabled_package_slds)
 
 .PHONY: disable-package-%
 disable-package-%:
@@ -67,19 +67,19 @@ disable-google-packages: disable-packages-by-prefix-com.android.vending disable-
 permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions -g))))
 .PHONY: list-permissions
 list-permissions:
-	echo $(permissions)
+	@echo $(permissions)
 
 dangerous_permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions -g -d))))
 .PHONY: list-dangerous-permissions
 list-dangerous-permissions:
-	echo $(dangerous_permissions)
+	@echo $(dangerous_permissions)
 
 # From https://source.android.com/devices/tech/config/perms-whitelist
 # > Privileged apps are system apps that are located in a `priv-app` directory on one of the system image partitions.
 privileged_permissions_by_package = $(sort $(subst $(comma)$(space),$(space),$(patsubst %$(right_brace),%,$(patsubst $(left_brace)%,%,$(shell $(ADB) shell pm get-privapp-permissions $(1))))))
 .PHONY: list-privileged-permissions-%
 list-privileged-permissions-%:
-	echo $(call privileged_permissions_by_package,$*)
+	@echo $(call privileged_permissions_by_package,$*)
 
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%:
