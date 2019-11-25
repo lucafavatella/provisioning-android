@@ -11,6 +11,7 @@ sprout-report: \
 	list-devices \
 	list-users \
 	list-package-secondary-level-domains \
+	list-enabled-package-secondary-level-domains \
 	list-enabled-packages \
 	list-dangerous-permissions \
 	;
@@ -42,11 +43,17 @@ enabled_packages = $(sort $(patsubst package:%,%,$(shell $(ADB) shell pm list pa
 list-enabled-packages:
 	echo $(enabled_packages)
 
-packages_slds = $(sort $(foreach p,$(packages),$(shell echo $(p) | cut -d. -f-2)))
+package_slds = $(sort $(foreach p,$(packages),$(shell echo $(p) | cut -d. -f-2)))
 # Secondary and first level domains.
 .PHONY: list-package-secondary-level-domains
 list-package-secondary-level-domains:
-	echo $(packages_slds)
+	echo $(package_slds)
+
+enabled_package_slds = $(sort $(foreach p,$(enabled_packages),$(shell echo $(p) | cut -d. -f-2)))
+# Secondary and first level domains.
+.PHONY: list-enabled-package-secondary-level-domains
+list-enabled-package-secondary-level-domains:
+	echo $(enabled_package_slds)
 
 .PHONY: disable-package-%
 disable-package-%:
