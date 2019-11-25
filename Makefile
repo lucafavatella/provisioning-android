@@ -1,3 +1,4 @@
+# TODO Revoke privileged permissions from packages.
 ADB ?= $(shell brew cask info android-platform-tools | grep adb | cut -d' ' -f1)
 
 comma = ,
