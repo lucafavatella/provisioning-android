@@ -1,4 +1,5 @@
 ADB ?= $(shell brew cask info android-platform-tools | grep adb | cut -d' ' -f1)
+ADB_USER_ID ?= 0
 
 comma = ,
 empty =
@@ -58,7 +59,7 @@ list-enabled-package-secondary-level-domains:
 
 .PHONY: disable-package-%
 disable-package-%:
-	$(ADB) shell pm disable-user $*
+	$(ADB) shell pm disable-user --user $(ADB_USER_ID) $*
 
 packages_by_prefix = $(filter $(1) $(1).%,$(packages))
 
