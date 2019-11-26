@@ -1,4 +1,3 @@
-# TODO Revoke privileged permissions from packages.
 ADB ?= $(shell brew cask info android-platform-tools | grep adb | cut -d' ' -f1)
 
 comma = ,
@@ -21,6 +20,7 @@ sprout-report: \
 sprout-provision:
 	-$(MAKE) -k disable-google-packages # TODO Allow error only on com.google.android.apps.work.oobconfig
 	$(MAKE) revoke-dangerous-permissions-from-all-packages
+	$(MAKE) revoke-privileged-permissions-from-all-packages
 
 .PHONY: list-devices
 list-devices:
@@ -88,6 +88,13 @@ revoke-dangerous-permissions-from-package-%:
 
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: $(foreach p,$(packages),revoke-dangerous-permissions-from-package-$(p)) ;
+
+.PHONY: revoke-privileged-permissions-from-package-%
+revoke-privileged-permissions-from-package-%:
+	{ echo "all:" && for P in { $(MAKE) -s list-privileged-permissions-$*; }; do echo "	$(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
+
+.PHONY: revoke-privileged-permissions-from-all-packages
+revoke-privileged-permissions-from-all-packages: $(foreach p,$(packages),revoke-privileged-permissions-from-package-$(p)) ;
 
 .SECONDEXPANSION:
 
