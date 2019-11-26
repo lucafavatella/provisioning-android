@@ -83,6 +83,11 @@ disable-google-packages: $(patsubst %,disable-packages-by-prefix-%, \
 		com.google.android.apps.wallpaper \
 		com.google.android.apps.wellbeing \
 		com.google.android.apps.work.oobconfig \
+		com.google.android.as \
+		com.google.android.backuptransport \
+		com.google.android.calendar \
+		com.google.android.youtube \
+		com.google.ar.lens \
 		)
 
 permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions -g))))
