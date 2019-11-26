@@ -70,16 +70,16 @@ list-packages-by-prefix-%:
 #disable-google-packages: disable-packages-by-prefix-com.android.vending disable-packages-by-prefix-com.google ;
 disable-google-packages: $(patsubst %,disable-packages-by-prefix-%, \
 		com.android.vending \
-		# com.google.android.apps.docs \
-		# com.google.android.apps.googleassistant \
-		# com.google.android.apps.magazines \
-		# com.google.android.apps.maps \
-		# com.google.android.apps.messaging \
-		# com.google.android.apps.nbu.files \
-		# com.google.android.apps.photos \
-		# com.google.android.apps.restore \
-		# com.google.android.apps.subscriptions.red \
-		# com.google.android.apps.turbo \
+		com.google.android.apps.docs \
+		com.google.android.apps.googleassistant \
+		com.google.android.apps.magazines \
+		com.google.android.apps.maps \
+		com.google.android.apps.messaging \
+		com.google.android.apps.nbu.files \
+		com.google.android.apps.photos \
+		com.google.android.apps.restore \
+		com.google.android.apps.subscriptions.red \
+		com.google.android.apps.turbo \
 		# com.google.android.apps.wallpaper \
 		# com.google.android.apps.wellbeing \
 		# com.google.android.apps.work.oobconfig \
