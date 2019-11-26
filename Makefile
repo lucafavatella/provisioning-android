@@ -91,7 +91,7 @@ revoke-dangerous-permissions-from-all-packages: $(foreach p,$(packages),revoke-d
 
 .PHONY: revoke-privileged-permissions-from-package-%
 revoke-privileged-permissions-from-package-%:
-	{ echo "all:" && for P in { $(MAKE) -s list-privileged-permissions-$*; }; do echo "	$(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
+	{ echo "all:" && for P in { $(MAKE) -s list-privileged-permissions-$*; }; do echo "	echo $(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
 
 .PHONY: revoke-privileged-permissions-from-all-packages
 revoke-privileged-permissions-from-all-packages: $(foreach p,$(packages),revoke-privileged-permissions-from-package-$(p)) ;
