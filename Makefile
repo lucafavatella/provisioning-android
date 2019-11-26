@@ -62,6 +62,9 @@ disable-package-%:
 	$(ADB) shell pm disable-user --user $(ADB_USER_ID) $*
 
 packages_by_prefix = $(filter $(1) $(1).%,$(packages))
+.PHONY: list-packages-by-prefix-%
+list-packages-by-prefix-%:
+	@echo $(call packages_by_prefix,$*)
 
 .PHONY: disable-google-packages
 disable-google-packages: disable-packages-by-prefix-com.android.vending disable-packages-by-prefix-com.google ;
