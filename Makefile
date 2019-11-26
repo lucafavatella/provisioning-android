@@ -80,6 +80,8 @@ disable-google-packages: $(patsubst %,disable-packages-by-prefix-%, \
 		com.google.android.apps.restore \
 		com.google.android.apps.subscriptions.red \
 		com.google.android.apps.turbo \
+		com.google.android.apps.wallpaper \
+		com.google.android.apps.wellbeing \
 		)
 
 permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions -g))))
