@@ -86,6 +86,10 @@ disable-google-packages: $(patsubst %,disable-packages-by-prefix-%, \
 		com.google.android.as \
 		com.google.android.backuptransport \
 		com.google.android.calendar \
+		com.google.android.deskclock \
+		com.google.android.ext.services \
+		com.google.android.ext.shared \
+		com.google.android.feedback \
 		com.google.android.gm \
 		com.google.android.gms \
 		com.google.android.gms.policy_sidecar_aps \
