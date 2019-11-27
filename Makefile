@@ -66,6 +66,9 @@ packages_by_prefix = $(filter $(1) $(1).%,$(packages))
 list-packages-by-prefix-%:
 	@echo $(call packages_by_prefix,$*)
 
+# com.google.android.configupdater \
+# com.google.android.contacts \
+# com.google.android.dialer \
 .PHONY: disable-google-packages
 #disable-google-packages: disable-packages-by-prefix-com.android.vending disable-packages-by-prefix-com.google ;
 disable-google-packages: $(patsubst %,disable-packages-by-prefix-%, \
@@ -96,6 +99,18 @@ disable-google-packages: $(patsubst %,disable-packages-by-prefix-%, \
 		com.google.android.gmsintegration \
 		com.google.android.googlequicksearchbox \
 		com.google.android.gsf \
+		# com.google.android.ims \
+		# com.google.android.inputmethod.latin \
+		# com.google.android.marvin.talkback \
+		# com.google.android.onetimeinitializer \
+		# com.google.android.packageinstaller \
+		# com.google.android.partnersetup \
+		# com.google.android.printservice.recommendation \
+		# com.google.android.setupwizard \
+		# com.google.android.syncadapters.contacts \
+		# com.google.android.tag \
+		# com.google.android.tts \
+		# com.google.android.webview \
 		com.google.android.youtube \
 		com.google.ar.lens \
 		)
