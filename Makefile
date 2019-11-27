@@ -86,6 +86,12 @@ disable-google-packages: $(patsubst %,disable-packages-by-prefix-%, \
 		com.google.android.as \
 		com.google.android.backuptransport \
 		com.google.android.calendar \
+		com.google.android.gm \
+		com.google.android.gms \
+		com.google.android.gms.policy_sidecar_aps \
+		com.google.android.gmsintegration \
+		com.google.android.googlequicksearchbox \
+		com.google.android.gsf \
 		com.google.android.youtube \
 		com.google.ar.lens \
 		)
