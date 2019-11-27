@@ -103,14 +103,7 @@ disable-google-packages: $(patsubst %,disable-packages-by-prefix-%, \
 		com.google.android.gsf \
 		com.google.android.ims \
 		com.google.android.marvin.talkback \
-		# com.google.android.onetimeinitializer \
-		# com.google.android.packageinstaller \
-		# com.google.android.partnersetup \
-		# com.google.android.printservice.recommendation \
-		# com.google.android.setupwizard \
-		# com.google.android.syncadapters.contacts \
-		# com.google.android.tag \
-		# com.google.android.tts \
+		com.google.android.tts \
 		com.google.android.youtube \
 		com.google.ar.lens \
 		)
