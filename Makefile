@@ -67,7 +67,6 @@ list-packages-by-prefix-%:
 	@echo $(call packages_by_prefix,$*)
 
 # com.google.android.configupdater \
-# com.google.android.contacts \
 # com.google.android.dialer \
 # com.google.android.inputmethod.latin \
 # com.google.android.webview \
@@ -92,6 +91,7 @@ disable-google-packages: $(patsubst %,disable-packages-by-prefix-%, \
 		com.google.android.as \
 		com.google.android.backuptransport \
 		com.google.android.calendar \
+		com.google.android.contacts \
 		com.google.android.deskclock \
 		com.google.android.ext.services \
 		com.google.android.ext.shared \
