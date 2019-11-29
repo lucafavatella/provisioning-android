@@ -1,13 +1,17 @@
 ADB ?= $(shell brew cask info android-platform-tools | grep adb | cut -d' ' -f1)
 ADB_USER_ID ?= 0
 
-MONKEYRUNNER ?= $(shell brew cask info android-sdk | grep monkeyrunner | cut -d' ' -f1)
+MONKEYRUNNER = env PATH="$(dir $(ADB))":"$$PATH" $(shell brew cask info android-sdk | grep monkeyrunner | cut -d' ' -f1)
 
 comma = ,
 empty =
 space = $(empty) $(empty)
 left_brace := {
 right_brace := }
+
+.PHONY: help
+help:
+	echo foo
 
 .PHONY: sprout-report
 sprout-report: \
@@ -24,6 +28,10 @@ sprout-provision:
 	-$(MAKE) -k disable-google-packages # TODO Allow error only on com.google.android.apps.work.oobconfig
 	echo $(MAKE) revoke-dangerous-permissions-from-all-packages
 	echo $(MAKE) revoke-privileged-permissions-from-all-packages
+
+.PHONY: test
+test:
+	$(MONKEYRUNNER) lib/revoke-special-app-access.py
 
 .PHONY: list-devices
 list-devices:
