@@ -1,0 +1,6 @@
+#!/bin/sh
+
+X="${1:?}"
+Y="${2:?}"
+
+exec adb shell input tap "${X:?}" "${Y:?}"
