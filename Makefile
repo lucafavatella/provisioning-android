@@ -74,54 +74,17 @@ packages_by_prefix = $(filter $(1) $(1).%,$(packages))
 list-packages-by-prefix-%:
 	@echo $(call packages_by_prefix,$*)
 
-# com.google.android.configupdater \
-# com.google.android.dialer \
-# com.google.android.inputmethod.latin \
-# com.google.android.webview \
-# com.google.android.packageinstaller \
+google_packages_not_to_be_disabled = \
+	com.google.android.configupdater \
+	com.google.android.dialer \
+	com.google.android.inputmethod.latin \
+	com.google.android.webview \
+	com.google.android.packageinstaller
+google_packages_to_be_disabled = \
+	com.android.vending \
+	$(filter-out $(google_packages_not_to_be_disabled),$(call packages_by_prefix,com.google))
 .PHONY: disable-google-packages
-#disable-google-packages: disable-packages-by-prefix-com.android.vending disable-packages-by-prefix-com.google ;
-disable-google-packages: $(patsubst %,disable-packages-by-prefix-%, \
-		com.android.vending \
-		com.google.android.apps.docs \
-		com.google.android.apps.googleassistant \
-		com.google.android.apps.magazines \
-		com.google.android.apps.maps \
-		com.google.android.apps.messaging \
-		com.google.android.apps.nbu.files \
-		com.google.android.apps.photos \
-		com.google.android.apps.restore \
-		com.google.android.apps.subscriptions.red \
-		com.google.android.apps.turbo \
-		com.google.android.apps.wallpaper \
-		com.google.android.apps.wellbeing \
-		com.google.android.apps.work.oobconfig \
-		com.google.android.as \
-		com.google.android.backuptransport \
-		com.google.android.calendar \
-		com.google.android.contacts \
-		com.google.android.deskclock \
-		com.google.android.ext.services \
-		com.google.android.ext.shared \
-		com.google.android.feedback \
-		com.google.android.gm \
-		com.google.android.gms \
-		com.google.android.gms.policy_sidecar_aps \
-		com.google.android.gmsintegration \
-		com.google.android.googlequicksearchbox \
-		com.google.android.gsf \
-		com.google.android.ims \
-		com.google.android.marvin.talkback \
-		com.google.android.onetimeinitializer \
-		com.google.android.partnersetup \
-		com.google.android.printservice.recommendation \
-		com.google.android.setupwizard \
-		com.google.android.syncadapters.contacts \
-		com.google.android.tag \
-		com.google.android.tts \
-		com.google.android.youtube \
-		com.google.ar.lens \
-		)
+disable-google-packages: $(foreach p,$(google_packages_to_be_disabled),disable-package-$(p)) ;
 
 permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions -g))))
 .PHONY: list-permissions
@@ -163,12 +126,6 @@ revoke-privileged-permissions-from-package-%:
 
 .PHONY: revoke-privileged-permissions-from-all-packages
 revoke-privileged-permissions-from-all-packages: $(foreach p,$(packages),revoke-privileged-permissions-from-package-$(p)) ;
-
-.SECONDEXPANSION:
-
-.PHONY: disable-packages-by-prefix-%
-disable-packages-by-prefix-%: $$(foreach p,$$(call packages_by_prefix,$$*),disable-package-$$(p)) ;
-
 
 # As per Android 9, the 14 items of the screen "Settings > Apps & notifications > Special app access" are defined in
 # https://github.com/aosp-mirror/platform_packages_apps_settings/blob/android-cts-9.0_r10/res/xml/special_access.xml
