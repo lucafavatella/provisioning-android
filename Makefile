@@ -126,6 +126,8 @@ revoke-dangerous-permissions-from-package-%:
 revoke-privileged-permissions-from-package-%:
 	{ echo "all:" && for P in { $(MAKE) -s list-privileged-permissions-$*; }; do echo "	echo $(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
 
+# -- 8< ----
+
 # As per Android 9, the 14 items of the screen "Settings > Apps & notifications > Special app access" are defined in
 # https://github.com/aosp-mirror/platform_packages_apps_settings/blob/android-cts-9.0_r10/res/xml/special_access.xml
 # e.g.
