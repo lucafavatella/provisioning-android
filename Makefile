@@ -8,8 +8,8 @@ $(dir $(patsubst %/,%,$(dir $(MONKEYRUNNER))))adb: | $(ADB)
 comma = ,
 empty =
 space = $(empty) $(empty)
-left_brace := {
-right_brace := }
+left_brace = {
+right_brace = }
 
 .PHONY: sprout-report
 sprout-report: \
