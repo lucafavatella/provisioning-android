@@ -58,6 +58,11 @@ packages_by_prefix = $(filter $(1) $(1).%,$(packages))
 list-packages-by-prefix-%:
 	@echo $(call packages_by_prefix,$*)
 
+enabled_packages_by_prefix = $(filter $(1) $(1).%,$(enabled_packages))
+.PHONY: list-enabled-packages-by-prefix-%
+list-enabled-packages-by-prefix-%:
+	@echo $(call enabled_packages_by_prefix,$*)
+
 # Secondary or first level domain.
 sld = $(shell echo $(1) | cut -d. -f-2)
 package_slds = $(sort $(foreach p,$(packages),$(call sld,$(p))))
