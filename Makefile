@@ -24,8 +24,6 @@ sprout-report: \
 .PHONY: sprout-provision
 sprout-provision:
 	-$(MAKE) -k disable-google-packages
-	echo $(MAKE) revoke-dangerous-permissions-from-all-packages
-	echo $(MAKE) revoke-privileged-permissions-from-all-packages
 
 .PHONY: test
 test:
@@ -124,15 +122,9 @@ list-privileged-permissions-%:
 revoke-dangerous-permissions-from-package-%:
 	{ echo "all:" && for P in $(dangerous_permissions); do echo "	$(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
 
-.PHONY: revoke-dangerous-permissions-from-all-packages
-revoke-dangerous-permissions-from-all-packages: $(foreach p,$(packages),revoke-dangerous-permissions-from-package-$(p)) ;
-
 .PHONY: revoke-privileged-permissions-from-package-%
 revoke-privileged-permissions-from-package-%:
 	{ echo "all:" && for P in { $(MAKE) -s list-privileged-permissions-$*; }; do echo "	echo $(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
-
-.PHONY: revoke-privileged-permissions-from-all-packages
-revoke-privileged-permissions-from-all-packages: $(foreach p,$(packages),revoke-privileged-permissions-from-package-$(p)) ;
 
 # As per Android 9, the 14 items of the screen "Settings > Apps & notifications > Special app access" are defined in
 # https://github.com/aosp-mirror/platform_packages_apps_settings/blob/android-cts-9.0_r10/res/xml/special_access.xml
