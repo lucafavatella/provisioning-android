@@ -1,17 +1,19 @@
+.PHONY: help
+help:
+	echo foo
+
 ADB ?= $(shell brew cask info android-platform-tools | grep adb | cut -d' ' -f1)
 ADB_USER_ID ?= 0
 
-MONKEYRUNNER = env PATH="$(dir $(ADB))":"$$PATH" $(shell brew cask info android-sdk | grep monkeyrunner | cut -d' ' -f1)
+MONKEYRUNNER = $(shell brew cask info android-sdk | grep monkeyrunner | cut -d' ' -f1)
+$(dir $(patsubst %/,%,$(dir $(MONKEYRUNNER))))adb: | $(ADB)
+	ln -s "$(word 1,$|)" "$@"
 
 comma = ,
 empty =
 space = $(empty) $(empty)
 left_brace := {
 right_brace := }
-
-.PHONY: help
-help:
-	echo foo
 
 .PHONY: sprout-report
 sprout-report: \
