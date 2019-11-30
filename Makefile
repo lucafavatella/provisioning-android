@@ -53,13 +53,15 @@ enabled_packages = $(sort $(patsubst package:%,%,$(shell $(ADB) shell pm list pa
 list-enabled-packages:
 	@echo $(enabled_packages)
 
-package_slds = $(sort $(foreach p,$(packages),$(shell echo $(p) | cut -d. -f-2)))
-# Secondary and first level domains.
+# Secondary or first level domain.
+sld = $(shell echo $(1) | cut -d. -f-2)
+
+package_slds = $(sort $(foreach p,$(packages),$(call sld,$(p))))
 .PHONY: list-package-secondary-level-domains
 list-package-secondary-level-domains:
 	@echo $(package_slds)
 
-enabled_package_slds = $(sort $(foreach p,$(enabled_packages),$(shell echo $(p) | cut -d. -f-2)))
+enabled_package_slds = $(sort $(foreach p,$(enabled_packages),$(call sld,$(p))))
 # Secondary and first level domains.
 .PHONY: list-enabled-package-secondary-level-domains
 list-enabled-package-secondary-level-domains:
