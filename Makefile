@@ -25,10 +25,6 @@ sprout-report: \
 sprout-provision:
 	-$(MAKE) -k disable-google-packages
 
-.PHONY: test
-test:
-	$(MONKEYRUNNER) lib/revoke-special-app-access.py
-
 .PHONY: list-devices
 list-devices:
 	$(ADB) devices -l
@@ -125,6 +121,10 @@ revoke-dangerous-permissions-from-package-%:
 .PHONY: revoke-privileged-permissions-from-package-%
 revoke-privileged-permissions-from-package-%:
 	{ echo "all:" && for P in { $(MAKE) -s list-privileged-permissions-$*; }; do echo "	echo $(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
+
+.PHONY: revoke-special-app-access
+revoke-special-app-access:
+	$(MONKEYRUNNER) lib/$@.py
 
 # -- 8< ----
 
