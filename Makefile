@@ -1,7 +1,3 @@
-.PHONY: help
-help:
-	echo foo
-
 ADB ?= $(shell brew cask info android-platform-tools | grep adb | cut -d' ' -f1)
 ADB_USER_ID ?= 0
 
