@@ -23,7 +23,7 @@ sprout-report: \
 
 .PHONY: sprout-provision
 sprout-provision:
-	-$(MAKE) -k disable-google-packages # TODO Allow error only on com.google.android.apps.work.oobconfig
+	-$(MAKE) -k disable-google-packages
 	echo $(MAKE) revoke-dangerous-permissions-from-all-packages
 	echo $(MAKE) revoke-privileged-permissions-from-all-packages
 
@@ -81,6 +81,7 @@ disable-package-%:
 	$(ADB) shell pm disable-user --user $(ADB_USER_ID) $*
 
 google_packages_not_to_be_disabled = \
+	com.google.android.apps.work.oobconfig \
 	com.google.android.configupdater \
 	com.google.android.dialer \
 	com.google.android.inputmethod.latin \
