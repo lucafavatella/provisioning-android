@@ -53,9 +53,13 @@ enabled_packages = $(sort $(patsubst package:%,%,$(shell $(ADB) shell pm list pa
 list-enabled-packages:
 	@echo $(enabled_packages)
 
+packages_by_prefix = $(filter $(1) $(1).%,$(packages))
+.PHONY: list-packages-by-prefix-%
+list-packages-by-prefix-%:
+	@echo $(call packages_by_prefix,$*)
+
 # Secondary or first level domain.
 sld = $(shell echo $(1) | cut -d. -f-2)
-
 package_slds = $(sort $(foreach p,$(packages),$(call sld,$(p))))
 .PHONY: list-package-secondary-level-domains
 list-package-secondary-level-domains:
@@ -70,11 +74,6 @@ list-enabled-package-secondary-level-domains:
 .PHONY: disable-package-%
 disable-package-%:
 	$(ADB) shell pm disable-user --user $(ADB_USER_ID) $*
-
-packages_by_prefix = $(filter $(1) $(1).%,$(packages))
-.PHONY: list-packages-by-prefix-%
-list-packages-by-prefix-%:
-	@echo $(call packages_by_prefix,$*)
 
 google_packages_not_to_be_disabled = \
 	com.google.android.configupdater \
