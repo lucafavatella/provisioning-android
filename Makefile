@@ -192,3 +192,8 @@ revoke-special-app-access:
 
 
 # https://developer.android.com/training/testing/ui-automator#ui-automator-apis
+https://github.com/xiaocong/uiautomator
+https://github.com/openatx/uiautomator2
+https://developer.android.com/training/testing/ui-testing/uiautomator-testing
+https://developer.android.com/training/testing/ui-automator
+UIAutomator vs Espresso: https://stackoverflow.com/questions/31076228/android-testing-uiautomator-vs-espresso/31080906#31080906
