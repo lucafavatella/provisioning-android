@@ -217,3 +217,5 @@ https://github.com/openatx/uiautomator2 - 2019
 https://bitbucket.org/zgoda/androidery/src/master/ - 2018
 https://github.com/dtmilano/AndroidViewClient/ - 2019
 https://github.com/ffujiawei/cerium - Jan 2019
+
+https://stackoverflow.com/questions/27256911/any-faster-way-to-dump-ui-hierarchy
