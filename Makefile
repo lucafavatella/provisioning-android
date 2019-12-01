@@ -192,8 +192,16 @@ revoke-special-app-access:
 
 
 # https://developer.android.com/training/testing/ui-automator#ui-automator-apis
-https://github.com/xiaocong/uiautomator
-https://github.com/openatx/uiautomator2
-https://developer.android.com/training/testing/ui-testing/uiautomator-testing
-https://developer.android.com/training/testing/ui-automator
-UIAutomator vs Espresso: https://stackoverflow.com/questions/31076228/android-testing-uiautomator-vs-espresso/31080906#31080906
+# https://github.com/xiaocong/uiautomator
+# https://github.com/openatx/uiautomator2
+# https://developer.android.com/training/testing/ui-testing/uiautomator-testing
+# https://developer.android.com/training/testing/ui-automator
+# UIAutomator vs Espresso: https://stackoverflow.com/questions/31076228/android-testing-uiautomator-vs-espresso/31080906#31080906
+# https://github.com/appium/appium-espresso-driver
+# https://github.com/appium/appium-uiautomator2-driver
+
+# https://developer.android.com/studio/test/monkeyrunner
+
+# https://dustingram.com/articles/2010/06/18/automated-control-of-an-android-device-with-python/
+
+# https://github.com/ffujiawei/cerium/blob/f6e06e0dcf83a0bc924828e9d6cb81383ed2364f/cerium/androiddriver.py
