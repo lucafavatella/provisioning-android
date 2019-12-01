@@ -211,6 +211,8 @@ revoke-special-app-access:
 # https://cerium.readthedocs.io/en/latest/user/quickstart.html#interact-with-applications
 
 https://bitbucket.org/zgoda/androidery/src/master/ - 2018
+Random collection of ADB usages. It does not have any UI helper e.g. click by id.
+
 https://github.com/dtmilano/AndroidViewClient/ - 2019
 https://github.com/ffujiawei/cerium - Jan 2019
 
