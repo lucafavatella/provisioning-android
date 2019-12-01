@@ -189,3 +189,6 @@ revoke-special-app-access:
 
 # https://developer.android.com/training/testing/espresso/setup#analytics
 # adb shell am instrument -e disableAnalytics true
+
+
+# https://developer.android.com/training/testing/ui-automator#ui-automator-apis
