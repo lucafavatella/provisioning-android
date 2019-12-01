@@ -219,3 +219,28 @@ https://github.com/dtmilano/AndroidViewClient/ - 2019
 https://github.com/ffujiawei/cerium - Jan 2019
 
 https://stackoverflow.com/questions/27256911/any-faster-way-to-dump-ui-hierarchy
+
+
+From https://github.com/openatx/android-uiautomator-server/
+# > [UIAutomator](http://developer.android.com/tools/testing/testing_ui.html) is a
+# > great tool to perform Android UI testing, but to do it, you have to write java
+# > code, compile it, install the jar, and run. It's a complex steps for all
+# > testers...
+# > 
+# > This project is to build a light weight jsonrpc server in Android device, so
+# > that we can just write PC side script to write UIAutomator tests.
+# > 
+# > ...
+# > 
+# > # How to use
+# > 
+# > ```python
+# > from uiautomator import device as d
+# > 
+# > d.screen.on()
+# > d(text="Settings").click()
+# > d(scrollable=True).scroll.vert.forward()
+# > ```
+# > 
+# > Refer to python wrapper library [uiautomator](https://github.com/xiaocong/uiautomator).
+# > 
