@@ -220,8 +220,7 @@ https://github.com/ffujiawei/cerium - Jan 2019
 
 https://stackoverflow.com/questions/27256911/any-faster-way-to-dump-ui-hierarchy
 
-
-From https://github.com/openatx/android-uiautomator-server/
+https://github.com/openatx/uiautomator2 (forked from `xiaocong/uiautomator`) needs https://github.com/openatx/android-uiautomator-server/
 # > [UIAutomator](http://developer.android.com/tools/testing/testing_ui.html) is a
 # > great tool to perform Android UI testing, but to do it, you have to write java
 # > code, compile it, install the jar, and run. It's a complex steps for all
@@ -244,3 +243,5 @@ From https://github.com/openatx/android-uiautomator-server/
 # > 
 # > Refer to python wrapper library [uiautomator](https://github.com/xiaocong/uiautomator).
 # > 
+
+https://github.com/swind/uiautomator (forked from `xiaocong/uiautomator`, and replaces ADB client with Python implementation) needs https://github.com/Swind/android-uiautomator-server
