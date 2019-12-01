@@ -184,3 +184,8 @@ revoke-special-app-access:
 # Strings associated to the android:key are defined in https://github.com/aosp-mirror/platform_packages_apps_settings/blob/android-cts-9.0_r10/res/values/strings.xml#L8824
 # e.g.
 # Search for `change_wifi_state`, find also <string name="change_wifi_state_title">Wi-Fi control</string>
+
+
+
+# https://developer.android.com/training/testing/espresso/setup#analytics
+# adb shell am instrument -e disableAnalytics true
