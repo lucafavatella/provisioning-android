@@ -211,7 +211,7 @@ revoke-special-app-access:
 # https://cerium.readthedocs.io/en/latest/user/quickstart.html#interact-with-applications
 
 https://github.com/xiaocong/uiautomator - 2018
-https://github.com/swind/uiautomator - 2019
+#https://github.com/swind/uiautomator - 2019 (pure-python-adb rather than adb cli)
 https://github.com/openatx/uiautomator2 - 2019
 
 https://bitbucket.org/zgoda/androidery/src/master/ - 2018
