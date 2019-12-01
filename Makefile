@@ -208,3 +208,4 @@ revoke-special-app-access:
 
 
 # https://github.com/ffujiawei/cerium/blob/f6e06e0dcf83a0bc924828e9d6cb81383ed2364f/cerium/androiddriver.py#L577
+# https://cerium.readthedocs.io/en/latest/user/quickstart.html#interact-with-applications
