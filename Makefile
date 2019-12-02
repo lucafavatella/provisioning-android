@@ -249,3 +249,30 @@ https://github.com/swind/uiautomator (forked from `xiaocong/uiautomator`, and re
 https://stackoverflow.com/questions/13578416/read-binary-stdout-data-from-adb-shell/31401447#31401447
 https://android.googlesource.com/platform/system/core/+/5d9d434efadf1c535c7fea634d5306e18c68ef1f
 ${ADB} exec-out uiautomator dump --compressed /dev/tty
+
+
+```
+$ ${ADB} shell input
+Usage: input [<source>] <command> [<arg>...]
+
+The sources are: 
+      dpad
+      keyboard
+      mouse
+      touchpad
+      gamepad
+      touchnavigation
+      joystick
+      touchscreen
+      stylus
+      trackball
+
+The commands and default sources are:
+      text <string> (Default: touchscreen)
+      keyevent [--longpress] <key code number or name> ... (Default: keyboard)
+      tap <x> <y> (Default: touchscreen)
+      swipe <x1> <y1> <x2> <y2> [duration(ms)] (Default: touchscreen)
+      draganddrop <x1> <y1> <x2> <y2> [duration(ms)] (Default: touchscreen)
+      press (Default: trackball)
+      roll <dx> <dy> (Default: trackball)
+```
