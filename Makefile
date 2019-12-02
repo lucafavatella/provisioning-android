@@ -234,9 +234,6 @@ https://github.com/openatx/uiautomator2 (forked from `xiaocong/uiautomator`) nee
 # > d(text="Settings").click()
 # > d(scrollable=True).scroll.vert.forward()
 # > ```
-# > 
-# > Refer to python wrapper library [uiautomator](https://github.com/xiaocong/uiautomator).
-# > 
 
 https://github.com/swind/uiautomator (forked from `xiaocong/uiautomator`, and replaces ADB client with Python implementation) needs https://github.com/Swind/android-uiautomator-server
 
