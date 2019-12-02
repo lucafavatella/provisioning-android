@@ -194,7 +194,12 @@ revoke-special-app-access:
 # https://github.com/openatx/uiautomator2
 # https://developer.android.com/training/testing/ui-testing/uiautomator-testing
 # https://developer.android.com/training/testing/ui-automator
+
 # UIAutomator vs Espresso: https://stackoverflow.com/questions/31076228/android-testing-uiautomator-vs-espresso/31080906#31080906
+# UIAutomator – is powerful and has good external OS system integration e.g. can turn WiFi on and off and access other settings during test, but ... lacks detailed view access so one could say it may be more of a pure black-box test. Where as Espresso has access to view internals (see below). ...
+# Espresso - ... does not have access to system integration tests but has access to view internals e.g. can test a webview (useful for Hybrid app testing, or webview heavy testing). Slightly more grey-box testing compared to UI Automator. ...
+
+
 # https://github.com/appium/appium-espresso-driver
 # https://github.com/appium/appium-uiautomator2-driver
 
