@@ -185,7 +185,9 @@ revoke-special-app-access:
 # e.g.
 # Search for `change_wifi_state`, find also <string name="change_wifi_state_title">Wi-Fi control</string>
 
+# -- 8< ----
 
+# UI automation
 
 # https://developer.android.com/training/testing/espresso/setup#analytics
 # adb shell am instrument -e disableAnalytics true
