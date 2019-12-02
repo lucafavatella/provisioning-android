@@ -254,19 +254,7 @@ ${ADB} exec-out uiautomator dump --compressed /dev/tty
 ```
 $ ${ADB} shell input
 Usage: input [<source>] <command> [<arg>...]
-
-The sources are: 
-      dpad
-      keyboard
-      mouse
-      touchpad
-      gamepad
-      touchnavigation
-      joystick
-      touchscreen
-      stylus
-      trackball
-
+...
 The commands and default sources are:
       text <string> (Default: touchscreen)
       keyevent [--longpress] <key code number or name> ... (Default: keyboard)
