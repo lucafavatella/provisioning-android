@@ -249,10 +249,8 @@ https://github.com/openatx/uiautomator2 (forked from `xiaocong/uiautomator`) nee
 
 https://github.com/swind/uiautomator (forked from `xiaocong/uiautomator`, and replaces ADB client with Python implementation) needs https://github.com/Swind/android-uiautomator-server
 
-https://stackoverflow.com/questions/13578416/read-binary-stdout-data-from-adb-shell/31401447#31401447
-https://android.googlesource.com/platform/system/core/+/5d9d434efadf1c535c7fea634d5306e18c68ef1f
+https://android.googlesource.com/platform/system/core/+/5d9d434efadf1c535c7fea634d5306e18c68ef1f (via https://stackoverflow.com/questions/13578416/read-binary-stdout-data-from-adb-shell/31401447#31401447 )
 ${ADB} exec-out uiautomator dump --compressed /dev/tty
-
 
 ```
 $ ${ADB} shell input
