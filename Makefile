@@ -257,3 +257,5 @@ The commands and default sources are:
 ```
 
 In apps and notifications, in default apps, disable assist and voice input.
+
+In connected devices, connection preferences, no NFC or printing.
