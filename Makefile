@@ -255,3 +255,5 @@ The commands and default sources are:
       press (Default: trackball)
       roll <dx> <dy> (Default: trackball)
 ```
+
+In apps and notifications, in default apps, disable assist and voice input.
