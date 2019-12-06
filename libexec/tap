@@ -1,2 +1,4 @@
 #!/bin/sh
-adb shell input tap "${1:?}" "${2:?}"
+X="${1:?}"
+Y="${2:?}"
+adb shell input tap "${X:?}" "${Y:?}"
