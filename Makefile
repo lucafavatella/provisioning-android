@@ -239,20 +239,6 @@ https://github.com/openatx/uiautomator2 (forked from `xiaocong/uiautomator`) nee
 
 https://github.com/swind/uiautomator (forked from `xiaocong/uiautomator`, and replaces ADB client with Python implementation) needs https://github.com/Swind/android-uiautomator-server
 
-```
-$ ${ADB} shell input
-Usage: input [<source>] <command> [<arg>...]
-...
-The commands and default sources are:
-      text <string> (Default: touchscreen)
-      keyevent [--longpress] <key code number or name> ... (Default: keyboard)
-      tap <x> <y> (Default: touchscreen)
-      swipe <x1> <y1> <x2> <y2> [duration(ms)] (Default: touchscreen)
-      draganddrop <x1> <y1> <x2> <y2> [duration(ms)] (Default: touchscreen)
-      press (Default: trackball)
-      roll <dx> <dy> (Default: trackball)
-```
-
 In apps and notifications, in default apps, disable assist and voice input.
 
 In connected devices, connection preferences, no NFC or printing.
