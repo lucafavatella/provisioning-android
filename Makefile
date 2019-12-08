@@ -1,5 +1,19 @@
 .DEFAULT_GOAL = list-devices
 
+.PHONY: provision-sprout
+provision-sprout: \
+	disable-package-com.hmdglobal.app.fmradio \
+	provision-android-one \
+	;
+
+.PHONY: provision-android-one
+provision-android-one: \
+	disable-google-packages \
+	revoke-special-permissions-from-all-packages \
+	; $(info Assumption: Android One systems are similar across Original Equipment Manufacturers)
+
+# --v-- Internal rules --v--
+
 ADB = $(shell brew cask info android-platform-tools | grep adb | cut -d' ' -f1)
 ADB_USER_ID = 0
 
@@ -13,17 +27,7 @@ space = $(empty) $(empty)
 left_brace = {
 right_brace = }
 
-.PHONY: provision-sprout
-provision-sprout: \
-	disable-package-com.hmdglobal.app.fmradio \
-	provision-android-one \
-	;
 
-.PHONY: provision-android-one
-provision-android-one: \
-	disable-google-packages \
-	revoke-special-permissions-from-all-packages \
-	; $(info Assumption: Android One systems are similar across Original Equipment Manufacturers)
 
 .PHONY: list-devices
 list-devices: ; $(ADB) devices -l
