@@ -49,11 +49,13 @@ list-commands: ; $(ADB) shell cmd -l
 .PHONY: list-users
 list-users: ; $(ADB) shell pm list users
 
-packages = $(sort $(patsubst package:%,%,$(shell $(ADB) shell pm list packages)))
+adb_ls_packages = $(ADB) shell pm list packages $(1)
+
+packages = $(sort $(patsubst package:%,%,$(shell $(call adb_ls_packages,))))
 .PHONY: list-packages
 list-packages: ; @echo $(packages)
 
-enabled_packages = $(sort $(patsubst package:%,%,$(shell $(ADB) shell pm list packages -e)))
+enabled_packages = $(sort $(patsubst package:%,%,$(shell $(call adb_ls_packages,-e))))
 .PHONY: list-enabled-packages
 list-enabled-packages: ; @echo $(enabled_packages)
 
