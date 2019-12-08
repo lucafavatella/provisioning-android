@@ -78,9 +78,10 @@ google_packages_not_to_be_disabled = \
 	com.google.android.apps.work.oobconfig \
 	com.google.android.configupdater \
 	com.google.android.dialer \
+	com.google.android.gms \
 	com.google.android.inputmethod.latin \
-	com.google.android.webview \
-	com.google.android.packageinstaller
+	com.google.android.packageinstaller \
+	com.google.android.webview
 google_packages_to_be_disabled = \
 	com.android.vending \
 	$(filter-out $(google_packages_not_to_be_disabled),$(call packages_by_prefix,com.google))
