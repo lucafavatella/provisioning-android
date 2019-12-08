@@ -15,19 +15,17 @@ provision-android-one: \
 ADB = $(shell brew cask info android-platform-tools | grep adb | cut -d' ' -f1)
 ADB_USER_ID = 0
 
-# --v-- Internal rules and variables --v--
-
 # MONKEYRUNNER = $(shell brew cask info android-sdk | grep monkeyrunner | cut -d' ' -f1)
 # $(dir $(patsubst %/,%,$(dir $(MONKEYRUNNER))))adb: | $(ADB)
 # 	ln -s "$(word 1,$|)" "$@"
+
+# --v-- Internal rules and variables --v--
 
 comma = ,
 empty =
 space = $(empty) $(empty)
 left_brace = {
 right_brace = }
-
-
 
 .PHONY: list-devices
 list-devices: ; $(ADB) devices -l
