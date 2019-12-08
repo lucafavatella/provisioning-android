@@ -23,8 +23,6 @@ sprout-report: \
 
 .PHONY: sprout-provision
 sprout-provision: \
-	disable-google-packages \
-	disable-package-com.hmdglobal.app.fmradio \
 	$(foreach p,$(packages),revoke-special-permissions-from-packages-$(p)) \
 	;
 
