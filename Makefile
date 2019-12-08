@@ -142,6 +142,7 @@ revoke-special-permissions-from-package-%:
 
 .PHONY: revoke-special-permissions-from-all-packages
 revoke-special-permissions-from-all-packages:
+	$(warning This target $@ ignores errors)
 	-$(MAKE) -k $(foreach p,$(packages),revoke-special-permissions-from-package-$(p))
 
 .PHONY: revoke-dangerous-permissions-from-package-%
