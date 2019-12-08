@@ -23,7 +23,7 @@ sprout-provision: \
 android-one-provisioning: \
 	disable-google-packages \
 	revoke-special-permissions-from-all-packages \
-	;
+	; $(info Assumption: Android One systems are similar across Original Equipment Manufacturer)
 
 .PHONY: list-devices
 list-devices: ; $(ADB) devices -l
