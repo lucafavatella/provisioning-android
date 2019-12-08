@@ -23,6 +23,13 @@ sprout-report: \
 
 .PHONY: sprout-provision
 sprout-provision: \
+	disable-package-com.hmdglobal.app.fmradio \
+	android-one-provisioning \
+	;
+
+.PHONY: android-one-provisioning
+android-one-provisioning: \
+	disable-google-packages \
 	revoke-special-permissions-from-all-packages \
 	;
 
