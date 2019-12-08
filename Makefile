@@ -94,6 +94,12 @@ permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(A
 list-permissions:
 	@echo $(permissions)
 
+special_permissions = \
+	android.permission.WRITE_SECURE_SETTINGS
+.PHONY: list-special-permissions
+list-special-permissions:
+	@echo $(special_permissions)
+
 dangerous_permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions -g -d))))
 .PHONY: list-dangerous-permissions
 list-dangerous-permissions:
@@ -115,6 +121,10 @@ privileged_permissions_by_package = $(sort $(subst $(comma)$(space),$(space),$(p
 .PHONY: list-privileged-permissions-%
 list-privileged-permissions-%:
 	@echo $(call privileged_permissions_by_package,$*)
+
+.PHONY: revoke-special-permissions-from-package-%
+revoke-special-permissions-from-package-%:
+	android.permission.WRITE_SECURE_SETTINGS
 
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%:
