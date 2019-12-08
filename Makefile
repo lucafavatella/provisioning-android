@@ -21,6 +21,19 @@ ADB_USER_ID = 0
 
 # --v-- Internal rules and variables --v--
 
+google_packages_not_to_be_disabled = \
+	com.google.android.apps.work.oobconfig \
+	com.google.android.configupdater \
+	com.google.android.deskclock \
+	com.google.android.dialer \
+	com.google.android.gms \
+	com.google.android.inputmethod.latin \
+	com.google.android.packageinstaller \
+	com.google.android.webview
+google_packages_to_be_disabled = \
+	com.android.vending \
+	$(filter-out $(google_packages_not_to_be_disabled),$(call packages_by_prefix,com.google))
+
 comma = ,
 empty =
 space = $(empty) $(empty)
@@ -66,18 +79,6 @@ list-enabled-package-secondary-level-domains: ; @echo $(enabled_package_slds)
 .PHONY: disable-package-%
 disable-package-%: ; $(ADB) shell pm disable-user --user $(ADB_USER_ID) $*
 
-google_packages_not_to_be_disabled = \
-	com.google.android.apps.work.oobconfig \
-	com.google.android.configupdater \
-	com.google.android.deskclock \
-	com.google.android.dialer \
-	com.google.android.gms \
-	com.google.android.inputmethod.latin \
-	com.google.android.packageinstaller \
-	com.google.android.webview
-google_packages_to_be_disabled = \
-	com.android.vending \
-	$(filter-out $(google_packages_not_to_be_disabled),$(call packages_by_prefix,com.google))
 .PHONY: disable-google-packages
 disable-google-packages: \
 	$(foreach p,$(google_packages_to_be_disabled),disable-package-$(p)) \
