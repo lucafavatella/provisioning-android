@@ -40,6 +40,8 @@ space = $(empty) $(empty)
 left_brace = {
 right_brace = }
 
+strip_prefix = $(patsubst $(1)%,%,$(2))
+
 .PHONY: list-devices
 list-devices: ; $(ADB) devices -l
 
@@ -50,12 +52,13 @@ list-commands: ; $(ADB) shell cmd -l
 list-users: ; $(ADB) shell pm list users
 
 adb_ls_packages = $(ADB) shell pm list packages $(1)
+strip_package = $(call strip_prefix,package:,$(1))
 
-packages = $(sort $(patsubst package:%,%,$(shell $(call adb_ls_packages,))))
+packages = $(sort $(call strip_package,$(shell $(call adb_ls_packages,))))
 .PHONY: list-packages
 list-packages: ; @echo $(packages)
 
-enabled_packages = $(sort $(patsubst package:%,%,$(shell $(call adb_ls_packages,-e))))
+enabled_packages = $(sort $(call strip_package,$(shell $(call adb_ls_packages,-e))))
 .PHONY: list-enabled-packages
 list-enabled-packages: ; @echo $(enabled_packages)
 
