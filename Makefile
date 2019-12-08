@@ -23,7 +23,7 @@ sprout-report: \
 
 .PHONY: sprout-provision
 sprout-provision: \
-	$(foreach p,$(packages),revoke-special-permissions-from-package-$(p)) \
+	revoke-special-permissions-from-all-packages \
 	;
 
 .PHONY: list-devices
@@ -102,6 +102,13 @@ special_permissions = \
 list-special-permissions:
 	@echo $(special_permissions)
 
+.PHONY: revoke-special-permissions-from-package-%
+revoke-special-permissions-from-package-%:
+	{ echo "all:" && for P in $(special_permissions); do echo "	$(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
+
+.PHONY: revoke-special-permissions-from-all-packages
+revoke-special-permissions-from-all-packages: $(foreach p,$(packages),revoke-special-permissions-from-package-$(p)) ;
+
 dangerous_permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions -g -d))))
 .PHONY: list-dangerous-permissions
 list-dangerous-permissions:
@@ -117,20 +124,16 @@ dangerous_user_permissions = $(filter $(user_permissions),$(dangerous_permission
 list-dangerous-user-permissions:
 	@echo $(dangerous_user_permissions)
 
+.PHONY: revoke-dangerous-permissions-from-package-%
+revoke-dangerous-permissions-from-package-%:
+	{ echo "all:" && for P in $(dangerous_permissions); do echo "	$(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
+
 # From https://source.android.com/devices/tech/config/perms-whitelist
 # > Privileged apps are system apps that are located in a `priv-app` directory on one of the system image partitions.
 privileged_permissions_by_package = $(sort $(subst $(comma)$(space),$(space),$(patsubst %$(right_brace),%,$(patsubst $(left_brace)%,%,$(shell $(ADB) shell pm get-privapp-permissions $(1))))))
 .PHONY: list-privileged-permissions-%
 list-privileged-permissions-%:
 	@echo $(call privileged_permissions_by_package,$*)
-
-.PHONY: revoke-special-permissions-from-package-%
-revoke-special-permissions-from-package-%:
-	{ echo "all:" && for P in $(special_permissions); do echo "	$(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
-
-.PHONY: revoke-dangerous-permissions-from-package-%
-revoke-dangerous-permissions-from-package-%:
-	{ echo "all:" && for P in $(dangerous_permissions); do echo "	$(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
 
 .PHONY: revoke-privileged-permissions-from-package-%
 revoke-privileged-permissions-from-package-%:
