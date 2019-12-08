@@ -97,7 +97,7 @@ list-permissions:
 
 special_permissions = \
 	android.permission.SYSTEM_ALERT_WINDOW \
-	android.permission.WRITE_SECURE_SETTINGS
+	android.permission.WRITE_SETTINGS
 .PHONY: list-special-permissions
 list-special-permissions:
 	@echo $(special_permissions)
