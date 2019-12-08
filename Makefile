@@ -11,16 +11,6 @@ space = $(empty) $(empty)
 left_brace = {
 right_brace = }
 
-.PHONY: sprout-report
-sprout-report: \
-	list-devices \
-	list-users \
-	list-package-secondary-level-domains \
-	list-enabled-package-secondary-level-domains \
-	list-enabled-packages \
-	list-dangerous-permissions \
-	;
-
 .PHONY: sprout-provision
 sprout-provision: \
 	disable-package-com.hmdglobal.app.fmradio \
