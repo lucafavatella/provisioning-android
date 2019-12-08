@@ -216,9 +216,3 @@ revoke-privileged-permissions-from-package-%:
 # Strings associated to the android:key are defined in https://github.com/aosp-mirror/platform_packages_apps_settings/blob/android-cts-9.0_r10/res/values/strings.xml#L8824
 # e.g.
 # Search for `change_wifi_state`, find also <string name="change_wifi_state_title">Wi-Fi control</string>
-
-# -- 8< ----
-
-# In apps and notifications, in default apps, disable assist and voice input.
-
-# In connected devices, connection preferences, no NFC or printing.
