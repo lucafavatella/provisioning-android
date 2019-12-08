@@ -125,7 +125,7 @@ list-privileged-permissions-%:
 
 .PHONY: revoke-special-permissions-from-package-%
 revoke-special-permissions-from-package-%:
-	android.permission.WRITE_SECURE_SETTINGS
+	{ echo "all:" && for P in $(special_permissions); do echo "	$(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
 
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%:
@@ -134,10 +134,6 @@ revoke-dangerous-permissions-from-package-%:
 .PHONY: revoke-privileged-permissions-from-package-%
 revoke-privileged-permissions-from-package-%:
 	{ echo "all:" && for P in { $(MAKE) -s list-privileged-permissions-$*; }; do echo "	echo $(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
-
-.PHONY: revoke-special-app-access
-revoke-special-app-access:
-	$(MONKEYRUNNER) lib/$@.py
 
 # -- 8< ----
 
