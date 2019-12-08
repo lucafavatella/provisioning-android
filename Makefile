@@ -104,7 +104,18 @@ list-special-permissions:
 
 .PHONY: revoke-special-permissions-from-package-%
 revoke-special-permissions-from-package-%:
-	{ echo "all:" && for P in $(special_permissions); do echo "	$(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
+	{ echo ".PHONY: all" \
+		&& echo "all: \\" \
+		&& for P in $(special_permissions); do \
+			echo "	revoke-permission-$${P:?}-from-package \\"; \
+		done \
+		&& echo "	;" \
+		&& echo \
+		&& echo ".PHONY: revoke-permission-%-from-package" \
+		&& echo "revoke-permission-%-from-package:" \
+		&& echo "	$(ADB) shell pm revoke $* $$*"
+		; } \
+	| $(MAKE) -f -
 
 .PHONY: revoke-special-permissions-from-all-packages
 revoke-special-permissions-from-all-packages:
