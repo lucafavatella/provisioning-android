@@ -13,14 +13,14 @@ space = $(empty) $(empty)
 left_brace = {
 right_brace = }
 
-.PHONY: sprout-provision
-sprout-provision: \
+.PHONY: provision-sprout
+provision-sprout: \
 	disable-package-com.hmdglobal.app.fmradio \
-	android-one-provisioning \
+	provision-android-one \
 	;
 
-.PHONY: android-one-provisioning
-android-one-provisioning: \
+.PHONY: provision-android-one
+provision-android-one: \
 	disable-google-packages \
 	revoke-special-permissions-from-all-packages \
 	; $(info Assumption: Android One systems are similar across Original Equipment Manufacturers)
