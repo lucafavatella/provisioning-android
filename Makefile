@@ -22,10 +22,10 @@ sprout-report: \
 	;
 
 .PHONY: sprout-provision
-sprout-provision:
-	$(MAKE) -k \
-		disable-google-packages \
-		disable-package-com.hmdglobal.app.fmradio
+sprout-provision: \
+	disable-google-packages \
+	disable-package-com.hmdglobal.app.fmradio \
+	$(foreach p,$(packages),revoke-special-permissions-from-packages-$(p)) ;
 
 .PHONY: list-devices
 list-devices:
