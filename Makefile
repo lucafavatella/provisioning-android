@@ -206,17 +206,17 @@ revoke-special-app-access:
 # https://github.com/ffujiawei/cerium/blob/f6e06e0dcf83a0bc924828e9d6cb81383ed2364f/cerium/androiddriver.py#L577
 # https://cerium.readthedocs.io/en/latest/user/quickstart.html#interact-with-applications
 
-https://bitbucket.org/zgoda/androidery/src/master/ - 2018
-Random collection of ADB usages. It does not have any UI helper e.g. click by id.
+# https://bitbucket.org/zgoda/androidery/src/master/ - 2018
+# Random collection of ADB usages. It does not have any UI helper e.g. click by id.
 
-https://github.com/dtmilano/AndroidViewClient/ - 2019
-Overcomplicated?
+# https://github.com/dtmilano/AndroidViewClient/ - 2019
+# Overcomplicated?
 
-https://github.com/ffujiawei/cerium - Jan 2019
+# https://github.com/ffujiawei/cerium - Jan 2019
 
-https://stackoverflow.com/questions/27256911/any-faster-way-to-dump-ui-hierarchy
+# https://stackoverflow.com/questions/27256911/any-faster-way-to-dump-ui-hierarchy
 
-https://github.com/openatx/uiautomator2 (forked from `xiaocong/uiautomator`) needs https://github.com/openatx/android-uiautomator-server/
+# https://github.com/openatx/uiautomator2 (forked from `xiaocong/uiautomator`) needs https://github.com/openatx/android-uiautomator-server/
 # > [UIAutomator](http://developer.android.com/tools/testing/testing_ui.html) is a
 # > great tool to perform Android UI testing, but to do it, you have to write java
 # > code, compile it, install the jar, and run. It's a complex steps for all
@@ -237,8 +237,8 @@ https://github.com/openatx/uiautomator2 (forked from `xiaocong/uiautomator`) nee
 # > d(scrollable=True).scroll.vert.forward()
 # > ```
 
-https://github.com/swind/uiautomator (forked from `xiaocong/uiautomator`, and replaces ADB client with Python implementation) needs https://github.com/Swind/android-uiautomator-server
+# https://github.com/swind/uiautomator (forked from `xiaocong/uiautomator`, and replaces ADB client with Python implementation) needs https://github.com/Swind/android-uiautomator-server
 
-In apps and notifications, in default apps, disable assist and voice input.
+# In apps and notifications, in default apps, disable assist and voice input.
 
-In connected devices, connection preferences, no NFC or printing.
+# In connected devices, connection preferences, no NFC or printing.
