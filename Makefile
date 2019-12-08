@@ -107,8 +107,7 @@ revoke-special-permissions-from-package-%:
 	{ echo "all:" && for P in $(special_permissions); do echo "	$(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
 
 .PHONY: revoke-special-permissions-from-all-packages
-revoke-special-permissions-from-all-packages:
-	-$(MAKE) -k $(foreach p,$(packages),revoke-special-permissions-from-package-$(p))
+revoke-special-permissions-from-all-packages: $(foreach p,$(packages),revoke-special-permissions-from-package-$(p)) ;
 
 dangerous_permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions -g -d))))
 .PHONY: list-dangerous-permissions
