@@ -101,15 +101,27 @@ disable-google-packages: \
 adb_ls_permissions = $(ADB) shell pm list permissions $(1)
 strip_permission = $(call strip_prefix,permission:,$(1))
 
-permissions = $(sort $(call strip_permission,$(shell $(call adb_ls_permissions,-g))))
-.PHONY: list-permissions
-list-permissions: ; @echo $(permissions)
-
 special_permissions = \
 	android.permission.SYSTEM_ALERT_WINDOW \
 	android.permission.WRITE_SETTINGS
 .PHONY: list-special-permissions
 list-special-permissions: ; @echo $(special_permissions)
+
+permissions = $(sort $(call strip_permission,$(shell $(call adb_ls_permissions,-g))))
+.PHONY: list-permissions
+list-permissions: ; @echo $(permissions)
+
+dangerous_permissions = $(sort $(call strip_permission,$(shell $(call adb_ls_permissions,-g -d))))
+.PHONY: list-dangerous-permissions
+list-dangerous-permissions: ; @echo $(dangerous_permissions)
+
+user_permissions = $(sort $(call strip_permission,$(shell $(call adb_ls_permissions,-u))))
+.PHONY: list-user-permissions
+list-user-permissions: ; @echo $(user_permissions)
+
+dangerous_user_permissions = $(filter $(user_permissions),$(dangerous_permissions))
+.PHONY: list-dangerous-user-permissions
+list-dangerous-user-permissions: ; @echo $(dangerous_user_permissions)
 
 # ---- Revoke Permissions ----
 
@@ -131,18 +143,6 @@ revoke-special-permissions-from-package-%:
 .PHONY: revoke-special-permissions-from-all-packages
 revoke-special-permissions-from-all-packages:
 	-$(MAKE) -k $(foreach p,$(packages),revoke-special-permissions-from-package-$(p))
-
-dangerous_permissions = $(sort $(call strip_permission,$(shell $(call adb_ls_permissions,-g -d))))
-.PHONY: list-dangerous-permissions
-list-dangerous-permissions: ; @echo $(dangerous_permissions)
-
-user_permissions = $(sort $(call strip_permission,$(shell $(call adb_ls_permissions,-u))))
-.PHONY: list-user-permissions
-list-user-permissions: ; @echo $(user_permissions)
-
-dangerous_user_permissions = $(filter $(user_permissions),$(dangerous_permissions))
-.PHONY: list-dangerous-user-permissions
-list-dangerous-user-permissions: ; @echo $(dangerous_user_permissions)
 
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%:
