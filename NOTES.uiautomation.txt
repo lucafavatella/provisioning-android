@@ -1,0 +1,51 @@
+# UI automation
+
+# UIAutomator vs Espresso: https://stackoverflow.com/questions/31076228/android-testing-uiautomator-vs-espresso/31080906#31080906
+# UIAutomator – is powerful and has good external OS system integration e.g. can turn WiFi on and off and access other settings during test, but ... lacks detailed view access so one could say it may be more of a pure black-box test. Where as Espresso has access to view internals (see below). ...
+# Espresso - ... does not have access to system integration tests but has access to view internals e.g. can test a webview (useful for Hybrid app testing, or webview heavy testing). Slightly more grey-box testing compared to UI Automator. ...
+
+# https://developer.android.com/studio/test/monkeyrunner
+# Lacks selecting UI element by text or other means, and identifying location to click.
+
+# https://github.com/appium/appium-espresso-driver
+# https://github.com/appium/appium-uiautomator2-driver
+# Overcomplicated.
+
+
+# https://dustingram.com/articles/2010/06/18/automated-control-of-an-android-device-with-python/
+
+# https://github.com/ffujiawei/cerium/blob/f6e06e0dcf83a0bc924828e9d6cb81383ed2364f/cerium/androiddriver.py#L577
+# https://cerium.readthedocs.io/en/latest/user/quickstart.html#interact-with-applications
+
+# https://bitbucket.org/zgoda/androidery/src/master/ - 2018
+# Random collection of ADB usages. It does not have any UI helper e.g. click by id.
+
+# https://github.com/dtmilano/AndroidViewClient/ - 2019
+# Overcomplicated?
+
+# https://github.com/ffujiawei/cerium - Jan 2019
+
+# https://stackoverflow.com/questions/27256911/any-faster-way-to-dump-ui-hierarchy
+
+# https://github.com/openatx/uiautomator2 (forked from `xiaocong/uiautomator`) needs https://github.com/openatx/android-uiautomator-server/
+# > [UIAutomator](http://developer.android.com/tools/testing/testing_ui.html) is a
+# > great tool to perform Android UI testing, but to do it, you have to write java
+# > code, compile it, install the jar, and run. It's a complex steps for all
+# > testers...
+# > 
+# > This project is to build a light weight jsonrpc server in Android device, so
+# > that we can just write PC side script to write UIAutomator tests.
+# > 
+# > ...
+# > 
+# > # How to use
+# > 
+# > ```python
+# > from uiautomator import device as d
+# > 
+# > d.screen.on()
+# > d(text="Settings").click()
+# > d(scrollable=True).scroll.vert.forward()
+# > ```
+
+# https://github.com/swind/uiautomator (forked from `xiaocong/uiautomator`, and replaces ADB client with Python implementation) needs https://github.com/Swind/android-uiautomator-server
