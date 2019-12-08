@@ -160,4 +160,4 @@ list-privileged-permissions-%: ; @echo $(call privileged_permissions_by_package,
 
 .PHONY: revoke-privileged-permissions-from-package-%
 revoke-privileged-permissions-from-package-%:
-	{ echo "all:" && for P in { $(MAKE) -s list-privileged-permissions-$*; }; do echo "	echo $(ADB) shell pm revoke $* $${P:?}"; done; } | $(MAKE) -f -
+	$(call revoke_package_permissions,$*,$(MAKE) -s list-privileged-permissions-$*)
