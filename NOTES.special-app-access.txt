@@ -1,0 +1,56 @@
+# As per Android 9, the 14 items of the screen "Settings > Apps & notifications > Special app access" are defined in
+# https://github.com/aosp-mirror/platform_packages_apps_settings/blob/android-cts-9.0_r10/res/xml/special_access.xml
+# e.g.
+# Device admin apps -> android:key="device_administrators" android:fragment="com.android.settings.DeviceAdminSettings"
+# Modify system setings -> android:key="write_settings_apps"
+# Premium SMS access -> android:key="premium_sms"
+# Unrestricted data -> android:key="data_saver"
+# Install unknown apps -> android:key="manage_external_sources"
+# Usage access -> android:key="special_app_usage_access"
+# Directory access -> android:key="special_app_directory_access"
+# Wi-Fi control -> android:key="change_wifi_state"
+# ```
+# $ curl -LsSf https://raw.githubusercontent.com/aosp-mirror/platform_packages_apps_settings/android-cts-9.0_r10/res/xml/special_access.xml | grep '\(android:key\|android:fragment\|settings:keywords\)='
+#         android:key="special_app_access_screen"
+#         android:key="high_power_apps"
+#         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+#         settings:keywords="@string/keywords_ignore_optimizations">
+#         android:key="device_administrators"
+#         android:fragment="com.android.settings.DeviceAdminSettings" />
+#         android:key="system_alert_window"
+#         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+#         settings:keywords="@string/keywords_system_alert_window">
+#         android:key="zen_access"
+#         android:fragment="com.android.settings.notification.ZenAccessSettings" />
+#         android:key="write_settings_apps"
+#         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+#         settings:keywords="@string/keywords_write_settings">
+#         android:key="notification_access"
+#         android:fragment="com.android.settings.notification.NotificationAccessSettings" />
+#         android:key="picture_in_picture"
+#         android:fragment="com.android.settings.applications.appinfo.PictureInPictureSettings"
+#         settings:keywords="@string/picture_in_picture_keywords" />
+#         android:key="premium_sms"
+#         android:fragment="com.android.settings.applications.PremiumSmsAccess" />
+#         android:key="data_saver"
+#         android:fragment="com.android.settings.datausage.UnrestrictedDataAccess" />
+#         android:key="manage_external_sources"
+#         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+#         settings:keywords="@string/keywords_install_other_apps">
+#         android:key="special_app_usage_access"
+#         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+#         settings:keywords="@string/keywords_write_settings">
+#         android:key="enabled_vr_listeners"
+#         android:fragment="com.android.settings.applications.VrListenerSettings"
+#         settings:keywords="@string/keywords_vr_listener">
+#         android:key="special_app_directory_access"
+#         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+#         settings:keywords="@string/keywords_directory_access">
+#         android:key="change_wifi_state"
+#         android:fragment="com.android.settings.applications.manageapplications.ManageApplications"
+#         settings:keywords="@string/keywords_change_wifi_state">
+# ```
+
+# Strings associated to the android:key are defined in https://github.com/aosp-mirror/platform_packages_apps_settings/blob/android-cts-9.0_r10/res/values/strings.xml#L8824
+# e.g.
+# Search for `change_wifi_state`, find also <string name="change_wifi_state_title">Wi-Fi control</string>
