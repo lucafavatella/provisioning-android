@@ -23,7 +23,7 @@ sprout-report: \
 
 .PHONY: sprout-provision
 sprout-provision: \
-	$(foreach p,$(packages),revoke-special-permissions-from-packages-$(p)) \
+	$(foreach p,$(packages),revoke-special-permissions-from-package-$(p)) \
 	;
 
 .PHONY: list-devices
