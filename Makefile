@@ -19,7 +19,7 @@ ADB_USER_ID = 0
 # $(dir $(patsubst %/,%,$(dir $(MONKEYRUNNER))))adb: | $(ADB)
 # 	ln -s "$(word 1,$|)" "$@"
 
-# ==== Internal rules and variables ====
+# ==== Internal Rules and Variables ====
 
 google_packages_not_to_be_disabled = \
 	com.google.android.apps.work.oobconfig \
@@ -51,9 +51,10 @@ list-commands: ; $(ADB) shell cmd -l
 .PHONY: list-users
 list-users: ; $(ADB) shell pm list users
 
+# ---- List Packages ----
+
 adb_ls_packages = $(ADB) shell pm list packages $(1)
 strip_package = $(call strip_prefix,package:,$(1))
-filter_packages_by_prefix = $(filter $(1) $(1).%,$(2))
 
 packages = $(sort $(call strip_package,$(shell $(call adb_ls_packages,))))
 .PHONY: list-packages
@@ -62,6 +63,8 @@ list-packages: ; @echo $(packages)
 enabled_packages = $(sort $(call strip_package,$(shell $(call adb_ls_packages,-e))))
 .PHONY: list-enabled-packages
 list-enabled-packages: ; @echo $(enabled_packages)
+
+filter_packages_by_prefix = $(filter $(1) $(1).%,$(2))
 
 .PHONY: list-packages-by-prefix-%
 list-packages-by-prefix-%:
@@ -73,6 +76,7 @@ list-enabled-packages-by-prefix-%:
 
 # Second- or first-level domain.
 sld = $(shell echo $(1) | cut -d. -f-2)
+
 package_slds = $(sort $(foreach p,$(packages),$(call sld,$(p))))
 .PHONY: list-package-secondary-level-domains
 list-package-secondary-level-domains: ; @echo $(package_slds)
@@ -82,6 +86,8 @@ enabled_package_slds = $(sort $(foreach p,$(enabled_packages),$(call sld,$(p))))
 .PHONY: list-enabled-package-secondary-level-domains
 list-enabled-package-secondary-level-domains: ; @echo $(enabled_package_slds)
 
+# ---- Disable Packages ----
+
 .PHONY: disable-package-%
 disable-package-%: ; $(ADB) shell pm disable-user --user $(ADB_USER_ID) $*
 
@@ -89,6 +95,8 @@ disable-package-%: ; $(ADB) shell pm disable-user --user $(ADB_USER_ID) $*
 disable-google-packages: \
 	$(foreach p,$(google_packages_to_be_disabled),disable-package-$(p)) \
 	;
+
+# ---- List Permissions ----
 
 adb_ls_permissions = $(ADB) shell pm list permissions $(1)
 strip_permission = $(call strip_prefix,permission:,$(1))
@@ -102,6 +110,8 @@ special_permissions = \
 	android.permission.WRITE_SETTINGS
 .PHONY: list-special-permissions
 list-special-permissions: ; @echo $(special_permissions)
+
+# ---- Revoke Permissions ----
 
 .PHONY: revoke-special-permissions-from-package-%
 revoke-special-permissions-from-package-%:
