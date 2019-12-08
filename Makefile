@@ -90,7 +90,10 @@ disable-google-packages: \
 	$(foreach p,$(google_packages_to_be_disabled),disable-package-$(p)) \
 	;
 
-permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions -g))))
+adb_ls_permissions = $(ADB) shell pm list permissions $(1)
+strip_permission = $(call strip_prefix,permission:,$(1))
+
+permissions = $(sort $(call strip_permission,$(shell $(call adb_ls_permissions,-g))))
 .PHONY: list-permissions
 list-permissions: ; @echo $(permissions)
 
@@ -119,11 +122,11 @@ revoke-special-permissions-from-package-%:
 revoke-special-permissions-from-all-packages:
 	-$(MAKE) -k $(foreach p,$(packages),revoke-special-permissions-from-package-$(p))
 
-dangerous_permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions -g -d))))
+dangerous_permissions = $(sort $(call strip_permission,$(shell $(call adb_ls_permissions,-g -d))))
 .PHONY: list-dangerous-permissions
 list-dangerous-permissions: ; @echo $(dangerous_permissions)
 
-user_permissions = $(sort $(patsubst permission:%,%,$(filter permission:%,$(shell $(ADB) shell pm list permissions -u))))
+user_permissions = $(sort $(call strip_permission,$(shell $(call adb_ls_permissions,-u))))
 .PHONY: list-user-permissions
 list-user-permissions: ; @echo $(user_permissions)
 
