@@ -113,7 +113,7 @@ revoke-special-permissions-from-package-%:
 		&& echo \
 		&& echo ".PHONY: revoke-permission-%-from-package" \
 		&& echo "revoke-permission-%-from-package:" \
-		&& echo "	$(ADB) shell pm revoke $* $$*" \
+		&& echo "	$(ADB) shell pm revoke $* $$\*" \
 		; } \
 	| $(MAKE) -f -
 
