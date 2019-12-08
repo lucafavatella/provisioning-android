@@ -4,13 +4,19 @@
 provision-sprout: \
 	disable-package-com.hmdglobal.app.fmradio \
 	provision-android-one \
+	manually-provision-android-one \
 	;
 
 .PHONY: provision-android-one
 provision-android-one: \
 	disable-google-packages \
-	revoke-special-permissions-from-all-packages \
+	revoke-revocable-special-permissions-from-all-packages \
 	; $(info Assumption: Android One systems are similar across Original Equipment Manufacturers)
+
+.PHONY: manually-provision-android-one
+manually-provision-android-one: \
+	prompt-managing-special-permission-for-modifying-system-settings \
+	;
 
 ADB = $(shell brew cask info android-platform-tools | grep adb | cut -d' ' -f1)
 ADB_USER_ID = 0
@@ -101,8 +107,27 @@ disable-google-packages: \
 adb_ls_permissions = $(ADB) shell pm list permissions $(1)
 strip_permission = $(call strip_prefix,permission:,$(1))
 
+revocable_special_permissions = \
+	android.permission.SYSTEM_ALERT_WINDOW
+.PHONY: list-revocable-special-permissions
+list-revocable-special-permissions: ; @echo $(revocable_special_permissions)
+
+# Re `android.permission.WRITE_SETTINGS`:
+# ```
+# $ adb shell pm revoke com.android.vending android.permission.WRITE_SETTINGS
+# Security exception: Permission android.permission.WRITE_SETTINGS is not a changeable permission type
+#
+# java.lang.SecurityException: Permission android.permission.WRITE_SETTINGS is not a changeable permission type
+# ...
+# ```
+#
+# From https://github.com/tynn/DevSet issue 1:
+# > The required permission changed with Oreo and it cannot be set with pm anymore. You have to set this manually. ...
+# ```
+# adb shell am start -a android.settings.action.MANAGE_WRITE_SETTINGS
+# ```
 special_permissions = \
-	android.permission.SYSTEM_ALERT_WINDOW \
+	$(revocable_special_permissions) \
 	android.permission.WRITE_SETTINGS
 .PHONY: list-special-permissions
 list-special-permissions: ; @echo $(special_permissions)
@@ -139,14 +164,20 @@ revoke_package_permissions = \
 		; } \
 	| $(MAKE) -f -
 
-.PHONY: revoke-special-permissions-from-package-%
-revoke-special-permissions-from-package-%:
-	$(call revoke_package_permissions,$*,$(special_permissions))
+.PHONY: revoke-revocable-special-permissions-from-package-%
+revoke-revocable-special-permissions-from-package-%:
+	$(call revoke_package_permissions,$*,$(revocable_special_permissions))
 
-.PHONY: revoke-special-permissions-from-all-packages
-revoke-special-permissions-from-all-packages:
+.PHONY: revoke-revocable-special-permissions-from-all-packages
+revoke-revocable-special-permissions-from-all-packages:
 	$(warning This target $@ ignores errors)
-	-$(MAKE) -k $(foreach p,$(packages),revoke-special-permissions-from-package-$(p))
+	-$(MAKE) -k $(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p))
+
+.PHONY: prompt-managing-special-permission-for-modifying-system-settings
+prompt-managing-special-permission-for-modifying-system-settings:
+	$(info This target $@ requires user action)
+	$(ADB) shell input keyevent KEYCODE_POWER
+	$(ADB) shell am start -a android.settings.action.MANAGE_WRITE_SETTINGS
 
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%:
