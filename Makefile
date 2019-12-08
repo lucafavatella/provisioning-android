@@ -23,7 +23,9 @@ sprout-report: \
 
 .PHONY: sprout-provision
 sprout-provision:
-	-$(MAKE) -k disable-google-packages disable-package-com.hmdglobal.app.fmradio
+	$(MAKE) -k \
+		disable-google-packages \
+		disable-package-com.hmdglobal.app.fmradio
 
 .PHONY: list-devices
 list-devices:
