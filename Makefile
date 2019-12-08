@@ -32,7 +32,7 @@ google_packages_not_to_be_disabled = \
 	com.google.android.webview
 google_packages_to_be_disabled = \
 	com.android.vending \
-	$(filter-out $(google_packages_not_to_be_disabled),$(call packages_by_prefix,com.google))
+	$(filter-out $(google_packages_not_to_be_disabled),$(call filter_packages_by_prefix,com.google,$(packages)))
 
 comma = ,
 empty =
@@ -53,6 +53,7 @@ list-users: ; $(ADB) shell pm list users
 
 adb_ls_packages = $(ADB) shell pm list packages $(1)
 strip_package = $(call strip_prefix,package:,$(1))
+filter_packages_by_prefix = $(filter $(1) $(1).%,$(2))
 
 packages = $(sort $(call strip_package,$(shell $(call adb_ls_packages,))))
 .PHONY: list-packages
@@ -62,13 +63,13 @@ enabled_packages = $(sort $(call strip_package,$(shell $(call adb_ls_packages,-e
 .PHONY: list-enabled-packages
 list-enabled-packages: ; @echo $(enabled_packages)
 
-packages_by_prefix = $(filter $(1) $(1).%,$(packages))
 .PHONY: list-packages-by-prefix-%
-list-packages-by-prefix-%: ; @echo $(call packages_by_prefix,$*)
+list-packages-by-prefix-%:
+	@echo $(call filter_packages_by_prefix,$*,$(packages))
 
-enabled_packages_by_prefix = $(filter $(1) $(1).%,$(enabled_packages))
 .PHONY: list-enabled-packages-by-prefix-%
-list-enabled-packages-by-prefix-%: ; @echo $(call enabled_packages_by_prefix,$*)
+list-enabled-packages-by-prefix-%:
+	@echo $(call filter_packages_by_prefix,$*,$(enabled_packages))
 
 # Second- or first-level domain.
 sld = $(shell echo $(1) | cut -d. -f-2)
