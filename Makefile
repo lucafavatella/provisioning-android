@@ -19,7 +19,7 @@ ADB_USER_ID = 0
 # $(dir $(patsubst %/,%,$(dir $(MONKEYRUNNER))))adb: | $(ADB)
 # 	ln -s "$(word 1,$|)" "$@"
 
-# --v-- Internal rules and variables --v--
+# Internal rules and variables.
 
 google_packages_not_to_be_disabled = \
 	com.google.android.apps.work.oobconfig \
