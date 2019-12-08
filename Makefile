@@ -25,7 +25,8 @@ sprout-report: \
 sprout-provision: \
 	disable-google-packages \
 	disable-package-com.hmdglobal.app.fmradio \
-	$(foreach p,$(packages),revoke-special-permissions-from-packages-$(p)) ;
+	$(foreach p,$(packages),revoke-special-permissions-from-packages-$(p)) \
+	;
 
 .PHONY: list-devices
 list-devices:
