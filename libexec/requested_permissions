@@ -1,14 +1,66 @@
 #!/bin/sh
 
+REQ_PERMS="requested permissions"
+
 # References:
 # - Hint on usage of `adb shell dumpsys package packagename` for
 #   insight on permissions for some packages: -
 #   https://stackoverflow.com/questions/21091022/listing-permissions-of-android-application-via-adb
+dump_pkg_info() {
+    adb shell dumpsys package "${1:?}"
+}
+
+keep_from_requested_perms() {
+    sed -n -e '/'"${REQ_PERMS:?}"':$/,$p'
+}
+
+keep_only_non_empty_lines() {
+    grep '[^[:space:]]'
+}
+
+keep_only_until_so_indented() {
+    sed \
+	-n \
+	-e '/^'"${1:?}"'[^[:space:]]/p' \
+	-e '/^'"${1:?}"'[^[:space:]]/!q'
+}
+
+indentation() {
+    sed 's/^\([[:space:]]*\)[^[:space:]].*$/\1/'
+}
+
+first_line() {
+    head -n 1
+}
+
+rest_lines() {
+    tail -n +2
+}
+
+n_lines() {
+    wc -l
+}
+
+n_bytes() {
+    wc -c
+}
 
 P="${1:?}"
 
-adb shell dumpsys package "${P:?}"
-exit 0
-ReqPermsAndRest="$(adb shell dumpsys package "${P:?}" | sed -n -e '/requested permissions:/,$p')" \
-    && ReqPermsIndent=$(echo "${ReqPermsAndRest:?}" | head -n 1 | sed 's/^\([[:space:]]*\)[^[:space:]].*$/\1/') \
-    && (echo "${ReqPermsAndRest:?}" | tail -n +2 | grep -v '^[[:space:]]*$' | sed -n -e '/^'"${ReqPermsIndent:?}"'[[:space:]]/P' -e '1,$d')
+Dump="$(dump_pkg_info "${P:?}")" || exit 1
+
+RelevantTail="$(echo "${Dump:?}" | keep_from_requested_perms | keep_only_non_empty_lines)"
+test 0 -lt $(echo "${RelevantTail:?}" | n_lines) || exit 1  # Assumption: At least the title line must be present.
+
+ReqPermsTitleLine="$(echo "${RelevantTail:?}" | first_line)"
+{ echo "${ReqPermsTitleLine}" | grep -q '^[[:space:]]*'"${REQ_PERMS:?}"; } || exit 1
+PostReqPermsTitle="$(echo "${RelevantTail:?}" | rest_lines)"
+test 0 -lt $(echo "${PostReqPermsTitle:?}" | n_lines) || exit 0  # Assumption: There may be no requested permissions.
+ReqPermsTitleIndent="$(echo "${ReqPermsTitleLine:?}" | indentation)"
+ReqPermsTitleIndentLength=$(echo "${ReqPermsTitleIndent:?}" | n_bytes)
+
+PostReqPermsTitleIndent="$(echo "${PostReqPermsTitle:?}" | first_line | indentation)"
+PostReqPermsTitleIndentLength=$(echo "${PostReqPermsTitleIndent:?}" | n_bytes)
+test ${ReqPermsTitleIndentLength:?} -lt ${PostReqPermsTitleIndentLength:?} || exit 0  # Assumption: no tabs counting as multiple spaces. # Assumption: There may be no requested permissions.
+
+echo "${PostReqPermsTitle:?}" | keep_only_until_so_indented "${PostReqPermsTitleIndent:?}"
