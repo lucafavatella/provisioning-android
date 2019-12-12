@@ -2,4 +2,7 @@
 
 # Usage of `adb shell dumpsys package packagename` for insight on permissions for some packages hinted in https://stackoverflow.com/questions/21091022/listing-permissions-of-android-application-via-adb
 
-From="$(adb shell dumpsys package com.hmdglobal.app.camera | sed -n -e '/requested permissions:/,$p')" && IndentationPre=$(echo "${From:?}" | head -n 1 | sed 's/^\([[:space:]]*\)[^[:space:]].*$/\1/') && (echo "${From:?}" | tail -n +2 | grep -v '^[[:space:]]*$' | sed -n -e '/^'"${Pre:?}"'[[:space:]]/P' -e '1,$d')
+P="${1:?}"
+
+ReqPermsAndRest="$(adb shell dumpsys package "${1:?}" | sed -n -e '/requested permissions:/,$p')" \
+    && IndentationPre=$(echo "${From:?}" | head -n 1 | sed 's/^\([[:space:]]*\)[^[:space:]].*$/\1/') && (echo "${From:?}" | tail -n +2 | grep -v '^[[:space:]]*$' | sed -n -e '/^'"${Pre:?}"'[[:space:]]/P' -e '1,$d')
