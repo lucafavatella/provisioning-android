@@ -198,7 +198,7 @@ prompt-managing-special-permission-for-modifying-system-settings:
 
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%:
-	$(call revoke_package_permissions,$*,$(dangerous_permissions))
+	@$(call revoke_package_permissions,$*,$(dangerous_permissions))
 
 # From https://source.android.com/devices/tech/config/perms-whitelist
 # > Privileged apps are system apps that are located in a `priv-app` directory on one of the system image partitions.
@@ -208,4 +208,4 @@ list-privileged-permissions-%: ; @echo $(call privileged_permissions_by_package,
 
 .PHONY: revoke-privileged-permissions-from-package-%
 revoke-privileged-permissions-from-package-%:
-	$(call revoke_package_permissions,$*,$(MAKE) -s list-privileged-permissions-$*)
+	@$(call revoke_package_permissions,$*,$(MAKE) -s list-privileged-permissions-$*)
