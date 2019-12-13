@@ -166,18 +166,20 @@ list-dangerous-user-permissions: ; @echo $(dangerous_user_permissions)
 # ---- Revoke Permissions ----
 
 revoke_package_permissions = \
-	{ echo ".PHONY: all" \
-		&& echo "all: \\" \
-		&& for P in $(2); do \
-			echo "	revoke-permission-$${P:?}-from-package \\"; \
-		done \
-		&& echo "	;" \
-		&& echo \
-		&& echo ".PHONY: revoke-permission-%-from-package" \
-		&& echo "revoke-permission-%-from-package:" \
-		&& echo "	$(ADB) shell pm revoke $(1) \$$*" \
-		; } \
-	| $(MAKE) -f -
+	test -z "$(2)" \
+		|| { { echo ".PHONY: all" \
+			&& echo "all: \\" \
+			&& for P in $(2); do \
+				echo "	revoke-permission-$${P:?}-from-package \\"; \
+			done \
+			&& echo "	;" \
+			&& echo \
+			&& echo ".PHONY: revoke-permission-%-from-package" \
+			&& echo "revoke-permission-%-from-package:" \
+			&& echo "	$(ADB) shell pm revoke $(1) \$$*" \
+			; } \
+		| $(MAKE) -f - \
+		; }
 
 .PHONY: revoke-revocable-special-permissions-from-package-%
 revoke-revocable-special-permissions-from-package-%:
