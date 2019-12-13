@@ -138,6 +138,7 @@ list-revocable-special-permissions: ; @echo $(revocable_special_permissions)
 # ```
 special_permissions = \
 	$(revocable_special_permissions) \
+	android.permission.BIND_DEVICE_ADMIN \
 	android.permission.WRITE_SETTINGS
 .PHONY: list-special-permissions
 list-special-permissions: ; @echo $(special_permissions)
@@ -177,6 +178,9 @@ revoke_package_permissions = \
 			&& echo ".PHONY: revoke-permission-%-from-package" \
 			&& echo "revoke-permission-%-from-package:" \
 			&& echo "	$(ADB) shell pm revoke $(1) \$$*" \
+			&& echo "revoke-permission-android.permission.SYSTEM_ALERT_WINDOW-from-package: \\" \
+			&& echo "	revoke-permission-android.permission.%-from-package:" \
+			&& echo "	$(ADB) shell appops set $(1) \$$* deny" \
 			; } \
 		| $(MAKE) -f - \
 		; }
