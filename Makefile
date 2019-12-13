@@ -2,13 +2,23 @@
 
 .PHONY: provision-sprout
 provision-sprout: \
+	automatically-provision-sprout \
+	manually-provision-sprout \
+	;
+
+.PHONY: automatically-provision-sprout
+automatically-provision-sprout: \
 	disable-package-com.hmdglobal.app.fmradio \
-	provision-android-one \
+	automatically-provision-android-one \
+	;
+
+.PHONY: manually-provision-sprout
+manually-provision-sprout:
 	manually-provision-android-one \
 	;
 
-.PHONY: provision-android-one
-provision-android-one: \
+.PHONY: automatically-provision-android-one
+automatically-provision-android-one: \
 	disable-google-packages \
 	revoke-revocable-special-permissions-from-all-packages \
 	; $(info Assumption: Android One systems are similar across Original Equipment Manufacturers)
