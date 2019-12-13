@@ -186,8 +186,9 @@ revoke-revocable-special-permissions-from-package-%:
 	$(call revoke_package_permissions,$*,$(filter $(call requested_permissions_by_package,$*),$(revocable_special_permissions)))
 
 .PHONY: revoke-revocable-special-permissions-from-all-packages
-revoke-revocable-special-permissions-from-all-packages:
-	$(MAKE) -k $(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p))
+revoke-revocable-special-permissions-from-all-packages: \
+	$(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p)) \
+	;
 
 .PHONY: prompt-managing-special-permission-for-modifying-system-settings
 prompt-managing-special-permission-for-modifying-system-settings:
