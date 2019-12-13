@@ -183,7 +183,7 @@ revoke_package_permissions = \
 
 .PHONY: revoke-revocable-special-permissions-from-package-%
 revoke-revocable-special-permissions-from-package-%:
-	$(call revoke_package_permissions,$*,$(filter $(shell $(MAKE) -s list-requested-permissions-by-package-$*),$(revocable_special_permissions)))
+	$(call revoke_package_permissions,$*,$(filter $(call requested_permissions_by_package,$*),$(revocable_special_permissions)))
 
 .PHONY: revoke-revocable-special-permissions-from-all-packages
 revoke-revocable-special-permissions-from-all-packages:
