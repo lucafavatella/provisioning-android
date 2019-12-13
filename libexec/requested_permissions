@@ -50,7 +50,7 @@ P="${1:?}"
 Dump="$(dump_pkg_info "${P:?}")" || exit 1
 
 RelevantTail="$(echo "${Dump:?}" | keep_from_requested_perms | keep_only_non_empty_lines)"
-test 0 -lt $(echo "${RelevantTail?}" | n_lines) || exit 1  # Assumption: At least the title line must be present.
+test 0 -lt $(echo "${RelevantTail?}" | n_lines) || exit 0  # Assumption: Requested permissions may be not present - not even the title.
 
 ReqPermsTitleLine="$(echo "${RelevantTail:?}" | first_line)"
 { echo "${ReqPermsTitleLine}" | grep -q '^[[:space:]]*'"${REQ_PERMS:?}"; } || exit 1
