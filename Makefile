@@ -142,6 +142,11 @@ special_permissions = \
 .PHONY: list-special-permissions
 list-special-permissions: ; @echo $(special_permissions)
 
+requested_permissions_by_package = $(sort $(shell $(CURDIR)/libexec/requested_permissions $(1)))
+.PHONY: list-requested-permissions-by-package-%
+list-requested-permissions-by-package-%:
+	@echo $(call requested_permissions_by_package,$*)
+
 permissions = $(sort $(call strip_permission,$(shell $(call adb_ls_permissions,-g))))
 .PHONY: list-permissions
 list-permissions: ; @echo $(permissions)
@@ -176,12 +181,11 @@ revoke_package_permissions = \
 
 .PHONY: revoke-revocable-special-permissions-from-package-%
 revoke-revocable-special-permissions-from-package-%:
-	$(call revoke_package_permissions,$*,$(revocable_special_permissions))
+	$(call revoke_package_permissions,$*,$(filter $(shell $(MAKE) -s list-requested-permissions-by-package-$*),$(revocable_special_permissions)))
 
 .PHONY: revoke-revocable-special-permissions-from-all-packages
 revoke-revocable-special-permissions-from-all-packages:
-	$(warning This target $@ ignores errors)
-	-$(MAKE) -k $(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p))
+	$(MAKE) -k $(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p))
 
 .PHONY: prompt-managing-special-permission-for-modifying-system-settings
 prompt-managing-special-permission-for-modifying-system-settings:
