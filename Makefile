@@ -165,7 +165,8 @@ revoke_package_permissions = \
 			&& echo ".PHONY: revoke-permission-%-from-package" \
 			&& echo "revoke-permission-%-from-package:" \
 			&& echo "	$(ADB) shell pm revoke $(1) \$$*" \
-			&& echo "revoke-permission-android.permission.SYSTEM_ALERT_WINDOW-from-package: \\" \
+			&& echo "revoke-permission-android.permission.SYSTEM_ALERT_WINDOW-from-package \\" \
+			&& echo "	revoke-permission-android.permission.WRITE_SETTINGS-from-package: \\" \
 			&& echo "	revoke-permission-android.permission.%-from-package:" \
 			&& echo "	$(ADB) shell appops set $(1) \$$* deny" \
 			; } \
