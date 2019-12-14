@@ -128,14 +128,14 @@ revocable_special_permissions = \
 	android.permission.SEND_SMS_NO_CONFIRMATION \
 	android.permission.USE_DATA_IN_BACKGROUND \
 	android.permission.REQUEST_INSTALL_PACKAGES \
-	android.permission.PACKAGE_USAGE_STATS \
 	android.permission.CHANGE_WIFI_STATE
 .PHONY: list-revocable-special-permissions
 list-revocable-special-permissions: ; @echo $(revocable_special_permissions)
 
 special_permissions = \
 	$(revocable_special_permissions) \
-	android.permission.BIND_DEVICE_ADMIN
+	android.permission.BIND_DEVICE_ADMIN \
+	android.permission.PACKAGE_USAGE_STATS
 .PHONY: list-special-permissions
 list-special-permissions: ; @echo $(special_permissions)
 
@@ -180,7 +180,6 @@ revoke_package_permissions = \
 			&& echo "	revoke-permission-android.permission.SEND_SMS_NO_CONFIRMATION-from-package \\" \
 			&& echo "	revoke-permission-android.permission.USE_DATA_IN_BACKGROUND-from-package \\" \
 			&& echo "	revoke-permission-android.permission.REQUEST_INSTALL_PACKAGES-from-package \\" \
-			&& echo "	revoke-permission-android.permission.PACKAGE_USAGE_STATS-from-package \\" \
 			&& echo "	revoke-permission-android.permission.CHANGE_WIFI_STATE-from-package \\" \
 			&& echo "	: \\" \
 			&& echo "	revoke-permission-android.permission.%-from-package:" \
