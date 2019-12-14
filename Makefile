@@ -28,7 +28,7 @@ manually-provision-android-one: \
 	prompt-managing-special-permission-for-modifying-system-settings \
 	;
 
-ADB = $(shell brew cask info android-platform-tools | grep adb | cut -d' ' -f1)
+ADB = adb
 ADB_USER_ID = 0
 
 # MONKEYRUNNER = $(shell brew cask info android-sdk | grep monkeyrunner | cut -d' ' -f1)
