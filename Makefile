@@ -1,5 +1,12 @@
 .DEFAULT_GOAL = list-devices
 
+ADB = adb
+ADB_USER_ID = 0
+
+# MONKEYRUNNER = $(shell brew cask info android-sdk | grep monkeyrunner | cut -d' ' -f1)
+# $(dir $(patsubst %/,%,$(dir $(MONKEYRUNNER))))adb: | $(ADB)
+# 	ln -s "$(word 1,$|)" "$@"
+
 .PHONY: provision-sprout
 provision-sprout: \
 	automatically-provision-sprout \
@@ -28,14 +35,16 @@ manually-provision-android-one: \
 	prompt-managing-special-permission-for-modifying-system-settings \
 	;
 
-ADB = adb
-ADB_USER_ID = 0
-
-# MONKEYRUNNER = $(shell brew cask info android-sdk | grep monkeyrunner | cut -d' ' -f1)
-# $(dir $(patsubst %/,%,$(dir $(MONKEYRUNNER))))adb: | $(ADB)
-# 	ln -s "$(word 1,$|)" "$@"
-
 # ==== Internal Rules and Variables ====
+
+# No built-in rules. Eases debugging.
+MAKEFLAGS = -r
+
+comma = ,
+empty =
+space = $(empty) $(empty)
+left_brace = {
+right_brace = }
 
 google_packages_not_to_be_disabled = \
 	com.google.android.apps.work.oobconfig \
@@ -49,12 +58,6 @@ google_packages_not_to_be_disabled = \
 google_packages_to_be_disabled = \
 	com.android.vending \
 	$(filter-out $(google_packages_not_to_be_disabled),$(call filter_packages_by_prefix,com.google,$(packages)))
-
-comma = ,
-empty =
-space = $(empty) $(empty)
-left_brace = {
-right_brace = }
 
 strip_prefix = $(patsubst $(1)%,%,$(2))
 
