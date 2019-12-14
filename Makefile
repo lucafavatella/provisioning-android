@@ -117,10 +117,19 @@ disable-google-packages: \
 adb_ls_permissions = $(ADB) shell pm list permissions $(1)
 strip_permission = $(call strip_prefix,permission:,$(1))
 
+# References:
+# - https://github.com/aosp-mirror/platform_packages_apps_settings/blob/android-cts-9.0_r10/res/xml/special_access.xml
+# - https://github.com/aosp-mirror/platform_frameworks_base/blob/master/core/res/AndroidManifest.xml
+# Revoking android.permission.SEND_SMS_NO_CONFIRMATION is untested.
 revocable_special_permissions = \
 	android.permission.SYSTEM_ALERT_WINDOW \
-	android.permission.WRITE_SETTINGS
-
+	android.permission.WRITE_SETTINGS \
+	android.permission.ACCESS_NOTIFICATIONS \
+	android.permission.SEND_SMS_NO_CONFIRMATION \
+	android.permission.USE_DATA_IN_BACKGROUND \
+	android.permission.REQUEST_INSTALL_PACKAGES \
+	android.permission.PACKAGE_USAGE_STATS \
+	android.permission.CHANGE_WIFI_STATE
 .PHONY: list-revocable-special-permissions
 list-revocable-special-permissions: ; @echo $(revocable_special_permissions)
 
@@ -166,7 +175,14 @@ revoke_package_permissions = \
 			&& echo "revoke-permission-%-from-package:" \
 			&& echo "	$(ADB) shell pm revoke $(1) \$$*" \
 			&& echo "revoke-permission-android.permission.SYSTEM_ALERT_WINDOW-from-package \\" \
-			&& echo "	revoke-permission-android.permission.WRITE_SETTINGS-from-package: \\" \
+			&& echo "	revoke-permission-android.permission.WRITE_SETTINGS-from-package \\" \
+			&& echo "	revoke-permission-android.permission.ACCESS_NOTIFICATIONS-from-package \\" \
+			&& echo "	revoke-permission-android.permission.SEND_SMS_NO_CONFIRMATION-from-package \\" \
+			&& echo "	revoke-permission-android.permission.USE_DATA_IN_BACKGROUND-from-package \\" \
+			&& echo "	revoke-permission-android.permission.REQUEST_INSTALL_PACKAGES-from-package \\" \
+			&& echo "	revoke-permission-android.permission.PACKAGE_USAGE_STATS-from-package \\" \
+			&& echo "	revoke-permission-android.permission.CHANGE_WIFI_STATE-from-package \\" \
+			&& echo "	: \\" \
 			&& echo "	revoke-permission-android.permission.%-from-package:" \
 			&& echo "	$(ADB) shell appops set $(1) \$$* deny" \
 			; } \
