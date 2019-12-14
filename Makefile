@@ -120,24 +120,115 @@ disable-google-packages: \
 adb_ls_permissions = $(ADB) shell pm list permissions $(1)
 strip_permission = $(call strip_prefix,permission:,$(1))
 
-# References:
-# - https://github.com/aosp-mirror/platform_packages_apps_settings/blob/android-cts-9.0_r10/res/xml/special_access.xml
-# - https://github.com/aosp-mirror/platform_frameworks_base/blob/master/core/res/AndroidManifest.xml
+# As per Android 9,
+# the 14 items of the screen "Settings > Apps & notifications > Special app access" are defined in `special_access.xml`.
+#
+# Relevant excerpts can be extracted from it by:
+# ```
+# $ curl -LsSf https://raw.githubusercontent.com/aosp-mirror/platform_packages_apps_settings/android-9.0.0_r51/res/xml/special_access.xml | grep '\(android:key\|android:fragment\|settings:keywords\)='
+# ```
+#
+# The keys in such file are:
+# ```
+# $ curl -LsSf https://raw.githubusercontent.com/aosp-mirror/platform_packages_apps_settings/android-9.0.0_r51/res/xml/special_access.xml | grep '\(android:key\)=' | sed 's/^[[:space:]]*android:key="\([^"]*\)"[[:space:]]*$/\1/'
+# special_app_access_screen
+# high_power_apps
+# device_administrators
+# system_alert_window
+# zen_access
+# write_settings_apps
+# notification_access
+# picture_in_picture
+# premium_sms
+# data_saver
+# manage_external_sources
+# special_app_usage_access
+# enabled_vr_listeners
+# special_app_directory_access
+# change_wifi_state
+# ```
+#
+# The strings associated to the `android:key` keys in the `special_access.xml` seem to be defined in
+# https://raw.githubusercontent.com/aosp-mirror/platform_packages_apps_settings/android-9.0.0_r51/res/values/strings.xml
+#
+# The permissions are defined in `AndroidManifest.xml`.
+#
+# Some permissions are labelled as `appop`, and seems to be able to be revoked by `adb shell appops set ... ... deny`.
+# ```
+# $ curl -LsSf https://raw.githubusercontent.com/aosp-mirror/platform_frameworks_base/android-9.0.0_r51/core/res/AndroidManifest.xml | grep -B 3 -i appop
+#          system for creating and managing IPsec-based interfaces.
+#     -->
+#     <permission android:name="android.permission.MANAGE_IPSEC_TUNNELS"
+#         android:protectionLevel="signature|appop" />
+# --
+#     <permission android:name="android.permission.SYSTEM_ALERT_WINDOW"
+#         android:label="@string/permlab_systemAlertWindow"
+#         android:description="@string/permdesc_systemAlertWindow"
+#         android:protectionLevel="signature|preinstalled|appop|pre23|development" />
+# --
+#     <permission android:name="android.permission.WRITE_SETTINGS"
+#         android:label="@string/permlab_writeSettings"
+#         android:description="@string/permdesc_writeSettings"
+#         android:protectionLevel="signature|preinstalled|appop|pre23" />
+# --
+#     <permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"
+#         android:label="@string/permlab_requestInstallPackages"
+#         android:description="@string/permdesc_requestInstallPackages"
+#         android:protectionLevel="signature|appop" />
+# --
+#          <p>Declaring the permission implies intention to use the API and the user of the
+#          device can grant permission through the Settings application. -->
+#     <permission android:name="android.permission.PACKAGE_USAGE_STATS"
+#         android:protectionLevel="signature|privileged|development|appop" />
+# --
+#          any metadata and intents attached.
+#          @hide -->
+#     <permission android:name="android.permission.ACCESS_NOTIFICATIONS"
+#         android:protectionLevel="signature|privileged|appop" />
+# --
+#
+#     <!-- Allows an instant app to create foreground services. -->
+#     <permission android:name="android.permission.INSTANT_APP_FOREGROUND_SERVICE"
+#         android:protectionLevel="signature|development|instant|appop" />
+# --
+#
+#     <!-- Allows an application to watch changes and/or active state of app ops.
+#          @hide <p>Not for use by third-party applications. -->
+#     <permission android:name="android.permission.WATCH_APPOPS"
+# ```
+#
+# Summary from `special_access.xml` to `AndroidManifest.xml`:
+# ```
+# high_power_apps              - ?
+# device_administrators        - ? BIND_DEVICE_ADMIN
+# system_alert_window          - SYSTEM_ALERT_WINDOW
+# zen_access                   - ?
+# write_settings_apps          - WRITE_SETTINGS
+# notification_access          - ACCESS_NOTIFICATIONS
+# picture_in_picture           - ?
+# premium_sms                  - ? SEND_SMS_NO_CONFIRMATION
+# data_saver                   - USE_DATA_IN_BACKGROUND
+# manage_external_sources      - REQUEST_INSTALL_PACKAGES
+# special_app_usage_access     - ? PACKAGE_USAGE_STATS
+# enabled_vr_listeners         - ?
+# special_app_directory_access - ?
+# change_wifi_state            - CHANGE_WIFI_STATE
+# ```
 revocable_special_permissions = \
-	android.permission.ACCESS_NOTIFICATIONS \
-	android.permission.CHANGE_WIFI_STATE \
-	android.permission.REQUEST_INSTALL_PACKAGES \
 	android.permission.SYSTEM_ALERT_WINDOW \
+	android.permission.WRITE_SETTINGS \
+	android.permission.ACCESS_NOTIFICATIONS \
 	android.permission.USE_DATA_IN_BACKGROUND \
-	android.permission.WRITE_SETTINGS
+	android.permission.REQUEST_INSTALL_PACKAGES \
+	android.permission.CHANGE_WIFI_STATE
 .PHONY: list-revocable-special-permissions
 list-revocable-special-permissions: ; @echo $(revocable_special_permissions)
 
 special_permissions = \
 	$(revocable_special_permissions) \
 	android.permission.BIND_DEVICE_ADMIN \
-	android.permission.PACKAGE_USAGE_STATS \
-	android.permission.SEND_SMS_NO_CONFIRMATION
+	android.permission.SEND_SMS_NO_CONFIRMATION \
+	android.permission.PACKAGE_USAGE_STATS
 .PHONY: list-special-permissions
 list-special-permissions: ; @echo $(special_permissions)
 
