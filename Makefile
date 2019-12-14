@@ -118,28 +118,15 @@ adb_ls_permissions = $(ADB) shell pm list permissions $(1)
 strip_permission = $(call strip_prefix,permission:,$(1))
 
 revocable_special_permissions = \
-	android.permission.SYSTEM_ALERT_WINDOW
+	android.permission.SYSTEM_ALERT_WINDOW \
+	android.permission.WRITE_SETTINGS
+
 .PHONY: list-revocable-special-permissions
 list-revocable-special-permissions: ; @echo $(revocable_special_permissions)
 
-# Re `android.permission.WRITE_SETTINGS`:
-# ```
-# $ adb shell pm revoke com.android.vending android.permission.WRITE_SETTINGS
-# Security exception: Permission android.permission.WRITE_SETTINGS is not a changeable permission type
-#
-# java.lang.SecurityException: Permission android.permission.WRITE_SETTINGS is not a changeable permission type
-# ...
-# ```
-#
-# From https://github.com/tynn/DevSet issue 1:
-# > The required permission changed with Oreo and it cannot be set with pm anymore. You have to set this manually. ...
-# ```
-# adb shell am start -a android.settings.action.MANAGE_WRITE_SETTINGS
-# ```
 special_permissions = \
 	$(revocable_special_permissions) \
-	android.permission.BIND_DEVICE_ADMIN \
-	android.permission.WRITE_SETTINGS
+	android.permission.BIND_DEVICE_ADMIN
 .PHONY: list-special-permissions
 list-special-permissions: ; @echo $(special_permissions)
 
@@ -198,6 +185,7 @@ revoke-revocable-special-permissions-from-all-packages: \
 prompt-managing-special-permission-for-modifying-system-settings:
 	$(info This target $@ requires user action)
 	$(ADB) shell input keyevent KEYCODE_POWER
+	$(error Target to-be-updated with actions corresponding to non-revocable special permissions)
 	$(ADB) shell am start -a android.settings.action.MANAGE_WRITE_SETTINGS
 
 .PHONY: revoke-dangerous-permissions-from-package-%
