@@ -266,33 +266,6 @@ revoke-permission-%-package:
 		$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) deny, \
 		$(ADB) shell pm revoke $(call revoke_pkg,$*) $(call revoke_perm,$*))
 
-# TODO Target in this Makefile?
-# TODO Refactor special permissions?
-revoke_package_permissions = \
-	test -z "$(2)" \
-		|| { { echo ".PHONY: all" \
-			&& echo "all: \\" \
-			&& for P in $(2); do \
-				echo "	revoke-permission-$${P:?}-from-package \\"; \
-			done \
-			&& echo "	;" \
-			&& echo \
-			&& echo ".PHONY: revoke-permission-%-from-package" \
-			&& echo "revoke-permission-%-from-package:" \
-			&& echo "	$(ADB) shell pm revoke $(1) \$$*" \
-			&& echo "revoke-permission-android.permission.ACCESS_NOTIFICATIONS-from-package \\" \
-			&& echo "	revoke-permission-android.permission.CHANGE_WIFI_STATE-from-package \\" \
-			&& echo "	revoke-permission-android.permission.REQUEST_INSTALL_PACKAGES-from-package \\" \
-			&& echo "	revoke-permission-android.permission.SYSTEM_ALERT_WINDOW-from-package \\" \
-			&& echo "	revoke-permission-android.permission.USE_DATA_IN_BACKGROUND-from-package \\" \
-			&& echo "	revoke-permission-android.permission.WRITE_SETTINGS-from-package \\" \
-			&& echo "	: \\" \
-			&& echo "	revoke-permission-android.permission.%-from-package:" \
-			&& echo "	$(ADB) shell appops set $(1) \$$* deny" \
-			; } \
-		| $(MAKE) -f - \
-		; }
-
 # TODO Review unnecessary `error: no devices/emulators found` if calling make on a target not requiring adb.
 .PHONY: revoke-revocable-special-permissions-from-all-packages
 revoke-revocable-special-permissions-from-all-packages: \
