@@ -293,10 +293,6 @@ revoke_package_permissions = \
 		| $(MAKE) -f - \
 		; }
 
-.PHONY: revoke-revocable-special-permissions-from-package-%
-revoke-revocable-special-permissions-from-package-%:
-	@$(call revoke_package_permissions,$*,$(filter $(call requested_permissions_by_package,$*),$(revocable_special_permissions)))
-
 # TODO Review unnecessary `error: no devices/emulators found` if calling make on a target not requiring adb.
 .PHONY: revoke-revocable-special-permissions-from-all-packages
 revoke-revocable-special-permissions-from-all-packages: \
@@ -311,10 +307,6 @@ prompt-managing-special-permission-for-modifying-system-settings:
 	$(error Target to-be-updated with actions corresponding to non-revocable special permissions)
 	$(ADB) shell am start -a android.settings.action.MANAGE_WRITE_SETTINGS
 
-.PHONY: revoke-dangerous-permissions-from-package-%
-revoke-dangerous-permissions-from-package-%:
-	@$(call revoke_package_permissions,$*,$(dangerous_permissions))
-
 # From https://source.android.com/devices/tech/config/perms-whitelist
 # > Privileged apps are system apps that are located in a `priv-app` directory on one of the system image partitions.
 privileged_permissions_by_package = $(sort $(subst $(comma)$(space),$(space),$(patsubst %$(right_brace),%,$(patsubst $(left_brace)%,%,$(shell $(ADB) shell pm get-privapp-permissions $(1))))))
@@ -324,3 +316,17 @@ list-privileged-permissions-%: ; @echo $(call privileged_permissions_by_package,
 .PHONY: revoke-privileged-permissions-from-package-%
 revoke-privileged-permissions-from-package-%:
 	@$(call revoke_package_permissions,$*,$(MAKE) -s list-privileged-permissions-$*)
+
+# ---- Secondary Expansion ----
+
+.SECONDEXPANSION:
+
+# ---- Revoke Permissions (Secondary Expansion) ----
+
+.PHONY: revoke-revocable-special-permissions-from-package-%
+revoke-revocable-special-permissions-from-package-%:
+	@$(call revoke_package_permissions,$*,$(filter $(call requested_permissions_by_package,$*),$(revocable_special_permissions)))
+
+.PHONY: revoke-dangerous-permissions-from-package-%
+revoke-dangerous-permissions-from-package-%:
+	@$(call revoke_package_permissions,$*,$(dangerous_permissions))
