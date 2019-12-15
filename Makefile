@@ -150,7 +150,7 @@ disable-google-packages: \
 #
 # The permissions are defined in `AndroidManifest.xml`.
 #
-# Some permissions are labelled as `appop`, and seems to be able to be revoked by `adb shell appops set ... ... deny`.
+# Some permissions are labelled as `appop`, and seem to be able to be revoked by `adb shell appops set ... ... deny`.
 # ```
 # $ curl -LsSf https://raw.githubusercontent.com/aosp-mirror/platform_frameworks_base/android-9.0.0_r51/core/res/AndroidManifest.xml | grep -B 3 -i appop
 #          system for creating and managing IPsec-based interfaces.
