@@ -256,6 +256,13 @@ list-dangerous-user-permissions: ; @echo $(dangerous_user_permissions)
 
 # ---- Revoke Permissions ----
 
+revoke_perm_pkg_sep = +
+revoke_pkg = $(word 2,$(subst +, ,$(1)))
+revoke_perm = $(word 1,$(subst +, ,$(1)))
+.PHONY: revoke-permission-from-package-%
+revoke-permission-from-package-%:
+	$(if $(filter $(revocable_special_permissions),$(call revoke_perm)$(word 1,$(subst +, ,$*))),$(ADB) shell appops set $(word 2,$(subst +, ,$*)) $(word 1,$(subst +, ,$*)) deny,$(ADB) shell pm revoke $(word 2,$(subst +, ,$*)) $(word 1,$(subst +, ,$*)))
+
 # TODO Target in this Makefile?
 # TODO Refactor special permissions?
 revoke_package_permissions = \
