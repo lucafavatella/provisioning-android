@@ -313,10 +313,6 @@ privileged_permissions_by_package = $(sort $(subst $(comma)$(space),$(space),$(p
 .PHONY: list-privileged-permissions-%
 list-privileged-permissions-%: ; @echo $(call privileged_permissions_by_package,$*)
 
-.PHONY: revoke-privileged-permissions-from-package-%
-revoke-privileged-permissions-from-package-%:
-	@$(call revoke_package_permissions,$*,$(MAKE) -s list-privileged-permissions-$*)
-
 # ---- Secondary Expansion ----
 
 .SECONDEXPANSION:
@@ -330,3 +326,7 @@ revoke-revocable-special-permissions-from-package-%:
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%:
 	@$(call revoke_package_permissions,$*,$(dangerous_permissions))
+
+.PHONY: revoke-privileged-permissions-from-package-%
+revoke-privileged-permissions-from-package-%:
+	@$(call revoke_package_permissions,$*,$(MAKE) -s list-privileged-permissions-$*)
