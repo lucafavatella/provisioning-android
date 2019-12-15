@@ -256,11 +256,11 @@ list-dangerous-user-permissions: ; @echo $(dangerous_user_permissions)
 
 # ---- Revoke Permissions ----
 
-revoke_perm_pkg_sep = +
-revoke_pkg = $(word 2,$(subst +, ,$(1)))
-revoke_perm = $(word 1,$(subst +, ,$(1)))
-.PHONY: revoke-permission-from-package-%
-revoke-permission-from-package-%:
+revoke_perm_pkg_sep = -from-
+revoke_pkg = $(word 2,$(subst $(revoke_perm_pkg_sep), ,$(1)))
+revoke_perm = $(word 1,$(subst $(revoke_perm_pkg_sep), ,$(1)))
+.PHONY: revoke-permission-%-package
+revoke-permission-%-package:
 	$(if \
 		$(filter $(revocable_special_permissions),$(call revoke_perm,$*)), \
 		$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) deny, \
@@ -320,13 +320,16 @@ list-privileged-permissions-%: ; @echo $(call privileged_permissions_by_package,
 # ---- Revoke Permissions (Secondary Expansion) ----
 
 .PHONY: revoke-revocable-special-permissions-from-package-%
-revoke-revocable-special-permissions-from-package-%:
-	@$(call revoke_package_permissions,$*,$(filter $(call requested_permissions_by_package,$*),$(revocable_special_permissions)))
+revoke-revocable-special-permissions-from-package-%: \
+	$$(foreach p,$$(filter $$(call requested_permissions_by_package,$*),$$(revocable_special_permissions)),revoke-permission-$$(p)-from-$*-package) \
+	;
 
 .PHONY: revoke-dangerous-permissions-from-package-%
-revoke-dangerous-permissions-from-package-%:
-	@$(call revoke_package_permissions,$*,$(dangerous_permissions))
+revoke-dangerous-permissions-from-package-%: \
+	$$(foreach p,$$(dangerous_permissions),revoke-permission-$$(p)-from-$*-package) \
+	;
 
 .PHONY: revoke-privileged-permissions-from-package-%
-revoke-privileged-permissions-from-package-%:
-	@$(call revoke_package_permissions,$*,$(MAKE) -s list-privileged-permissions-$*)
+revoke-privileged-permissions-from-package-%: \
+	$$(foreach p,$$(call privileged_permissions_by_package,$*),revoke-permission-$$(p)-from-$*-package) \
+	;
