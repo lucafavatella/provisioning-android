@@ -110,6 +110,7 @@ list-enabled-package-second-level-domains: ; @echo $(enabled_package_slds)
 .PHONY: disable-package-%
 disable-package-%: ; $(ADB) shell pm disable-user --user $(ADB_USER_ID) $*
 
+# TODO Review unnecessary `error: no devices/emulators found` if calling make on a target not requiring adb.
 .PHONY: disable-google-packages
 disable-google-packages: \
 	$(foreach p,$(google_packages_to_be_disabled),disable-package-$(p)) \
@@ -286,6 +287,7 @@ revoke_package_permissions = \
 revoke-revocable-special-permissions-from-package-%:
 	@$(call revoke_package_permissions,$*,$(filter $(call requested_permissions_by_package,$*),$(revocable_special_permissions)))
 
+# TODO Review unnecessary `error: no devices/emulators found` if calling make on a target not requiring adb.
 .PHONY: revoke-revocable-special-permissions-from-all-packages
 revoke-revocable-special-permissions-from-all-packages: \
 	$(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p)) \
