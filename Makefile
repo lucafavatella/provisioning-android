@@ -261,7 +261,10 @@ revoke_pkg = $(word 2,$(subst +, ,$(1)))
 revoke_perm = $(word 1,$(subst +, ,$(1)))
 .PHONY: revoke-permission-from-package-%
 revoke-permission-from-package-%:
-	$(if $(filter $(revocable_special_permissions),$(call revoke_perm,$*)),$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) deny,$(ADB) shell pm revoke $(call revoke_pkg,$*) $(call revoke_perm,$*))
+	$(if \
+		$(filter $(revocable_special_permissions),$(call revoke_perm,$*)), \
+		$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) deny, \
+		$(ADB) shell pm revoke $(call revoke_pkg,$*) $(call revoke_perm,$*))
 
 # TODO Target in this Makefile?
 # TODO Refactor special permissions?
