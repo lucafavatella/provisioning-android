@@ -255,6 +255,8 @@ list-dangerous-user-permissions: ; @echo $(dangerous_user_permissions)
 
 # ---- Revoke Permissions ----
 
+# TODO Target in this Makefile?
+# TODO Refactor special permissions?
 revoke_package_permissions = \
 	test -z "$(2)" \
 		|| { { echo ".PHONY: all" \
@@ -289,6 +291,7 @@ revoke-revocable-special-permissions-from-all-packages: \
 	$(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p)) \
 	;
 
+# TODO Update.
 .PHONY: prompt-managing-special-permission-for-modifying-system-settings
 prompt-managing-special-permission-for-modifying-system-settings:
 	$(info This target $@ requires user action)
