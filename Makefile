@@ -117,9 +117,6 @@ disable-google-packages: \
 
 # ---- List Permissions ----
 
-adb_ls_permissions = $(ADB) shell pm list permissions $(1)
-strip_permission = $(call strip_prefix,permission:,$(1))
-
 # As per Android 9,
 # the 14 items of the screen "Settings > Apps & notifications > Special app access" are defined in `special_access.xml`.
 #
@@ -236,6 +233,9 @@ requested_permissions_by_package = $(sort $(shell $(CURDIR)/libexec/requested_pe
 .PHONY: list-requested-permissions-by-package-%
 list-requested-permissions-by-package-%:
 	@echo $(call requested_permissions_by_package,$*)
+
+adb_ls_permissions = $(ADB) shell pm list permissions $(1)
+strip_permission = $(call strip_prefix,permission:,$(1))
 
 permissions = $(sort $(call strip_permission,$(shell $(call adb_ls_permissions,-g))))
 .PHONY: list-permissions
