@@ -207,7 +207,7 @@ disable-google-packages: \
 # premium_sms                  - ? SEND_SMS_NO_CONFIRMATION
 # data_saver                   - USE_DATA_IN_BACKGROUND
 # manage_external_sources      - REQUEST_INSTALL_PACKAGES
-# special_app_usage_access     - ? PACKAGE_USAGE_STATS      - android.intent.category.USAGE_ACCESS_CONFIG
+# special_app_usage_access     - ? PACKAGE_USAGE_STATS      - android.settings.action.APP_USAGE_SETTINGS
 # enabled_vr_listeners         - ?
 # special_app_directory_access - ?
 # change_wifi_state            - CHANGE_WIFI_STATE
@@ -283,7 +283,7 @@ revoke-revocable-special-permissions-from-all-packages: \
 prompt-managing-special-permission-for-modifying-system-settings:
 	$(info This target $@ requires user action)
 	$(ADB) shell input keyevent KEYCODE_POWER
-	$(ADB) shell am start -a android.intent.category.USAGE_ACCESS_CONFIG
+	$(ADB) shell am start -a android.settings.action.APP_USAGE_SETTINGS
 
 # ---- Secondary Expansion ----
 
