@@ -207,7 +207,7 @@ disable-google-packages: \
 # premium_sms                  - ? SEND_SMS_NO_CONFIRMATION
 # data_saver                   - USE_DATA_IN_BACKGROUND
 # manage_external_sources      - REQUEST_INSTALL_PACKAGES
-# special_app_usage_access     - ? PACKAGE_USAGE_STATS
+# special_app_usage_access     - ? PACKAGE_USAGE_STATS      - android.intent.category.USAGE_ACCESS_CONFIG
 # enabled_vr_listeners         - ?
 # special_app_directory_access - ?
 # change_wifi_state            - CHANGE_WIFI_STATE
