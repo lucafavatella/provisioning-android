@@ -294,15 +294,15 @@ list-privileged-permissions-%: ; @echo $(call privileged_permissions_by_package,
 
 .PHONY: revoke-revocable-special-permissions-from-package-%
 revoke-revocable-special-permissions-from-package-%: \
-	$$(foreach p,$$(filter $$(call requested_permissions_by_package,$*),$$(revocable_special_permissions)),revoke-permission-$$(p)-from-$*-package) \
+	$$(foreach p,$$(filter $$(call requested_permissions_by_package,$$*),$$(revocable_special_permissions)),revoke-permission-$$(p)-from-$$*-package) \
 	;
 
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%: \
-	$$(foreach p,$$(dangerous_permissions),revoke-permission-$$(p)-from-$*-package) \
+	$$(foreach p,$$(dangerous_permissions),revoke-permission-$$(p)-from-$$*-package) \
 	;
 
 .PHONY: revoke-privileged-permissions-from-package-%
 revoke-privileged-permissions-from-package-%: \
-	$$(foreach p,$$(call privileged_permissions_by_package,$*),revoke-permission-$$(p)-from-$*-package) \
+	$$(foreach p,$$(call privileged_permissions_by_package,$$*),revoke-permission-$$(p)-from-$$*-package) \
 	;
