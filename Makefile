@@ -283,8 +283,7 @@ revoke-revocable-special-permissions-from-all-packages: \
 prompt-managing-special-permission-for-modifying-system-settings:
 	$(info This target $@ requires user action)
 	$(ADB) shell input keyevent KEYCODE_POWER
-	$(error Target to-be-updated with actions corresponding to non-revocable special permissions)
-	$(ADB) shell am start -a android.settings.action.MANAGE_WRITE_SETTINGS
+	$(ADB) shell am start -a android.intent.category.USAGE_ACCESS_CONFIG
 
 # ---- Secondary Expansion ----
 
