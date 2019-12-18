@@ -216,6 +216,7 @@ revocable_special_permissions = \
 	android.permission.SYSTEM_ALERT_WINDOW \
 	android.permission.WRITE_SETTINGS \
 	android.permission.ACCESS_NOTIFICATIONS \
+	android.permission.SEND_SMS \
 	android.permission.USE_DATA_IN_BACKGROUND \
 	android.permission.REQUEST_INSTALL_PACKAGES \
 	android.permission.CHANGE_WIFI_STATE
@@ -225,7 +226,6 @@ list-revocable-special-permissions: ; @echo $(revocable_special_permissions)
 special_permissions = \
 	$(revocable_special_permissions) \
 	android.permission.BIND_DEVICE_ADMIN \
-	android.permission.SEND_SMS_NO_CONFIRMATION \
 	android.permission.PACKAGE_USAGE_STATS
 .PHONY: list-special-permissions
 list-special-permissions: ; @echo $(special_permissions)
