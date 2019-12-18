@@ -204,7 +204,7 @@ disable-google-packages: \
 # write_settings_apps          - WRITE_SETTINGS
 # notification_access          - ACCESS_NOTIFICATIONS
 # picture_in_picture           - ?
-# premium_sms                  - ? SEND_SMS_NO_CONFIRMATION
+# premium_sms                  - ? SEND_SMS
 # data_saver                   - USE_DATA_IN_BACKGROUND
 # manage_external_sources      - REQUEST_INSTALL_PACKAGES
 # special_app_usage_access     - ? PACKAGE_USAGE_STATS
