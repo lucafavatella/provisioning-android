@@ -32,7 +32,7 @@ automatically-provision-android-one: \
 
 .PHONY: manually-provision-android-one
 manually-provision-android-one: \
-	prompt-managing-special-permission-for-modifying-system-settings \
+	prompt-managing-special-permissions \
 	;
 
 # ==== Internal Rules and Variables ====
@@ -285,11 +285,11 @@ revoke-revocable-special-permissions-from-all-packages: \
 	;
 
 # TODO Update.
-.PHONY: prompt-managing-special-permission-for-modifying-system-settings
-prompt-managing-special-permission-for-modifying-system-settings:
+.PHONY: prompt-managing-special-permissions
+prompt-managing-special-permissions:
 	$(info This target $@ requires user action)
+	$(warning Manually revoke special permissions $(non_revocable_special_permissions))
 	$(ADB) shell input keyevent KEYCODE_POWER
-	$(ADB) shell am start -a TODO
 
 # ---- Secondary Expansion ----
 
