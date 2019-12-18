@@ -223,10 +223,15 @@ revocable_special_permissions = \
 .PHONY: list-revocable-special-permissions
 list-revocable-special-permissions: ; @echo $(revocable_special_permissions)
 
-special_permissions = \
-	$(revocable_special_permissions) \
+non_revocable_special_permissions = \
 	android.permission.BIND_DEVICE_ADMIN \
 	android.permission.PACKAGE_USAGE_STATS
+.PHONY: list-non-revocable-special-permissions
+list-non-revocable-special-permissions: ; @echo $(non_revocable_special_permissions)
+
+special_permissions = \
+	$(revocable_special_permissions) \
+	$(non_revocable_special_permissions)
 .PHONY: list-special-permissions
 list-special-permissions: ; @echo $(special_permissions)
 
