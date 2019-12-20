@@ -290,6 +290,7 @@ prompt-managing-special-permissions:
 	$(info This target $@ requires user action)
 	$(warning Manually revoke special permissions $(non_revocable_special_permissions))
 	$(ADB) shell input keyevent KEYCODE_POWER
+	$(ADB) shell am start -a android.settings.USAGE_ACCESS_SETTINGS
 
 # ---- Secondary Expansion ----
 
