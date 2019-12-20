@@ -313,3 +313,5 @@ revoke-dangerous-permissions-from-package-%: \
 revoke-privileged-permissions-from-package-%: \
 	$$(foreach p,$$(call privileged_permissions_by_package,$$*),revoke-permission-$$(p)-from-$$*-package) \
 	;
+
+# TODO Replace usage of foreach with patsubst in cases where it is only string replacement.
