@@ -284,26 +284,23 @@ revoke-revocable-special-permissions-from-all-packages: \
 	$(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p)) \
 	;
 
-https://github.com/aosp-mirror/platform_frameworks_base/blob/master/core/java/android/view/KeyEvent.java#L646
+# https://github.com/aosp-mirror/platform_frameworks_base/blob/master/core/java/android/view/KeyEvent.java#L646
+action_for_revoking_special_permission_android.permission.BIND_DEVICE_ADMIN =
+action_for_revoking_special_permission_android.permission.PACKAGE_USAGE_STATS = android.settings.USAGE_ACCESS_SETTINGS
 prefix_of_target_for_revoking_non_revocable_special_permission = \
 	prompt-managing-special-permission-
 targets_for_revoking_non_revocable_special_permissions = \
 	$(patsubst %,$(prefix_of_target_for_revoking_non_revocable_special_permission)%,$(non_revocable_special_permissions))
-#.PHONY: prompt-managing-special-permission-android.permission.PACKAGE_USAGE_STATS
-prompt-managing-special-permission-android.permission.PACKAGE_USAGE_STATS:
-	$(ADB) shell am start -a android.settings.USAGE_ACCESS_SETTINGS
-
-# TODO Update.
-.PHONY: prompt-managing-special-permissions
-prompt-managing-special-permissions:
+.PHONY: $(targets_for_revoking_non_revocable_special_permissions)
+$(targets_for_revoking_non_revocable_special_permissions):
+	$(prefix_of_target_for_revoking_non_revocable_special_permission)%:
 	$(info This target $@ requires user action)
-	$(warning Manually revoke special permissions $(non_revocable_special_permissions))
 	$(ADB) shell input keyevent KEYCODE_WAKEUP
-	# XXX https://github.com/aosp-mirror/platform_frameworks_base/blob/master/core/java/android/view/KeyEvent.java#L646
-	$(foreach p,$(non_revocable_special_permissions),
-	$(ADB) shell am start -a android.settings.USAGE_ACCESS_SETTINGS ## TODO Correlate with permission.
-action_for_revoking_special_permission_android.permission.BIND_DEVICE_ADMIN =
-action_for_revoking_special_permission_android.permission.PACKAGE_USAGE_STATS = android.settings.USAGE_ACCESS_SETTINGS
+	$(ADB) shell am start -a $(action_for_revoking_special_permission_$*)
+
+.PHONY: prompt-managing-special-permissions
+prompt-managing-special-permissions: \
+	$(targets_for_revoking_non_revocable_special_permissions)
 
 # ---- Secondary Expansion ----
 
