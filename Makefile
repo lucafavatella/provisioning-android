@@ -292,7 +292,7 @@ prefix_of_target_for_revoking_non_revocable_special_permission = \
 targets_for_revoking_non_revocable_special_permissions = \
 	$(patsubst %,$(prefix_of_target_for_revoking_non_revocable_special_permission)%,$(non_revocable_special_permissions))
 .PHONY: $(targets_for_revoking_non_revocable_special_permissions)
-$(targets_for_revoking_non_revocable_special_permissions):
+$(targets_for_revoking_non_revocable_special_permissions): \
 	$(prefix_of_target_for_revoking_non_revocable_special_permission)%:
 	$(info This target $@ requires user action)
 	$(ADB) shell input keyevent KEYCODE_WAKEUP
