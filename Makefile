@@ -289,15 +289,16 @@ revoke-revocable-special-permissions-from-all-packages: \
 	$(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p)) \
 	;
 
+prefix_of_target_for_prompting_special_permission = \
+	prompt-managing-special-permission-
+
 # XXX https://github.com/aosp-mirror/platform_frameworks_base/blob/master/core/java/android/view/KeyEvent.java#L646
 action_for_prompting_special_permission_android.permission.PACKAGE_USAGE_STATS = android.settings.USAGE_ACCESS_SETTINGS
-prefix_of_target_for_revoking_promptable_special_permission = \
-	prompt-managing-special-permission-
 targets_for_revoking_promptable_special_permissions = \
-	$(patsubst %,$(prefix_of_target_for_revoking_promptable_special_permission)%,$(promptable_special_permissions))
+	$(patsubst %,$(prefix_of_target_for_prompting_special_permission)%,$(promptable_special_permissions))
 .PHONY: $(targets_for_revoking_promptable_special_permissions)
 $(targets_for_revoking_promptable_special_permissions): \
-	$(prefix_of_target_for_revoking_promptable_special_permission)%:
+	$(prefix_of_target_for_prompting_special_permission)%:
 	$(info This target $@ requires user action)
 	$(ADB) shell input keyevent KEYCODE_WAKEUP
 	$(ADB) shell am start -a $(action_for_prompting_special_permission_$*)
@@ -305,10 +306,10 @@ $(targets_for_revoking_promptable_special_permissions): \
 	head -n 1
 
 targets_for_revoking_non_revocable_special_permissions = \
-	$(patsubst %,$(prefix_of_target_for_revoking_promptable_special_permission)%,$(non_revocable_special_permissions))
+	$(patsubst %,$(prefix_of_target_for_prompting_special_permission)%,$(non_revocable_special_permissions))
 .PHONY: $(targets_for_revoking_non_revocable_special_permissions)
 $(targets_for_revoking_non_revocable_special_permissions): \
-	$(prefix_of_target_for_revoking_promptable_special_permission)%:
+	$(prefix_of_target_for_prompting_special_permission)%:
 	$(info This target $@ requires user action)
 	@echo "You are on your own for disabling special permission $* for the applications. Once you are done, press any key."
 	head -n 1
