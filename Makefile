@@ -297,6 +297,8 @@ $(targets_for_revoking_non_revocable_special_permissions): \
 	$(info This target $@ requires user action)
 	$(ADB) shell input keyevent KEYCODE_WAKEUP
 	$(ADB) shell am start -a $(action_for_revoking_special_permission_$*)
+	@echo "Once you disable special permission $* for the applications, press any key."
+	head -n 1
 
 .PHONY: prompt-managing-special-permissions
 prompt-managing-special-permissions: \
