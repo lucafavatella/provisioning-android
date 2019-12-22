@@ -223,14 +223,19 @@ revocable_special_permissions = \
 .PHONY: list-revocable-special-permissions
 list-revocable-special-permissions: ; @echo $(revocable_special_permissions)
 
-non_revocable_special_permissions = \
-	android.permission.BIND_DEVICE_ADMIN \
+promptable_special_permissions = \
 	android.permission.PACKAGE_USAGE_STATS
+.PHONY: list-promptable-special-permissions
+list-promptable-special-permissions: ; @echo $(promptable_special_permissions)
+
+non_revocable_special_permissions = \
+	android.permission.BIND_DEVICE_ADMIN
 .PHONY: list-non-revocable-special-permissions
 list-non-revocable-special-permissions: ; @echo $(non_revocable_special_permissions)
 
 special_permissions = \
 	$(revocable_special_permissions) \
+	$(promptable_special_permissions) \
 	$(non_revocable_special_permissions)
 .PHONY: list-special-permissions
 list-special-permissions: ; @echo $(special_permissions)
@@ -285,24 +290,23 @@ revoke-revocable-special-permissions-from-all-packages: \
 	;
 
 # XXX https://github.com/aosp-mirror/platform_frameworks_base/blob/master/core/java/android/view/KeyEvent.java#L646
-action_for_revoking_special_permission_android.permission.BIND_DEVICE_ADMIN =
-action_for_revoking_special_permission_android.permission.PACKAGE_USAGE_STATS = android.settings.USAGE_ACCESS_SETTINGS
-prefix_of_target_for_revoking_non_revocable_special_permission = \
+action_for_prompting_special_permission_android.permission.PACKAGE_USAGE_STATS = android.settings.USAGE_ACCESS_SETTINGS
+prefix_of_target_for_revoking_promptable_special_permission = \
 	prompt-managing-special-permission-
-targets_for_revoking_non_revocable_special_permissions = \
-	$(patsubst %,$(prefix_of_target_for_revoking_non_revocable_special_permission)%,$(non_revocable_special_permissions))
-.PHONY: $(targets_for_revoking_non_revocable_special_permissions)
-$(targets_for_revoking_non_revocable_special_permissions): \
-	$(prefix_of_target_for_revoking_non_revocable_special_permission)%:
+targets_for_revoking_promptable_special_permissions = \
+	$(patsubst %,$(prefix_of_target_for_revoking_promptable_special_permission)%,$(promptable_special_permissions))
+.PHONY: $(targets_for_revoking_promptable_special_permissions)
+$(targets_for_revoking_promptable_special_permissions): \
+	$(prefix_of_target_for_revoking_promptable_special_permission)%:
 	$(info This target $@ requires user action)
 	$(ADB) shell input keyevent KEYCODE_WAKEUP
-	$(ADB) shell am start -a $(action_for_revoking_special_permission_$*)
+	$(ADB) shell am start -a $(action_for_prompting_special_permission_$*)
 	@echo "Once you disable special permission $* for the applications, press any key."
 	head -n 1
 
 .PHONY: prompt-managing-special-permissions
 prompt-managing-special-permissions: \
-	$(targets_for_revoking_non_revocable_special_permissions)
+	$(targets_for_revoking_promptable_special_permissions)
 
 # ---- Secondary Expansion ----
 
