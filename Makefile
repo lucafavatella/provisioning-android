@@ -304,9 +304,19 @@ $(targets_for_revoking_promptable_special_permissions): \
 	@echo "Once you disable special permission $* for the applications, press any key."
 	head -n 1
 
+targets_for_revoking_non_revocable_special_permissions = \
+	$(patsubst %,$(prefix_of_target_for_revoking_promptable_special_permission)%,$(non_revocable_special_permissions))
+.PHONY: $(targets_for_revoking_non_revocable_special_permissions)
+$(targets_for_revoking_non_revocable_special_permissions): \
+	$(prefix_of_target_for_revoking_promptable_special_permission)%:
+	$(info This target $@ requires user action)
+	@echo "You are on your own for disabling special permission $* for the applications. Once you are done, press any key."
+	head -n 1
+
 .PHONY: prompt-managing-special-permissions
 prompt-managing-special-permissions: \
-	$(targets_for_revoking_promptable_special_permissions)
+	$(targets_for_revoking_promptable_special_permissions) \
+	$(targets_for_revoking_non_revocable_special_permissions)
 
 # ---- Secondary Expansion ----
 
