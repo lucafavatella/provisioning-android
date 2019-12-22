@@ -292,7 +292,7 @@ revoke-revocable-special-permissions-from-all-packages: \
 prefix_of_target_for_prompting_special_permission = \
 	prompt-managing-special-permission-
 
-# XXX https://github.com/aosp-mirror/platform_frameworks_base/blob/master/core/java/android/view/KeyEvent.java#L646
+# TODO Copy key events? https://github.com/aosp-mirror/platform_frameworks_base/blob/master/core/java/android/view/KeyEvent.java#L646
 action_for_prompting_special_permission_android.permission.PACKAGE_USAGE_STATS = android.settings.USAGE_ACCESS_SETTINGS
 targets_for_revoking_promptable_special_permissions = \
 	$(patsubst %,$(prefix_of_target_for_prompting_special_permission)%,$(promptable_special_permissions))
