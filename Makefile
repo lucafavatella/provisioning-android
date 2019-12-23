@@ -28,6 +28,7 @@ manually-provision-sprout:
 automatically-provision-android-one: \
 	disable-google-packages \
 	revoke-revocable-special-permissions-from-all-packages \
+	disable-nfc \
 	; $(info Assumption: Android One systems are similar across Original Equipment Manufacturers)
 
 .PHONY: manually-provision-android-one
@@ -326,6 +327,12 @@ prompt-managing-default-apps:
 	$(ADB) shell am start -a android.settings.MANAGE_DEFAULT_APPS_SETTINGS
 	@echo "You are on your own for managing default applications. Once you are done, press any key."
 	head -n 1
+
+# ---- Misc ----
+
+.PHONY: disable-nfc
+disable-nfc:
+	$(ADB) shell svc nfc disable
 
 # ---- Secondary Expansion ----
 

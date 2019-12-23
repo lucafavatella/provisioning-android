@@ -1,1 +1,1 @@
-# In connected devices, connection preferences, no NFC or printing.
+# In connected devices, connection preferences, no printing.
