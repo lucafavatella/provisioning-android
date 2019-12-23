@@ -33,6 +33,7 @@ automatically-provision-android-one: \
 .PHONY: manually-provision-android-one
 manually-provision-android-one: \
 	prompt-managing-special-permissions \
+	prompt-managing-default-apps \
 	;
 
 # ==== Internal Rules and Variables ====
@@ -318,6 +319,13 @@ $(targets_for_revoking_non_revocable_special_permissions): \
 prompt-managing-special-permissions: \
 	$(targets_for_revoking_promptable_special_permissions) \
 	$(targets_for_revoking_non_revocable_special_permissions)
+
+.PHONY: prompt-managing-default-apps
+prompt-managing-default-apps:
+	$(info This target $@ requires user action)
+	$(ADB) shell am start -a android.settings.MANAGE_DEFAULT_APPS_SETTINGS
+	@echo "You are on your own for managing default applications. Once you are done, press any key."
+	head -n 1
 
 # ---- Secondary Expansion ----
 
