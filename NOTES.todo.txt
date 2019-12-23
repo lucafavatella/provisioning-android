@@ -1,1 +1,0 @@
-# In connected devices, connection preferences, no printing.
