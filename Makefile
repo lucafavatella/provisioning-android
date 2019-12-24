@@ -321,9 +321,26 @@ prompt-managing-special-permissions: \
 	$(targets_for_revoking_promptable_special_permissions) \
 	$(targets_for_revoking_non_revocable_special_permissions)
 
+packages_non_revocable_for_some_dangerous_permissions = \
+	android \
+	com.android.bluetooth \
+	com.android.cellbroadcastreceiver \
+	com.android.companiondevicemanager \
+	com.android.defcontainer \
+	com.android.emergency \
+	com.android.externalstorage \
+	com.android.location.fused \
+	com.android.mms.service \
+	com.android.nfc \
+	com.android.phone \
+	com.android.printspooler \
+	com.android.providers.calendar \
+	com.android.providers.contacts \
+	com.android.providers.downloads \
+	com.android.providers.media
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
-	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(filter-out android com.android.bluetooth com.android.cellbroadcastreceiver com.android.companiondevicemanager com.android.defcontainer com.android.emergency com.android.externalstorage com.android.location.fused com.android.mms.service com.android.nfc com.android.phone com.android.printspooler com.android.providers.calendar com.android.providers.contacts com.android.providers.downloads,$(packages))) \
+	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(filter-out $(packages_non_revocable_for_some_dangerous_permissions),$(packages))) \
 	;
 
 .PHONY: prompt-managing-default-apps
