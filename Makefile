@@ -340,7 +340,8 @@ packages_non_revocable_for_some_dangerous_permissions = \
 	com.android.providers.media \
 	com.android.providers.telephony \
 	com.android.server.telecom \
-	com.android.settings
+	com.android.settings \
+	com.android.sharedstoragebackup
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
 	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(filter-out $(packages_non_revocable_for_some_dangerous_permissions),$(packages))) \
