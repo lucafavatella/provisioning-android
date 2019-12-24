@@ -323,7 +323,7 @@ prompt-managing-special-permissions: \
 
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
-	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(filter-out android com.android.bluetooth com.android.cellbroadcastreceiver com.android.companiondevicemanager com.android.defcontainer com.android.emergency com.android.externalstorage com.android.location.fused com.android.mms.service com.android.nfc com.android.phone com.android.printspooler,$(packages))) \
+	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(filter-out android com.android.bluetooth com.android.cellbroadcastreceiver com.android.companiondevicemanager com.android.defcontainer com.android.emergency com.android.externalstorage com.android.location.fused com.android.mms.service com.android.nfc com.android.phone com.android.printspooler com.android.providers.calendar,$(packages))) \
 	;
 
 .PHONY: prompt-managing-default-apps
