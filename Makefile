@@ -323,7 +323,7 @@ prompt-managing-special-permissions: \
 
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
-	$(patsubst %,$(packages),revoke-dangerous-permissions-from-package-%) \
+	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(packages)) \
 	;
 
 .PHONY: prompt-managing-default-apps
