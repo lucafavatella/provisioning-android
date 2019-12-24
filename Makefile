@@ -20,7 +20,7 @@ automatically-provision-sprout: \
 	;
 
 .PHONY: manually-provision-sprout
-manually-provision-sprout:
+manually-provision-sprout: \
 	manually-provision-android-one \
 	;
 
