@@ -344,7 +344,8 @@ packages_non_revocable_for_some_dangerous_permissions = \
 	com.android.sharedstoragebackup \
 	com.android.shell \
 	com.android.systemui \
-	com.android.vending
+	com.android.vending \
+	com.google.android.gms
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
 	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(filter-out $(packages_non_revocable_for_some_dangerous_permissions),$(packages))) \
