@@ -347,7 +347,8 @@ packages_non_revocable_for_some_dangerous_permissions = \
 	com.android.vending \
 	com.google.android.gms \
 	com.google.android.packageinstaller \
-	com.hmdglobal.app.activation
+	com.hmdglobal.app.activation \
+	com.hmdglobal.app.fmradio
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
 	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(filter-out $(packages_non_revocable_for_some_dangerous_permissions),$(packages))) \
