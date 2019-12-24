@@ -323,7 +323,7 @@ prompt-managing-special-permissions: \
 
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
-	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(filter-out android com.android.bluetooth com.android.cellbroadcastreceiver,$(packages))) \
+	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(filter-out android com.android.bluetooth com.android.cellbroadcastreceiver com.android.companiondevicemanager,$(packages))) \
 	;
 
 .PHONY: prompt-managing-default-apps
