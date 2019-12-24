@@ -352,7 +352,7 @@ revoke-revocable-special-permissions-from-package-%: \
 
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%: \
-	$$(foreach p,$$(dangerous_permissions),revoke-permission-$$(p)-from-$$*-package) \
+	$$(foreach p,$$(filter $$(call requested_permissions_by_package,$$*),$$(dangerous_permissions)),revoke-permission-$$(p)-from-$$*-package) \
 	;
 
 .PHONY: revoke-privileged-permissions-from-package-%
