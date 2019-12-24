@@ -321,6 +321,11 @@ prompt-managing-special-permissions: \
 	$(targets_for_revoking_promptable_special_permissions) \
 	$(targets_for_revoking_non_revocable_special_permissions)
 
+.PHONY: revoke-dangerous-permissions-from-all-packages
+revoke-dangerous-permissions-from-all-packages: \
+	$(patsubst %,$(packages),revoke-dangerous-permissions-from-package-%) \
+	;
+
 .PHONY: prompt-managing-default-apps
 prompt-managing-default-apps:
 	$(info This target $@ requires user action)
