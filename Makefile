@@ -378,14 +378,14 @@ revoke-dangerous-permissions-from-all-packages: \
 	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(filter-out $(packages_non_revocable_for_some_dangerous_permissions),$(packages))) \
 	;
 
+# ---- Misc ----
+
 .PHONY: prompt-managing-default-apps
 prompt-managing-default-apps:
 	$(info This target $@ requires user action)
 	$(ADB) shell am start -a android.settings.MANAGE_DEFAULT_APPS_SETTINGS
 	@echo "You are on your own for managing default applications. Once you are done, press any key."
 	head -n 1
-
-# ---- Misc ----
 
 .PHONY: disable-nfc
 disable-nfc:
