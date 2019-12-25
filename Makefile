@@ -360,7 +360,6 @@ packages_non_revocable_for_some_dangerous_permissions = \
 	com.android.sharedstoragebackup \
 	com.android.shell \
 	com.android.systemui \
-	com.android.vending \
 	com.google.android.gms \
 	com.google.android.packageinstaller \
 	com.hmdglobal.app.activation \
