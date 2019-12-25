@@ -237,17 +237,20 @@ revocable_special_permissions = \
 	android.permission.REQUEST_INSTALL_PACKAGES \
 	android.permission.CHANGE_WIFI_STATE
 .PHONY: list-revocable-special-permissions
-list-revocable-special-permissions: ; @echo $(revocable_special_permissions)
+list-revocable-special-permissions:
+	@echo $(revocable_special_permissions)
 
 promptable_special_permissions = \
 	android.permission.PACKAGE_USAGE_STATS
 .PHONY: list-promptable-special-permissions
-list-promptable-special-permissions: ; @echo $(promptable_special_permissions)
+list-promptable-special-permissions:
+	@echo $(promptable_special_permissions)
 
 non_revocable_special_permissions = \
 	android.permission.BIND_DEVICE_ADMIN
 .PHONY: list-non-revocable-special-permissions
-list-non-revocable-special-permissions: ; @echo $(non_revocable_special_permissions)
+list-non-revocable-special-permissions:
+	@echo $(non_revocable_special_permissions)
 
 special_permissions = \
 	$(revocable_special_permissions) \
