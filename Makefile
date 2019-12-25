@@ -353,7 +353,8 @@ packages_non_revocable_for_some_dangerous_permissions = \
 	com.hmdglobal.app.retaildemo \
 	com.hmdglobal.app.sarauth \
 	com.hmdglobal.app.setupwizardext \
-	com.qti.confuridialer
+	com.qti.confuridialer \
+	com.qti.dpmserviceapp
 # TODO Refactor blacklist above. Shall hmd packages stay as android one?
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
