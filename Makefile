@@ -108,6 +108,7 @@ list-enabled-packages-by-prefix-%:
 sld = $(shell echo $(1) | cut -d. -f-2)
 
 package_slds = $(sort $(foreach p,$(packages),$(call sld,$(p))))
+# Second- and first-level domains.
 .PHONY: list-package-second-level-domains
 list-package-second-level-domains: ; @echo $(package_slds)
 
