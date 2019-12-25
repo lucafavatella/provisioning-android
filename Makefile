@@ -96,6 +96,15 @@ list-enabled-packages-by-prefix-%:
 	@echo $(call filter_packages_by_prefix,$*,$(enabled_packages))
 
 # Second- or first-level domain.
+# Examples:
+# ```
+# $ echo com | cut -d. -f-2
+# com
+# $ echo com.example | cut -d. -f-2
+# com.example
+# $ echo com.example.third | cut -d. -f-2
+# com.example
+# ```
 sld = $(shell echo $(1) | cut -d. -f-2)
 
 package_slds = $(sort $(foreach p,$(packages),$(call sld,$(p))))
