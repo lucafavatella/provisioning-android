@@ -1,159 +1,159 @@
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.GET_ACCOUNTS for package android
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.android.bluetooth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.GET_ACCOUNTS for package com.android.bluetooth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CALL_LOG for package com.android.bluetooth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CONTACTS for package com.android.bluetooth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.bluetooth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_SMS for package com.android.bluetooth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.RECEIVE_SMS for package com.android.bluetooth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_CALL_LOG for package com.android.bluetooth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_CONTACTS for package com.android.bluetooth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.android.bluetooth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.RECEIVE_SMS for package com.android.cellbroadcastreceiver
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.android.companiondevicemanager
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.defcontainer
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.android.defcontainer
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.CALL_PHONE for package com.android.emergency
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CONTACTS for package com.android.emergency
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.externalstorage
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.android.externalstorage
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.android.location.fused
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_FINE_LOCATION for package com.android.location.fused
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_SMS for package com.android.mms.service
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CONTACTS for package com.android.nfc
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.nfc
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.android.nfc
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.CALL_PHONE for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.GET_ACCOUNTS for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.PROCESS_OUTGOING_CALLS for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CALL_LOG for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CONTACTS for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_SMS for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.RECEIVE_SMS for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.RECORD_AUDIO for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.USE_SIP for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_CALL_LOG for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_CONTACTS for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission com.android.voicemail.permission.ADD_VOICEMAIL for package com.android.phone
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.android.printspooler
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_FINE_LOCATION for package com.android.printspooler
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CALENDAR for package com.android.providers.calendar
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_CALENDAR for package com.android.providers.calendar
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.GET_ACCOUNTS for package com.android.providers.contacts
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CONTACTS for package com.android.providers.contacts
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.android.providers.contacts
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_CONTACTS for package com.android.providers.contacts
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.providers.downloads
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.android.providers.downloads
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.providers.media
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.android.providers.media
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.android.providers.media
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.providers.telephony
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.RECEIVE_SMS for package com.android.providers.telephony
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.android.providers.telephony
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CALL_LOG for package com.android.server.telecom
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.server.telecom
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_CALL_LOG for package com.android.server.telecom
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.android.settings
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.CALL_PHONE for package com.android.settings
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CONTACTS for package com.android.settings
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.settings
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.android.settings
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_SMS for package com.android.settings
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.RECEIVE_SMS for package com.android.settings
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_CONTACTS for package com.android.settings
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.android.settings
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.sharedstoragebackup
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.android.sharedstoragebackup
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.android.shell
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_FINE_LOCATION for package com.android.shell
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.CALL_PHONE for package com.android.shell
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.GET_ACCOUNTS for package com.android.shell
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CALENDAR for package com.android.shell
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CONTACTS for package com.android.shell
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.shell
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.android.shell
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_CALENDAR for package com.android.shell
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_CONTACTS for package com.android.shell
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.android.shell
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.android.systemui
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.CAMERA for package com.android.systemui
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.GET_ACCOUNTS for package com.android.systemui
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CONTACTS for package com.android.systemui
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.systemui
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.android.systemui
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.RECORD_AUDIO for package com.android.systemui
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.android.systemui
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.android.vending
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.android.vending
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.google.android.gms
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_FINE_LOCATION for package com.google.android.gms
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.google.android.packageinstaller
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.hmdglobal.app.activation
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_FINE_LOCATION for package com.hmdglobal.app.activation
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.hmdglobal.app.activation
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.hmdglobal.app.fmradio
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.hmdglobal.app.fmradio
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.RECORD_AUDIO for package com.hmdglobal.app.fmradio
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.hmdglobal.app.fmradio
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.hmdglobal.app.omacp
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.RECEIVE_WAP_PUSH for package com.hmdglobal.app.omacp
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.hmdglobal.app.retaildemo
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.hmdglobal.app.retaildemo
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.PROCESS_OUTGOING_CALLS for package com.hmdglobal.app.sarauth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.hmdglobal.app.sarauth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.hmdglobal.app.sarauth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.hmdglobal.app.sarauth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.GET_ACCOUNTS for package com.hmdglobal.app.setupwizardext
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.hmdglobal.app.setupwizardext
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.CALL_PHONE for package com.qti.confuridialer
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.PROCESS_OUTGOING_CALLS for package com.qti.confuridialer
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CALL_LOG for package com.qti.confuridialer
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CONTACTS for package com.qti.confuridialer
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.qti.confuridialer
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.qti.dpmserviceapp
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.qti.qualcomm.datastatusnotification
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.qti.xdivert
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.qualcomm.location
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_FINE_LOCATION for package com.qualcomm.location
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.PROCESS_OUTGOING_CALLS for package com.qualcomm.location
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.qualcomm.location
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.RECEIVE_SMS for package com.qualcomm.location
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.RECEIVE_WAP_PUSH for package com.qualcomm.location
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_FINE_LOCATION for package com.qualcomm.location.XT
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.qualcomm.qti.ims
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.qualcomm.qti.ims
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.qualcomm.qti.qdma
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.qualcomm.qti.qdma
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.qualcomm.qti.qmmi
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_FINE_LOCATION for package com.qualcomm.qti.qmmi
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.CAMERA for package com.qualcomm.qti.qmmi
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.qualcomm.qti.qmmi
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.qualcomm.qti.qmmi
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.RECORD_AUDIO for package com.qualcomm.qti.qmmi
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.qualcomm.qti.qmmi
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.CALL_PHONE for package com.qualcomm.qti.roamingsettings
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.qualcomm.qti.roamingsettings
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.CAMERA for package com.qualcomm.qti.seccamservice
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.qualcomm.qti.seccamservice
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.qualcomm.qti.seccamservice
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.qualcomm.qti.seemp.service
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.qualcomm.qti.services.secureui
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.GET_ACCOUNTS for package com.qualcomm.simcontacts
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_CONTACTS for package com.qualcomm.simcontacts
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.qualcomm.simcontacts
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_CONTACTS for package com.qualcomm.simcontacts
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_COARSE_LOCATION for package com.quicinc.cne.CNEService
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_FINE_LOCATION for package com.quicinc.cne.CNEService
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package com.quicinc.cne.CNEService
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.CAMERA for package com.wos.face.service
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package com.wos.face.service
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.RECORD_AUDIO for package com.wos.face.service
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package com.wos.face.service
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package org.codeaurora.bluetooth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.WRITE_EXTERNAL_STORAGE for package org.codeaurora.bluetooth
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.CAMERA for package org.codeaurora.ims
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_EXTERNAL_STORAGE for package org.codeaurora.ims
-java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.READ_PHONE_STATE for package org.codeaurora.ims
+android.permission.GET_ACCOUNTS android
+android.permission.ACCESS_COARSE_LOCATION com.android.bluetooth
+android.permission.GET_ACCOUNTS com.android.bluetooth
+android.permission.READ_CALL_LOG com.android.bluetooth
+android.permission.READ_CONTACTS com.android.bluetooth
+android.permission.READ_EXTERNAL_STORAGE com.android.bluetooth
+android.permission.READ_SMS com.android.bluetooth
+android.permission.RECEIVE_SMS com.android.bluetooth
+android.permission.WRITE_CALL_LOG com.android.bluetooth
+android.permission.WRITE_CONTACTS com.android.bluetooth
+android.permission.WRITE_EXTERNAL_STORAGE com.android.bluetooth
+android.permission.RECEIVE_SMS com.android.cellbroadcastreceiver
+android.permission.ACCESS_COARSE_LOCATION com.android.companiondevicemanager
+android.permission.READ_EXTERNAL_STORAGE com.android.defcontainer
+android.permission.WRITE_EXTERNAL_STORAGE com.android.defcontainer
+android.permission.CALL_PHONE com.android.emergency
+android.permission.READ_CONTACTS com.android.emergency
+android.permission.READ_EXTERNAL_STORAGE com.android.externalstorage
+android.permission.WRITE_EXTERNAL_STORAGE com.android.externalstorage
+android.permission.ACCESS_COARSE_LOCATION com.android.location.fused
+android.permission.ACCESS_FINE_LOCATION com.android.location.fused
+android.permission.READ_SMS com.android.mms.service
+android.permission.READ_CONTACTS com.android.nfc
+android.permission.READ_EXTERNAL_STORAGE com.android.nfc
+android.permission.WRITE_EXTERNAL_STORAGE com.android.nfc
+android.permission.ACCESS_COARSE_LOCATION com.android.phone
+android.permission.CALL_PHONE com.android.phone
+android.permission.GET_ACCOUNTS com.android.phone
+android.permission.PROCESS_OUTGOING_CALLS com.android.phone
+android.permission.READ_CALL_LOG com.android.phone
+android.permission.READ_CONTACTS com.android.phone
+android.permission.READ_EXTERNAL_STORAGE com.android.phone
+android.permission.READ_SMS com.android.phone
+android.permission.RECEIVE_SMS com.android.phone
+android.permission.RECORD_AUDIO com.android.phone
+android.permission.USE_SIP com.android.phone
+android.permission.WRITE_CALL_LOG com.android.phone
+android.permission.WRITE_CONTACTS com.android.phone
+com.android.voicemail.permission.ADD_VOICEMAIL com.android.phone
+android.permission.ACCESS_COARSE_LOCATION com.android.printspooler
+android.permission.ACCESS_FINE_LOCATION com.android.printspooler
+android.permission.READ_CALENDAR com.android.providers.calendar
+android.permission.WRITE_CALENDAR com.android.providers.calendar
+android.permission.GET_ACCOUNTS com.android.providers.contacts
+android.permission.READ_CONTACTS com.android.providers.contacts
+android.permission.READ_PHONE_STATE com.android.providers.contacts
+android.permission.WRITE_CONTACTS com.android.providers.contacts
+android.permission.READ_EXTERNAL_STORAGE com.android.providers.downloads
+android.permission.WRITE_EXTERNAL_STORAGE com.android.providers.downloads
+android.permission.READ_EXTERNAL_STORAGE com.android.providers.media
+android.permission.READ_PHONE_STATE com.android.providers.media
+android.permission.WRITE_EXTERNAL_STORAGE com.android.providers.media
+android.permission.READ_EXTERNAL_STORAGE com.android.providers.telephony
+android.permission.RECEIVE_SMS com.android.providers.telephony
+android.permission.WRITE_EXTERNAL_STORAGE com.android.providers.telephony
+android.permission.READ_CALL_LOG com.android.server.telecom
+android.permission.READ_EXTERNAL_STORAGE com.android.server.telecom
+android.permission.WRITE_CALL_LOG com.android.server.telecom
+android.permission.ACCESS_COARSE_LOCATION com.android.settings
+android.permission.CALL_PHONE com.android.settings
+android.permission.READ_CONTACTS com.android.settings
+android.permission.READ_EXTERNAL_STORAGE com.android.settings
+android.permission.READ_PHONE_STATE com.android.settings
+android.permission.READ_SMS com.android.settings
+android.permission.RECEIVE_SMS com.android.settings
+android.permission.WRITE_CONTACTS com.android.settings
+android.permission.WRITE_EXTERNAL_STORAGE com.android.settings
+android.permission.READ_EXTERNAL_STORAGE com.android.sharedstoragebackup
+android.permission.WRITE_EXTERNAL_STORAGE com.android.sharedstoragebackup
+android.permission.ACCESS_COARSE_LOCATION com.android.shell
+android.permission.ACCESS_FINE_LOCATION com.android.shell
+android.permission.CALL_PHONE com.android.shell
+android.permission.GET_ACCOUNTS com.android.shell
+android.permission.READ_CALENDAR com.android.shell
+android.permission.READ_CONTACTS com.android.shell
+android.permission.READ_EXTERNAL_STORAGE com.android.shell
+android.permission.READ_PHONE_STATE com.android.shell
+android.permission.WRITE_CALENDAR com.android.shell
+android.permission.WRITE_CONTACTS com.android.shell
+android.permission.WRITE_EXTERNAL_STORAGE com.android.shell
+android.permission.ACCESS_COARSE_LOCATION com.android.systemui
+android.permission.CAMERA com.android.systemui
+android.permission.GET_ACCOUNTS com.android.systemui
+android.permission.READ_CONTACTS com.android.systemui
+android.permission.READ_EXTERNAL_STORAGE com.android.systemui
+android.permission.READ_PHONE_STATE com.android.systemui
+android.permission.RECORD_AUDIO com.android.systemui
+android.permission.WRITE_EXTERNAL_STORAGE com.android.systemui
+android.permission.READ_EXTERNAL_STORAGE com.android.vending
+android.permission.WRITE_EXTERNAL_STORAGE com.android.vending
+android.permission.ACCESS_COARSE_LOCATION com.google.android.gms
+android.permission.ACCESS_FINE_LOCATION com.google.android.gms
+android.permission.READ_EXTERNAL_STORAGE com.google.android.packageinstaller
+android.permission.ACCESS_COARSE_LOCATION com.hmdglobal.app.activation
+android.permission.ACCESS_FINE_LOCATION com.hmdglobal.app.activation
+android.permission.READ_PHONE_STATE com.hmdglobal.app.activation
+android.permission.READ_EXTERNAL_STORAGE com.hmdglobal.app.fmradio
+android.permission.READ_PHONE_STATE com.hmdglobal.app.fmradio
+android.permission.RECORD_AUDIO com.hmdglobal.app.fmradio
+android.permission.WRITE_EXTERNAL_STORAGE com.hmdglobal.app.fmradio
+android.permission.READ_PHONE_STATE com.hmdglobal.app.omacp
+android.permission.RECEIVE_WAP_PUSH com.hmdglobal.app.omacp
+android.permission.READ_EXTERNAL_STORAGE com.hmdglobal.app.retaildemo
+android.permission.WRITE_EXTERNAL_STORAGE com.hmdglobal.app.retaildemo
+android.permission.PROCESS_OUTGOING_CALLS com.hmdglobal.app.sarauth
+android.permission.READ_EXTERNAL_STORAGE com.hmdglobal.app.sarauth
+android.permission.READ_PHONE_STATE com.hmdglobal.app.sarauth
+android.permission.WRITE_EXTERNAL_STORAGE com.hmdglobal.app.sarauth
+android.permission.GET_ACCOUNTS com.hmdglobal.app.setupwizardext
+android.permission.READ_PHONE_STATE com.hmdglobal.app.setupwizardext
+android.permission.CALL_PHONE com.qti.confuridialer
+android.permission.PROCESS_OUTGOING_CALLS com.qti.confuridialer
+android.permission.READ_CALL_LOG com.qti.confuridialer
+android.permission.READ_CONTACTS com.qti.confuridialer
+android.permission.READ_PHONE_STATE com.qti.confuridialer
+android.permission.READ_PHONE_STATE com.qti.dpmserviceapp
+android.permission.READ_PHONE_STATE com.qti.qualcomm.datastatusnotification
+android.permission.READ_PHONE_STATE com.qti.xdivert
+android.permission.ACCESS_COARSE_LOCATION com.qualcomm.location
+android.permission.ACCESS_FINE_LOCATION com.qualcomm.location
+android.permission.PROCESS_OUTGOING_CALLS com.qualcomm.location
+android.permission.READ_PHONE_STATE com.qualcomm.location
+android.permission.RECEIVE_SMS com.qualcomm.location
+android.permission.RECEIVE_WAP_PUSH com.qualcomm.location
+android.permission.ACCESS_FINE_LOCATION com.qualcomm.location.XT
+android.permission.READ_EXTERNAL_STORAGE com.qualcomm.qti.ims
+android.permission.READ_PHONE_STATE com.qualcomm.qti.ims
+android.permission.ACCESS_COARSE_LOCATION com.qualcomm.qti.qdma
+android.permission.READ_PHONE_STATE com.qualcomm.qti.qdma
+android.permission.ACCESS_COARSE_LOCATION com.qualcomm.qti.qmmi
+android.permission.ACCESS_FINE_LOCATION com.qualcomm.qti.qmmi
+android.permission.CAMERA com.qualcomm.qti.qmmi
+android.permission.READ_EXTERNAL_STORAGE com.qualcomm.qti.qmmi
+android.permission.READ_PHONE_STATE com.qualcomm.qti.qmmi
+android.permission.RECORD_AUDIO com.qualcomm.qti.qmmi
+android.permission.WRITE_EXTERNAL_STORAGE com.qualcomm.qti.qmmi
+android.permission.CALL_PHONE com.qualcomm.qti.roamingsettings
+android.permission.READ_PHONE_STATE com.qualcomm.qti.roamingsettings
+android.permission.CAMERA com.qualcomm.qti.seccamservice
+android.permission.READ_EXTERNAL_STORAGE com.qualcomm.qti.seccamservice
+android.permission.WRITE_EXTERNAL_STORAGE com.qualcomm.qti.seccamservice
+android.permission.READ_PHONE_STATE com.qualcomm.qti.seemp.service
+android.permission.READ_PHONE_STATE com.qualcomm.qti.services.secureui
+android.permission.GET_ACCOUNTS com.qualcomm.simcontacts
+android.permission.READ_CONTACTS com.qualcomm.simcontacts
+android.permission.READ_PHONE_STATE com.qualcomm.simcontacts
+android.permission.WRITE_CONTACTS com.qualcomm.simcontacts
+android.permission.ACCESS_COARSE_LOCATION com.quicinc.cne.CNEService
+android.permission.ACCESS_FINE_LOCATION com.quicinc.cne.CNEService
+android.permission.READ_PHONE_STATE com.quicinc.cne.CNEService
+android.permission.CAMERA com.wos.face.service
+android.permission.READ_EXTERNAL_STORAGE com.wos.face.service
+android.permission.RECORD_AUDIO com.wos.face.service
+android.permission.WRITE_EXTERNAL_STORAGE com.wos.face.service
+android.permission.READ_EXTERNAL_STORAGE org.codeaurora.bluetooth
+android.permission.WRITE_EXTERNAL_STORAGE org.codeaurora.bluetooth
+android.permission.CAMERA org.codeaurora.ims
+android.permission.READ_EXTERNAL_STORAGE org.codeaurora.ims
+android.permission.READ_PHONE_STATE org.codeaurora.ims
