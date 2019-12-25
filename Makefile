@@ -364,7 +364,13 @@ packages_non_revocable_for_some_dangerous_permissions = \
 	com.qualcomm.qti.qmmi \
 	com.qualcomm.qti.roamingsettings \
 	com.qualcomm.qti.seccamservice \
-	com.qualcomm.qti.seemp.service
+	com.qualcomm.qti.seemp.service \
+	com.qualcomm.qti.services.secureui \
+	com.qualcomm.simcontacts \
+	com.quicinc.cne.CNEService \
+	com.wos.face.service \
+	org.codeaurora.bluetooth \
+	org.codeaurora.ims
 # TODO Refactor blacklist above. Shall hmd packages stay as android one?
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
