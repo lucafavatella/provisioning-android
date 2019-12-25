@@ -285,6 +285,7 @@ revoke-permission-%-package:
 		$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) deny, \
 		$(ADB) shell pm revoke $(call revoke_pkg,$*) $(call revoke_perm,$*))
 
+# TODO Review 4 apps left with unrestricted data e.g. Google Play Services.
 # TODO Review unnecessary `error: no devices/emulators found` if calling make on a target not requiring adb.
 .PHONY: revoke-revocable-special-permissions-from-all-packages
 revoke-revocable-special-permissions-from-all-packages: \
