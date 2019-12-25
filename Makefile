@@ -303,7 +303,6 @@ revoke-revocable-special-permissions-from-all-packages: \
 prefix_of_target_for_prompting_special_permission = \
 	prompt-managing-special-permission-
 
-# TODO Copy key events? https://github.com/aosp-mirror/platform_frameworks_base/blob/master/core/java/android/view/KeyEvent.java#L646
 action_for_prompting_special_permission_android.permission.PACKAGE_USAGE_STATS = android.settings.USAGE_ACCESS_SETTINGS
 targets_for_revoking_promptable_special_permissions = \
 	$(patsubst %,$(prefix_of_target_for_prompting_special_permission)%,$(promptable_special_permissions))
@@ -311,7 +310,7 @@ targets_for_revoking_promptable_special_permissions = \
 $(targets_for_revoking_promptable_special_permissions): \
 	$(prefix_of_target_for_prompting_special_permission)%:
 	$(info This target $@ requires user action)
-	$(ADB) shell input keyevent KEYCODE_WAKEUP
+	$(ADB) shell input keyevent KEYCODE_WAKEUP # Reference: https://github.com/aosp-mirror/platform_frameworks_base/blob/android-9.0.0_r51/core/java/android/view/KeyEvent.java#L640
 	$(ADB) shell am start -a $(action_for_prompting_special_permission_$*)
 	@echo "Once you disable special permission $* for the applications, press any key."
 	head -n 1
