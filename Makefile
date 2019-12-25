@@ -337,55 +337,7 @@ prompt-managing-special-permissions: \
 	$(targets_for_revoking_promptable_special_permissions) \
 	$(targets_for_revoking_non_revocable_special_permissions)
 
-packages_non_revocable_for_some_dangerous_permissions = \
-	android \
-	com.android.bluetooth \
-	com.android.cellbroadcastreceiver \
-	com.android.companiondevicemanager \
-	com.android.defcontainer \
-	com.android.emergency \
-	com.android.externalstorage \
-	com.android.location.fused \
-	com.android.mms.service \
-	com.android.nfc \
-	com.android.phone \
-	com.android.printspooler \
-	com.android.providers.calendar \
-	com.android.providers.contacts \
-	com.android.providers.downloads \
-	com.android.providers.media \
-	com.android.providers.telephony \
-	com.android.server.telecom \
-	com.android.settings \
-	com.android.sharedstoragebackup \
-	com.android.shell \
-	com.android.systemui \
-	com.google.android.gms \
-	com.google.android.packageinstaller \
-	com.hmdglobal.app.activation \
-	com.hmdglobal.app.fmradio \
-	com.hmdglobal.app.omacp \
-	com.hmdglobal.app.retaildemo \
-	com.hmdglobal.app.sarauth \
-	com.hmdglobal.app.setupwizardext \
-	com.qti.confuridialer \
-	com.qti.dpmserviceapp \
-	com.qti.qualcomm.datastatusnotification \
-	com.qti.xdivert \
-	com.qualcomm.location \
-	com.qualcomm.location.XT \
-	com.qualcomm.qti.ims \
-	com.qualcomm.qti.qdma \
-	com.qualcomm.qti.qmmi \
-	com.qualcomm.qti.roamingsettings \
-	com.qualcomm.qti.seccamservice \
-	com.qualcomm.qti.seemp.service \
-	com.qualcomm.qti.services.secureui \
-	com.qualcomm.simcontacts \
-	com.quicinc.cne.CNEService \
-	com.wos.face.service \
-	org.codeaurora.bluetooth \
-	org.codeaurora.ims
+packages_non_revocable_for_some_dangerous_permissions = 
 # TODO Refactor blacklist above. Shall hmd packages stay as android one?
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
