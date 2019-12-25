@@ -132,7 +132,8 @@ disable-google-packages: \
 # ---- List Permissions ----
 
 # As per Android 9,
-# the 14 items of the screen "Settings > Apps & notifications > Special app access" are defined in `special_access.xml`.
+# the 14 items of the screen "Settings > Apps & notifications >
+# Special app access" are defined in `special_access.xml`.
 #
 # Relevant excerpts can be extracted from it by:
 # ```
@@ -159,12 +160,14 @@ disable-google-packages: \
 # change_wifi_state
 # ```
 #
-# The strings associated to the `android:key` keys in the `special_access.xml` seem to be defined in
+# The strings associated to the `android:key` keys in the
+# `special_access.xml` seem to be defined in
 # https://raw.githubusercontent.com/aosp-mirror/platform_packages_apps_settings/android-9.0.0_r51/res/values/strings.xml
 #
 # The permissions are defined in `AndroidManifest.xml`.
 #
-# Some permissions are labelled as `appop`, and seem to be able to be revoked by `adb shell appops set ... ... deny`.
+# Some permissions are labelled as `appop`, and seem to be able to be
+# revoked by `adb shell appops set ... ... deny`.
 # ```
 # $ curl -LsSf https://raw.githubusercontent.com/aosp-mirror/platform_frameworks_base/android-9.0.0_r51/core/res/AndroidManifest.xml | grep -B 3 -i appop
 #          system for creating and managing IPsec-based interfaces.
