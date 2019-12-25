@@ -77,11 +77,13 @@ list-users: ; $(ADB) shell pm list users
 adb_ls_packages = $(ADB) shell pm list packages $(1)
 strip_package = $(call strip_prefix,package:,$(1))
 
-packages = $(sort $(call strip_package,$(shell $(call adb_ls_packages,))))
+packages = \
+	$(sort $(call strip_package,$(shell $(call adb_ls_packages,))))
 .PHONY: list-packages
 list-packages: ; @echo $(packages)
 
-enabled_packages = $(sort $(call strip_package,$(shell $(call adb_ls_packages,-e))))
+enabled_packages = \
+	$(sort $(call strip_package,$(shell $(call adb_ls_packages,-e))))
 .PHONY: list-enabled-packages
 list-enabled-packages: ; @echo $(enabled_packages)
 
