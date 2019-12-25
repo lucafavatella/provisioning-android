@@ -351,7 +351,8 @@ packages_non_revocable_for_some_dangerous_permissions = \
 	com.hmdglobal.app.fmradio \
 	com.hmdglobal.app.omacp \
 	com.hmdglobal.app.retaildemo \
-	com.hmdglobal.app.sarauth
+	com.hmdglobal.app.sarauth \
+	com.hmdglobal.app.setupwizardext
 # TODO Refactor blacklist above. Shall hmd packages stay as android one?
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
