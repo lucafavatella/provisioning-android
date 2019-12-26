@@ -55,7 +55,7 @@ non_revocable_permissions_from_qualcomm_packages = \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.quicinc.cne.CNEService \
 	android.permission.ACCESS_FINE_LOCATION-from-com.quicinc.cne.CNEService \
 	android.permission.READ_PHONE_STATE-from-com.quicinc.cne.CNEService
-NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES = \
+EXTRA_NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES = \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.hmdglobal.app.activation \
 	android.permission.ACCESS_FINE_LOCATION-from-com.hmdglobal.app.activation \
 	android.permission.READ_PHONE_STATE-from-com.hmdglobal.app.activation \
@@ -450,7 +450,7 @@ non_revocable_permissions_from_packages = \
 targets_for_not_revoking_non_revocable_permissions_from_packages = \
 	$(patsubst %,revoke-permission-%-package, \
 		$(non_revocable_permissions_from_packages) \
-		$(NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES))
+		$(EXTRA_NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES))
 .PHONY: $(targets_for_not_revoking_non_revocable_permissions_from_packages)
 $(targets_for_not_revoking_non_revocable_permissions_from_packages): \
 	revoke-permission-%-package:
