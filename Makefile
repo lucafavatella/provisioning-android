@@ -92,14 +92,14 @@ manually-provision-sprout: \
 .PHONY: automatically-provision-android-one
 automatically-provision-android-one: \
 	disable-google-packages \
-	revoke-revocable-special-permissions-from-all-packages \
+	revoke-revocable-special-accesses-from-all-packages \
 	revoke-dangerous-permissions-from-all-packages \
 	disable-nfc \
 	; $(info Assumption: Android One systems are similar across Original Equipment Manufacturers)
 
 .PHONY: manually-provision-android-one
 manually-provision-android-one: \
-	prompt-managing-special-permissions \
+	prompt-managing-special-accesses \
 	prompt-managing-default-apps \
 	;
 
@@ -456,8 +456,8 @@ $(targets_for_not_revoking_non_revocable_permissions_from_packages): \
 	revoke-permission-%-package:
 	$(info Ignoring revoking permission $(call revoke_perm,$*) from package $(call revoke_pkg,$*))
 
-.PHONY: revoke-revocable-special-permissions-from-all-packages
-revoke-revocable-special-permissions-from-all-packages: \
+.PHONY: revoke-revocable-special-accesses-from-all-packages
+revoke-revocable-special-accesses-from-all-packages: \
 	$(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p)) \
 	;
 
@@ -488,8 +488,8 @@ $(targets_for_revoking_non_revocable_special_permissions): \
 	@echo "You are on your own for disabling special permission $* for the applications. Once you are done, press any key."
 	head -n 1
 
-.PHONY: prompt-managing-special-permissions
-prompt-managing-special-permissions: \
+.PHONY: prompt-managing-special-accesses
+prompt-managing-special-accesses: \
 	$(targets_for_revoking_promptable_special_permissions) \
 	$(targets_for_revoking_non_revocable_special_permissions) \
 	;
