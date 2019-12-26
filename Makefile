@@ -276,12 +276,10 @@ disable-google-packages: \
 #          @hide <p>Not for use by third-party applications. -->
 #     <permission android:name="android.permission.WATCH_APPOPS"
 # ```
-# TODO Review 4 apps left with unrestricted data i.e. Device Setup, Download Manager, Downloads, Google Play Services, Media Storage, MTP Host.
 revocable_special_permissions = \
 	android.permission.SYSTEM_ALERT_WINDOW \
 	android.permission.WRITE_SETTINGS \
 	android.permission.ACCESS_NOTIFICATIONS \
-	android.permission.USE_DATA_IN_BACKGROUND \
 	android.permission.REQUEST_INSTALL_PACKAGES \
 	android.permission.CHANGE_WIFI_STATE
 .PHONY: list-revocable-special-permissions
@@ -299,6 +297,7 @@ list-promptable-special-permissions:
 # TODO: high_power_apps
 # TODO: picture_in_picture
 # TODO: premium_sms
+# TODO: data_saver
 # TODO: special_app_directory_access
 non_revocable_special_permissions = \
 	android.permission.BIND_DEVICE_ADMIN
