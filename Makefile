@@ -302,6 +302,7 @@ revoke-permission-%-package:
 		$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) deny, \
 		$(ADB) shell pm revoke $(call revoke_pkg,$*) $(call revoke_perm,$*))
 
+# TODO Refactor blacklist below. Shall hmd packages stay as android one?
 non_revocable_permissions_from_packages = \
 	android.permission.GET_ACCOUNTS-from-android \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.android.bluetooth \
@@ -503,11 +504,9 @@ prompt-managing-special-permissions: \
 	$(targets_for_revoking_promptable_special_permissions) \
 	$(targets_for_revoking_non_revocable_special_permissions)
 
-packages_non_revocable_for_some_dangerous_permissions = 
-# TODO Refactor blacklist above. Shall hmd packages stay as android one?
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
-	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(filter-out $(packages_non_revocable_for_some_dangerous_permissions),$(packages))) \
+	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(packages)) \
 	;
 
 # ---- Misc ----
