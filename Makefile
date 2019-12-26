@@ -295,6 +295,10 @@ promptable_special_permissions = \
 list-promptable-special-permissions:
 	@echo $(promptable_special_permissions)
 
+# TODO: high_power_apps
+# TODO: zen_access
+# TODO: picture_in_picture
+# TODO: special_app_directory_access
 non_revocable_special_permissions = \
 	android.permission.BIND_DEVICE_ADMIN
 .PHONY: list-non-revocable-special-permissions
