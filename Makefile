@@ -73,6 +73,10 @@ NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES = \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.hmdglobal.app.sarauth \
 	android.permission.GET_ACCOUNTS-from-com.hmdglobal.app.setupwizardext \
 	android.permission.READ_PHONE_STATE-from-com.hmdglobal.app.setupwizardext \
+	android.permission.CAMERA-from-com.wos.face.service \
+	android.permission.READ_EXTERNAL_STORAGE-from-com.wos.face.service \
+	android.permission.RECORD_AUDIO-from-com.wos.face.service \
+	android.permission.WRITE_EXTERNAL_STORAGE-from-com.wos.face.service \
 	$(non_revocable_permissions_from_qualcomm_packages)
 .PHONY: automatically-provision-sprout
 automatically-provision-sprout: \
@@ -459,10 +463,6 @@ non_revocable_permissions_from_packages = \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.google.android.gms \
 	android.permission.ACCESS_FINE_LOCATION-from-com.google.android.gms \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.google.android.packageinstaller \
-	android.permission.CAMERA-from-com.wos.face.service \
-	android.permission.READ_EXTERNAL_STORAGE-from-com.wos.face.service \
-	android.permission.RECORD_AUDIO-from-com.wos.face.service \
-	android.permission.WRITE_EXTERNAL_STORAGE-from-com.wos.face.service \
 	android.permission.READ_EXTERNAL_STORAGE-from-org.codeaurora.bluetooth \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-org.codeaurora.bluetooth \
 	android.permission.CAMERA-from-org.codeaurora.ims \
