@@ -51,7 +51,10 @@ non_revocable_permissions_from_qualcomm_packages = \
 	android.permission.GET_ACCOUNTS-from-com.qualcomm.simcontacts \
 	android.permission.READ_CONTACTS-from-com.qualcomm.simcontacts \
 	android.permission.READ_PHONE_STATE-from-com.qualcomm.simcontacts \
-	android.permission.WRITE_CONTACTS-from-com.qualcomm.simcontacts
+	android.permission.WRITE_CONTACTS-from-com.qualcomm.simcontacts \
+	android.permission.ACCESS_COARSE_LOCATION-from-com.quicinc.cne.CNEService \
+	android.permission.ACCESS_FINE_LOCATION-from-com.quicinc.cne.CNEService \
+	android.permission.READ_PHONE_STATE-from-com.quicinc.cne.CNEService
 NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES = \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.hmdglobal.app.activation \
 	android.permission.ACCESS_FINE_LOCATION-from-com.hmdglobal.app.activation \
@@ -456,9 +459,6 @@ non_revocable_permissions_from_packages = \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.google.android.gms \
 	android.permission.ACCESS_FINE_LOCATION-from-com.google.android.gms \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.google.android.packageinstaller \
-	android.permission.ACCESS_COARSE_LOCATION-from-com.quicinc.cne.CNEService \
-	android.permission.ACCESS_FINE_LOCATION-from-com.quicinc.cne.CNEService \
-	android.permission.READ_PHONE_STATE-from-com.quicinc.cne.CNEService \
 	android.permission.CAMERA-from-com.wos.face.service \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.wos.face.service \
 	android.permission.RECORD_AUDIO-from-com.wos.face.service \
