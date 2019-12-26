@@ -276,24 +276,6 @@ disable-google-packages: \
 #          @hide <p>Not for use by third-party applications. -->
 #     <permission android:name="android.permission.WATCH_APPOPS"
 # ```
-#
-# Summary from `special_access.xml` to `AndroidManifest.xml`:
-# ```
-# high_power_apps              - ?
-# device_administrators        - ? BIND_DEVICE_ADMIN
-# system_alert_window          - SYSTEM_ALERT_WINDOW
-# zen_access                   - ?
-# write_settings_apps          - WRITE_SETTINGS
-# notification_access          - ACCESS_NOTIFICATIONS
-# picture_in_picture           - ?
-# premium_sms                  - ? SEND_SMS
-# data_saver                   - USE_DATA_IN_BACKGROUND
-# manage_external_sources      - REQUEST_INSTALL_PACKAGES
-# special_app_usage_access     - ? PACKAGE_USAGE_STATS
-# enabled_vr_listeners         - ?
-# special_app_directory_access - ?
-# change_wifi_state            - CHANGE_WIFI_STATE
-# ```
 revocable_special_permissions = \
 	android.permission.SYSTEM_ALERT_WINDOW \
 	android.permission.WRITE_SETTINGS \
