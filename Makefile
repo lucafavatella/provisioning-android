@@ -197,6 +197,39 @@ disable-google-packages: \
 
 # ---- List Permissions ----
 
+requested_permissions_by_package = $(sort $(shell $(CURDIR)/libexec/requested_permissions $(1)))
+.PHONY: list-requested-permissions-by-package-%
+list-requested-permissions-by-package-%:
+	@echo $(call requested_permissions_by_package,$*)
+
+adb_ls_permissions = $(ADB) shell pm list permissions $(1)
+filter_permissions = $(filter permission:%,$(1))
+strip_permission = $(call strip_prefix,permission:,$(1))
+
+permissions = $(sort $(call strip_permission,$(call filter_permissions,$(shell $(call adb_ls_permissions,-g)))))
+.PHONY: list-permissions
+list-permissions: ; @echo $(permissions)
+
+dangerous_permissions = $(sort $(call strip_permission,$(call filter_permissions,$(shell $(call adb_ls_permissions,-g -d)))))
+.PHONY: list-dangerous-permissions
+list-dangerous-permissions: ; @echo $(dangerous_permissions)
+
+user_permissions = $(sort $(call strip_permission,$(call filter_permissions,$(shell $(call adb_ls_permissions,-u)))))
+.PHONY: list-user-permissions
+list-user-permissions: ; @echo $(user_permissions)
+
+dangerous_user_permissions = $(filter $(user_permissions),$(dangerous_permissions))
+.PHONY: list-dangerous-user-permissions
+list-dangerous-user-permissions: ; @echo $(dangerous_user_permissions)
+
+# From https://source.android.com/devices/tech/config/perms-whitelist
+# > Privileged apps are system apps that are located in a `priv-app` directory on one of the system image partitions.
+privileged_permissions_by_package = $(sort $(subst $(comma)$(space),$(space),$(patsubst %$(right_brace),%,$(patsubst $(left_brace)%,%,$(shell $(ADB) shell pm get-privapp-permissions $(1))))))
+.PHONY: list-privileged-permissions-%
+list-privileged-permissions-%: ; @echo $(call privileged_permissions_by_package,$*)
+
+# ---- Revoke Permissions ----
+
 # As per Android 9,
 # the 14 items of the screen "Settings > Apps & notifications >
 # Special app access" are defined in `special_access.xml`.
@@ -300,39 +333,6 @@ special_permissions = \
 	$(revocable_special_permissions) \
 	$(promptable_special_permissions) \
 	$(non_revocable_special_permissions)
-
-requested_permissions_by_package = $(sort $(shell $(CURDIR)/libexec/requested_permissions $(1)))
-.PHONY: list-requested-permissions-by-package-%
-list-requested-permissions-by-package-%:
-	@echo $(call requested_permissions_by_package,$*)
-
-adb_ls_permissions = $(ADB) shell pm list permissions $(1)
-filter_permissions = $(filter permission:%,$(1))
-strip_permission = $(call strip_prefix,permission:,$(1))
-
-permissions = $(sort $(call strip_permission,$(call filter_permissions,$(shell $(call adb_ls_permissions,-g)))))
-.PHONY: list-permissions
-list-permissions: ; @echo $(permissions)
-
-dangerous_permissions = $(sort $(call strip_permission,$(call filter_permissions,$(shell $(call adb_ls_permissions,-g -d)))))
-.PHONY: list-dangerous-permissions
-list-dangerous-permissions: ; @echo $(dangerous_permissions)
-
-user_permissions = $(sort $(call strip_permission,$(call filter_permissions,$(shell $(call adb_ls_permissions,-u)))))
-.PHONY: list-user-permissions
-list-user-permissions: ; @echo $(user_permissions)
-
-dangerous_user_permissions = $(filter $(user_permissions),$(dangerous_permissions))
-.PHONY: list-dangerous-user-permissions
-list-dangerous-user-permissions: ; @echo $(dangerous_user_permissions)
-
-# From https://source.android.com/devices/tech/config/perms-whitelist
-# > Privileged apps are system apps that are located in a `priv-app` directory on one of the system image partitions.
-privileged_permissions_by_package = $(sort $(subst $(comma)$(space),$(space),$(patsubst %$(right_brace),%,$(patsubst $(left_brace)%,%,$(shell $(ADB) shell pm get-privapp-permissions $(1))))))
-.PHONY: list-privileged-permissions-%
-list-privileged-permissions-%: ; @echo $(call privileged_permissions_by_package,$*)
-
-# ---- Revoke Permissions ----
 
 revoke_perm_pkg_sep = -from-
 revoke_pkg = $(word 2,$(subst $(revoke_perm_pkg_sep), ,$(1)))
