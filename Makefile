@@ -333,6 +333,7 @@ privileged_permissions_by_package = $(sort $(subst $(comma)$(space),$(space),$(p
 list-privileged-permissions-%: ; @echo $(call privileged_permissions_by_package,$*)
 
 # ---- Revoke Permissions ----
+# See also secondary expansion.
 
 # As per Android 9,
 # the 14 items of the screen "Settings > Apps & notifications >
