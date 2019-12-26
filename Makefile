@@ -276,6 +276,7 @@ disable-google-packages: \
 #          @hide <p>Not for use by third-party applications. -->
 #     <permission android:name="android.permission.WATCH_APPOPS"
 # ```
+# TODO Review 4 apps left with unrestricted data i.e. Device Setup, Download Manager, Downloads, Google Play Services, Media Storage, MTP Host.
 revocable_special_permissions = \
 	android.permission.SYSTEM_ALERT_WINDOW \
 	android.permission.WRITE_SETTINGS \
@@ -467,7 +468,6 @@ $(targets_for_not_revoking_non_revocable_permissions_from_packages): \
 	revoke-permission-%-package:
 	$(info Ignoring revoking permission $(call revoke_perm,$*) from package $(call revoke_pkg,$*))
 
-# TODO Review 4 apps left with unrestricted data i.e. Device Setup, Download Manager, Downloads, Google Play Services, Media Storage, MTP Host.
 .PHONY: revoke-revocable-special-permissions-from-all-packages
 revoke-revocable-special-permissions-from-all-packages: \
 	$(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p)) \
