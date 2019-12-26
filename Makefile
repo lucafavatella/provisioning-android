@@ -476,7 +476,7 @@ $(targets_for_not_revoking_non_revocable_permissions_from_packages): \
 	revoke-permission-%-package:
 	$(info Ignoring revoking permission $(call revoke_perm,$*) from package $(call revoke_pkg,$*))
 
-# TODO Review 4 apps left with unrestricted data e.g. Google Play Services.
+# TODO Review 4 apps left with unrestricted data i.e. Device Setup, Download Manager, Downloads, Google Play Services, Media Storage, MTP Host.
 .PHONY: revoke-revocable-special-permissions-from-all-packages
 revoke-revocable-special-permissions-from-all-packages: \
 	$(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p)) \
