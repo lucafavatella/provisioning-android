@@ -28,6 +28,7 @@ manually-provision-sprout: \
 automatically-provision-android-one: \
 	disable-google-packages \
 	revoke-revocable-special-permissions-from-all-packages \
+	revoke-dangerous-permissions-from-all-packages \
 	disable-nfc \
 	; $(info Assumption: Android One systems are similar across Original Equipment Manufacturers)
 
