@@ -502,7 +502,8 @@ $(targets_for_revoking_non_revocable_special_permissions): \
 .PHONY: prompt-managing-special-permissions
 prompt-managing-special-permissions: \
 	$(targets_for_revoking_promptable_special_permissions) \
-	$(targets_for_revoking_non_revocable_special_permissions)
+	$(targets_for_revoking_non_revocable_special_permissions) \
+	;
 
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
