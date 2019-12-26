@@ -420,18 +420,25 @@ revocable_special_permissions = \
 	android.permission.REQUEST_INSTALL_PACKAGES \
 	android.permission.CHANGE_WIFI_STATE
 
-promptable_special_permissions = \
-	android.permission.ACCESS_NOTIFICATION_POLICY \
-	android.permission.PACKAGE_USAGE_STATS \
-	android.permission.BIND_VR_LISTENER_SERVICE
+# Special Access           | Permission
+# zen_access               | ? android.permission.ACCESS_NOTIFICATION_POLICY
+# special_app_usage_access | ? android.permission.PACKAGE_USAGE_STATS
+# enabled_vr_listeners     | ? android.permission.BIND_VR_LISTENER_SERVICE
+promptable_special_accesses = \
+	zen_access \
+	special_app_usage_access \
+	enabled_vr_listeners
 
 # TODO: high_power_apps
 # TODO: picture_in_picture
 # TODO: premium_sms
 # TODO: data_saver
 # TODO: special_app_directory_access
-non_revocable_special_permissions = \
-	android.permission.BIND_DEVICE_ADMIN
+#
+# Special Access        | Permission
+# device_administrators | ? android.permission.BIND_DEVICE_ADMIN
+non_revocable_special_accesses = \
+	device_administrators
 
 revoke_perm_pkg_sep = -from-
 revoke_pkg = $(word 2,$(subst $(revoke_perm_pkg_sep), ,$(1)))
@@ -457,37 +464,37 @@ revoke-revocable-special-accesses-from-all-packages: \
 	$(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p)) \
 	;
 
-prefix_of_target_for_prompting_special_permission = \
-	prompt-managing-special-permission-
-
 # Reference: https://developer.android.com/reference/android/provider/Settings
-action_for_prompting_special_permission_android.permission.ACCESS_NOTIFICATION_POLICY = android.settings.NOTIFICATION_POLICY_ACCESS_SETTINGS
-action_for_prompting_special_permission_android.permission.PACKAGE_USAGE_STATS = android.settings.USAGE_ACCESS_SETTINGS
-action_for_prompting_special_permission_android.permission.BIND_VR_LISTENER_SERVICE = android.settings.VR_LISTENER_SETTINGS
-targets_for_revoking_promptable_special_permissions = \
-	$(patsubst %,$(prefix_of_target_for_prompting_special_permission)%,$(promptable_special_permissions))
-.PHONY: $(targets_for_revoking_promptable_special_permissions)
-$(targets_for_revoking_promptable_special_permissions): \
-	$(prefix_of_target_for_prompting_special_permission)%:
+action_for_prompting_special_access_zen_access = \
+	android.settings.NOTIFICATION_POLICY_ACCESS_SETTINGS
+action_for_prompting_special_permission_special_app_usage_access = \
+	android.settings.USAGE_ACCESS_SETTINGS
+action_for_prompting_special_permission_enabled_vr_listeners = \
+	android.settings.VR_LISTENER_SETTINGS
+targets_for_revoking_promptable_special_accesses = \
+	$(patsubst %,prompt-managing-special-access-%,$(promptable_special_accesses))
+.PHONY: $(targets_for_revoking_promptable_special_accesses)
+$(targets_for_revoking_promptable_special_accesses): \
+	prompt-managing-special-access-%:
 	$(info This target $@ requires user action)
 	$(ADB) shell input keyevent KEYCODE_WAKEUP # Reference: https://github.com/aosp-mirror/platform_frameworks_base/blob/android-9.0.0_r51/core/java/android/view/KeyEvent.java#L640
-	$(ADB) shell am start -a $(action_for_prompting_special_permission_$*)
-	@echo "Once you disable special permission $* for the applications, press any key."
+	$(ADB) shell am start -a $(action_for_prompting_special_access_$*)
+	@echo "Once you disable special access $* for the applications, press any key."
 	head -n 1
 
-targets_for_revoking_non_revocable_special_permissions = \
-	$(patsubst %,$(prefix_of_target_for_prompting_special_permission)%,$(non_revocable_special_permissions))
-.PHONY: $(targets_for_revoking_non_revocable_special_permissions)
-$(targets_for_revoking_non_revocable_special_permissions): \
-	$(prefix_of_target_for_prompting_special_permission)%:
+targets_for_revoking_non_revocable_special_accesses = \
+	$(patsubst %,$(prefix_of_target_for_prompting_special_permission)%,$(non_revocable_special_accesses))
+.PHONY: $(targets_for_revoking_non_revocable_special_accesses)
+$(targets_for_revoking_non_revocable_special_accesses): \
+	prompt-managing-special-access-%:
 	$(info This target $@ requires user action)
-	@echo "You are on your own for disabling special permission $* for the applications. Once you are done, press any key."
+	@echo "You are on your own for disabling special access $* for the applications. Once you are done, press any key."
 	head -n 1
 
 .PHONY: prompt-managing-special-accesses
 prompt-managing-special-accesses: \
-	$(targets_for_revoking_promptable_special_permissions) \
-	$(targets_for_revoking_non_revocable_special_permissions) \
+	$(targets_for_revoking_promptable_special_accesses) \
+	$(targets_for_revoking_non_revocable_special_accesses) \
 	;
 
 .PHONY: revoke-dangerous-permissions-from-all-packages
