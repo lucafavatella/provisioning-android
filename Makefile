@@ -465,8 +465,8 @@ non_revocable_permissions_from_packages = \
 	android.permission.READ_PHONE_STATE-from-org.codeaurora.ims
 targets_for_not_revoking_non_revocable_permissions_from_packages = \
 	$(patsubst %,revoke-permission-%-package,$(non_revocable_permissions_from_packages))
-.PHONY: revoke-permission-android.permission.GET_ACCOUNTS-from-android-package
-revoke-permission-android.permission.GET_ACCOUNTS-from-android-package: \
+.PHONY: $(targets_for_not_revoking_non_revocable_permissions_from_packages)
+$(targets_for_not_revoking_non_revocable_permissions_from_packages): \
 	revoke-permission-%-package:
 	$(info Ignored revoking permission $(call revoke_perm,$*) from package $(call revoke_pkg,$*))
 
