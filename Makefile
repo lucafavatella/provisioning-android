@@ -302,6 +302,11 @@ revoke-permission-%-package:
 		$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) deny, \
 		$(ADB) shell pm revoke $(call revoke_pkg,$*) $(call revoke_perm,$*))
 
+.PHONY: revoke-permission-android.permission.GET_ACCOUNTS-from-android-package
+revoke-permission-android.permission.GET_ACCOUNTS-from-android-package: \
+	revoke-permission-%-package:
+	$(info Ignored revoking permission $(call revoke_perm,$*) from package $(call revoke_pkg,$*))
+
 # TODO Review 4 apps left with unrestricted data e.g. Google Play Services.
 .PHONY: revoke-revocable-special-permissions-from-all-packages
 revoke-revocable-special-permissions-from-all-packages: \
