@@ -506,7 +506,6 @@ prompt-managing-special-permissions: \
 	$(targets_for_revoking_non_revocable_special_permissions) \
 	;
 
-# TODO How are "SMS permissions" kept for "Google Play Services" and "Phone"?
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
 	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(packages)) \
