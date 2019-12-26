@@ -105,14 +105,7 @@ manually-provision-android-one: \
 
 # ==== Internal Rules and Variables ====
 
-# No built-in rules. Eases debugging.
-MAKEFLAGS = -r
-
-comma = ,
-empty =
-space = $(empty) $(empty)
-left_brace = {
-right_brace = }
+# ---- Android Variables: Packages ----
 
 google_packages_not_to_be_disabled = \
 	com.google.android.apps.work.oobconfig \
@@ -126,6 +119,8 @@ google_packages_not_to_be_disabled = \
 google_packages_to_be_disabled = \
 	com.android.vending \
 	$(filter-out $(google_packages_not_to_be_disabled),$(call filter_packages_by_prefix,com.google,$(packages)))
+
+# ---- Android Variables: Permissions ----
 
 non_revocable_permissions_from_packages = \
 	android.permission.GET_ACCOUNTS-from-android \
@@ -231,7 +226,49 @@ non_revocable_permissions_from_packages = \
 	android.permission.READ_EXTERNAL_STORAGE-from-org.codeaurora.ims \
 	android.permission.READ_PHONE_STATE-from-org.codeaurora.ims
 
+# ---- Android Variables: Special Accesses ----
+
+revocable_special_permissions = \
+	android.permission.SYSTEM_ALERT_WINDOW \
+	android.permission.WRITE_SETTINGS \
+	android.permission.ACCESS_NOTIFICATIONS \
+	android.permission.REQUEST_INSTALL_PACKAGES \
+	android.permission.CHANGE_WIFI_STATE
+
+# Special Access           | Permission
+# zen_access               | ? android.permission.ACCESS_NOTIFICATION_POLICY
+# special_app_usage_access | ? android.permission.PACKAGE_USAGE_STATS
+# enabled_vr_listeners     | ? android.permission.BIND_VR_LISTENER_SERVICE
+promptable_special_accesses = \
+	zen_access \
+	special_app_usage_access \
+	enabled_vr_listeners
+
+# TODO: high_power_apps
+# TODO: picture_in_picture
+# TODO: premium_sms
+# TODO: data_saver
+# TODO: special_app_directory_access
+#
+# Special Access        | Permission
+# device_administrators | ? android.permission.BIND_DEVICE_ADMIN
+non_revocable_special_accesses = \
+	device_administrators
+
+# ---- Make Variables ----
+
+# No built-in rules. Eases debugging.
+MAKEFLAGS = -r
+
+comma = ,
+empty =
+space = $(empty) $(empty)
+left_brace = {
+right_brace = }
+
 strip_prefix = $(patsubst $(1)%,%,$(2))
+
+# ---- List Devices and Other Basic Items ----
 
 .PHONY: list-devices
 list-devices: ; $(ADB) devices -l
@@ -414,32 +451,6 @@ list-privileged-permissions-%: ; @echo $(call privileged_permissions_by_package,
 #          @hide <p>Not for use by third-party applications. -->
 #     <permission android:name="android.permission.WATCH_APPOPS"
 # ```
-revocable_special_permissions = \
-	android.permission.SYSTEM_ALERT_WINDOW \
-	android.permission.WRITE_SETTINGS \
-	android.permission.ACCESS_NOTIFICATIONS \
-	android.permission.REQUEST_INSTALL_PACKAGES \
-	android.permission.CHANGE_WIFI_STATE
-
-# Special Access           | Permission
-# zen_access               | ? android.permission.ACCESS_NOTIFICATION_POLICY
-# special_app_usage_access | ? android.permission.PACKAGE_USAGE_STATS
-# enabled_vr_listeners     | ? android.permission.BIND_VR_LISTENER_SERVICE
-promptable_special_accesses = \
-	zen_access \
-	special_app_usage_access \
-	enabled_vr_listeners
-
-# TODO: high_power_apps
-# TODO: picture_in_picture
-# TODO: premium_sms
-# TODO: data_saver
-# TODO: special_app_directory_access
-#
-# Special Access        | Permission
-# device_administrators | ? android.permission.BIND_DEVICE_ADMIN
-non_revocable_special_accesses = \
-	device_administrators
 
 revoke_perm_pkg_sep = -from-
 revoke_pkg = $(word 2,$(subst $(revoke_perm_pkg_sep), ,$(1)))
