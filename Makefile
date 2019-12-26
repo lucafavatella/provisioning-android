@@ -282,17 +282,11 @@ revocable_special_permissions = \
 	android.permission.ACCESS_NOTIFICATIONS \
 	android.permission.REQUEST_INSTALL_PACKAGES \
 	android.permission.CHANGE_WIFI_STATE
-.PHONY: list-revocable-special-permissions
-list-revocable-special-permissions:
-	@echo $(revocable_special_permissions)
 
 promptable_special_permissions = \
 	android.permission.ACCESS_NOTIFICATION_POLICY \
 	android.permission.PACKAGE_USAGE_STATS \
 	android.permission.BIND_VR_LISTENER_SERVICE
-.PHONY: list-promptable-special-permissions
-list-promptable-special-permissions:
-	@echo $(promptable_special_permissions)
 
 # TODO: high_power_apps
 # TODO: picture_in_picture
@@ -301,16 +295,11 @@ list-promptable-special-permissions:
 # TODO: special_app_directory_access
 non_revocable_special_permissions = \
 	android.permission.BIND_DEVICE_ADMIN
-.PHONY: list-non-revocable-special-permissions
-list-non-revocable-special-permissions:
-	@echo $(non_revocable_special_permissions)
 
 special_permissions = \
 	$(revocable_special_permissions) \
 	$(promptable_special_permissions) \
 	$(non_revocable_special_permissions)
-.PHONY: list-special-permissions
-list-special-permissions: ; @echo $(special_permissions)
 
 requested_permissions_by_package = $(sort $(shell $(CURDIR)/libexec/requested_permissions $(1)))
 .PHONY: list-requested-permissions-by-package-%
