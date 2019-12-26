@@ -13,6 +13,8 @@ provision-sprout: \
 	manually-provision-sprout \
 	;
 
+NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES = \
+	foo
 .PHONY: automatically-provision-sprout
 automatically-provision-sprout: \
 	disable-package-com.hmdglobal.app.fmradio \
@@ -465,7 +467,9 @@ non_revocable_permissions_from_packages = \
 	android.permission.READ_EXTERNAL_STORAGE-from-org.codeaurora.ims \
 	android.permission.READ_PHONE_STATE-from-org.codeaurora.ims
 targets_for_not_revoking_non_revocable_permissions_from_packages = \
-	$(patsubst %,revoke-permission-%-package,$(non_revocable_permissions_from_packages))
+	$(patsubst %,revoke-permission-%-package, \
+		$(non_revocable_permissions_from_packages) \
+		$(NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES))
 .PHONY: $(targets_for_not_revoking_non_revocable_permissions_from_packages)
 $(targets_for_not_revoking_non_revocable_permissions_from_packages): \
 	revoke-permission-%-package:
