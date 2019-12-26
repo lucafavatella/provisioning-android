@@ -280,7 +280,6 @@ revocable_special_permissions = \
 	android.permission.SYSTEM_ALERT_WINDOW \
 	android.permission.WRITE_SETTINGS \
 	android.permission.ACCESS_NOTIFICATIONS \
-	android.permission.SEND_SMS \
 	android.permission.USE_DATA_IN_BACKGROUND \
 	android.permission.REQUEST_INSTALL_PACKAGES \
 	android.permission.CHANGE_WIFI_STATE
@@ -298,6 +297,7 @@ list-promptable-special-permissions:
 # TODO: high_power_apps
 # TODO: zen_access
 # TODO: picture_in_picture
+# TODO: premium_sms
 # TODO: special_app_directory_access
 non_revocable_special_permissions = \
 	android.permission.BIND_DEVICE_ADMIN
@@ -364,6 +364,7 @@ non_revocable_permissions_from_packages = \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.bluetooth \
 	android.permission.READ_SMS-from-com.android.bluetooth \
 	android.permission.RECEIVE_SMS-from-com.android.bluetooth \
+	android.permission.SEND_SMS-from-com.android.bluetooth \
 	android.permission.WRITE_CALL_LOG-from-com.android.bluetooth \
 	android.permission.WRITE_CONTACTS-from-com.android.bluetooth \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.bluetooth \
@@ -391,6 +392,7 @@ non_revocable_permissions_from_packages = \
 	android.permission.READ_SMS-from-com.android.phone \
 	android.permission.RECEIVE_SMS-from-com.android.phone \
 	android.permission.RECORD_AUDIO-from-com.android.phone \
+	android.permission.SEND_SMS-from-com.android.phone \
 	android.permission.USE_SIP-from-com.android.phone \
 	android.permission.WRITE_CALL_LOG-from-com.android.phone \
 	android.permission.WRITE_CONTACTS-from-com.android.phone \
@@ -421,6 +423,7 @@ non_revocable_permissions_from_packages = \
 	android.permission.READ_PHONE_STATE-from-com.android.settings \
 	android.permission.READ_SMS-from-com.android.settings \
 	android.permission.RECEIVE_SMS-from-com.android.settings \
+	android.permission.SEND_SMS-from-com.android.settings \
 	android.permission.WRITE_CONTACTS-from-com.android.settings \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.settings \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.sharedstoragebackup \
@@ -433,6 +436,7 @@ non_revocable_permissions_from_packages = \
 	android.permission.READ_CONTACTS-from-com.android.shell \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.shell \
 	android.permission.READ_PHONE_STATE-from-com.android.shell \
+	android.permission.SEND_SMS-from-com.android.shell \
 	android.permission.WRITE_CALENDAR-from-com.android.shell \
 	android.permission.WRITE_CONTACTS-from-com.android.shell \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.shell \
