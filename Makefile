@@ -433,11 +433,6 @@ promptable_special_permissions = \
 non_revocable_special_permissions = \
 	android.permission.BIND_DEVICE_ADMIN
 
-special_permissions = \
-	$(revocable_special_permissions) \
-	$(promptable_special_permissions) \
-	$(non_revocable_special_permissions)
-
 revoke_perm_pkg_sep = -from-
 revoke_pkg = $(word 2,$(subst $(revoke_perm_pkg_sep), ,$(1)))
 revoke_perm = $(word 1,$(subst $(revoke_perm_pkg_sep), ,$(1)))
