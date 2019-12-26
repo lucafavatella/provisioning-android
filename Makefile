@@ -307,7 +307,8 @@ list-revocable-special-permissions:
 	@echo $(revocable_special_permissions)
 
 promptable_special_permissions = \
-	android.permission.PACKAGE_USAGE_STATS
+	android.permission.PACKAGE_USAGE_STATS \
+	android.permission.BIND_VR_LISTENER_SERVICE
 .PHONY: list-promptable-special-permissions
 list-promptable-special-permissions:
 	@echo $(promptable_special_permissions)
@@ -487,6 +488,7 @@ prefix_of_target_for_prompting_special_permission = \
 
 # Reference: https://developer.android.com/reference/android/provider/Settings
 action_for_prompting_special_permission_android.permission.PACKAGE_USAGE_STATS = android.settings.USAGE_ACCESS_SETTINGS
+action_for_prompting_special_permission_android.permission.BIND_VR_LISTENER_SERVICE = android.settings.VR_LISTENER_SETTINGS
 targets_for_revoking_promptable_special_permissions = \
 	$(patsubst %,$(prefix_of_target_for_prompting_special_permission)%,$(promptable_special_permissions))
 .PHONY: $(targets_for_revoking_promptable_special_permissions)
