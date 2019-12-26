@@ -13,6 +13,7 @@ provision-sprout: \
 	manually-provision-sprout \
 	;
 
+# TODO Split in separate makefiles.
 NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES = \
 	foo
 .PHONY: automatically-provision-sprout
