@@ -288,6 +288,7 @@ list-revocable-special-permissions:
 	@echo $(revocable_special_permissions)
 
 promptable_special_permissions = \
+	android.permission.ACCESS_NOTIFICATION_POLICY \
 	android.permission.PACKAGE_USAGE_STATS \
 	android.permission.BIND_VR_LISTENER_SERVICE
 .PHONY: list-promptable-special-permissions
@@ -295,7 +296,6 @@ list-promptable-special-permissions:
 	@echo $(promptable_special_permissions)
 
 # TODO: high_power_apps
-# TODO: zen_access
 # TODO: picture_in_picture
 # TODO: premium_sms
 # TODO: special_app_directory_access
@@ -477,6 +477,7 @@ prefix_of_target_for_prompting_special_permission = \
 	prompt-managing-special-permission-
 
 # Reference: https://developer.android.com/reference/android/provider/Settings
+action_for_prompting_special_permission_android.permission.ACCESS_NOTIFICATION_POLICY = android.settings.NOTIFICATION_POLICY_ACCESS_SETTINGS
 action_for_prompting_special_permission_android.permission.PACKAGE_USAGE_STATS = android.settings.USAGE_ACCESS_SETTINGS
 action_for_prompting_special_permission_android.permission.BIND_VR_LISTENER_SERVICE = android.settings.VR_LISTENER_SETTINGS
 targets_for_revoking_promptable_special_permissions = \
