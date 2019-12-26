@@ -368,7 +368,6 @@ revoke-permission-%-package:
 		$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) deny, \
 		$(ADB) shell pm revoke $(call revoke_pkg,$*) $(call revoke_perm,$*))
 
-# TODO Refactor blacklist below. Shall hmd packages stay as android one?
 non_revocable_permissions_from_packages = \
 	android.permission.GET_ACCOUNTS-from-android \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.android.bluetooth \
