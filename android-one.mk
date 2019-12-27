@@ -319,7 +319,7 @@ list-data_saver-whitelist-package-uids:
 
 .PHONY: revoke-special-access-data_saver-from-package-uid-%
 revoke-special-access-data_saver-from-package-uid-%:
-	$(info Removing package UID $* from data background whitelist (packages $(call packages_by_uid,$*)))
+	$(info Removing package UID $* from data background whitelist (packages: $(call packages_by_uid,$*)))
 	$(ADB) shell cmd netpolicy remove restrict-background-whitelist $*
 
 .PHONY: revoke-special-access-data_saver-from-all-packages
