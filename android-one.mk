@@ -62,6 +62,13 @@ promptable_special_accesses = \
 	zen_access \
 	special_app_usage_access \
 	enabled_vr_listeners
+# Reference: https://developer.android.com/reference/android/provider/Settings
+action_for_prompting_special_access_zen_access = \
+	android.settings.NOTIFICATION_POLICY_ACCESS_SETTINGS
+action_for_prompting_special_access_special_app_usage_access = \
+	android.settings.USAGE_ACCESS_SETTINGS
+action_for_prompting_special_access_enabled_vr_listeners = \
+	android.settings.VR_LISTENER_SETTINGS
 
 # TODO: high_power_apps
 # TODO: picture_in_picture
@@ -335,13 +342,6 @@ revoke-revocable-special-accesses-from-all-packages: \
 
 # ---- Revoke Special Accesses: Manual ----
 
-# Reference: https://developer.android.com/reference/android/provider/Settings
-action_for_prompting_special_access_zen_access = \
-	android.settings.NOTIFICATION_POLICY_ACCESS_SETTINGS
-action_for_prompting_special_access_special_app_usage_access = \
-	android.settings.USAGE_ACCESS_SETTINGS
-action_for_prompting_special_access_enabled_vr_listeners = \
-	android.settings.VR_LISTENER_SETTINGS
 targets_for_revoking_promptable_special_accesses = \
 	$(patsubst %,prompt-managing-special-access-%,$(promptable_special_accesses))
 .PHONY: $(targets_for_revoking_promptable_special_accesses)
