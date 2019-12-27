@@ -346,7 +346,8 @@ disable-google-packages: \
 
 # ---- List Permissions ----
 
-requested_permissions_by_package = $(sort $(shell $(CURDIR)/libexec/requested_permissions $(1)))
+requested_permissions_by_package = \
+	$(sort $(shell $(CURDIR)/libexec/requested_permissions $(1)))
 .PHONY: list-requested-permissions-by-package-%
 list-requested-permissions-by-package-%:
 	@echo $(call requested_permissions_by_package,$*)
