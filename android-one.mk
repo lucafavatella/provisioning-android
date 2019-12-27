@@ -169,11 +169,11 @@ disable-google-packages: \
 
 # ---- List Permissions ----
 
-requested_permissions_by_package = \
+permissions_requested_by_package = \
 	$(sort $(shell $(CURDIR)/libexec/requested_permissions $(1)))
-.PHONY: list-requested-permissions-by-package-%
-list-requested-permissions-by-package-%:
-	@echo $(call requested_permissions_by_package,$*)
+.PHONY: list-permissions-requested-by-package-%
+list-permissions-requested-by-package-%:
+	@echo $(call permissions_requested_by_package,$*)
 
 adb_ls_permissions = $(ADB) shell pm list permissions $(1)
 filter_permissions = $(filter permission:%,$(1))
@@ -388,7 +388,7 @@ disable-nfc:
 
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%: \
-	$$(foreach p,$$(filter $$(call requested_permissions_by_package,$$*),$$(dangerous_permissions)),revoke-permission-$$(p)-from-$$*-package) \
+	$$(foreach p,$$(filter $$(call permissions_requested_by_package,$$*),$$(dangerous_permissions)),revoke-permission-$$(p)-from-$$*-package) \
 	;
 
 .PHONY: revoke-privileged-permissions-from-package-%
@@ -400,5 +400,5 @@ revoke-privileged-permissions-from-package-%: \
 
 .PHONY: revoke-revocable-special-permissions-from-package-%
 revoke-revocable-special-permissions-from-package-%: \
-	$$(foreach p,$$(filter $$(call requested_permissions_by_package,$$*),$$(revocable_special_permissions)),revoke-permission-$$(p)-from-$$*-package) \
+	$$(foreach p,$$(filter $$(call permissions_requested_by_package,$$*),$$(revocable_special_permissions)),revoke-permission-$$(p)-from-$$*-package) \
 	;
