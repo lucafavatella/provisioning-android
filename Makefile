@@ -404,8 +404,7 @@ revoke-dangerous-permissions-from-all-packages: \
 	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(packages)) \
 	;
 
-# ---- Revoke Special Accesses: Automatic ----
-# See also secondary expansion.
+# ---- List Special Accesses ----
 
 # As per Android 9,
 # the 14 items of the screen "Settings > Apps & notifications >
@@ -492,6 +491,12 @@ adb_ls_net_background_whitelist = \
 	$(ADB) shell cmd netpolicy list restrict-background-whitelist
 data_background_whitelist_package_uids = \
 	$(shell echo "$$($(adb_ls_net_background_whitelist))" | sed -e "s/^Restrict background whitelisted UIDs://")
+.PHONY: list-data_saver-whitelist-package-uids
+list-data_saver-whitelist-package-uids:
+	@echo $(data_background_whitelist_package_uids)
+
+# ---- Revoke Special Accesses: Automatic ----
+# See also secondary expansion.
 
 .PHONY: revoke-special-access-data_saver-from-package-uid-%
 revoke-special-access-data_saver-from-package-uid-%:
