@@ -487,11 +487,8 @@ revoke-dangerous-permissions-from-all-packages: \
 #     <permission android:name="android.permission.WATCH_APPOPS"
 # ```
 
-# Reference: https://developer.android.com/training/basics/network-ops/data-saver
-adb_ls_net_background_whitelist = \
-	$(ADB) shell cmd netpolicy list restrict-background-whitelist
 data_background_whitelist_package_uids = \
-	$(shell echo "$$($(adb_ls_net_background_whitelist))" | sed -e "s/^Restrict background whitelisted UIDs://")
+	$(sort $(shell $(CURDIR)/libexec/net_background_whitelist))
 .PHONY: list-data_saver-whitelist-package-uids
 list-data_saver-whitelist-package-uids:
 	@echo $(data_background_whitelist_package_uids)
