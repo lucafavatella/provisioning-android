@@ -577,5 +577,5 @@ revoke-privileged-permissions-from-package-%: \
 
 .PHONY: revoke-revocable-special-permissions-from-package-%
 revoke-revocable-special-permissions-from-package-%: \
-	$$(patsubst %,revoke-permission-%-from-$$*-package,$$(filter $$(call requested_permissions_by_package,$$*),$$(revocable_special_permissions))) \
+	$$(foreach p,$$(filter $$(call requested_permissions_by_package,$$*),$$(revocable_special_permissions)),revoke-permission-$$(p)-from-$$*-package) \
 	;
