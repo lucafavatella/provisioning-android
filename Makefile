@@ -330,7 +330,7 @@ list-enabled-package-second-level-domains: ; @echo $(enabled_package_slds)
 
 adb_ls_packages_by_uid = $(ADB) shell pm list packages --uid $(1)
 packages_by_uid = \
-	$(call strip_package,$(patsubst %uid:$(1),$(shell $(call adb_ls_packages_by_uid,$(1)))))
+	$(call strip_package,$(patsubst %uid:$(1),%,$(shell $(call adb_ls_packages_by_uid,$(1)))))
 .PHONY: list-packages-by-uid-%
 list-packages-by-uid-%: ; @echo $(call packages_by_uid,$*)
 
