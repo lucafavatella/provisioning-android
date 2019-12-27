@@ -171,20 +171,22 @@ list-requested-permissions-by-package-%:
 adb_ls_permissions = $(ADB) shell pm list permissions $(1)
 filter_permissions = $(filter permission:%,$(1))
 strip_permission = $(call strip_prefix,permission:,$(1))
+ls_permissions = $(call strip_permission,$(call filter_permissions,$(shell $(call adb_ls_permissions,$(1)))))
 
-permissions = $(sort $(call strip_permission,$(call filter_permissions,$(shell $(call adb_ls_permissions,-g)))))
+permissions = $(sort $(call ls_permissions,-g))
 .PHONY: list-permissions
 list-permissions: ; @echo $(permissions)
 
-dangerous_permissions = $(sort $(call strip_permission,$(call filter_permissions,$(shell $(call adb_ls_permissions,-g -d)))))
+dangerous_permissions = $(sort $(call ls_permissions,-g -d))
 .PHONY: list-dangerous-permissions
 list-dangerous-permissions: ; @echo $(dangerous_permissions)
 
-user_permissions = $(sort $(call strip_permission,$(call filter_permissions,$(shell $(call adb_ls_permissions,-u)))))
+user_permissions = $(sort $(call ls_permissions,-u))
 .PHONY: list-user-permissions
 list-user-permissions: ; @echo $(user_permissions)
 
-dangerous_user_permissions = $(filter $(user_permissions),$(dangerous_permissions))
+dangerous_user_permissions = \
+	$(filter $(user_permissions),$(dangerous_permissions))
 .PHONY: list-dangerous-user-permissions
 list-dangerous-user-permissions: ; @echo $(dangerous_user_permissions)
 
