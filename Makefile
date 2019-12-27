@@ -488,8 +488,10 @@ revoke-dangerous-permissions-from-all-packages: \
 # ```
 
 # Reference: https://developer.android.com/training/basics/network-ops/data-saver
+adb_ls_net_background_whitelist = \
+	$(ADB) shell cmd netpolicy list restrict-background-whitelist
 data_background_whitelist_package_uids = \
-	$(patsubst Restrict background whitelisted UIDs:%,%,$(shell $(ADB) shell cmd netpolicy list restrict-background-whitelist))
+	$(shell echo "$$($(adb_ls_net_background_whitelist))" | sed -e "s/^Restrict background whitelisted UIDs://")
 
 .PHONY: revoke-special-access-data_saver-from-package-uid-%
 revoke-special-access-data_saver-from-package-uid-%:
