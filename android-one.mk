@@ -338,9 +338,9 @@ revoke-revocable-special-accesses-from-all-packages: \
 # Reference: https://developer.android.com/reference/android/provider/Settings
 action_for_prompting_special_access_zen_access = \
 	android.settings.NOTIFICATION_POLICY_ACCESS_SETTINGS
-action_for_prompting_special_permission_special_app_usage_access = \
+action_for_prompting_special_access_special_app_usage_access = \
 	android.settings.USAGE_ACCESS_SETTINGS
-action_for_prompting_special_permission_enabled_vr_listeners = \
+action_for_prompting_special_access_enabled_vr_listeners = \
 	android.settings.VR_LISTENER_SETTINGS
 targets_for_revoking_promptable_special_accesses = \
 	$(patsubst %,prompt-managing-special-access-%,$(promptable_special_accesses))
