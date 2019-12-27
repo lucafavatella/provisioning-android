@@ -347,7 +347,6 @@ targets_for_revoking_promptable_special_accesses = \
 .PHONY: $(targets_for_revoking_promptable_special_accesses)
 $(targets_for_revoking_promptable_special_accesses): \
 	prompt-managing-special-access-%:
-	$(info This target $@ requires user action)
 	$(ADB) shell input keyevent KEYCODE_WAKEUP # Reference: https://github.com/aosp-mirror/platform_frameworks_base/blob/android-9.0.0_r51/core/java/android/view/KeyEvent.java#L640
 	$(ADB) shell am start -a $(action_for_prompting_special_access_$*)
 	@echo "Once you disable special access $* for the applications, press any key."
@@ -358,7 +357,6 @@ targets_for_revoking_non_revocable_special_accesses = \
 .PHONY: $(targets_for_revoking_non_revocable_special_accesses)
 $(targets_for_revoking_non_revocable_special_accesses): \
 	prompt-managing-special-access-%:
-	$(info This target $@ requires user action)
 	@echo "You are on your own for disabling special access $* for the applications. Once you are done, press any key."
 	head -n 1
 
@@ -372,7 +370,6 @@ prompt-managing-special-accesses: \
 
 .PHONY: prompt-managing-default-apps
 prompt-managing-default-apps:
-	$(info This target $@ requires user action)
 	$(ADB) shell am start -a android.settings.MANAGE_DEFAULT_APPS_SETTINGS
 	@echo "You are on your own for managing default applications. Once you are done, press any key."
 	head -n 1
