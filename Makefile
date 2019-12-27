@@ -528,7 +528,7 @@ $(targets_for_revoking_promptable_special_accesses): \
 	head -n 1
 
 targets_for_revoking_non_revocable_special_accesses = \
-	$(patsubst %,$(prefix_of_target_for_prompting_special_permission)%,$(non_revocable_special_accesses))
+	$(patsubst %,prompt-managing-special-access-%,$(non_revocable_special_accesses))
 .PHONY: $(targets_for_revoking_non_revocable_special_accesses)
 $(targets_for_revoking_non_revocable_special_accesses): \
 	prompt-managing-special-access-%:
