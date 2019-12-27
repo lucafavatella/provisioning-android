@@ -235,6 +235,9 @@ non_revocable_permissions_from_packages = \
 
 # ---- Android Variables: Special Accesses ----
 
+revocable_special_accesses = \
+	data_saver
+
 # Special Access           | Permission
 # zen_access               | ? android.permission.ACCESS_NOTIFICATION_POLICY
 # special_app_usage_access | ? android.permission.PACKAGE_USAGE_STATS
@@ -247,7 +250,6 @@ promptable_special_accesses = \
 # TODO: high_power_apps
 # TODO: picture_in_picture
 # TODO: premium_sms
-# TODO: data_saver
 # TODO: special_app_directory_access
 #
 # Special Access        | Permission
@@ -325,6 +327,12 @@ enabled_package_slds = $(sort $(foreach p,$(enabled_packages),$(call sld,$(p))))
 # Second- and first-level domains.
 .PHONY: list-enabled-package-second-level-domains
 list-enabled-package-second-level-domains: ; @echo $(enabled_package_slds)
+
+adb_ls_packages_by_uid = $(ADB) shell pm list packages --uid $(1)
+packages_by_uid = \
+	$(call strip_package,$(patsubst %uid:$(1),$(shell $(call adb_ls_packages_by_uid,$(1)))))
+.PHONY: list-packages-by-uid-%
+list-packages-by-uid-%: ; @echo $(call packages_by_uid,$*)
 
 # ---- Disable Packages ----
 
@@ -479,9 +487,24 @@ revoke-dangerous-permissions-from-all-packages: \
 #     <permission android:name="android.permission.WATCH_APPOPS"
 # ```
 
+# Reference: https://developer.android.com/training/basics/network-ops/data-saver
+data_background_whitelist_package_uids = \
+	$(patsubst Restrict background whitelisted UIDs:%,%,$(shell $(ADB) shell cmd netpolicy list restrict-background-whitelist))
+
+.PHONY: revoke-special-access-data_saver-from-package-uid-%
+revoke-special-access-data_saver-from-package-uid-%:
+	$(info Removing package UID $* from data background whitelist (packages $(call packages_by_uid,$*)))
+	$(ADB) shell cmd netpolicy remove restrict-background-whitelist $*
+
+.PHONY:
+revoke-special-access-data_saver-from-all-packages: \
+	$(patsubst %,revoke-special-access-data_saver-from-package-uid-%,$(data_background_whitelist_package_uids)) \
+	;
+
 .PHONY: revoke-revocable-special-accesses-from-all-packages
 revoke-revocable-special-accesses-from-all-packages: \
 	$(patsubst %,revoke-revocable-special-permissions-from-package-%,$(packages)) \
+	$(patsubst %,revoke-special-access-%-from-all-packages,$(revocable_special_accesses)) \
 	;
 
 # ---- Revoke Special Accesses: Manual ----
