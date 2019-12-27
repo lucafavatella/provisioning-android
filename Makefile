@@ -561,11 +561,13 @@ disable-nfc:
 
 .SECONDEXPANSION:
 
+# Prefer "foreach" to "patsubst" as error "No rule to make target" experienced.
+
 # ---- Revoke Permissions (Secondary Expansion) ----
 
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%: \
-	$$(patsubst %,revoke-permission-%-from-$$*-package,$$(filter $$(call requested_permissions_by_package,$$*),$$(dangerous_permissions))) \
+	$$(foreach p,$$(filter $$(call requested_permissions_by_package,$$*),$$(dangerous_permissions)),revoke-permission-$$(p)-from-$$*-package) \
 	;
 
 .PHONY: revoke-privileged-permissions-from-package-%
