@@ -333,7 +333,7 @@ disable-package-%: ; $(ADB) shell pm disable-user --user $(ADB_USER_ID) $*
 
 .PHONY: disable-google-packages
 disable-google-packages: \
-	$(foreach p,$(google_packages_to_be_disabled),disable-package-$(p)) \
+	$(patsubst %,disable-package-%,$(google_packages_to_be_disabled)) \
 	;
 
 # ---- List Permissions ----
@@ -481,7 +481,7 @@ revoke-dangerous-permissions-from-all-packages: \
 
 .PHONY: revoke-revocable-special-accesses-from-all-packages
 revoke-revocable-special-accesses-from-all-packages: \
-	$(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p)) \
+	$(patsubst %,revoke-revocable-special-permissions-from-package-%,$(packages)) \
 	;
 
 # ---- Revoke Special Accesses: Manual ----
@@ -540,19 +540,17 @@ disable-nfc:
 
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%: \
-	$$(foreach p,$$(filter $$(call requested_permissions_by_package,$$*),$$(dangerous_permissions)),revoke-permission-$$(p)-from-$$*-package) \
+	$$(patsubst %,revoke-permission-%-from-$$*-package,$$(filter $$(call requested_permissions_by_package,$$*),$$(dangerous_permissions))) \
 	;
 
 .PHONY: revoke-privileged-permissions-from-package-%
 revoke-privileged-permissions-from-package-%: \
-	$$(foreach p,$$(call privileged_permissions_by_package,$$*),revoke-permission-$$(p)-from-$$*-package) \
+	$$(patsubst %,revoke-permission-%-from-$$*-package,$$(call privileged_permissions_by_package,$$*)) \
 	;
 
 # ---- Revoke Special Accesses: Automatic (Secondary Expansion) ----
 
 .PHONY: revoke-revocable-special-permissions-from-package-%
 revoke-revocable-special-permissions-from-package-%: \
-	$$(foreach p,$$(filter $$(call requested_permissions_by_package,$$*),$$(revocable_special_permissions)),revoke-permission-$$(p)-from-$$*-package) \
+	$$(patsubst %,revoke-permission-%-from-$$*-package,$$(filter $$(call requested_permissions_by_package,$$*),$$(revocable_special_permissions))) \
 	;
-
-# TODO Replace usage of foreach with patsubst in cases where it is only string replacement.
