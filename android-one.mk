@@ -204,6 +204,7 @@ list-privileged-permissions-%:
 revoke_perm_pkg_sep = -from-
 revoke_pkg = $(word 2,$(subst $(revoke_perm_pkg_sep), ,$(1)))
 revoke_perm = $(word 1,$(subst $(revoke_perm_pkg_sep), ,$(1)))
+
 .PHONY: revoke-permission-%-package
 revoke-permission-%-package:
 	$(if \
