@@ -122,6 +122,13 @@ google_packages_to_be_disabled = \
 
 # ---- Android Variables: Permissions ----
 
+revocable_special_permissions = \
+	android.permission.SYSTEM_ALERT_WINDOW \
+	android.permission.WRITE_SETTINGS \
+	android.permission.ACCESS_NOTIFICATIONS \
+	android.permission.REQUEST_INSTALL_PACKAGES \
+	android.permission.CHANGE_WIFI_STATE
+
 non_revocable_permissions_from_packages = \
 	android.permission.GET_ACCOUNTS-from-android \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.android.bluetooth \
@@ -227,13 +234,6 @@ non_revocable_permissions_from_packages = \
 	android.permission.READ_PHONE_STATE-from-org.codeaurora.ims
 
 # ---- Android Variables: Special Accesses ----
-
-revocable_special_permissions = \
-	android.permission.SYSTEM_ALERT_WINDOW \
-	android.permission.WRITE_SETTINGS \
-	android.permission.ACCESS_NOTIFICATIONS \
-	android.permission.REQUEST_INSTALL_PACKAGES \
-	android.permission.CHANGE_WIFI_STATE
 
 # Special Access           | Permission
 # zen_access               | ? android.permission.ACCESS_NOTIFICATION_POLICY
@@ -372,6 +372,33 @@ list-privileged-permissions-%: ; @echo $(call privileged_permissions_by_package,
 # ---- Revoke Permissions ----
 # See also secondary expansion.
 
+revoke_perm_pkg_sep = -from-
+revoke_pkg = $(word 2,$(subst $(revoke_perm_pkg_sep), ,$(1)))
+revoke_perm = $(word 1,$(subst $(revoke_perm_pkg_sep), ,$(1)))
+.PHONY: revoke-permission-%-package
+revoke-permission-%-package:
+	$(if \
+		$(filter $(revocable_special_permissions),$(call revoke_perm,$*)), \
+		$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) deny, \
+		$(ADB) shell pm revoke $(call revoke_pkg,$*) $(call revoke_perm,$*))
+
+targets_for_not_revoking_non_revocable_permissions_from_packages = \
+	$(patsubst %,revoke-permission-%-package, \
+		$(non_revocable_permissions_from_packages) \
+		$(EXTRA_NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES))
+.PHONY: $(targets_for_not_revoking_non_revocable_permissions_from_packages)
+$(targets_for_not_revoking_non_revocable_permissions_from_packages): \
+	revoke-permission-%-package:
+	$(info Ignoring revoking permission $(call revoke_perm,$*) from package $(call revoke_pkg,$*))
+
+.PHONY: revoke-dangerous-permissions-from-all-packages
+revoke-dangerous-permissions-from-all-packages: \
+	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(packages)) \
+	;
+
+# ---- Revoke Special Accesses: Automatic ----
+# See also secondary expansion.
+
 # As per Android 9,
 # the 14 items of the screen "Settings > Apps & notifications >
 # Special app access" are defined in `special_access.xml`.
@@ -452,29 +479,12 @@ list-privileged-permissions-%: ; @echo $(call privileged_permissions_by_package,
 #     <permission android:name="android.permission.WATCH_APPOPS"
 # ```
 
-revoke_perm_pkg_sep = -from-
-revoke_pkg = $(word 2,$(subst $(revoke_perm_pkg_sep), ,$(1)))
-revoke_perm = $(word 1,$(subst $(revoke_perm_pkg_sep), ,$(1)))
-.PHONY: revoke-permission-%-package
-revoke-permission-%-package:
-	$(if \
-		$(filter $(revocable_special_permissions),$(call revoke_perm,$*)), \
-		$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) deny, \
-		$(ADB) shell pm revoke $(call revoke_pkg,$*) $(call revoke_perm,$*))
-
-targets_for_not_revoking_non_revocable_permissions_from_packages = \
-	$(patsubst %,revoke-permission-%-package, \
-		$(non_revocable_permissions_from_packages) \
-		$(EXTRA_NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES))
-.PHONY: $(targets_for_not_revoking_non_revocable_permissions_from_packages)
-$(targets_for_not_revoking_non_revocable_permissions_from_packages): \
-	revoke-permission-%-package:
-	$(info Ignoring revoking permission $(call revoke_perm,$*) from package $(call revoke_pkg,$*))
-
 .PHONY: revoke-revocable-special-accesses-from-all-packages
 revoke-revocable-special-accesses-from-all-packages: \
 	$(foreach p,$(packages),revoke-revocable-special-permissions-from-package-$(p)) \
 	;
+
+# ---- Revoke Special Accesses: Manual ----
 
 # Reference: https://developer.android.com/reference/android/provider/Settings
 action_for_prompting_special_access_zen_access = \
@@ -509,11 +519,6 @@ prompt-managing-special-accesses: \
 	$(targets_for_revoking_non_revocable_special_accesses) \
 	;
 
-.PHONY: revoke-dangerous-permissions-from-all-packages
-revoke-dangerous-permissions-from-all-packages: \
-	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(packages)) \
-	;
-
 # ---- Misc ----
 
 .PHONY: prompt-managing-default-apps
@@ -533,11 +538,6 @@ disable-nfc:
 
 # ---- Revoke Permissions (Secondary Expansion) ----
 
-.PHONY: revoke-revocable-special-permissions-from-package-%
-revoke-revocable-special-permissions-from-package-%: \
-	$$(foreach p,$$(filter $$(call requested_permissions_by_package,$$*),$$(revocable_special_permissions)),revoke-permission-$$(p)-from-$$*-package) \
-	;
-
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%: \
 	$$(foreach p,$$(filter $$(call requested_permissions_by_package,$$*),$$(dangerous_permissions)),revoke-permission-$$(p)-from-$$*-package) \
@@ -546,6 +546,13 @@ revoke-dangerous-permissions-from-package-%: \
 .PHONY: revoke-privileged-permissions-from-package-%
 revoke-privileged-permissions-from-package-%: \
 	$$(foreach p,$$(call privileged_permissions_by_package,$$*),revoke-permission-$$(p)-from-$$*-package) \
+	;
+
+# ---- Revoke Special Accesses: Automatic (Secondary Expansion) ----
+
+.PHONY: revoke-revocable-special-permissions-from-package-%
+revoke-revocable-special-permissions-from-package-%: \
+	$$(foreach p,$$(filter $$(call requested_permissions_by_package,$$*),$$(revocable_special_permissions)),revoke-permission-$$(p)-from-$$*-package) \
 	;
 
 # TODO Replace usage of foreach with patsubst in cases where it is only string replacement.
