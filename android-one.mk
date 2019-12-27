@@ -199,11 +199,21 @@ list-dangerous-user-permissions: ; @echo $(dangerous_user_permissions)
 
 # From https://source.android.com/devices/tech/config/perms-whitelist
 # > Privileged apps are system apps that are located in a `priv-app` directory on one of the system image partitions.
-privileged_permissions_by_package = \
+privileged_permissions_for_package = \
 	$(sort $(subst $(comma)$(space),$(space),$(patsubst %$(right_brace),%,$(patsubst $(left_brace)%,%,$(shell $(ADB) shell pm get-privapp-permissions $(1))))))
-.PHONY: list-privileged-permissions-%
-list-privileged-permissions-%:
-	@echo $(call privileged_permissions_by_package,$*)
+.PHONY: list-privileged-permissions-for-package-%
+list-privileged-permissions-for-package-%:
+	@echo $(call privileged_permissions_for_package,$*)
+
+.PHONY: long-list-privileged-permissions-for-package-%
+long-list-privileged-permissions-for-package-%:
+	@printf "Privileged permissions for package %b:\n\t" "$*"
+	@$(MAKE) list-privileged-permissions-for-package-$*
+
+.PHONY: list-privileged-permissions-for-all-enabled-packages
+list-privileged-permissions-for-all-enabled-packages: \
+	$(patsubst %,long-list-privileged-permissions-for-package-%,$(enabled_packages)) \
+	;
 
 # ---- Revoke Permissions ----
 # See also secondary expansion.
