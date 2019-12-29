@@ -13,6 +13,7 @@ automatically-provision-android-one: \
 	revoke-revocable-special-accesses-from-all-packages \
 	revoke-dangerous-permissions-from-all-packages \
 	disable-nfc \
+	install-logcat \
 	; $(info Assumption: Android One systems are similar across Original Equipment Manufacturers)
 
 .PHONY: manually-provision-android-one
@@ -387,6 +388,15 @@ prompt-managing-default-apps:
 .PHONY: disable-nfc
 disable-nfc:
 	$(ADB) shell svc nfc disable
+
+# ---- Install Packages ----
+
+.PHONY: install-logcat
+install-logcat: var/cache/fdroidcl/apks/com.dp.logcatapp.apk
+	adb install --user current $<
+	adb shell pm grant --user $(ADB_USER_ID) com.dp.logcatapp android.permission.READ_LOGS
+
+var/cache/fdroidcl/apks/%.apk: ; $(MAKE) -f Makefile.fdroidcl $@
 
 # ---- Secondary Expansion ----
 

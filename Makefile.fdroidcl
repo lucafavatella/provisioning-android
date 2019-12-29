@@ -1,0 +1,29 @@
+.DEFAULT_GOAL = clean
+
+.PHONY: clean
+clean: \
+	clean-docker \
+	clean-apks \
+	;
+
+docker_image_name = fdroidcl-local
+.PHONY: clean-docker
+clean-docker: ; docker rmi $(docker_image_name)
+
+apks_dir = var/cache/fdroidcl/apks
+.PHONY: clean-apks
+clean-apks: ; find $(apks_dir) -type f -name '*.apk' -exec rm {} \;
+
+# Does not preserve version code in file name.
+$(apks_dir)/%.apk: $(apks_dir)/%.apk.tmp ; mv $< $@
+
+$(apks_dir)/%.apk.tmp: $(docker_image_name)
+	docker run --rm $< $* > $@
+
+today_this_hour = $(shell date "+%Y%m%d_%H")
+.PHONY: $(docker_image_name)
+$(docker_image_name): lib/fdroidcl/Dockerfile
+	docker build \
+		-t $@ \
+		--build-arg USE_BY="$(today_this_hour)" \
+		- < $<
