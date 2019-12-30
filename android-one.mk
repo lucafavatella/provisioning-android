@@ -204,6 +204,12 @@ permissions_requested_by_package = \
 list-permissions-requested-by-package-%:
 	@echo $(call permissions_requested_by_package,$*)
 
+permissions_granted_to_package = \
+	$(sort $(shell $(CURDIR)/libexec/granted_permissions $(1)))
+.PHONY: list-permissions-granted-to-package-%
+list-permissions-granted-to-package-%:
+	@echo $(call permissions_granted_to_package,$*)
+
 # From https://source.android.com/devices/tech/config/perms-whitelist
 # > Privileged apps are system apps that are located in a `priv-app` directory on one of the system image partitions.
 privileged_permissions_for_package = \

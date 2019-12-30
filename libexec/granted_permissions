@@ -1,0 +1,33 @@
+#!/bin/sh
+
+GRANTED_MARKER="granted=true"
+
+dump_pkg_info() {
+    adb shell dumpsys package "${1:?}"
+}
+
+keep_only_granted_lines() {
+    grep -F "${GRANTED_MARKER:?}"
+}
+
+# Sample input lines:
+# ```
+# android.permission.MODIFY_PHONE_STATE: granted=true
+#   android.permission.READ_CALENDAR: granted=true, flags=[ SYSTEM_FIXED GRANTED_BY_DEFAULT ]
+# ```
+extract_granted_permission_from_granted_line() {
+    sed 's/^[[:space:]]*\([^[:space:]:]*\):.*$/\1/'
+}
+
+unique() {
+    sort -u
+}
+
+P="${1:?}"
+
+Dump="$(dump_pkg_info "${P:?}")" || exit 1
+
+echo "${Dump:?}" \
+    | keep_only_granted_lines \
+    | extract_granted_permission_from_granted_line \
+    | unique
