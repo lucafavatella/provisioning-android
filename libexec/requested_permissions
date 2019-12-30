@@ -49,6 +49,9 @@ P="${1:?}"
 
 Dump="$(dump_pkg_info "${P:?}")" || exit 1
 
+{ test 1 -eq $(echo "${Dump:?}" | grep -cF " Package [${P:?}]"); } \
+    || exit 1  # Assumption: Exactly one package per dump.
+
 RelevantTail="$(echo "${Dump:?}" \
                      | keep_from_requested_perms \
                      | keep_only_non_empty_lines)"
