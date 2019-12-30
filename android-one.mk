@@ -417,7 +417,7 @@ revoke-dangerous-permissions-from-package-%: \
 
 .PHONY: revoke-privileged-permissions-from-package-%
 revoke-privileged-permissions-from-package-%: \
-	$$(foreach p,$$(call privileged_permissions_by_package,$$*),revoke-permission-$$(p)-from-$$*-package) \
+	$$(foreach p,$$(call privileged_permissions_for_package,$$*),revoke-permission-$$(p)-from-$$*-package) \
 	;
 
 # ---- Revoke Special Accesses: Automatic (Secondary Expansion) ----
