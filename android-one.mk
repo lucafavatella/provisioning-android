@@ -120,6 +120,10 @@ enabled_packages = \
 .PHONY: list-enabled-packages
 list-enabled-packages: ; @echo $(enabled_packages)
 
+disabled_packages = $(filter-out $(enabled_packages),$(packages))
+.PHONY: list-disabled-packages
+list-disabled-packages: ; @echo $(disabled_packages)
+
 filter_packages_by_prefix = $(filter $(1) $(1).%,$(2))
 
 .PHONY: list-packages-by-prefix-%
