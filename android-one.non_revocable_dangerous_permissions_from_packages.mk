@@ -100,4 +100,5 @@ non_revocable_dangerous_permissions_from_packages = \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-org.codeaurora.bluetooth \
 	android.permission.CAMERA-from-org.codeaurora.ims \
 	android.permission.READ_EXTERNAL_STORAGE-from-org.codeaurora.ims \
-	android.permission.READ_PHONE_STATE-from-org.codeaurora.ims
+	android.permission.READ_PHONE_STATE-from-org.codeaurora.ims \
+	
