@@ -1,4 +1,4 @@
-non_revocable_permissions_from_packages = \
+non_revocable_dangerous_permissions_from_packages = \
 	android.permission.GET_ACCOUNTS-from-android \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.android.bluetooth \
 	android.permission.GET_ACCOUNTS-from-com.android.bluetooth \

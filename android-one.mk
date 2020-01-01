@@ -48,7 +48,9 @@ revocable_special_permissions = \
 	android.permission.REQUEST_INSTALL_PACKAGES \
 	android.permission.CHANGE_WIFI_STATE
 
-include android-one.non_revocable_permissions_from_packages.mk
+include android-one.non_revocable_dangerous_permissions_from_packages.mk
+non_revocable_permissions_from_packages = \
+	$(sort $(non_revocable_dangerous_permissions_from_packages))
 
 # ---- Android Variables: Special Accesses ----
 
