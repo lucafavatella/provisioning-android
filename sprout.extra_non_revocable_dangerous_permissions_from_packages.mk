@@ -1,4 +1,4 @@
-EXTRA_NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES = \
+extra_non_revocable_dangerous_permissions_from_packages = \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.hmdglobal.app.activation \
 	android.permission.ACCESS_FINE_LOCATION-from-com.hmdglobal.app.activation \
 	android.permission.READ_PHONE_STATE-from-com.hmdglobal.app.activation \
@@ -19,5 +19,4 @@ EXTRA_NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES = \
 	android.permission.CAMERA-from-com.wos.face.service \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.wos.face.service \
 	android.permission.RECORD_AUDIO-from-com.wos.face.service \
-	android.permission.WRITE_EXTERNAL_STORAGE-from-com.wos.face.service \
-	$(non_revocable_permissions_from_qualcomm_packages)
+	android.permission.WRITE_EXTERNAL_STORAGE-from-com.wos.face.service

@@ -1,4 +1,4 @@
-non_revocable_permissions_from_qualcomm_packages = \
+non_revocable_dangerous_permissions_from_qualcomm_packages = \
 	android.permission.CALL_PHONE-from-com.qti.confuridialer \
 	android.permission.PROCESS_OUTGOING_CALLS-from-com.qti.confuridialer \
 	android.permission.READ_CALL_LOG-from-com.qti.confuridialer \
