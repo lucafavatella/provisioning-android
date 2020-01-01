@@ -438,7 +438,7 @@ revoke-privileged-permissions-from-package-%: \
 			$$(privileged_permissions_not_to_be_revoked_from_package_$$*), \
 			$$(call privileged_permissions_requested_by_package,$$*)), \
 		revoke-permission-$$(p)-from-$$*-package) \
-	;
+	; $(warning Revoking of privileged permissions does not survive reboot)
 
 # ---- Revoke Special Accesses: Automatic (Secondary Expansion) ----
 
