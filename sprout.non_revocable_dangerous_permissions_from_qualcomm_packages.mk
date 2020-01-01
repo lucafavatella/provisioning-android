@@ -38,4 +38,5 @@ non_revocable_dangerous_permissions_from_qualcomm_packages = \
 	android.permission.WRITE_CONTACTS-from-com.qualcomm.simcontacts \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.quicinc.cne.CNEService \
 	android.permission.ACCESS_FINE_LOCATION-from-com.quicinc.cne.CNEService \
-	android.permission.READ_PHONE_STATE-from-com.quicinc.cne.CNEService
+	android.permission.READ_PHONE_STATE-from-com.quicinc.cne.CNEService \
+	

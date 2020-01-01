@@ -19,4 +19,5 @@ extra_non_revocable_dangerous_permissions_from_packages = \
 	android.permission.CAMERA-from-com.wos.face.service \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.wos.face.service \
 	android.permission.RECORD_AUDIO-from-com.wos.face.service \
-	android.permission.WRITE_EXTERNAL_STORAGE-from-com.wos.face.service
+	android.permission.WRITE_EXTERNAL_STORAGE-from-com.wos.face.service \
+	
