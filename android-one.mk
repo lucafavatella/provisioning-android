@@ -122,9 +122,15 @@ enabled_packages = \
 .PHONY: list-enabled-packages
 list-enabled-packages: ; @echo $(enabled_packages)
 
+.PHONY: is-package-%-enabled
+is-package-%-enabled: ; $(if $(filter $*,$(enabled_packages)),true,false)
+
 disabled_packages = $(filter-out $(enabled_packages),$(packages))
 .PHONY: list-disabled-packages
 list-disabled-packages: ; @echo $(disabled_packages)
+
+.PHONY: is-package-%-disabled
+is-package-%-disabled: ; $(if $(filter $*,$(disabled_packages)),true,false)
 
 filter_packages_by_prefix = $(filter $(1) $(1).%,$(2))
 
@@ -171,8 +177,15 @@ disable-package-%: ; $(ADB) shell pm disable-user --user $(ADB_USER_ID) $*
 
 .PHONY: disable-google-packages
 disable-google-packages: \
-	$(patsubst %,disable-package-%,$(google_packages_to_be_disabled)) \
-	;
+	$(patsubst %,disable-package-%,$(google_packages_to_be_disabled))
+	for P in $(google_packages_to_be_disabled); do \
+		$(MAKE) -s is-package-$${P:?}-disabled \
+			|| { echo $${P:?}; exit 1; } \
+	; done
+	for P in $(google_packages_not_to_be_disabled); do \
+		$(MAKE) -s is-package-$${P:?}-enabled \
+			|| { echo $${P:?}; exit 1; } \
+	; done
 
 # ---- List Permissions across Packages ----
 
