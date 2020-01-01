@@ -172,13 +172,7 @@ disable-google-packages: \
 	$(patsubst %,disable-package-%,$(google_packages_to_be_disabled)) \
 	;
 
-# ---- List Permissions ----
-
-permissions_requested_by_package = \
-	$(sort $(shell $(CURDIR)/libexec/requested_permissions $(1)))
-.PHONY: list-permissions-requested-by-package-%
-list-permissions-requested-by-package-%:
-	@echo $(call permissions_requested_by_package,$*)
+# ---- List Permissions across Packages ----
 
 adb_ls_permissions = $(ADB) shell pm list permissions $(1)
 filter_permissions = $(filter permission:%,$(1))
@@ -201,6 +195,14 @@ dangerous_user_permissions = \
 	$(filter $(user_permissions),$(dangerous_permissions))
 .PHONY: list-dangerous-user-permissions
 list-dangerous-user-permissions: ; @echo $(dangerous_user_permissions)
+
+# ---- List per-Package Permissions ----
+
+permissions_requested_by_package = \
+	$(sort $(shell $(CURDIR)/libexec/requested_permissions $(1)))
+.PHONY: list-permissions-requested-by-package-%
+list-permissions-requested-by-package-%:
+	@echo $(call permissions_requested_by_package,$*)
 
 # From https://source.android.com/devices/tech/config/perms-whitelist
 # > Privileged apps are system apps that are located in a `priv-app` directory on one of the system image partitions.
