@@ -218,16 +218,6 @@ privileged_permissions_for_package = \
 list-privileged-permissions-for-package-%:
 	@echo $(call privileged_permissions_for_package,$*)
 
-.PHONY: long-list-privileged-permissions-for-package-%
-long-list-privileged-permissions-for-package-%:
-	@printf "Privileged permissions for package %b:\n\t" "$*"
-	@$(MAKE) list-privileged-permissions-for-package-$*
-
-.PHONY: list-privileged-permissions-for-all-enabled-packages
-list-privileged-permissions-for-all-enabled-packages: \
-	$(patsubst %,long-list-privileged-permissions-for-package-%,$(enabled_packages)) \
-	;
-
 # ---- Revoke Permissions ----
 # See also secondary expansion.
 
