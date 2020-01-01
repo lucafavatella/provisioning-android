@@ -218,6 +218,14 @@ privileged_permissions_for_package = \
 list-privileged-permissions-for-package-%:
 	@echo $(call privileged_permissions_for_package,$*)
 
+privileged_permissions_requested_by_package = \
+	$(filter \
+		$(call permissions_requested_by_package,$(1)), \
+		$(call privileged_permissions_for_package,$(1)))
+.PHONY: list-privileged-permissions-requested-by-package-%
+list-privileged-permissions-requested-by-package-%:
+	@echo $(call privileged_permissions_requested_by_package,$*)
+
 # ---- Revoke Permissions ----
 # See also secondary expansion.
 
@@ -244,6 +252,11 @@ $(targets_for_not_revoking_non_revocable_permissions_from_packages): \
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
 	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(packages)) \
+	;
+
+.PHONY: revoke-privileged-permissions-from-all-packages
+revoke-privileged-permissions-from-all-packages: \
+	$(patsubst %,revoke-privileged-permissions-from-package-%,$(packages)) \
 	;
 
 # ---- List Special Accesses ----
@@ -413,9 +426,16 @@ revoke-dangerous-permissions-from-package-%: \
 	$$(foreach p,$$(filter $$(call permissions_requested_by_package,$$*),$$(dangerous_permissions)),revoke-permission-$$(p)-from-$$*-package) \
 	;
 
+privileged_permissions_not_to_be_revoked_from_package_com.android.shell = \
+	android.permission.DUMP
 .PHONY: revoke-privileged-permissions-from-package-%
 revoke-privileged-permissions-from-package-%: \
-	$$(foreach p,$$(call privileged_permissions_for_package,$$*),revoke-permission-$$(p)-from-$$*-package) \
+	$$(foreach \
+		p, \
+		$$(filter-out \
+			$$(privileged_permissions_not_to_be_revoked_from_package_$$*), \
+			$$(call privileged_permissions_requested_by_package,$$*)), \
+		revoke-permission-$$(p)-from-$$*-package) \
 	;
 
 # ---- Revoke Special Accesses: Automatic (Secondary Expansion) ----
