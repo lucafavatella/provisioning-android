@@ -263,7 +263,7 @@ revoke-privileged-permissions-from-all-packages: \
 
 android-one.non_revocable_dangerous_permissions_from_packages.mk:
 	$(warning This is a development-only target: you are on your own)
-	> $@
+	echo > $@
 	$(MAKE) $@.tmp
 	mv $@.tmp $@
 
