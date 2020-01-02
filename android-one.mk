@@ -212,9 +212,14 @@ user_permissions = $(sort $(call ls_permissions,-u))
 list-user-permissions: ; @echo $(user_permissions)
 
 dangerous_user_permissions = \
-	$(filter $(user_permissions),$(dangerous_permissions))
+	$(filter $(dangerous_permissions),$(user_permissions))
 .PHONY: list-dangerous-user-permissions
 list-dangerous-user-permissions: ; @echo $(dangerous_user_permissions)
+
+non_dangerous_user_permissions = \
+	$(filter-out $(dangerous_permissions),$(user_permissions))
+.PHONY: list-non-dangerous-user-permissions
+list-non-dangerous-user-permissions: ; @echo $(non_dangerous_user_permissions)
 
 # ---- List per-Package Permissions ----
 
