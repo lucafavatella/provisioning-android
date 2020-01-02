@@ -408,6 +408,10 @@ revoke-special-access-data_saver-from-all-packages: \
 	$(patsubst %,revoke-special-access-data_saver-from-package-uid-%,$(data_background_whitelist_package_uids)) \
 	;
 
+.PHONY: is-special-access-data_saver-revoked-from-all-packages
+is-special-access-data_saver-revoked-from-all-packages:
+	$(if $(data_background_whitelist_package_uids),@false,@true)
+
 .PHONY: revoke-revocable-special-accesses-from-all-packages
 revoke-revocable-special-accesses-from-all-packages: \
 	$(patsubst %,revoke-revocable-special-permissions-from-package-%,$(packages)) \
