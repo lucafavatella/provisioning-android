@@ -187,6 +187,10 @@ disable-google-packages: \
 			|| { echo $${P:?}; exit 1; } \
 	; done
 
+.PHONY: clear-package-com.android.chrome
+clear-package-com.android.chrome: clear-package-%:
+	adb shell pm clear $*
+
 # ---- List Permissions across Packages ----
 
 adb_ls_permissions = $(ADB) shell pm list permissions $(1)
