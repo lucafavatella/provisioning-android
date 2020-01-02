@@ -24,6 +24,12 @@ manually-provision-android-one: \
 	prompt-managing-default-apps \
 	;
 
+.PHONY: is-android-one-provisioned
+is-android-one-provisioned: \
+	are-google-packages-disabled-or-enabled-correctly \
+	is-special-access-data_saver-revoked-from-all-packages \
+	; $(warning This target performs only partial checks)
+
 # ==== Internal Rules and Variables ====
 
 # ---- Android Variables: Packages ----
