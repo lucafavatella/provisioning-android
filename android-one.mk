@@ -418,9 +418,14 @@ revoke-special-access-data_saver-from-all-packages: \
 is-special-access-data_saver-revoked-from-all-packages:
 	$(if $(data_background_whitelist_package_uids),@false,@true)
 
+.PHONY: revoke-revocable-special-permissions-from-all-packages
+revoke-revocable-special-permissions-from-all-packages: \
+	$(patsubst %,revoke-revocable-special-permissions-from-package-%,$(packages)) \
+	;
+
 .PHONY: revoke-revocable-special-accesses-from-all-packages
 revoke-revocable-special-accesses-from-all-packages: \
-	$(patsubst %,revoke-revocable-special-permissions-from-package-%,$(packages)) \
+	revoke-revocable-special-permissions-from-all-packages \
 	$(patsubst %,revoke-special-access-%-from-all-packages,$(revocable_special_accesses)) \
 	;
 
