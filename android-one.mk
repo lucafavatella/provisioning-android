@@ -9,13 +9,13 @@ ADB_USER_ID = 0
 
 .PHONY: automatically-provision-android-one
 automatically-provision-android-one: \
+	install-logcat \
 	install-keyboard \
+	install-browser \
 	disable-google-packages \
 	revoke-revocable-special-accesses-from-all-packages \
 	revoke-dangerous-permissions-from-all-packages \
 	disable-nfc \
-	install-logcat \
-	install-browser \
 	; $(info Assumption: Android One systems are similar across Original Equipment Manufacturers)
 
 .PHONY: manually-provision-android-one
