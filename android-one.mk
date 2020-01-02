@@ -14,6 +14,7 @@ automatically-provision-android-one: \
 	revoke-dangerous-permissions-from-all-packages \
 	disable-nfc \
 	install-logcat \
+	install-browser \
 	; $(info Assumption: Android One systems are similar across Original Equipment Manufacturers)
 
 .PHONY: manually-provision-android-one
@@ -452,8 +453,8 @@ install-com.dp.logcatapp.apk: install-%.apk: var/cache/fdroidcl/apks/%.apk
 	adb install --user current $<
 	adb shell pm grant --user $(ADB_USER_ID) $* android.permission.READ_LOGS
 
-.PHONY: install-mozilla
-install-mozilla: install-org.mozilla.fennec_fdroid.apk
+.PHONY: install-browser
+install-browser: install-org.mozilla.fennec_fdroid.apk
 
 .PHONY: install-%.apk
 install-%.apk: var/cache/fdroidcl/apks/%.apk
