@@ -9,6 +9,7 @@ ADB_USER_ID = 0
 
 .PHONY: automatically-provision-android-one
 automatically-provision-android-one: \
+	install-keyboard \
 	disable-google-packages \
 	revoke-revocable-special-accesses-from-all-packages \
 	revoke-dangerous-permissions-from-all-packages \
@@ -34,7 +35,6 @@ google_packages_not_to_be_disabled = \
 	com.google.android.deskclock \
 	com.google.android.dialer \
 	com.google.android.gms \
-	com.google.android.inputmethod.latin \
 	com.google.android.packageinstaller
 google_packages_to_be_disabled = \
 	com.android.vending \
@@ -444,6 +444,9 @@ disable-nfc:
 	$(ADB) shell svc nfc disable
 
 # ---- Install Packages ----
+
+.PHONY: install-keyboard
+install-keyboard: install-com.menny.android.anysoftkeyboard.apk ;
 
 .PHONY: install-logcat
 install-logcat: install-com.dp.logcatapp.apk ;
