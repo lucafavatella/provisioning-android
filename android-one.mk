@@ -27,7 +27,9 @@ manually-provision-android-one: \
 .PHONY: is-android-one-provisioned
 is-android-one-provisioned: \
 	are-google-packages-disabled-or-enabled-correctly \
+	are-revocable-special-permissions-revoked-from-all-packages \
 	is-special-access-data_saver-revoked-from-all-packages \
+	are-dangerous-permissions-revoked-from-all-packages \
 	; $(warning This target performs only partial checks)
 
 # ==== Internal Rules and Variables ====
@@ -279,9 +281,31 @@ $(targets_for_not_revoking_non_revocable_permissions_from_packages): \
 	revoke-permission-%-package:
 	$(info Ignoring revoking permission $(call revoke_perm,$*) from package $(call revoke_pkg,$*))
 
+revoked_perm_pkg_sep = -revoked-from-
+revoked_pkg = $(word 2,$(subst $(revoked_perm_pkg_sep), ,$(1)))
+revoked_perm = $(word 1,$(subst $(revoked_perm_pkg_sep), ,$(1)))
+
+# XXX Review. Doc mentions `allow, ignore, deny, or default`
+is_revocable_special_permission_granted_to_package = \
+	$(ADB) shell appops get $(1) $(patsubst android.permission.%,%,$(2)) | grep -q -e allow
+.PHONY: is-permission-%-package
+is-permission-%-package:
+	$(if \
+		$(filter $(revocable_special_permissions),$(call revoked_perm,$*)), \
+		! $(call is_revocable_special_permission_granted_to_package,$(call revoked_pkg,$*),$(call revoked_perm,$*)), \
+		$(if \
+			$(filter $(call revoked_perm,$*),$(call permissions_granted_to_package,$(call revoked_pkg,$*))), \
+			@false, \
+			@true))
+
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
 	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(packages)) \
+	;
+
+.PHONY: are-dangerous-permissions-revoked-from-all-packages
+are-dangerous-permissions-revoked-from-all-packages: \
+	$(patsubst %,are-dangerous-permissions-revoked-from-package-%,$(packages)) \
 	;
 
 .PHONY: revoke-non-dangerous-user-permissions-from-all-packages
@@ -423,6 +447,11 @@ revoke-revocable-special-permissions-from-all-packages: \
 	$(patsubst %,revoke-revocable-special-permissions-from-package-%,$(packages)) \
 	;
 
+.PHONY: are-revocable-special-permissions-revoked-from-all-packages
+are-revocable-special-permissions-revoked-from-all-packages: \
+	$(patsubst %,are-revocable-special-permissions-revoked-from-package-%,$(packages)) \
+	;
+
 .PHONY: revoke-revocable-special-accesses-from-all-packages
 revoke-revocable-special-accesses-from-all-packages: \
 	revoke-revocable-special-permissions-from-all-packages \
@@ -505,6 +534,26 @@ revoke-dangerous-permissions-from-package-%: \
 	$$(foreach p,$$(filter $$(call permissions_requested_by_package,$$*),$$(dangerous_permissions)),revoke-permission-$$(p)-from-$$*-package) \
 	;
 
+per_package_targets_for_not_revoking_non_revocable_permissions_from_packages = \
+	$(filter \
+		revoke-permission-%$(revoke_perm_pkg_sep)$(1)-package, \
+		$(targets_for_not_revoking_non_revocable_permissions_from_packages))
+per_package_non_revocable_permissions = \
+	$(patsubst \
+		revoke-permission-%-from-$(1)-package,%, \
+		$(call per_package_targets_for_not_revoking_non_revocable_permissions_from_packages,$(1)))
+.PHONY: are-dangerous-permissions-revoked-from-package-%
+are-dangerous-permissions-revoked-from-package-%: \
+	$$(foreach \
+		p, \
+		$$(filter-out \
+			$$(call per_package_non_revocable_permissions,$$*), \
+			$$(filter \
+				$$(call permissions_requested_by_package,$$*), \
+				$$(dangerous_permissions))), \
+		is-permission-$$(p)-revoked-from-$$*-package) \
+	;
+
 .PHONY: revoke-non-dangerous-user-permissions-from-package-%
 revoke-non-dangerous-user-permissions-from-package-%: \
 	$$(foreach p,$$(filter $$(call permissions_requested_by_package,$$*),$$(non_dangerous_user_permissions)),revoke-permission-$$(p)-from-$$*-package) \
@@ -527,4 +576,9 @@ revoke-privileged-permissions-from-package-%: \
 .PHONY: revoke-revocable-special-permissions-from-package-%
 revoke-revocable-special-permissions-from-package-%: \
 	$$(foreach p,$$(filter $$(call permissions_requested_by_package,$$*),$$(revocable_special_permissions)),revoke-permission-$$(p)-from-$$*-package) \
+	;
+
+.PHONY: are-revocable-special-permissions-revoked-from-package-%
+are-revocable-special-permissions-revoked-from-package-%: \
+	$$(foreach p,$$(filter $$(call permissions_requested_by_package,$$*),$$(revocable_special_permissions)),is-permission-$$(p)-revoked-from-$$*-package) \
 	;
