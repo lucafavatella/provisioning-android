@@ -179,14 +179,13 @@ disable-package-%: ; $(ADB) shell pm disable-user --user $(ADB_USER_ID) $*
 .PHONY: disable-google-packages
 disable-google-packages: \
 	$(patsubst %,disable-package-%,$(google_packages_to_be_disabled))
-	for P in $(google_packages_to_be_disabled); do \
-		$(MAKE) -s is-package-$${P:?}-disabled \
-			|| { echo $${P:?}; exit 1; } \
-	; done
-	for P in $(google_packages_not_to_be_disabled); do \
-		$(MAKE) -s is-package-$${P:?}-enabled \
-			|| { echo $${P:?}; exit 1; } \
-	; done
+	$(MAKE) -s are-google-packages-disabled-or-enabled-correctly
+
+.PHONY: are-google-packages-disabled-or-enabled-correctly
+are-google-packages-disabled-or-enabled-correctly: \
+	$(patsubst %,is-package-%-disabled,$(google_packages_to_be_disabled)) \
+	$(patsubst %,is-package-%-enabled,$(google_packages_not_to_be_disabled)) \
+	;
 
 .PHONY: clear-package-com.android.chrome
 clear-package-com.android.chrome: clear-package-%:
