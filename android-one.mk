@@ -279,6 +279,11 @@ revoke-dangerous-permissions-from-all-packages: \
 	$(patsubst %,revoke-dangerous-permissions-from-package-%,$(packages)) \
 	;
 
+.PHONY: revoke-non-dangerous-user-permissions-from-all-packages
+revoke-non-dangerous-user-permissions-from-all-packages: \
+	$(patsubst %,revoke-non-dangerous-user-permissions-from-package-%,$(packages)) \
+	;
+
 .PHONY: revoke-privileged-permissions-from-all-packages
 revoke-privileged-permissions-from-all-packages: \
 	$(patsubst %,revoke-privileged-permissions-from-package-%,$(packages)) \
@@ -481,6 +486,11 @@ var/cache/fdroidcl/apks/%.apk: ; $(MAKE) -f Makefile.fdroidcl $@
 .PHONY: revoke-dangerous-permissions-from-package-%
 revoke-dangerous-permissions-from-package-%: \
 	$$(foreach p,$$(filter $$(call permissions_requested_by_package,$$*),$$(dangerous_permissions)),revoke-permission-$$(p)-from-$$*-package) \
+	;
+
+.PHONY: revoke-non-dangerous-user-permissions-from-package-%
+revoke-non-dangerous-user-permissions-from-package-%: \
+	$$(foreach p,$$(filter $$(call permissions_requested_by_package,$$*),$$(non_dangerous_user_permissions)),revoke-permission-$$(p)-from-$$*-package) \
 	;
 
 privileged_permissions_not_to_be_revoked_from_package_com.android.shell = \
