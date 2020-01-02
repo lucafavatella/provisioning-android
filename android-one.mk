@@ -445,9 +445,19 @@ disable-nfc:
 # ---- Install Packages ----
 
 .PHONY: install-logcat
-install-logcat: var/cache/fdroidcl/apks/com.dp.logcatapp.apk
+install-logcat: install-com.dp.logcatapp.apk ;
+
+.PHONY: install-com.dp.logcatapp.apk
+install-com.dp.logcatapp.apk: install-%.apk: var/cache/fdroidcl/apks/%.apk
 	adb install --user current $<
-	adb shell pm grant --user $(ADB_USER_ID) com.dp.logcatapp android.permission.READ_LOGS
+	adb shell pm grant --user $(ADB_USER_ID) $* android.permission.READ_LOGS
+
+.PHONY: install-mozilla
+install-mozilla: install-org.mozilla.fennec_fdroid.apk
+
+.PHONY: install-%.apk
+install-%.apk: var/cache/fdroidcl/apks/%.apk
+	adb install --user current $<
 
 var/cache/fdroidcl/apks/%.apk: ; $(MAKE) -f Makefile.fdroidcl $@
 
