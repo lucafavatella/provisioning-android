@@ -453,6 +453,9 @@ prompt-managing-default-apps:
 disable-nfc:
 	$(ADB) shell svc nfc disable
 
+.PHONY: reboot
+reboot: ; $(ADB) $@
+
 # ---- Install Packages ----
 
 .PHONY: install-keyboard
