@@ -448,6 +448,9 @@ revoke-special-access-data_saver-from-all-packages: \
 is-special-access-data_saver-revoked-from-all-packages:
 	$(if $(data_background_whitelist_package_uids),@false,@true)
 
+ifneq ($(strip $(filter-out $(permissions),$(revocable_special_permissions))),)
+$(error Misconfigured revocable special permission(s) $(filter-out $(permissions),$(revocable_special_permissions)))
+endif
 .PHONY: revoke-revocable-special-permissions-from-all-packages
 revoke-revocable-special-permissions-from-all-packages: \
 	$(patsubst %,revoke-revocable-special-permissions-from-package-%,$(packages)) \
