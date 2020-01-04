@@ -339,8 +339,12 @@ list-dangerous-permissions-revoked-from-package-%:
 
 .PHONY: long-list-dangerous-permissions-revoked-from-package-%
 long-list-dangerous-permissions-revoked-from-package-%:
-	@printf "Dangerous permissions revoked from package %b:\n\t" "$*"
-	@$(MAKE) list-dangerous-permissions-revoked-from-package-$*
+	@X="$$($(MAKE) -s list-dangerous-permissions-revoked-from-package-$*)" \
+		&& { test -z "$${X?}" \
+			|| printf "%b %b:\n\t%b\n" \
+				"Dangerous permissions revoked from package" \
+				"$*" \
+				"$${X:?}"; }
 
 .PHONY: list-dangerous-permissions-revoked-from-enabled-packages
 list-dangerous-permissions-revoked-from-enabled-packages: \
