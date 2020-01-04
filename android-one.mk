@@ -327,6 +327,26 @@ are-dangerous-permissions-revoked-from-all-packages: \
 	$(patsubst %,are-dangerous-permissions-revoked-from-package-%,$(packages)) \
 	;
 
+permissions_not_granted_to_package = \
+	$(filter-out \
+		$(call permissions_granted_to_package,$(1)), \
+		$(call permissions_requested_by_package,$(1)))
+.PHONY: list-dangerous-permissions-revoked-from-package-%
+list-dangerous-permissions-revoked-from-package-%:
+	@echo $(filter \
+		$(dangerous_permissions), \
+		$(call permissions_not_granted_to_package,$*))
+
+.PHONY: long-list-dangerous-permissions-revoked-from-package-%
+long-list-dangerous-permissions-revoked-from-package-%:
+	@printf "Dangerous permissions revoked from package %b:\n\t" "$*"
+	@$(MAKE) list-dangerous-permissions-revoked-from-package-$*
+
+.PHONY: list-dangerous-permissions-revoked-from-enabled-packages
+list-dangerous-permissions-revoked-from-enabled-packages: \
+	$(patsubst %,long-list-dangerous-permissions-revoked-from-package-%,$(enabled_packages)) \
+	;
+
 .PHONY: revoke-non-dangerous-user-permissions-from-all-packages
 revoke-non-dangerous-user-permissions-from-all-packages: \
 	$(patsubst %,revoke-non-dangerous-user-permissions-from-package-%,$(packages)) \
