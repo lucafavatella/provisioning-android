@@ -282,6 +282,19 @@ targets_for_not_revoking_non_revocable_permissions_from_packages = \
 	$(patsubst %,revoke-permission-%-package, \
 		$(non_revocable_permissions_from_packages) \
 		$(EXTRA_NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES))
+ifeq ($(strip $(W)),all)
+# This is slow hence protect it with conditional on environment variable `W`.
+# XXX Wrap this in a target - setting conditional?
+$(foreach \
+	t, \
+	$(non_revocable_permissions_from_packages) \
+		$(EXTRA_NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES), \
+	$(if \
+		$(filter-out \
+			$(call permissions_requested_by_package,$(call revoke_pkg,$(t))), \
+			$(call revoke_perm,$(t))), \
+		$(error Misconfigured permission $(call revoke_perm,$(t)) not to be revoked from package $(call revoke_pkg,$(t)))))
+endif
 .PHONY: $(targets_for_not_revoking_non_revocable_permissions_from_packages)
 $(targets_for_not_revoking_non_revocable_permissions_from_packages): \
 	revoke-permission-%-package:
