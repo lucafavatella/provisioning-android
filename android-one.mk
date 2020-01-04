@@ -231,6 +231,7 @@ list-dangerous-user-permissions: ; @echo $(dangerous_user_permissions)
 
 non_dangerous_user_permissions = \
 	$(filter-out $(dangerous_permissions),$(user_permissions))
+# Non-dangerous user permissions cannot be revoked.
 .PHONY: list-non-dangerous-user-permissions
 list-non-dangerous-user-permissions: ; @echo $(non_dangerous_user_permissions)
 
@@ -349,31 +350,6 @@ long-list-dangerous-permissions-revoked-from-package-%:
 .PHONY: list-dangerous-permissions-revoked-from-enabled-packages
 list-dangerous-permissions-revoked-from-enabled-packages: \
 	$(patsubst %,long-list-dangerous-permissions-revoked-from-package-%,$(enabled_packages)) \
-	;
-
-.PHONY: list-non-dangerous-user-permissions-revoked-from-package-%
-list-non-dangerous-user-permissions-revoked-from-package-%:
-	@echo $(filter \
-		$(non_dangerous_user_permissions), \
-		$(call permissions_not_granted_to_package,$*))
-
-.PHONY: long-list-non-dangerous-user-permissions-revoked-from-package-%
-long-list-non-dangerous-user-permissions-revoked-from-package-%:
-	@X="$$($(MAKE) -s list-non-dangerous-user-permissions-revoked-from-package-$*)" \
-		&& { test -z "$${X?}" \
-			|| printf "%b %b:\n\t%b\n" \
-				"Non-dangerous user permissions revoked from package" \
-				"$*" \
-				"$${X:?}"; }
-
-.PHONY: list-non-dangerous-user-permissions-revoked-from-enabled-packages
-list-non-dangerous-user-permissions-revoked-from-enabled-packages: \
-	$(patsubst %,long-list-non-dangerous-user-permissions-revoked-from-package-%,$(enabled_packages)) \
-	;
-
-.PHONY: revoke-non-dangerous-user-permissions-from-all-packages
-revoke-non-dangerous-user-permissions-from-all-packages: \
-	$(patsubst %,revoke-non-dangerous-user-permissions-from-package-%,$(packages)) \
 	;
 
 .PHONY: revoke-privileged-permissions-from-all-packages
@@ -618,11 +594,6 @@ are-dangerous-permissions-revoked-from-package-%: \
 				$$(call permissions_requested_by_package,$$*), \
 				$$(dangerous_permissions))), \
 		is-permission-$$(p)-revoked-from-$$*-package) \
-	;
-
-.PHONY: revoke-non-dangerous-user-permissions-from-package-%
-revoke-non-dangerous-user-permissions-from-package-%: \
-	$$(foreach p,$$(filter $$(call permissions_requested_by_package,$$*),$$(non_dangerous_user_permissions)),revoke-permission-$$(p)-from-$$*-package) \
 	;
 
 privileged_permissions_not_to_be_revoked_from_package_com.android.shell = \
