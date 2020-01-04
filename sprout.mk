@@ -9,9 +9,12 @@ include sprout.extra_non_revocable_dangerous_permissions_from_packages.mk
 EXTRA_NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES = \
 	$(non_revocable_dangerous_permissions_from_qualcomm_packages) \
 	$(extra_non_revocable_dangerous_permissions_from_packages)
+sprout_packages_to_be_disabled = \
+	com.hmdglobal.app.fmradio \
+	com.wos.face.service
 .PHONY: automatically-provision-sprout
 automatically-provision-sprout: \
-	disable-package-com.hmdglobal.app.fmradio \
+	$(patsubst %,disable-package-%,$(sprout_packages_to_be_disabled)) \
 	automatically-provision-android-one \
 	;
 
