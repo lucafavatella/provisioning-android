@@ -351,6 +351,26 @@ list-dangerous-permissions-revoked-from-enabled-packages: \
 	$(patsubst %,long-list-dangerous-permissions-revoked-from-package-%,$(enabled_packages)) \
 	;
 
+.PHONY: list-non-dangerous-user-permissions-revoked-from-package-%
+list-non-dangerous-user-permissions-revoked-from-package-%:
+	@echo $(filter \
+		$(non_dangerous_user_permissions), \
+		$(call permissions_not_granted_to_package,$*))
+
+.PHONY: long-list-non-dangerous-user-permissions-revoked-from-package-%
+long-list-non-dangerous-user-permissions-revoked-from-package-%:
+	@X="$$($(MAKE) -s list-non-dangerous-user-permissions-revoked-from-package-$*)" \
+		&& { test -z "$${X?}" \
+			|| printf "%b %b:\n\t%b\n" \
+				"Non-dangerous user permissions revoked from package" \
+				"$*" \
+				"$${X:?}"; }
+
+.PHONY: list-non-dangerous-user-permissions-revoked-from-enabled-packages
+list-non-dangerous-user-permissions-revoked-from-enabled-packages: \
+	$(patsubst %,long-list-non-dangerous-user-permissions-revoked-from-package-%,$(enabled_packages)) \
+	;
+
 .PHONY: revoke-non-dangerous-user-permissions-from-all-packages
 revoke-non-dangerous-user-permissions-from-all-packages: \
 	$(patsubst %,revoke-non-dangerous-user-permissions-from-package-%,$(packages)) \
