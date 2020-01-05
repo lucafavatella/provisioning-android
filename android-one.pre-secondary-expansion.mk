@@ -14,6 +14,7 @@ automatically-provision-android-one: \
 	install-clock \
 	install-keyboard \
 	install-logcat \
+	install-messaging \
 	disable-google-packages \
 	revoke-revocable-special-accesses-from-all-packages \
 	revoke-dangerous-permissions-from-all-packages \
@@ -558,6 +559,9 @@ install-keyboard: install-com.menny.android.anysoftkeyboard.apk ;
 
 .PHONY: install-logcat
 install-logcat: install-com.dp.logcatapp.apk ;
+
+.PHONY: install-messaging
+install-messaging: install-org.smssecure.smssecure.apk
 
 .PHONY: install-com.dp.logcatapp.apk
 install-com.dp.logcatapp.apk: install-%.apk: var/cache/fdroidcl/apks/%.apk
