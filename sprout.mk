@@ -48,4 +48,10 @@ sprout.non_revocable_dangerous_permissions_from_qualcomm_packages.mk.tmp \
 
 # ====
 
-include android-one.mk
+include android-one.pre-secondary-expansion.mk
+
+# ---- Secondary Expansion ----
+
+.SECONDEXPANSION:
+
+include android-one.post-secondary-expansion.mk
