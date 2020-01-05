@@ -49,8 +49,43 @@ is-android-one-provisioned: \
 # ---- Android Variables: Packages ----
 
 google_packages_not_to_be_disabled = \
+	com.android.bips \
+	com.android.bluetooth \
+	com.android.cellbroadcastreceiver \
+	com.android.certinstaller \
 	com.android.chrome \
+	com.android.documentsui \
+	com.android.emergency \
+	com.android.externalstorage \
+	com.android.htmlviewer \
+	com.android.inputdevices \
+	com.android.keychain \
+	com.android.launcher3 \
+	com.android.location.fused \
+	com.android.nfc \
+	com.android.printspooler \
+	com.android.providers.blockednumber \
+	com.android.providers.calendar \
+	com.android.providers.contacts \
+	com.android.providers.downloads \
+	com.android.providers.downloads.ui \
+	com.android.providers.media \
+	com.android.providers.settings \
+	com.android.providers.telephony \
+	com.android.phone \
+	com.android.server.telecom \
+	com.android.settings \
+	com.android.settings.intelligence \
+	com.android.settings.overlay.cmcc \
+	com.android.settings.overlay.common \
 	com.android.shell \
+	com.android.storagemanager \
+	com.android.systemui \
+	com.android.systemui.overlay.cmcc \
+	com.android.systemui.overlay.ct \
+	com.android.systemui.theme.dark \
+	com.android.traceur \
+	com.android.vpndialogs \
 	com.google.android.configupdater \
 	com.google.android.deskclock \
 	com.google.android.dialer \
@@ -59,6 +94,7 @@ google_packages_not_to_be_disabled = \
 	com.google.android.packageinstaller
 google_packages_to_be_disabled = \
 	com.android.vending \
+	$(filter-out $(google_packages_not_to_be_disabled),$(call filter_packages_by_prefix,com.android,$(packages))) \
 	$(filter-out $(google_packages_not_to_be_disabled),$(call filter_packages_by_prefix,com.google,$(packages)))
 
 # ---- Android Variables: Permissions ----
