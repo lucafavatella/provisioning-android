@@ -12,6 +12,7 @@ automatically-provision-android-one: \
 	install-browser \
 	install-camera \
 	install-clock \
+	install-contacts \
 	install-keyboard \
 	install-logcat \
 	install-messaging \
@@ -553,6 +554,9 @@ install-camera: install-net.sourceforge.opencamera.apk
 
 .PHONY: install-clock
 install-clock: install-com.simplemobiletools.clock.apk
+
+.PHONY: install-contacts
+install-contacts: install-com.simplemobiletools.contacts.pro.apk
 
 .PHONY: install-keyboard
 install-keyboard: install-com.menny.android.anysoftkeyboard.apk ;
