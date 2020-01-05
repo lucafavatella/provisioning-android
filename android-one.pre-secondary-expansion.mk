@@ -9,10 +9,10 @@ ADB_USER_ID = 0
 
 .PHONY: automatically-provision-android-one
 automatically-provision-android-one: \
-	install-logcat \
-	install-keyboard \
 	install-browser \
 	install-camera \
+	install-keyboard \
+	install-logcat \
 	disable-google-packages \
 	revoke-revocable-special-accesses-from-all-packages \
 	revoke-dangerous-permissions-from-all-packages \
@@ -544,6 +544,12 @@ reboot: ; $(ADB) $@
 
 # ---- Install Packages ----
 
+.PHONY: install-browser
+install-browser: install-org.mozilla.fennec_fdroid.apk
+
+.PHONY: install-camera
+install-camera: install-net.sourceforge.opencamera.apk
+
 .PHONY: install-keyboard
 install-keyboard: install-com.menny.android.anysoftkeyboard.apk ;
 
@@ -554,12 +560,6 @@ install-logcat: install-com.dp.logcatapp.apk ;
 install-com.dp.logcatapp.apk: install-%.apk: var/cache/fdroidcl/apks/%.apk
 	adb install --user current $<
 	adb shell pm grant --user $(ADB_USER_ID) $* android.permission.READ_LOGS
-
-.PHONY: install-browser
-install-browser: install-org.mozilla.fennec_fdroid.apk
-
-.PHONY: install-camera
-install-camera: install-net.sourceforge.opencamera.apk
 
 .PHONY: install-%.apk
 install-%.apk: var/cache/fdroidcl/apks/%.apk
