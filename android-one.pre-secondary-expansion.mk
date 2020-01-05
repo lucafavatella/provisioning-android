@@ -11,6 +11,7 @@ ADB_USER_ID = 0
 automatically-provision-android-one: \
 	install-browser \
 	install-camera \
+	install-clock \
 	install-keyboard \
 	install-logcat \
 	disable-google-packages \
@@ -41,7 +42,6 @@ google_packages_not_to_be_disabled = \
 	com.android.chrome \
 	com.google.android.apps.work.oobconfig \
 	com.google.android.configupdater \
-	com.google.android.deskclock \
 	com.google.android.dialer \
 	com.google.android.gms \
 	com.google.android.packageinstaller
@@ -549,6 +549,9 @@ install-browser: install-org.mozilla.fennec_fdroid.apk
 
 .PHONY: install-camera
 install-camera: install-net.sourceforge.opencamera.apk
+
+.PHONY: install-clock
+install-clock: install-com.simplemobiletools.clock.apk
 
 .PHONY: install-keyboard
 install-keyboard: install-com.menny.android.anysoftkeyboard.apk ;
