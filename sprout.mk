@@ -10,11 +10,11 @@ EXTRA_NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES = \
 	$(non_revocable_dangerous_permissions_from_qualcomm_packages) \
 	$(extra_non_revocable_dangerous_permissions_from_packages)
 sprout_packages_to_be_disabled = \
-	com.hmdglobal.app.fmradio \
+	$(call filter_packages_by_prefix,com.hmdglobal,$(packages)) \
 	com.wos.face.service
 .PHONY: automatically-provision-sprout
 automatically-provision-sprout: \
-	$(patsubst %,disable-package-%,$(sprout_packages_to_be_disabled)) \
+	disable-hmd-packages \
 	automatically-provision-android-one \
 	;
 
@@ -46,9 +46,12 @@ sprout.non_revocable_dangerous_permissions_from_qualcomm_packages.mk.tmp \
 	; } > $@
 	$(MAKE) -s list-devices
 
-# ====
-
 include android-one.pre-secondary-expansion.mk
+
+.PHONY: disable-hmd-packages
+disable-hmd-packages: \
+	$(patsubst %,disable-package-%,$(sprout_packages_to_be_disabled)) \
+	;
 
 # ---- Secondary Expansion ----
 
