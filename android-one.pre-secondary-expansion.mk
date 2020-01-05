@@ -12,6 +12,7 @@ automatically-provision-android-one: \
 	install-logcat \
 	install-keyboard \
 	install-browser \
+	install-camera \
 	disable-google-packages \
 	revoke-revocable-special-accesses-from-all-packages \
 	revoke-dangerous-permissions-from-all-packages \
@@ -556,6 +557,9 @@ install-com.dp.logcatapp.apk: install-%.apk: var/cache/fdroidcl/apks/%.apk
 
 .PHONY: install-browser
 install-browser: install-org.mozilla.fennec_fdroid.apk
+
+.PHONY: install-camera
+install-camera: install-net.sourceforge.opencamera.apk
 
 .PHONY: install-%.apk
 install-%.apk: var/cache/fdroidcl/apks/%.apk
