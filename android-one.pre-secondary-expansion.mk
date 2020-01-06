@@ -13,7 +13,6 @@ automatically-provision-android-one: \
 	install-calculator \
 	install-calendar \
 	install-camera \
-	install-clock \
 	install-contacts \
 	install-file-manager \
 	install-gallery \
@@ -54,6 +53,7 @@ google_packages_not_to_be_disabled = \
 	com.android.shell \
 	com.google.android.apps.work.oobconfig \
 	com.google.android.configupdater \
+	com.google.android.deskclock \
 	com.google.android.dialer \
 	com.google.android.gms \
 	com.google.android.packageinstaller
@@ -567,9 +567,6 @@ install-calendar: install-com.simplemobiletools.calendar.pro.apk
 
 .PHONY: install-camera
 install-camera: install-net.sourceforge.opencamera.apk
-
-.PHONY: install-clock
-install-clock: install-com.simplemobiletools.clock.apk
 
 .PHONY: install-contacts
 install-contacts: install-com.simplemobiletools.contacts.pro.apk
