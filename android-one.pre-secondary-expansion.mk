@@ -23,6 +23,7 @@ automatically-provision-android-one: \
 	install-media-player \
 	install-messaging \
 	install-notes \
+	install-org.fdroid.fdroid.apk \
 	install-sensor-stats \
 	disable-google-packages \
 	revoke-revocable-special-accesses-from-all-packages \
