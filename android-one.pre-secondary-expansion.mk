@@ -19,6 +19,7 @@ automatically-provision-android-one: \
 	install-gallery \
 	install-keyboard \
 	install-logcat \
+	install-maps \
 	install-media-player \
 	install-messaging \
 	install-notes \
@@ -586,6 +587,9 @@ install-logcat: install-com.dp.logcatapp.apk ;
 install-com.dp.logcatapp.apk: install-%.apk: var/cache/fdroidcl/apks/%.apk
 	adb install --user current $<
 	adb shell pm grant --user $(ADB_USER_ID) $* android.permission.READ_LOGS
+
+.PHONY: install-maps
+install-maps: install-net.osmand.plus.apk
 
 .PHONY: install-media-player
 install-media-player: install-org.videolan.vlc.apk
