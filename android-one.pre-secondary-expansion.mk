@@ -10,6 +10,7 @@ ADB_USER_ID = 0
 .PHONY: automatically-provision-android-one
 automatically-provision-android-one: \
 	install-browser \
+	install-calendar \
 	install-camera \
 	install-clock \
 	install-contacts \
@@ -549,6 +550,9 @@ reboot: ; $(ADB) $@
 
 .PHONY: install-browser
 install-browser: install-org.mozilla.fennec_fdroid.apk
+
+.PHONY: install-calendar
+install-calendar: install-com.simplemobiletools.calendar.pro.apk
 
 .PHONY: install-camera
 install-camera: install-net.sourceforge.opencamera.apk
