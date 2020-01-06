@@ -10,6 +10,7 @@ ADB_USER_ID = 0
 .PHONY: automatically-provision-android-one
 automatically-provision-android-one: \
 	install-browser \
+	install-calculator \
 	install-calendar \
 	install-camera \
 	install-clock \
@@ -19,6 +20,7 @@ automatically-provision-android-one: \
 	install-keyboard \
 	install-logcat \
 	install-messaging \
+	install-notes \
 	disable-google-packages \
 	revoke-revocable-special-accesses-from-all-packages \
 	revoke-dangerous-permissions-from-all-packages \
@@ -552,6 +554,9 @@ reboot: ; $(ADB) $@
 .PHONY: install-browser
 install-browser: install-org.mozilla.fennec_fdroid.apk
 
+.PHONY: install-calculator
+install-calculator: install-com.simplemobiletools.calculator.apk
+
 .PHONY: install-calendar
 install-calendar: install-com.simplemobiletools.calendar.pro.apk
 
@@ -576,13 +581,16 @@ install-keyboard: install-com.menny.android.anysoftkeyboard.apk ;
 .PHONY: install-logcat
 install-logcat: install-com.dp.logcatapp.apk ;
 
-.PHONY: install-messaging
-install-messaging: install-org.smssecure.smssecure.apk
-
 .PHONY: install-com.dp.logcatapp.apk
 install-com.dp.logcatapp.apk: install-%.apk: var/cache/fdroidcl/apks/%.apk
 	adb install --user current $<
 	adb shell pm grant --user $(ADB_USER_ID) $* android.permission.READ_LOGS
+
+.PHONY: install-messaging
+install-messaging: install-org.smssecure.smssecure.apk
+
+.PHONY: install-notes
+install-notes: install-com.simplemobiletools.notes.pro.apk
 
 .PHONY: install-%.apk
 install-%.apk: var/cache/fdroidcl/apks/%.apk
