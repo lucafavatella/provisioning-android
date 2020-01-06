@@ -23,6 +23,7 @@ automatically-provision-android-one: \
 	install-media-player \
 	install-messaging \
 	install-notes \
+	install-sensor-stats \
 	disable-google-packages \
 	revoke-revocable-special-accesses-from-all-packages \
 	revoke-dangerous-permissions-from-all-packages \
@@ -599,6 +600,9 @@ install-messaging: install-org.smssecure.smssecure.apk
 
 .PHONY: install-notes
 install-notes: install-com.simplemobiletools.notes.pro.apk
+
+.PHONY: install-sensor-stats
+install-sensor-stats: install-com.vonglasow.michael.satstat.apk
 
 .PHONY: install-%.apk
 install-%.apk: var/cache/fdroidcl/apks/%.apk
