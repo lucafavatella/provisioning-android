@@ -14,6 +14,7 @@ automatically-provision-android-one: \
 	install-camera \
 	install-clock \
 	install-contacts \
+	install-file-manager \
 	install-gallery \
 	install-keyboard \
 	install-logcat \
@@ -562,6 +563,9 @@ install-clock: install-com.simplemobiletools.clock.apk
 
 .PHONY: install-contacts
 install-contacts: install-com.simplemobiletools.contacts.pro.apk
+
+.PHONY: install-file-manager
+install-file-manager: install-com.simplemobiletools.filemanager.pro.apk
 
 .PHONY: install-gallery
 install-gallery: install-com.simplemobiletools.gallery.pro.apk
