@@ -558,7 +558,7 @@ prompt-managing-special-accesses: \
 .PHONY: prompt-managing-default-apps
 prompt-managing-default-apps:
 	$(ADB) shell am start -a android.settings.MANAGE_DEFAULT_APPS_SETTINGS
-	@echo "You are on your own for managing default applications. Once you are done, press any key."
+	@echo "Once you manage default applications, press any key."
 	@head -n 1
 
 .PHONY: disable-nfc
