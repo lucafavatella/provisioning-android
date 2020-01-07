@@ -56,6 +56,7 @@ google_packages_not_to_be_disabled = \
 	com.google.android.deskclock \
 	com.google.android.dialer \
 	com.google.android.gms \
+	com.google.android.gsf \
 	com.google.android.packageinstaller
 google_packages_to_be_disabled = \
 	com.android.vending \
