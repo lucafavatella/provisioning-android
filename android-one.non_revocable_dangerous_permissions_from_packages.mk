@@ -83,6 +83,8 @@ non_revocable_dangerous_permissions_from_packages = \
 	android.permission.WRITE_CALENDAR-from-com.android.shell \
 	android.permission.WRITE_CONTACTS-from-com.android.shell \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.shell \
+	android.permission.READ_EXTERNAL_STORAGE-from-com.android.storagemanager \
+	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.storagemanager \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.android.systemui \
 	android.permission.CAMERA-from-com.android.systemui \
 	android.permission.GET_ACCOUNTS-from-com.android.systemui \
