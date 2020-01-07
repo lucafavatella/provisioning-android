@@ -624,6 +624,12 @@ install-notes: install-com.simplemobiletools.notes.pro.apk
 .PHONY: install-sensor-stats
 install-sensor-stats: install-com.vonglasow.michael.satstat.apk
 
+# XXX This shall be allowed.
+.PHONY: revoke-permission-android.permission.CHANGE_WIFI_STATE-from-com.vonglasow.michael.satstat-package
+revoke-permission-android.permission.CHANGE_WIFI_STATE-from-com.vonglasow.michael.satstat-package: \
+	revoke-permission-%-package:
+	$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) ignore
+
 .PHONY: install-%.apk
 install-%.apk: var/cache/fdroidcl/apks/%.apk
 	adb install --user current $<
