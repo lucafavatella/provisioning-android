@@ -256,6 +256,20 @@ permissions_requested_by_package = \
 list-permissions-requested-by-package-%:
 	@echo $(call permissions_requested_by_package,$*)
 
+.PHONY: long-list-permissions-requested-by-package-%
+long-list-permissions-requested-by-package-%:
+	@X="$$($(MAKE) -s list-permissions-requested-by-package-$*)" \
+		&& { test -z "$${X?}" \
+			|| printf "%b %b:\n\t%b\n" \
+				"Permissions requested by package" \
+				"$*" \
+				"$${X:?}"; }
+
+.PHONY: list-permissions-requested-by-enabled-packages
+list-permissions-requested-by-enabled-packages: \
+	$(patsubst %,long-list-permissions-requested-by-package-%,$(enabled_packages)) \
+	;
+
 permissions_granted_to_package = \
 	$(sort $(shell $(CURDIR)/libexec/granted_permissions $(1)))
 .PHONY: list-permissions-granted-to-package-%
