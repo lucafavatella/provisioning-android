@@ -569,6 +569,12 @@ disable-nfc:
 .PHONY: reboot
 reboot: ; $(ADB) $@
 
+.PHONY: prompt-updating-system
+prompt-updating-system:
+	$(ADB) shell am start -a android.settings.SYSTEM_UPDATE_SETTINGS
+	@echo "Once you check for system updates, press any key."
+	@head -n 1
+
 # ---- Install Packages ----
 
 .PHONY: install-browser
