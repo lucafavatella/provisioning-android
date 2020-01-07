@@ -10,6 +10,7 @@ EXTRA_NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES = \
 	$(non_revocable_dangerous_permissions_from_qualcomm_packages) \
 	$(extra_non_revocable_dangerous_permissions_from_packages)
 sprout_packages_to_be_disabled = \
+	$(call filter_packages_by_prefix,co.sitic,$(packages)) \
 	$(call filter_packages_by_prefix,com.hmdglobal,$(packages)) \
 	com.wos.face.service
 .PHONY: automatically-provision-sprout
