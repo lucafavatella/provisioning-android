@@ -17,6 +17,8 @@ Security & location
 - Find My Device
   - (Should) Untoggle "On"
 - (Should) Untoggle "Show passwords"
+- Trust agents
+  - (Must) Untoggle "Smart Lock (Google)"
 
 Google
 - Ads
