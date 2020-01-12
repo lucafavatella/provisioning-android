@@ -59,7 +59,6 @@ google_packages_not_to_be_disabled = \
 	com.google.android.packageinstaller
 google_packages_to_be_disabled = \
 	com.android.vending \
-	com.google.android.apps.work.oobconfig \
 	$(filter-out $(google_packages_not_to_be_disabled),$(call filter_packages_by_prefix,com.google,$(packages)))
 
 # ---- Android Variables: Permissions ----
