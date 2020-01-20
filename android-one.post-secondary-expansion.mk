@@ -27,18 +27,6 @@ are-dangerous-permissions-revoked-from-package-%: \
 		is-permission-$$(p)-revoked-from-$$*-package) \
 	;
 
-privileged_permissions_not_to_be_revoked_from_package_com.android.shell = \
-	android.permission.DUMP
-.PHONY: revoke-privileged-permissions-from-package-%
-revoke-privileged-permissions-from-package-%: \
-	$$(foreach \
-		p, \
-		$$(filter-out \
-			$$(privileged_permissions_not_to_be_revoked_from_package_$$*), \
-			$$(call privileged_permissions_requested_by_package,$$*)), \
-		revoke-permission-$$(p)-from-$$*-package) \
-	; $(warning Revoking of privileged permissions does not survive reboot)
-
 # ---- Revoke Special Accesses: Automatic (Secondary Expansion) ----
 
 .PHONY: revoke-revocable-special-permissions-from-package-%

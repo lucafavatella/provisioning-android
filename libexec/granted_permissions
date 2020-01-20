@@ -3,6 +3,7 @@
 GRANTED_MARKER="granted=true"
 
 dump_pkg_info() {
+    # Requires android.permission.DUMP for package com.android.shell
     adb shell dumpsys package "${1:?}"
 }
 

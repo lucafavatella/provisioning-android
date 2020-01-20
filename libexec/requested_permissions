@@ -7,6 +7,7 @@ REQ_PERMS="requested permissions"
 #   insight on permissions for some packages:
 #   https://stackoverflow.com/questions/21091022/listing-permissions-of-android-application-via-adb
 dump_pkg_info() {
+    # Requires android.permission.DUMP for package com.android.shell
     adb shell dumpsys package "${1:?}"
 }
 

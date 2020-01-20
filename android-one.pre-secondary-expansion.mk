@@ -379,11 +379,6 @@ list-dangerous-permissions-revoked-from-enabled-packages: \
 	$(patsubst %,long-list-dangerous-permissions-revoked-from-package-%,$(enabled_packages)) \
 	;
 
-.PHONY: revoke-privileged-permissions-from-all-packages
-revoke-privileged-permissions-from-all-packages: \
-	$(patsubst %,revoke-privileged-permissions-from-package-%,$(packages)) \
-	;
-
 android-one.non_revocable_dangerous_permissions_from_packages.mk:
 	$(warning This is a development-only target: you are on your own)
 	echo > $@
