@@ -71,8 +71,11 @@ revocable_special_permissions = \
 	android.permission.CHANGE_WIFI_STATE
 
 include android-one.non_revocable_dangerous_permissions_from_packages.mk
+include android-one.dangerous_permissions_not_to_be_revoked_from_packages.mk
 non_revocable_permissions_from_packages = \
-	$(sort $(non_revocable_dangerous_permissions_from_packages))
+	$(sort \
+		$(non_revocable_dangerous_permissions_from_packages) \
+		$(dangerous_permissions_not_to_be_revoked_from_packages))
 
 # ---- Android Variables: Special Accesses ----
 
@@ -344,6 +347,10 @@ is-permission-%-package:
 			$(filter $(call revoked_perm,$*),$(call permissions_granted_to_package,$(call revoked_pkg,$*))), \
 			@false, \
 			@true))
+
+.PHONY: is-not-permission-%-package
+is-not-permission-%-package:
+	@! $(MAKE) -s is-permission-$(call revoked_perm,$*)$(revoked_perm_pkg_sep)$(call revoked_pkg,$*)-package > /dev/null 2> /dev/null
 
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \

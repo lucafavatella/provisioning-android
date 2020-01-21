@@ -25,6 +25,10 @@ are-dangerous-permissions-revoked-from-package-%: \
 				$$(call permissions_requested_by_package,$$*), \
 				$$(dangerous_permissions))), \
 		is-permission-$$(p)-revoked-from-$$*-package) \
+	$$(foreach \
+		p, \
+		$$(call per_package_non_revocable_permissions,$$*), \
+		is-not-permission-$$(p)-revoked-from-$$*-package) \
 	;
 
 # ---- Revoke Special Accesses: Automatic (Secondary Expansion) ----
