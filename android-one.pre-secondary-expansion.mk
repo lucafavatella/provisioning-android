@@ -54,6 +54,7 @@ google_packages_not_to_be_disabled = \
 	com.android.cellbroadcastreceiver \
 	com.android.certinstaller \
 	com.android.chrome \
+	com.android.defcontainer \
 	com.android.documentsui \
 	com.android.emergency \
 	com.android.externalstorage \
