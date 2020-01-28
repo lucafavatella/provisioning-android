@@ -22,7 +22,6 @@ automatically-provision-android-one: \
 	install-maps \
 	install-media-player \
 	install-messaging \
-	install-messaging-extra \
 	install-notes \
 	install-org.fdroid.fdroid.apk \
 	install-sensor-stats \
@@ -660,17 +659,6 @@ install-media-player: install-org.videolan.vlc.apk
 
 .PHONY: install-messaging
 install-messaging: install-org.smssecure.smssecure.apk
-
-.PHONY: install-messaging-extra
-install-messaging-extra: install-org.thoughtcrime.securesms.apk
-
-.PHONY: install-org.thoughtcrime.securesms.apk
-install-org.thoughtcrime.securesms.apk: \
-	var/cache/signal/org.thoughtcrime.securesms.apk
-	adb install --user current $<
-
-var/cache/signal/org.thoughtcrime.securesms.apk:
-	$(MAKE) -f Makefile.signal $@
 
 .PHONY: install-notes
 install-notes: install-com.simplemobiletools.notes.pro.apk
