@@ -22,6 +22,7 @@ automatically-provision-android-one: \
 	install-maps \
 	install-media-player \
 	install-messaging \
+	install-messaging-extra \
 	install-notes \
 	install-org.fdroid.fdroid.apk \
 	install-sensor-stats \
@@ -659,6 +660,17 @@ install-media-player: install-org.videolan.vlc.apk
 
 .PHONY: install-messaging
 install-messaging: install-org.smssecure.smssecure.apk
+
+.PHONY: install-messaging-extra
+install-messaging-extra: install-com.whatsapp.apk
+
+.PHONY: install-com.whatsapp.apk
+install-com.whatsapp.apk: \
+	var/cache/whatsapp/com.whatsapp.apk
+	adb install --user current $<
+
+var/cache/whatsapp/com.whatsapp.apk:
+	$(MAKE) -f Makefile.whatsapp $@
 
 .PHONY: install-notes
 install-notes: install-com.simplemobiletools.notes.pro.apk

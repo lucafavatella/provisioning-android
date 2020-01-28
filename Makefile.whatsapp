@@ -1,0 +1,39 @@
+.DEFAULT_GOAL = clean
+
+.DELETE_ON_ERROR:
+
+package = com.whatsapp
+
+.PHONY: clean
+clean: \
+	clean-apk \
+	;
+
+work_dir = var/cache/whatsapp
+.PHONY: clean-apk
+clean-apk: ; rm $(work_dir)/$(package).apk
+
+$(work_dir)/$(package).apk: $(work_dir)/$(package).url
+	cat $<
+	curl -sSf -o $@ "$$(cat $<)"
+
+$(work_dir)/$(package).url: $(work_dir)/$(package).url.tmp
+	cat $<
+	test 1 -eq "$$(wc -l < $<)"
+	grep \
+		-q \
+		-e '^https://scontent\.whatsapp\.net/[^\?]*/WhatsApp.apk?[&=a-zA-Z0-9._-]*$$' \
+		< $<
+	mv $< $@
+
+$(work_dir)/$(package).url.tmp: $(work_dir)/android.html
+	{ xmllint \
+		--html \
+		--xpath "string(/html/body//div[@class='_whatsapp_www__block_action'][1]/a/@href)" \
+		$< \
+		2>/dev/null \
+	&& printf "\n"; } \
+		> $@
+
+$(work_dir)/android.html:
+	curl -sSf https://www.whatsapp.com/android -o $@ --create-dirs
