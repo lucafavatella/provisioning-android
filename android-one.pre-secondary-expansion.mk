@@ -662,7 +662,8 @@ install-media-player: install-org.videolan.vlc.apk ;
 install-messaging: install-org.smssecure.smssecure.apk ;
 
 .PHONY: install-messaging-extra
-install-messaging-extra: install-com.whatsapp.apk ;
+install-messaging-extra: install-com.whatsapp.apk
+	$(info How to start a conversation without contacts permission: "https://api.whatsapp.com/send?phone=4412345" - relying on default setting "Default apps > Opening links > WhatsApp > Supported links")
 
 .PHONY: install-com.whatsapp.apk
 install-com.whatsapp.apk: var/cache/whatsapp/com.whatsapp.apk
