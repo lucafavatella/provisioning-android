@@ -618,28 +618,28 @@ prompt-updating-system:
 # ---- Install Packages ----
 
 .PHONY: install-browser
-install-browser: install-org.mozilla.fennec_fdroid.apk
+install-browser: install-org.mozilla.fennec_fdroid.apk ;
 
 .PHONY: install-calculator
-install-calculator: install-com.simplemobiletools.calculator.apk
+install-calculator: install-com.simplemobiletools.calculator.apk ;
 
 .PHONY: install-calendar
-install-calendar: install-com.simplemobiletools.calendar.pro.apk
+install-calendar: install-com.simplemobiletools.calendar.pro.apk ;
 
 .PHONY: install-camera
-install-camera: install-net.sourceforge.opencamera.apk
+install-camera: install-net.sourceforge.opencamera.apk ;
 
 .PHONY: install-contacts
-install-contacts: install-com.simplemobiletools.contacts.pro.apk
+install-contacts: install-com.simplemobiletools.contacts.pro.apk ;
 
 .PHONY: install-docs-pdf
-install-docs-pdf: install-com.artifex.mupdf.viewer.app.apk
+install-docs-pdf: install-com.artifex.mupdf.viewer.app.apk ;
 
 .PHONY: install-file-manager
-install-file-manager: install-com.simplemobiletools.filemanager.pro.apk
+install-file-manager: install-com.simplemobiletools.filemanager.pro.apk ;
 
 .PHONY: install-gallery
-install-gallery: install-com.simplemobiletools.gallery.pro.apk
+install-gallery: install-com.simplemobiletools.gallery.pro.apk ;
 
 .PHONY: install-keyboard
 install-keyboard: install-com.menny.android.anysoftkeyboard.apk ;
@@ -653,30 +653,29 @@ install-com.dp.logcatapp.apk: install-%.apk: var/cache/fdroidcl/apks/%.apk
 	adb shell pm grant --user $(ADB_USER_ID) $* android.permission.READ_LOGS
 
 .PHONY: install-maps
-install-maps: install-net.osmand.plus.apk
+install-maps: install-net.osmand.plus.apk ;
 
 .PHONY: install-media-player
-install-media-player: install-org.videolan.vlc.apk
+install-media-player: install-org.videolan.vlc.apk ;
 
 .PHONY: install-messaging
-install-messaging: install-org.smssecure.smssecure.apk
+install-messaging: install-org.smssecure.smssecure.apk ;
 
 .PHONY: install-messaging-extra
-install-messaging-extra: install-com.whatsapp.apk
+install-messaging-extra: install-com.whatsapp.apk ;
 
 .PHONY: install-com.whatsapp.apk
-install-com.whatsapp.apk: \
-	var/cache/whatsapp/com.whatsapp.apk
+install-com.whatsapp.apk: var/cache/whatsapp/com.whatsapp.apk
 	adb install --user current $<
 
 var/cache/whatsapp/com.whatsapp.apk:
 	$(MAKE) -f Makefile.whatsapp $@
 
 .PHONY: install-notes
-install-notes: install-com.simplemobiletools.notes.pro.apk
+install-notes: install-com.simplemobiletools.notes.pro.apk ;
 
 .PHONY: install-sensor-stats
-install-sensor-stats: install-com.vonglasow.michael.satstat.apk
+install-sensor-stats: install-com.vonglasow.michael.satstat.apk ;
 
 # XXX This shall be allowed.
 .PHONY: revoke-permission-android.permission.CHANGE_WIFI_STATE-from-com.vonglasow.michael.satstat-package
