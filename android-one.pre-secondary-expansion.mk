@@ -661,6 +661,20 @@ install-media-player: install-org.videolan.vlc.apk ;
 .PHONY: install-messaging
 install-messaging: install-org.smssecure.smssecure.apk ;
 
+# From https://faq.whatsapp.com/en/android/28030015/
+# > Important: End-to-end encryption is always activated. There's no
+# > way to turn off end-to-end encryption.
+#
+# From
+# https://www.whatsapp.com/security/WhatsApp-Security-Whitepaper.pdf
+# (Dec 2017) (via https://www.whatsapp.com/security/ ):
+# > Messages to WhatsApp groups build on the pairwise encrypted
+# > sessions outlined above to achieve efficient server-side fan-out
+# > for most messages sent to groups . This is accomplished using the
+# > “Sender Keys” component of the Signal Messaging Protocol.
+# > ...
+# > ... Whenever a group member leaves, all group participants clear
+# > their `Sender Key` and start over.
 .PHONY: install-messaging-extra
 install-messaging-extra: install-com.whatsapp.apk
 	$(info How to start a conversation without contacts permission: "https://api.whatsapp.com/send?phone=4412345" - relying on default setting "Default apps > Opening links > WhatsApp > Supported links")
