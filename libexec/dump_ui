@@ -3,4 +3,5 @@
 # Reference re binary standard output of adb shell command by `exec-out`:
 # https://android.googlesource.com/platform/system/core/+/5d9d434efadf1c535c7fea634d5306e18c68ef1f
 # (via https://stackoverflow.com/questions/13578416/read-binary-stdout-data-from-adb-shell/31401447#31401447 )
-exec adb exec-out uiautomator dump --compressed /dev/tty
+U="$(adb exec-out uiautomator dump --compressed /dev/tty)" \
+    && { echo "${U:?}" | sed 's|UI hierchary dumped to: /dev/tty||'; }
