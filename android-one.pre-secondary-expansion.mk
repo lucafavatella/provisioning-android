@@ -34,6 +34,7 @@ automatically-provision-android-one: \
 
 .PHONY: manually-provision-android-one
 manually-provision-android-one: \
+	configure-keyboard \
 	prompt-managing-special-accesses \
 	prompt-managing-default-apps \
 	;
@@ -644,11 +645,57 @@ install-gallery: install-com.simplemobiletools.gallery.pro.apk ;
 .PHONY: install-keyboard
 install-keyboard: install-com.menny.android.anysoftkeyboard.apk ;
 
+.PHONY: install-com.menny.android.anysoftkeyboard.apk
+install-com.menny.android.anysoftkeyboard.apk: \
+	install-%.apk: var/cache/fdroidcl/apks/%.apk
+	adb install --user current $<
+
+.PHONY: configure-keyboard
+configure-keyboard: configure-com.menny.android.anysoftkeyboard.apk ;
+
+.PHONY: configure-com.menny.android.anysoftkeyboard.apk
+configure-com.menny.android.anysoftkeyboard.apk: configure-%.apk:
+	$(ADB) shell input keyevent KEYCODE_WAKEUP
+	$(ADB) shell am start -n $*/.LauncherSettingsActivity
+	$(warning This target assumes the package $* not to be in an internal screen of the settings activity; it may work because the language button is present in other screens though may be fragile)
+	@echo "Once you ensure the screen is unlocked, press the enter key."
+	@head -n 1
+	# Reference: https://github.com/AnySoftKeyboard/AnySoftKeyboard/blob/e57c9cc852aefdc1ff60b024e52d4341337b3df7/app/src/main/res/menu/bottom_navigation_main.xml#L11
+	until libexec/tap \
+		$$(libexec/dump_ui \
+			| xmllint --xpath 'string(//node[@resource-id="$*:id/bottom_nav_language_button"]/@bounds)' - \
+			| libexec/ui_bounds_to_centre ' ' \
+		); do echo "."; sleep 1; done
+	# Reference: https://github.com/AnySoftKeyboard/AnySoftKeyboard/blob/e57c9cc852aefdc1ff60b024e52d4341337b3df7/app/src/main/res/layout/language_root_settings.xml#L27
+	until libexec/tap \
+		$$(libexec/dump_ui \
+			| xmllint --xpath 'string(//node[@resource-id="$*:id/settings_tile_grammar"]/@bounds)' - \
+			| libexec/ui_bounds_to_centre ' ' \
+		); do echo "."; sleep 1; done
+	# References:
+	# - https://github.com/AnySoftKeyboard/AnySoftKeyboard/blob/e57c9cc852aefdc1ff60b024e52d4341337b3df7/app/src/main/res/xml/prefs_dictionaries.xml#L12
+	# - https://github.com/AnySoftKeyboard/AnySoftKeyboard/blob/e57c9cc852aefdc1ff60b024e52d4341337b3df7/app/src/main/res/values/strings.xml#L465
+	# - https://github.com/AnySoftKeyboard/AnySoftKeyboard/blob/e57c9cc852aefdc1ff60b024e52d4341337b3df7/app/src/main/res/values-en/strings.xml#L465
+	# - https://github.com/AnySoftKeyboard/AnySoftKeyboard/blob/e57c9cc852aefdc1ff60b024e52d4341337b3df7/app/src/main/res/values-it/strings.xml#L361
+	( CheckNode='//node[@resource-id="android:id/title"][@text="Show suggestions"]/../node[@checkable="true"]' \
+		; Checked="" \
+		; until Checked="$$(libexec/dump_ui \
+			| xmllint --xpath 'string('"$${CheckNode:?}"'/@checked)' -)" \
+			; do echo "."; sleep 1; done \
+		; test "false" = "$${Checked:?}" \
+			|| until libexec/tap \
+				$$(libexec/dump_ui \
+					| xmllint --xpath 'string('"$${CheckNode:?}"'/@bounds)' - \
+					| libexec/ui_bounds_to_centre ' ' \
+				); do echo "."; sleep 1; done \
+		; )
+
 .PHONY: install-logcat
 install-logcat: install-com.dp.logcatapp.apk ;
 
 .PHONY: install-com.dp.logcatapp.apk
-install-com.dp.logcatapp.apk: install-%.apk: var/cache/fdroidcl/apks/%.apk
+install-com.dp.logcatapp.apk: \
+	install-%.apk: var/cache/fdroidcl/apks/%.apk
 	adb install --user current $<
 	$(MAKE) configure-$*.apk
 
