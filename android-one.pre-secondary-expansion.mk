@@ -683,8 +683,7 @@ install-messaging-extra: install-com.whatsapp.apk
 install-com.whatsapp.apk: var/cache/whatsapp/com.whatsapp.apk
 	adb install --user current $<
 
-var/cache/whatsapp/com.whatsapp.apk:
-	$(MAKE) -f Makefile.whatsapp $@
+var/cache/whatsapp/com.whatsapp.apk: ; $(MAKE) -f Makefile.whatsapp $@
 
 .PHONY: install-notes
 install-notes: install-com.simplemobiletools.notes.pro.apk ;
