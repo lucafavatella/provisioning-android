@@ -9,6 +9,3 @@ https://github.com/khlam/debloat-samsung-android/blob/7482d4107473956d225a7071d6
 
 https://www.thecustomdroid.com/uninstall-samsung-galaxy-s10-bloatware-guide/
 pm uninstall -k --user 0 <app-package-name>
-
-https://forum.xda-developers.com/showpost.php?p=79462709&postcount=23
-adb shell cmd package install-existing com.google.android.apps.photos
