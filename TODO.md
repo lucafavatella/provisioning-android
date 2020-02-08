@@ -12,9 +12,3 @@ pm uninstall -k --user 0 <app-package-name>
 
 https://forum.xda-developers.com/showpost.php?p=79462709&postcount=23
 adb shell cmd package install-existing com.google.android.apps.photos
-
-https://forum.xda-developers.com/showpost.php?p=80265765&postcount=33
-Here is a batch file for MIUI devices. You can update package names and test it.
-https://gist.github.com/asif-mistry/edc780c8d2def41b846069b40cd38172
-adb shell pm uninstall %%X
-adb shell pm uninstall --user 0 %%X
