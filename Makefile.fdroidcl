@@ -17,7 +17,9 @@ apks_dir = var/cache/fdroidcl/apks
 clean-apks: ; find $(apks_dir) -type f -name '*.apk' -exec rm {} \;
 
 # Does not preserve version code in file name.
-$(apks_dir)/%.apk: $(docker_image_name)
+$(apks_dir)/%.apk: $(apks_dir)/%.apk.tmp ; mv $< $@
+
+$(apks_dir)/%.apk.tmp: $(docker_image_name)
 	docker run --rm $< $* > $@
 
 today_this_hour = $(shell date "+%Y%m%d_%H")

@@ -683,6 +683,7 @@ install-messaging-extra: install-com.whatsapp.apk
 install-com.whatsapp.apk: var/cache/whatsapp/com.whatsapp.apk
 	adb install --user current $<
 
+.SECONDARY: var/cache/whatsapp/com.whatsapp.apk
 var/cache/whatsapp/com.whatsapp.apk: ; $(MAKE) -f Makefile.whatsapp $@
 
 .PHONY: install-notes
@@ -701,4 +702,5 @@ revoke-permission-android.permission.CHANGE_WIFI_STATE-from-com.vonglasow.michae
 install-%.apk: var/cache/fdroidcl/apks/%.apk
 	adb install --user current $<
 
+.PRECIOUS: var/cache/fdroidcl/apks/%.apk
 var/cache/fdroidcl/apks/%.apk: ; $(MAKE) -f Makefile.fdroidcl $@
