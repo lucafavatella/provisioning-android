@@ -18,7 +18,3 @@ Here is a batch file for MIUI devices. You can update package names and test it.
 https://gist.github.com/asif-mistry/edc780c8d2def41b846069b40cd38172
 adb shell pm uninstall %%X
 adb shell pm uninstall --user 0 %%X
-
-https://android.stackexchange.com/questions/179575/how-to-uninstall-a-system-app-using-adb-uninstall-command-not-remove-via-rm-or/186586#186586
-pm uninstall -k --user 0 com.android.service
-adb uninstall --user 0 com.android.service
