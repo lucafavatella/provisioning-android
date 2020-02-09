@@ -650,6 +650,10 @@ install-logcat: install-com.dp.logcatapp.apk ;
 .PHONY: install-com.dp.logcatapp.apk
 install-com.dp.logcatapp.apk: install-%.apk: var/cache/fdroidcl/apks/%.apk
 	adb install --user current $<
+	$(MAKE) configure-$*.apk
+
+.PHONY: configure-com.dp.logcatapp.apk
+configure-com.dp.logcatapp.apk: configure-%.apk:
 	adb shell pm grant --user $(ADB_USER_ID) $* android.permission.READ_LOGS
 
 .PHONY: install-maps
