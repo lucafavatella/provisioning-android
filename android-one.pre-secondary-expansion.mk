@@ -577,7 +577,7 @@ $(targets_for_revoking_promptable_special_accesses): \
 	prompt-managing-special-access-%:
 	$(ADB) shell input keyevent KEYCODE_WAKEUP # Reference: https://github.com/aosp-mirror/platform_frameworks_base/blob/android-9.0.0_r51/core/java/android/view/KeyEvent.java#L640
 	$(ADB) shell am start -a $(action_for_prompting_special_access_$*)
-	@echo "Once you disable special access $* for the applications, press any key."
+	@echo "Once you disable special access $* for the applications, press the enter key."
 	@head -n 1
 
 targets_for_revoking_non_revocable_special_accesses = \
@@ -585,7 +585,7 @@ targets_for_revoking_non_revocable_special_accesses = \
 .PHONY: $(targets_for_revoking_non_revocable_special_accesses)
 $(targets_for_revoking_non_revocable_special_accesses): \
 	prompt-managing-special-access-%:
-	@echo "You are on your own for disabling special access $* for the applications. Once you are done, press any key."
+	@echo "You are on your own for disabling special access $* for the applications. Once you are done, press the enter key."
 	@head -n 1
 
 .PHONY: prompt-managing-special-accesses
@@ -599,7 +599,7 @@ prompt-managing-special-accesses: \
 .PHONY: prompt-managing-default-apps
 prompt-managing-default-apps:
 	$(ADB) shell am start -a android.settings.MANAGE_DEFAULT_APPS_SETTINGS
-	@echo "Once you manage default applications, press any key."
+	@echo "Once you manage default applications, press the enter key."
 	@head -n 1
 
 .PHONY: disable-nfc
@@ -612,7 +612,7 @@ reboot: ; $(ADB) $@
 .PHONY: prompt-updating-system
 prompt-updating-system:
 	$(ADB) shell am start -a android.settings.SYSTEM_UPDATE_SETTINGS
-	@echo "Once you check for system updates, press any key."
+	@echo "Once you check for system updates, press the enter key."
 	@head -n 1
 
 # ---- Install Packages ----
