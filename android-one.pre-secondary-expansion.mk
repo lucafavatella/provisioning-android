@@ -712,6 +712,24 @@ install-media-player: install-org.videolan.vlc.apk ;
 .PHONY: install-messaging
 install-messaging: install-org.smssecure.smssecure.apk ;
 
+.PHONY: configure-messaging
+configure-messaging: prompt-configuring-smsc ;
+
+.PHONY: prompt-configuring-smsc
+prompt-configuring-smsc:
+	$(ADB) shell input keyevent KEYCODE_WAKEUP
+	@echo "Once you ensure the screen is unlocked, press the enter key."
+	@head -n 1
+	$(MAKE) dial-hidden-code-4636
+	@echo "Select 'Phone information', scroll to 'SMSC', insert the number, tap on `Update`."
+
+# From https://www.xda-developers.com/codes-hidden-android/
+# > *#*#4636#*#*	Display information about Phone, Battery and Usage statistics
+.PHONY: dial-hidden-code-%
+dial-hidden-code-%:
+	$(ADB) shell am start -a android.intent.action.DIAL
+	@echo "Type hidden code '*#*#$*#*#*'."
+
 # From https://faq.whatsapp.com/en/android/28030015/
 # > Important: End-to-end encryption is always activated. There's no
 # > way to turn off end-to-end encryption.
