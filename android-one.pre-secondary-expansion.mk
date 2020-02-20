@@ -3,10 +3,6 @@
 ADB = adb
 ADB_USER_ID = 0
 
-# MONKEYRUNNER = $(shell brew cask info android-sdk | grep monkeyrunner | cut -d' ' -f1)
-# $(dir $(patsubst %/,%,$(dir $(MONKEYRUNNER))))adb: | $(ADB)
-# 	ln -s "$(word 1,$|)" "$@"
-
 .PHONY: automatically-provision-android-one
 automatically-provision-android-one: \
 	install-browser \
