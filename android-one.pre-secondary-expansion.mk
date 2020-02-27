@@ -309,6 +309,11 @@ list-permissions-requested-by-enabled-packages: \
 	$(patsubst %,long-list-permissions-requested-by-package-%,$(enabled_packages)) \
 	;
 
+.PHONY: list-permissions-requested-by-disabled-packages
+list-permissions-requested-by-disabled-packages: \
+	$(patsubst %,long-list-permissions-requested-by-package-%,$(disabled_packages)) \
+	;
+
 permissions_granted_to_package = \
 	$(sort $(shell $(CURDIR)/libexec/granted_permissions $(1)))
 .PHONY: list-permissions-granted-to-package-%
