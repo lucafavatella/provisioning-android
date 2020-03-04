@@ -10,6 +10,7 @@ automatically-provision-android-one: \
 	install-calendar \
 	install-camera \
 	install-contacts \
+	install-dialer \
 	install-docs-pdf \
 	install-file-manager \
 	install-gallery \
@@ -633,6 +634,9 @@ install-camera: install-net.sourceforge.opencamera.apk ;
 
 .PHONY: install-contacts
 install-contacts: install-com.simplemobiletools.contacts.pro.apk ;
+
+.PHONY: install-dialer
+install-dialer: install-com.simplemobiletools.contacts.pro.apk ;
 
 .PHONY: install-docs-pdf
 install-docs-pdf: install-com.artifex.mupdf.viewer.app.apk ;
