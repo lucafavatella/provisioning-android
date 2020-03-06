@@ -145,6 +145,11 @@ action_for_prompting_special_access_enabled_vr_listeners = \
 non_revocable_special_accesses = \
 	device_administrators
 
+# ---- Android Variables: ADB Library ----
+
+# Reference: https://github.com/aosp-mirror/platform_frameworks_base/blob/android-9.0.0_r51/core/java/android/view/KeyEvent.java#L637-L640
+adb_wakeup = $(ADB) shell input keyevent KEYCODE_WAKEUP
+
 # ---- Make Variables ----
 
 # No built-in rules. Eases debugging.
@@ -578,7 +583,7 @@ targets_for_revoking_promptable_special_accesses = \
 .PHONY: $(targets_for_revoking_promptable_special_accesses)
 $(targets_for_revoking_promptable_special_accesses): \
 	prompt-managing-special-access-%:
-	$(ADB) shell input keyevent KEYCODE_WAKEUP # Reference: https://github.com/aosp-mirror/platform_frameworks_base/blob/android-9.0.0_r51/core/java/android/view/KeyEvent.java#L640
+	$(adb_wakeup)
 	$(ADB) shell am start -a $(action_for_prompting_special_access_$*)
 	@echo "Once you disable special access $* for the applications, press the enter key."
 	@head -n 1
@@ -601,6 +606,7 @@ prompt-managing-special-accesses: \
 
 .PHONY: prompt-managing-default-apps
 prompt-managing-default-apps:
+	$(adb_wakeup)
 	$(ADB) shell am start -a android.settings.MANAGE_DEFAULT_APPS_SETTINGS
 	@echo "Once you manage default applications, press the enter key."
 	@head -n 1
@@ -614,6 +620,7 @@ reboot: ; $(ADB) $@
 
 .PHONY: prompt-updating-system
 prompt-updating-system:
+	$(adb_wakeup)
 	$(ADB) shell am start -a android.settings.SYSTEM_UPDATE_SETTINGS
 	@echo "Once you check for system updates, press the enter key."
 	@head -n 1
@@ -660,7 +667,7 @@ configure-keyboard: configure-com.menny.android.anysoftkeyboard.apk ;
 
 .PHONY: configure-com.menny.android.anysoftkeyboard.apk
 configure-com.menny.android.anysoftkeyboard.apk: configure-%.apk:
-	$(ADB) shell input keyevent KEYCODE_WAKEUP
+	$(adb_wakeup)
 	$(ADB) shell am start -n $*/.LauncherSettingsActivity
 	$(warning This target assumes the package $* not to be in an internal screen of the settings activity; it may work because the language button is present in other screens though may be fragile)
 	@echo "Once you ensure the screen is unlocked, press the enter key."
@@ -722,7 +729,7 @@ configure-messaging: prompt-configuring-smsc ;
 
 .PHONY: prompt-configuring-smsc
 prompt-configuring-smsc:
-	$(ADB) shell input keyevent KEYCODE_WAKEUP
+	$(adb_wakeup)
 	@echo "Once you ensure the screen is unlocked, press the enter key."
 	@head -n 1
 	$(MAKE) dial-hidden-code-4636
