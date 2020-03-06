@@ -178,6 +178,11 @@ get-prop-%:
 .PHONY: list-abis
 list-abis: get-prop-ro.product.cpu.abilist ;
 
+# Reference: https://developer.android.com/topic/generic-system-image/#device-compliance
+.PHONY: is-treble
+is-treble:
+	test true = $$($(MAKE) -s get-prop-ro.treble.enabled)
+
 .PHONY: list-commands
 list-commands: ; $(ADB) shell cmd -l
 
