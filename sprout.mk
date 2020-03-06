@@ -24,6 +24,12 @@ manually-provision-sprout: \
 	manually-provision-android-one \
 	;
 
+.PHONY: is-sprout-provisioned
+is-sprout-provisioned: \
+	are-hmd-packages-disabled-or-enabled-correctly \
+	is-android-one-provisioned \
+	;
+
 # ==== Internal Rules and Variables ====
 
 sprout.non_revocable_dangerous_permissions_from_qualcomm_packages.mk \
@@ -51,7 +57,15 @@ include android-one.pre-secondary-expansion.mk
 
 .PHONY: disable-hmd-packages
 disable-hmd-packages: \
-	$(patsubst %,disable-package-%,$(sprout_packages_to_be_disabled)) \
+	$(patsubst %,disable-package-%,$(sprout_packages_to_be_disabled))
+	$(MAKE) are-hmd-packages-disabled-or-enabled-correctly
+
+ifneq ($(strip $(filter-out $(packages),$(sprout_packages_to_be_disabled))),)
+$(error Misconfigured package(s) to be disabled $(filter-out $(packages),$(sprout_packages_to_be_disabled)))
+endif
+.PHONY: are-hmd-packages-disabled-or-enabled-correctly
+are-hmd-packages-disabled-or-enabled-correctly: \
+	$(patsubst %,is-package-%-disabled,$(sprout_packages_to_be_disabled)) \
 	;
 
 # ---- Secondary Expansion ----
