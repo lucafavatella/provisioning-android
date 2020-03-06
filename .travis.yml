@@ -1,0 +1,105 @@
+# From https://github.com/ankidroid/Anki-Android/blob/402d70b0d5fbd210b765766b354147dd2a98470c/.travis.yml#L2-L4
+# -- 8< ----
+language: bash
+# ignored on non-linux platforms, but bionic is required for nested virtualization
+dist: bionic
+# ---- >8 --
+before_install:
+  # Excerpts from https://github.com/travis-ci/travis-build/blob/c708e1c03407a38c64a6a42a59428b87d58c4515/lib/travis/build/script/nix.rb#L18-L69
+  # -- 8< ----
+  - export NIX_CURL_FLAGS='-sS'
+  - echo '-s' >> ~/.curlrc
+  - echo '-S' >> ~/.curlrc
+  - echo '--retry 3' >> ~/.curlrc
+  - wget --retry-connrefused --waitretry=1 -O /tmp/nix-install https://nixos.org/releases/nix/nix-2.3.3/install
+  - yes | sh /tmp/nix-install
+  # single-user install (linux)
+  - source ${TRAVIS_HOME}/.nix-profile/etc/profile.d/nix.sh
+  - nix-env --version
+  - nix-instantiate --eval -E 'with import <nixpkgs> {}; lib.version or lib.nixpkgsVersion'
+  # ---- >8 --
+  #
+  # From https://github.com/ankidroid/Anki-Android/blob/402d70b0d5fbd210b765766b354147dd2a98470c/.travis.yml#L104-L107
+  # -- 8< ----
+  # Set up KVM on linux for hardware acceleration. Manually here so it only happens for emulator tests, takes ~30s
+  - sudo -E apt-get -yq --no-install-suggests --no-install-recommends install bridge-utils libpulse0 libvirt-bin qemu-kvm virtinst ubuntu-vm-builder
+  - sudo adduser $USER libvirt
+  - sudo adduser $USER kvm
+  # ---- >8 --
+install:
+  - >
+    nix-build
+    -Q
+    -E '
+      with import <nixpkgs> {
+        config.android_sdk.accept_license = true;
+      };
+      androidenv.emulateApp {
+        name = "emulator-Device";
+        /*
+         * Android API 28 is Android 9.0.
+         * See https://developer.android.com/studio/releases/platforms#9.0
+         */
+        platformVersion = "28";
+        /*
+         * From https://developer.android.com/studio/releases/emulator#support_for_arm_binaries_on_android_9_and_11_system_images :
+         *
+         * > ... you can now use the Android 9 x86 system image or any
+         * > Android 11 system image to run your app – it is no longer
+         * > necessary to download a specific system image to run ARM
+         * > binaries.  These Android 9 and Android 11 system images support
+         * > ARM by default and provide dramatically improved performance
+         * > when compared to those with full ARM emulation.
+         * >
+         * > Known issues
+         * > Some ARMv7 binaries fail to run on Android 11 x86 and x86_64
+         * > system images.  Consider building for ARM64 when targeting
+         * > Android 11.
+         */
+        abiVersion = "x86";
+        systemImageType = "google_apis_playstore";
+      }
+    '
+    -o emulator
+  - test -f emulator/bin/run-test-emulator  # Ref https://github.com/NixOS/nixpkgs/blob/8d178aeed27482df666208a96b04357afc9726ad/pkgs/development/mobile/androidenv/emulate-app.nix#L134
+  #
+  - >
+    nix-build
+    -Q
+    -E '
+      with import <nixpkgs> {
+        config.android_sdk.accept_license = true;
+      };
+      let
+        androidComposition = androidenv.composeAndroidPackages {
+        };
+      in
+      androidComposition.platform-tools
+    '
+    -o platform-tools
+  - test -f platform-tools/bin/adb  # Ref https://github.com/NixOS/nixpkgs/blob/8d178aeed27482df666208a96b04357afc9726ad/pkgs/development/mobile/androidenv/compose-android-packages.nix#L254
+before_script:
+  - export PATH="$(pwd)/platform-tools/bin:${PATH?}"
+  #
+  # From https://github.com/ankidroid/Anki-Android/blob/402d70b0d5fbd210b765766b354147dd2a98470c/.travis.yml#L111-L117
+  # with changes to the emulator command being called.
+  # -- 8< ----
+  - |
+    AUDIO=""
+    EMU_PARAMS="-verbose -no-snapshot -no-window -camera-back none -camera-front none -selinux permissive -qemu -m 2048"
+    # This double "sudo" monstrosity is used to have Travis execute the
+    # emulator with its new group permissions and help preserve the rule
+    # of least privilege.
+    sudo -E sudo -u $USER -E \
+      env NIX_ANDROID_EMULATOR_FLAGS="${AUDIO?} ${EMU_PARAMS?}" \
+      ./emulator/bin/run-test-emulator
+  # ---- >8 --
+  # See also https://developer.android.com/studio/run/emulator-commandline
+  #
+  - adb devices -l
+script:
+  - make list-devices
+  - make list-abis
+  - ! make is-android-one-provisioned
+  - make automatically-provision-android-one
+  - make is-android-one-provisioned
