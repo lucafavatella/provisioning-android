@@ -82,10 +82,11 @@ before_script:
   - export PATH="$(pwd)/platform-tools/bin:${PATH?}"
   #
   # From https://github.com/ankidroid/Anki-Android/blob/402d70b0d5fbd210b765766b354147dd2a98470c/.travis.yml#L111-L117
-  # with changes to the emulator command being called.
+  # with changes to the emulator command being called and to the
+  # parameters passed.
   # -- 8< ----
   - |
-    AUDIO=""
+    AUDIO="-no-audio"
     EMU_PARAMS="-verbose -no-snapshot -no-window -camera-back none -camera-front none -selinux permissive -qemu -m 2048"
     # This double "sudo" monstrosity is used to have Travis execute the
     # emulator with its new group permissions and help preserve the rule
