@@ -61,7 +61,7 @@ install:
          * > Android 11.
          */
         abiVersion = "x86";
-        systemImageType = "google_apis_playstore";
+        systemImageType = "default";
       }
     '
     -o emulator
