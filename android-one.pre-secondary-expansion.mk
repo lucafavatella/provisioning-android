@@ -168,6 +168,12 @@ strip_prefix = $(patsubst $(1)%,%,$(2))
 .PHONY: list-devices
 list-devices: ; $(ADB) devices -l
 
+.PHONY: list-props
+list-props: ; $(ADB) shell getprop
+
+.PHONY: list-abis
+list-abis: ; $(ADB) shell getprop ro.product.cpu.abilist
+
 .PHONY: list-commands
 list-commands: ; $(ADB) shell cmd -l
 
