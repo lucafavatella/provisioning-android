@@ -171,8 +171,12 @@ list-devices: ; $(ADB) devices -l
 .PHONY: list-props
 list-props: ; $(ADB) shell getprop
 
+.PHONY: get-prop-%
+get-prop-%:
+	$(ADB) shell getprop "$*"
+
 .PHONY: list-abis
-list-abis: ; $(ADB) shell getprop ro.product.cpu.abilist
+list-abis: get-prop-ro.product.cpu.abilist ;
 
 .PHONY: list-commands
 list-commands: ; $(ADB) shell cmd -l
