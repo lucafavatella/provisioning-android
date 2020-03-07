@@ -111,7 +111,7 @@ before_script:
   # -- 8< ----
   - |
     AUDIO="-no-audio"
-    EMU_PARAMS="-verbose -no-snapshot -no-window -camera-back none -camera-front none -selinux permissive -qemu -m 2048 -skip-adb-auth"
+    EMU_PARAMS="-verbose -no-snapshot -no-window -camera-back none -camera-front none -selinux permissive -qemu -m 2048"
     # This double "sudo" monstrosity is used to have Travis execute the
     # emulator with its new group permissions and help preserve the rule
     # of least privilege.
