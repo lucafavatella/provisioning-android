@@ -95,7 +95,7 @@ before_script:
   # -- 8< ----
   - |
     AUDIO="-no-audio"
-    EMU_PARAMS="-verbose -no-snapshot -no-window -camera-back none -camera-front none -selinux permissive -qemu -m 2048"
+    EMU_PARAMS="-verbose -no-snapshot -no-window -camera-back none -camera-front none -selinux permissive -qemu -m 2048 -skip-adb-auth"
     # This double "sudo" monstrosity is used to have Travis execute the
     # emulator with its new group permissions and help preserve the rule
     # of least privilege.
@@ -103,6 +103,24 @@ before_script:
       env NIX_ANDROID_EMULATOR_FLAGS="${AUDIO?} ${EMU_PARAMS?}" \
       ./emulator/bin/run-test-emulator
   # ---- >8 --
+  # Qemu option `-skip-adb-auth` and property `qemu.adb.secure` were apparently added/removed by the following commits:
+  # - https://github.com/aarch64-android-emulator/aarch64-qemu/commit/0af7ed3693fd4bd702c27295c172b6a3846cbe3e
+  #   - Qemu 1 `-skip-adb-auth` hence add property qemu.adb.secure 1 or 0
+  #   - Relevant files: vl-android.c
+  # - https://github.com/aarch64-android-emulator/aarch64-qemu/commit/75221c6b9c945b63e224b5c279f72f0a1fadb219
+  #   - Qemu 2 `-skip-adb-auth` hence add property qemu.adb.secure 1 or 0
+  #   - Relevant files: vl.c
+  # - https://github.com/aarch64-android-emulator/aarch64-qemu/commit/df8017df8da54b45831d3321fc3b1465d17c7c0e#diff-39ad8861af60009df4505f30ed16e6dc
+  #   - Relevant files: vl-android.c → android/qemu1/vl-android.c
+  # - https://github.com/aarch64-android-emulator/aarch64-qemu/commit/9fabd6888e550becfd405cab63358a90032bed5a
+  #   - Deprecate qemu.adb.secure
+  #   - Relevant files android/qemu1/vl-android.c vl.c
+  #   - This was Mar 2017.  Option `-skip-adb-auth` has been used in:
+  #     - [Initial commit in Jun 2019 in Google
+  #       repository](https://github.com/google/android-emulator-container-scripts/commit/d1ee84773ebd5ee938968cb04c9fee0cc73f657e#diff-5b74f0d89a3b199c905f1d296734c219R109).
+  #     - Emulator command line review [commit in Jan 2018 in Mozilla
+  #       repository](https://github.com/mozilla/gecko/commit/75ccc798d2027838b3f0aa221f9c392aab9246b4).
+  #
   # See also https://developer.android.com/studio/run/emulator-commandline
   #
   - adb devices -l
