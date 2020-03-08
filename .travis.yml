@@ -31,7 +31,11 @@ install:
     nix-build
     -Q
     -E '
-      with import <nixpkgs> {
+      with import (builtins.fetchGit {
+        url = "https://github.com/lucafavatella/nixpkgs.git";
+        ref = "emulator-google_apis_playstore";
+        rev = "8ccc3870b0dca42593067c5bd78761f5d6f9da6b";
+      }) {
         config.android_sdk.accept_license = true;
       };
       androidenv.emulateApp {
