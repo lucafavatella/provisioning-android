@@ -84,18 +84,6 @@ install:
   - test -f platform-tools/bin/adb  # Ref https://github.com/NixOS/nixpkgs/blob/8d178aeed27482df666208a96b04357afc9726ad/pkgs/development/mobile/androidenv/compose-android-packages.nix#L254
 before_script:
   - export PATH="$(pwd)/platform-tools/bin:${PATH?}"
-  # Enable connection from adb (emulator console not required).  References:
-  # - `adb --help`.
-  # - https://github.com/google/android-emulator-container-scripts/issues/79#issuecomment-561725903
-  # - https://github.com/google/android-emulator-container-scripts/blob/48e37e49c67ba1d052ed6804364040f74fe55e99/emu/templates/launch-emulator.sh#L26-L64
-  # - https://github.com/google/android-emulator-container-scripts/blob/48e37e49c67ba1d052ed6804364040f74fe55e99/run.sh#L17
-  - adb kill-server || true
-  - adb start-server
-  - export ADB_KEY="${HOME:?}/.android/adbkey"
-  - echo "${ADB_KEY:?}"
-  - test -f "${ADB_KEY:?}"
-  - export ADB_VENDOR_KEYS="${ADB_KEY:?}"
-  - adb kill-server
   #
   - ls -l emulator/bin/run-test-emulator  # Debug.
   - cat emulator/bin/run-test-emulator  # Debug - for investigating command hanging on `adb -s emulator-$port wait-for-device` for image `google_apis_playstore` but not `default`.
