@@ -143,6 +143,7 @@ before_script:
 script:
   - make -f android-one.mk list-devices
   - make -f android-one.mk list-abis
-  - ! make -f android-one.mk is-android-one-provisioned
+  - |
+    ! make -f android-one.mk is-android-one-provisioned
   - make -f android-one.mk automatically-provision-android-one
   - make -f android-one.mk is-android-one-provisioned
