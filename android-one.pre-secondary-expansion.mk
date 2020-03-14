@@ -263,10 +263,10 @@ disable-google-packages: \
 	$(MAKE) are-google-packages-disabled-or-enabled-correctly
 
 ifneq ($(strip $(filter-out $(packages),$(google_packages_to_be_disabled))),)
-$(error Misconfigured package(s) to be disabled $(filter-out $(packages),$(google_packages_to_be_disabled)))
+$(warning Misconfigured package(s) to be disabled $(filter-out $(packages),$(google_packages_to_be_disabled)))
 endif
 ifneq ($(strip $(filter-out $(packages),$(google_packages_not_to_be_disabled))),)
-$(error Misconfigured package(s) not to be disabled $(filter-out $(packages),$(google_packages_not_to_be_disabled)))
+$(warning Misconfigured package(s) not to be disabled $(filter-out $(packages),$(google_packages_not_to_be_disabled)))
 endif
 .PHONY: are-google-packages-disabled-or-enabled-correctly
 are-google-packages-disabled-or-enabled-correctly: \

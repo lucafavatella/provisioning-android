@@ -61,7 +61,7 @@ disable-hmd-packages: \
 	$(MAKE) are-hmd-packages-disabled-or-enabled-correctly
 
 ifneq ($(strip $(filter-out $(packages),$(sprout_packages_to_be_disabled))),)
-$(error Misconfigured package(s) to be disabled $(filter-out $(packages),$(sprout_packages_to_be_disabled)))
+$(warning Misconfigured package(s) to be disabled $(filter-out $(packages),$(sprout_packages_to_be_disabled)))
 endif
 .PHONY: are-hmd-packages-disabled-or-enabled-correctly
 are-hmd-packages-disabled-or-enabled-correctly: \
