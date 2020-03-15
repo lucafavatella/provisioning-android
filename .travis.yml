@@ -91,10 +91,6 @@ before_script:
   # - https://github.com/google/android-emulator-container-scripts/blob/48e37e49c67ba1d052ed6804364040f74fe55e99/run.sh#L17
   - adb kill-server || true
   - adb start-server
-  - export ADB_KEY="${HOME:?}/.android/adbkey"
-  - echo "${ADB_KEY:?}"
-  - test -f "${ADB_KEY:?}"
-  - export ADB_VENDOR_KEYS="${ADB_KEY:?}"
   - adb kill-server
   #
   # From https://github.com/ankidroid/Anki-Android/blob/402d70b0d5fbd210b765766b354147dd2a98470c/.travis.yml#L111-L117
