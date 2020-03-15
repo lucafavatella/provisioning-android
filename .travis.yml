@@ -97,14 +97,6 @@ before_script:
   - export ADB_VENDOR_KEYS="${ADB_KEY:?}"
   - adb kill-server
   #
-  - ls -l emulator/bin/run-test-emulator  # Debug.
-  - cat emulator/bin/run-test-emulator  # Debug - for investigating command hanging on `adb -s emulator-$port wait-for-device` for image `google_apis_playstore` but not `default`.
-  - cp -p emulator/bin/run-test-emulator /tmp/emulator-bin-run-test-emulator  # HACK.
-  - sed -i -e 's|\(^/nix/store/[^-]*-androidsdk/libexec/android-sdk/platform-tools/adb -s emulator-$port wait-for-device\)$|echo SKIP \1|' /tmp/emulator-bin-run-test-emulator  # HACK.
-  - sudo cp -p /tmp/emulator-bin-run-test-emulator emulator/bin/run-test-emulator  # HACK.
-  - ls -l emulator/bin/run-test-emulator  # Debug.
-  - cat emulator/bin/run-test-emulator  # Debug.
-  #
   # From https://github.com/ankidroid/Anki-Android/blob/402d70b0d5fbd210b765766b354147dd2a98470c/.travis.yml#L111-L117
   # with changes to the emulator command being called and to the
   # parameters passed.
