@@ -371,6 +371,12 @@ revoke-permission-%-package:
 		$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) deny, \
 		$(ADB) shell pm revoke $(call revoke_pkg,$*) $(call revoke_perm,$*))
 
+# XXX This shall be allowed.
+.PHONY: revoke-permission-android.permission.WRITE_SETTINGS-from-com.android.settings-package
+revoke-permission-android.permission.WRITE_SETTINGS-from-com.android.settings-package: \
+	revoke-permission-%-package:
+	$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) default
+
 targets_for_not_revoking_non_revocable_permissions_from_packages = \
 	$(patsubst %,revoke-permission-%-package, \
 		$(non_revocable_permissions_from_packages) \
