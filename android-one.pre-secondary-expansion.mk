@@ -37,7 +37,7 @@ manually-provision-android-one: \
 .PHONY: is-android-one-provisioned
 is-android-one-provisioned: \
 	are-google-packages-disabled-or-enabled-correctly \
-	are-revocable-special-permissions-revoked-from-all-packages \
+	are-revocable-special-permissions-revoked-from-or-granted-to-all-packages-correctly \
 	is-special-access-data_saver-revoked-from-all-packages \
 	are-dangerous-permissions-revoked-from-all-packages \
 	; $(warning This target performs only partial checks)
@@ -596,12 +596,12 @@ $(error Misconfigured revocable special permission(s) $(filter-out $(permissions
 endif
 .PHONY: revoke-revocable-special-permissions-from-all-packages
 revoke-revocable-special-permissions-from-all-packages: \
-	$(patsubst %,revoke-revocable-special-permissions-from-package-%,$(packages)) \
-	;
+	$(patsubst %,revoke-revocable-special-permissions-from-package-%,$(packages))
+	$(MAKE) are-revocable-special-permissions-revoked-from-or-granted-to-all-packages-correctly
 
-.PHONY: are-revocable-special-permissions-revoked-from-all-packages
-are-revocable-special-permissions-revoked-from-all-packages: \
-	$(patsubst %,are-revocable-special-permissions-revoked-from-package-%,$(packages)) \
+.PHONY: are-revocable-special-permissions-revoked-from-or-granted-to-all-packages-correctly
+are-revocable-special-permissions-revoked-from-or-granted-to-all-packages-correctly: \
+	$(patsubst %,are-revocable-special-permissions-revoked-from-or-granted-to-package-%,$(packages)) \
 	;
 
 .PHONY: revoke-revocable-special-accesses-from-all-packages

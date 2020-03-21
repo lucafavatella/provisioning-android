@@ -38,7 +38,7 @@ revoke-revocable-special-permissions-from-package-%: \
 	$$(foreach p,$$(filter $$(call permissions_requested_by_package,$$*),$$(revocable_special_permissions)),revoke-permission-$$(p)-from-$$*-package) \
 	;
 
-.PHONY: are-revocable-special-permissions-revoked-from-package-%
-are-revocable-special-permissions-revoked-from-package-%: \
+.PHONY: are-revocable-special-permissions-revoked-from-or-granted-to-package-%
+are-revocable-special-permissions-revoked-from-or-granted-to-package-%: \
 	$$(foreach p,$$(filter $$(call permissions_requested_by_package,$$*),$$(revocable_special_permissions)),is-permission-$$(p)-revoked-from-$$*-package) \
 	;
