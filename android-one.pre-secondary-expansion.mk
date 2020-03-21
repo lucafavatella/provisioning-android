@@ -625,6 +625,10 @@ prompt-managing-special-accesses: \
 
 # ---- Misc ----
 
+.PHONY: dump-intent-activity-resolver-table
+dump-intent-activity-resolver-table:
+	$(ADB) shell dumpsys package -f resolvers activity
+
 .PHONY: prompt-managing-default-apps
 prompt-managing-default-apps:
 	$(adb_wakeup)
