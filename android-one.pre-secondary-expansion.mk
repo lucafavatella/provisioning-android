@@ -682,11 +682,6 @@ install-gallery: install-com.simplemobiletools.gallery.pro.apk ;
 .PHONY: install-keyboard
 install-keyboard: install-com.menny.android.anysoftkeyboard.apk ;
 
-.PHONY: install-com.menny.android.anysoftkeyboard.apk
-install-com.menny.android.anysoftkeyboard.apk: \
-	install-%.apk: var/cache/fdroidcl/apks/%.apk
-	adb install --user current $<
-
 .PHONY: configure-keyboard
 configure-keyboard: configure-com.menny.android.anysoftkeyboard.apk ;
 
