@@ -276,7 +276,7 @@ are-google-packages-disabled-or-enabled-correctly: \
 
 .PHONY: clear-package-com.android.chrome
 clear-package-com.android.chrome: clear-package-%:
-	adb shell pm clear $*
+	$(ADB) shell pm clear $*
 
 # ---- List Permissions across Packages ----
 
@@ -728,12 +728,12 @@ install-logcat: install-com.dp.logcatapp.apk ;
 .PHONY: install-com.dp.logcatapp.apk
 install-com.dp.logcatapp.apk: \
 	install-%.apk: var/cache/fdroidcl/apks/%.apk
-	adb install --user current $<
+	$(ADB) install --user current $<
 	$(MAKE) configure-$*.apk
 
 .PHONY: configure-com.dp.logcatapp.apk
 configure-com.dp.logcatapp.apk: configure-%.apk:
-	adb shell pm grant --user $(ADB_USER_ID) $* android.permission.READ_LOGS
+	$(ADB) shell pm grant --user $(ADB_USER_ID) $* android.permission.READ_LOGS
 
 .PHONY: install-maps
 install-maps: install-net.osmand.plus.apk ;
@@ -782,7 +782,7 @@ install-messaging-extra: install-com.whatsapp.apk
 
 .PHONY: install-com.whatsapp.apk
 install-com.whatsapp.apk: var/cache/whatsapp/com.whatsapp.apk
-	adb install --user current $<
+	$(ADB) install --user current $<
 
 .SECONDARY: var/cache/whatsapp/com.whatsapp.apk
 var/cache/whatsapp/com.whatsapp.apk: ; $(MAKE) -f Makefile.whatsapp $@
@@ -801,7 +801,7 @@ revoke-permission-android.permission.CHANGE_WIFI_STATE-from-com.vonglasow.michae
 
 .PHONY: install-%.apk
 install-%.apk: var/cache/fdroidcl/apks/%.apk
-	adb install --user current $<
+	$(ADB) install --user current $<
 
 .PRECIOUS: var/cache/fdroidcl/apks/%.apk
 var/cache/fdroidcl/apks/%.apk: ; $(MAKE) -f Makefile.fdroidcl $@
