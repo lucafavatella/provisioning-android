@@ -257,6 +257,9 @@ list-packages-by-uid-%: ; @echo $(call packages_by_uid,$*)
 .PHONY: disable-package-%
 disable-package-%: ; $(ADB) shell pm disable-user --user $(ADB_USER_ID) $*
 
+.PHONY: enable-package-%
+enable-package-%: ; $(ADB) shell pm enable $*
+
 .PHONY: disable-google-packages
 disable-google-packages: \
 	$(patsubst %,disable-package-%,$(google_packages_to_be_disabled))
