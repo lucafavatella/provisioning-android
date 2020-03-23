@@ -374,6 +374,17 @@ revoke-permission-%-package:
 		$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) deny, \
 		$(ADB) shell pm revoke $(call revoke_pkg,$*) $(call revoke_perm,$*))
 
+grant_perm_pkg_sep = -to-
+grant_pkg = $(word 2,$(subst $(grant_perm_pkg_sep), ,$(1)))
+grant_perm = $(word 1,$(subst $(grant_perm_pkg_sep), ,$(1)))
+
+.PHONY: grant-permission-%-package
+grant-permission-%-package:
+	$(if \
+		$(filter $(revocable_special_permissions),$(call grant_perm,$*)), \
+		$(error Granting appop unimplemented), \
+		$(ADB) shell pm grant --user $(ADB_USER_ID) $(call grant_pkg,$*) $(call grant_perm,$*))
+
 # XXX This shall be allowed.
 .PHONY: revoke-permission-android.permission.WRITE_SETTINGS-from-com.android.settings-package
 revoke-permission-android.permission.WRITE_SETTINGS-from-com.android.settings-package: \
@@ -736,7 +747,7 @@ install-com.dp.logcatapp.apk: \
 
 .PHONY: configure-com.dp.logcatapp.apk
 configure-com.dp.logcatapp.apk: configure-%.apk:
-	$(ADB) shell pm grant --user $(ADB_USER_ID) $* android.permission.READ_LOGS
+	$(MAKE) grant-permission-android.permission.READ_LOGS-to-$*-package
 
 .PHONY: install-maps
 install-maps: install-net.osmand.plus.apk ;
