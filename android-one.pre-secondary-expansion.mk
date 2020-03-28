@@ -819,3 +819,6 @@ install-%.apk: var/cache/fdroidcl/apks/%.apk
 
 .PRECIOUS: var/cache/fdroidcl/apks/%.apk
 var/cache/fdroidcl/apks/%.apk: ; $(MAKE) -f Makefile.fdroidcl $@
+
+.PHONY: uninstall-%
+uninstall-%: ; $(ADB) uninstall $*
