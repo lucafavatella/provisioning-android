@@ -647,6 +647,12 @@ dump-intent-activity-resolver-table:
 dump-content-providers:
 	$(ADB) shell dumpsys package providers
 
+# XXX Fragile.
+.PHONY: list-content-provider-authorities
+list-content-provider-authorities:
+	$(MAKE) -s dump-content-providers \
+		| sed -n -e 's/^  \[\([^]]*\)\]:$$/\1/p'
+
 .PHONY: prompt-managing-default-apps
 prompt-managing-default-apps:
 	$(adb_wakeup)
