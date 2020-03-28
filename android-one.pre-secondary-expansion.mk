@@ -653,6 +653,13 @@ list-content-provider-authorities:
 	$(MAKE) -s dump-content-providers \
 		| sed -n -e 's/^  \[\([^]]*\)\]:$$/\1/p'
 
+.PHONY: account-identifier-of-raw_contact-%
+account-identifier-of-raw_contact-%:
+	$(ADB) shell content query \
+		--uri content://com.android.contacts/raw_contacts \
+		--projection "account_type:account_name" \
+		--where "display_name=\'$*\'"
+
 .PHONY: prompt-managing-default-apps
 prompt-managing-default-apps:
 	$(adb_wakeup)
