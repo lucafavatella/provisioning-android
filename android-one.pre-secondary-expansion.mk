@@ -653,13 +653,6 @@ list-content-provider-authorities:
 	$(MAKE) -s dump-content-providers \
 		| sed -n -e 's/^  \[\([^]]*\)\]:$$/\1/p'
 
-.PHONY: account-identifier-of-contact-%
-account-identifier-of-contact-%:
-	$(ADB) shell content query \
-		--uri content://com.android.contacts/contacts \
-		--projection "account_type:account_name" \
-		--where "display_name=\'$*\'"
-
 .PHONY: prompt-managing-default-apps
 prompt-managing-default-apps:
 	$(adb_wakeup)
@@ -697,44 +690,6 @@ install-camera: install-net.sourceforge.opencamera.apk ;
 
 .PHONY: install-contacts
 install-contacts: install-com.simplemobiletools.contacts.pro.apk ;
-
-.PHONY: configure-contacts
-configure-contacts: configure-com.simplemobiletools.contacts.pro.apk ;
-
-# Attempt working around contact visibility bug.
-#
-# References for bug:
-# - ["Only "not visible by other" contacts
-#   displayed"](https://github.com/SimpleMobileTools/Simple-Contacts/issues/370).
-# - ["Cannot add new contacts on factory reset phone without first
-#   adding one contact with Google
-#   Contacts"](https://github.com/SimpleMobileTools/Simple-Contacts/issues/491).
-#
-# See also ["Accessing wrong internal contact database on Android Pie
-# (LOS16)"](https://github.com/SimpleMobileTools/Simple-Contacts/issues/518).
-.PHONY: configure-com.simplemobiletools.contacts.pro.apk
-configure-com.simplemobiletools.contacts.pro.apk: c = com.google.android.contacts
-configure-com.simplemobiletools.contacts.pro.apk: w = android.permission.WRITE_CONTACTS
-configure-com.simplemobiletools.contacts.pro.apk: r = android.permission.READ_CONTACTS
-configure-com.simplemobiletools.contacts.pro.apk: t = contact
-configure-com.simplemobiletools.contacts.pro.apk: n = ContactsInitWorkaround
-configure-com.simplemobiletools.contacts.pro.apk: configure-%.apk:
-	$(MAKE) enable-package-$(c)
-	$(MAKE) grant-permission-$(w)-to-$(c)-package
-	$(MAKE) grant-permission-$(r)-to-$(c)-package
-	$(ADB) shell am start \
-		-a android.intent.action.INSERT \
-		-t vnd.android.cursor.dir/$(t) \
-		-n $(c)/com.google.android.apps.contacts.editorlite.ContactsEditorlite \
-		-e "name" "$(n)" \
-		-e "phone" "5551234567890" \
-		-e "notes" "Simple-Contacts_370_491"
-	$(adb_wakeup)
-	@echo "Once you contact is added, press the enter key."
-	@head -n 1
-	-$(MAKE) account-identifier-of-$(t)-$(n)
-	$(MAKE) disable-package-$(c)
-	$(MAKE) revoke-dangerous-permissions-from-package-$(c)
 
 .PHONY: install-dialer
 install-dialer: install-com.simplemobiletools.contacts.pro.apk ;
