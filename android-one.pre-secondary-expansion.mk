@@ -9,7 +9,6 @@ automatically-provision-android-one: \
 	install-calculator \
 	install-calendar \
 	install-camera \
-	install-contacts \
 	install-docs-pdf \
 	install-file-manager \
 	install-gallery \
@@ -87,6 +86,7 @@ google_packages_not_to_be_disabled = \
 	com.android.traceur \
 	com.android.vpndialogs \
 	com.google.android.configupdater \
+	com.google.android.contacts \
 	com.google.android.deskclock \
 	com.google.android.dialer \
 	com.google.android.gms \
@@ -686,9 +686,6 @@ install-calendar: install-com.simplemobiletools.calendar.pro.apk ;
 
 .PHONY: install-camera
 install-camera: install-net.sourceforge.opencamera.apk ;
-
-.PHONY: install-contacts
-install-contacts: install-com.simplemobiletools.contacts.pro.apk ;
 
 .PHONY: install-docs-pdf
 install-docs-pdf: install-com.artifex.mupdf.viewer.app.apk ;
