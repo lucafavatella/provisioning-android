@@ -14,6 +14,7 @@ automatically-provision-android-one: \
 	install-gallery \
 	install-keyboard \
 	install-logcat \
+	install-mail \
 	install-maps \
 	install-media-player \
 	install-messaging \
@@ -751,6 +752,9 @@ install-com.dp.logcatapp.apk: \
 .PHONY: configure-com.dp.logcatapp.apk
 configure-com.dp.logcatapp.apk: configure-%.apk:
 	$(MAKE) grant-permission-android.permission.READ_LOGS-to-$*-package
+
+.PHONY: install-mail
+install-mail: install-com.fsck.k9.apk ;
 
 .PHONY: install-maps
 install-maps: install-net.osmand.plus.apk ;
