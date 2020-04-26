@@ -30,8 +30,10 @@ automatically-provision-android-one: \
 
 .PHONY: manually-provision-android-one
 manually-provision-android-one: \
+	install-password-manager \
 	configure-keyboard \
 	configure-mail \
+	configure-password-manager \
 	prompt-managing-special-accesses \
 	prompt-managing-default-apps \
 	;
@@ -42,6 +44,7 @@ is-android-one-provisioned: \
 	are-revocable-special-permissions-revoked-from-all-packages \
 	is-special-access-data_saver-revoked-from-all-packages \
 	are-dangerous-permissions-revoked-from-all-packages \
+	is-password-manager-enabled \
 	; $(warning This target performs only partial checks)
 
 # ==== Internal Rules and Variables ====
@@ -821,6 +824,35 @@ var/cache/whatsapp/com.whatsapp.apk: ; $(MAKE) -f Makefile.whatsapp $@
 
 .PHONY: install-notes
 install-notes: install-com.simplemobiletools.notes.pro.apk ;
+
+.PHONY: install-password-manager
+install-password-manager: install-com.x8bit.bitwarden.apk ;
+
+.PHONY: install-com.x8bit.bitwarden.apk
+install-com.x8bit.bitwarden.apk: c = org.fdroid.fdroid
+# From https://github.com/bitwarden/mobile/blame/v2.3.1/README.md#L7
+install-com.x8bit.bitwarden.apk: r = https://mobileapp.bitwarden.com/fdroid/
+install-com.x8bit.bitwarden.apk: install-%.apk:
+	$(adb_wakeup)
+	$(ADB) shell am start \
+		-n $(c)/.views.main.MainActivity \
+		-a android.intent.action.VIEW \
+		"$(r)"
+	@echo "Once you add the repo and install application $*, press the enter key."
+	@head -n 1
+	$(MAKE) is-password-manager-enabled
+
+.PHONY: is-password-manager-enabled
+is-password-manager-enabled: is-package-com.x8bit.bitwarden-enabled ;
+
+.PHONY: configure-password-manager
+configure-password-manager: configure-com.x8bit.bitwarden.apk ;
+
+.PHONY: configure-com.x8bit.bitwarden.apk
+configure-com.x8bit.bitwarden.apk: configure-%.apk:
+	$(adb_wakeup)
+	@echo "Once you configure application $*, press the enter key."
+	@head -n 1
 
 .PHONY: install-sensor-stats
 install-sensor-stats: install-com.vonglasow.michael.satstat.apk ;
