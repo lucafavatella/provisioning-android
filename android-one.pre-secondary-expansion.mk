@@ -754,6 +754,9 @@ install-com.dp.logcatapp.apk: \
 configure-com.dp.logcatapp.apk: configure-%.apk:
 	$(MAKE) grant-permission-android.permission.READ_LOGS-to-$*-package
 
+.PHONY: install-mail
+install-mail: install-com.fsck.k9.apk ;
+
 .PHONY: configure-mail
 configure-mail: configure-com.fsck.k9.apk
 
@@ -763,9 +766,6 @@ configure-com.fsck.k9.apk: configure-%.apk:
 	@echo "Once you configure application $*, press the enter key."
 	@echo "* Settings > Global settings > Interaction > Confirm actions: Tick all"
 	@head -n 1
-
-.PHONY: install-mail
-install-mail: install-com.fsck.k9.apk ;
 
 .PHONY: install-maps
 install-maps: install-net.osmand.plus.apk ;
