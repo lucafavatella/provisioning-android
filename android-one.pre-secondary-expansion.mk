@@ -31,6 +31,7 @@ automatically-provision-android-one: \
 .PHONY: manually-provision-android-one
 manually-provision-android-one: \
 	configure-keyboard \
+	configure-mail \
 	prompt-managing-special-accesses \
 	prompt-managing-default-apps \
 	;
@@ -752,6 +753,16 @@ install-com.dp.logcatapp.apk: \
 .PHONY: configure-com.dp.logcatapp.apk
 configure-com.dp.logcatapp.apk: configure-%.apk:
 	$(MAKE) grant-permission-android.permission.READ_LOGS-to-$*-package
+
+.PHONY: configure-mail
+configure-mail: configure-com.fsck.k9.apk
+
+.PHONY: configure-com.fsck.k9.apk
+configure-com.fsck.k9.apk: configure-%.apk:
+	$(adb_wakeup)
+	@echo "Once you configure application $*, press the enter key."
+	@echo "* Settings > Global settings > Interaction > Confirm actions: Tick all"
+	@head -n 1
 
 .PHONY: install-mail
 install-mail: install-com.fsck.k9.apk ;
