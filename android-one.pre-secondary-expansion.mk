@@ -870,6 +870,7 @@ configure-password-manager: configure-com.x8bit.bitwarden.apk ;
 configure-com.x8bit.bitwarden.apk: configure-%.apk:
 	$(adb_wakeup)
 	@echo "Once you configure application $*, press the enter key."
+	@echo "* Settings > Unlock with Fingerprint"
 	@head -n 1
 
 .PHONY: install-sensor-stats

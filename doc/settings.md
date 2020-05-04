@@ -16,6 +16,8 @@ Security & location
   - (Should) Untoggle "Scan device for security threats"
 - Find My Device
   - (Should) Untoggle "On"
+- Fingerprint
+  - (Must) Select "Add fingerprint"
 - (Should) Untoggle "Show passwords"
 - Trust agents
   - (Must) Untoggle "Smart Lock (Google)"
