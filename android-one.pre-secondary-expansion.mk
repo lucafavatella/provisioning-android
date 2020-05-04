@@ -34,6 +34,7 @@ manually-provision-android-one: \
 	install-password-manager \
 	configure-keyboard \
 	configure-mail \
+	configure-mail-extra \
 	configure-password-manager \
 	prompt-managing-special-accesses \
 	prompt-managing-default-apps \
@@ -779,6 +780,12 @@ install-mail-extra:
 	$(adb_wakeup)
 	$(ADB) shell am start -a android.intent.action.VIEW -d "$(u)"
 	@echo "Once you install application from $(u), press the enter key."
+	@head -n 1
+
+.PHONY: configure-mail-extra
+configure-mail-extra:
+	$(adb_wakeup)
+	@echo "Once you configure application mail extra, press the enter key."
 	@head -n 1
 
 .PHONY: install-maps
