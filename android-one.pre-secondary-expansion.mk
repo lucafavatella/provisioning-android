@@ -30,6 +30,7 @@ automatically-provision-android-one: \
 
 .PHONY: manually-provision-android-one
 manually-provision-android-one: \
+	install-mail-extra \
 	install-password-manager \
 	configure-keyboard \
 	configure-mail \
@@ -769,6 +770,15 @@ configure-com.fsck.k9.apk: configure-%.apk:
 	@echo "Once you configure application $*, press the enter key."
 	@echo "* Settings > Global settings > Interaction > Confirm actions: Tick all"
 	@echo "* Settings > Account settings > Search > Enable server search: Tick (per-account)"
+	@head -n 1
+
+.PHONY: install-mail-extra
+# From https://protonmail.com/support/knowledge-base/android-permissions/#comment-10834
+install-mail-extra: u = https://protonapps.com
+install-mail-extra:
+	$(adb_wakeup)
+	$(ADB) shell am start -a android.intent.action.VIEW -d "$(u)"
+	@echo "Once you install application from $(u), press the enter key."
 	@head -n 1
 
 .PHONY: install-maps
