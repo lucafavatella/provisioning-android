@@ -16,7 +16,6 @@ automatically-provision-android-one: \
 	install-logcat \
 	install-mail \
 	install-maps \
-	install-media-player \
 	install-messaging \
 	install-messaging-extra \
 	install-notes \
@@ -801,9 +800,6 @@ configure-mail-extra:
 
 .PHONY: install-maps
 install-maps: install-net.osmand.plus.apk ;
-
-.PHONY: install-media-player
-install-media-player: install-org.videolan.vlc.apk ;
 
 .PHONY: install-messaging
 install-messaging: install-org.smssecure.smssecure.apk ;
