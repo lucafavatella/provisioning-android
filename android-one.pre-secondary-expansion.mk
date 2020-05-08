@@ -270,6 +270,11 @@ list-packages-by-uid-%: ; @echo $(call packages_by_uid,$*)
 
 # ---- Disable Packages ----
 
+# XXX Reconsider from clean state.
+.PHONY: disable-package-com.google.android.apps.work.oobconfig
+disable-package-com.google.android.apps.work.oobconfig: disable-package-%:
+	$(warning Ignoring disabling $*)
+
 .PHONY: disable-package-%
 disable-package-%: ; $(ADB) shell pm disable-user --user $(ADB_USER_ID) $*
 
