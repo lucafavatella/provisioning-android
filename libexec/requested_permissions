@@ -1,6 +1,9 @@
 #!/bin/sh
 
 REQ_PERMS="requested permissions"
+SEP=":"
+PERM="[^[:space:]${SEP:?}][^[:space:]${SEP:?}]*"
+RESTRICTED_SUFFIX="${SEP:?} restricted=true"
 
 # References:
 # - Hint on usage of `adb shell dumpsys package packagename` for
@@ -28,6 +31,13 @@ keep_only_until_so_indented() {
 
 indentation() {
     sed 's/^\([[:space:]]*\)[^[:space:]].*$/\1/'
+}
+
+perm() {
+    sed \
+        -n \
+        -e 's/^[[:space:]]*\('"${PERM:?}"'\)$/\1/p' \
+        -e 's/^[[:space:]]*\('"${PERM:?}"'\)'"${RESTRICTED_SUFFIX:?}"'$/\1/p'
 }
 
 first_line() {
@@ -83,5 +93,12 @@ PostReqPermsTitleIndentLength=$(echo "${PostReqPermsTitleIndent:?}" \
        -lt ${PostReqPermsTitleIndentLength:?}; } \
     || exit 0  # Assumption: no tabs counting as multiple spaces. # Assumption: There may be no requested permissions.
 
-echo "${PostReqPermsTitle:?}" \
-    | keep_only_until_so_indented "${PostReqPermsTitleIndent:?}"
+ReqPermsRaw="$(echo "${PostReqPermsTitle:?}" \
+                    | keep_only_until_so_indented "${PostReqPermsTitleIndent:?}")"
+ReqPerms="$(echo "${ReqPermsRaw:?}" \
+                 | perm)"
+{ test $(echo "${ReqPermsRaw:?}" | n_lines) \
+       -eq \
+       $(echo "${ReqPerms:?}" | n_lines); } \
+    || exit 1
+echo "${ReqPerms:?}"
