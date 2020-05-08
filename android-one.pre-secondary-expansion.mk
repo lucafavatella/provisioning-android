@@ -59,7 +59,6 @@ google_packages_not_to_be_disabled = \
 	com.android.cellbroadcastreceiver \
 	com.android.certinstaller \
 	com.android.chrome \
-	com.android.defcontainer \
 	com.android.documentsui \
 	com.android.emergency \
 	com.android.externalstorage \
@@ -82,14 +81,10 @@ google_packages_not_to_be_disabled = \
 	com.android.server.telecom \
 	com.android.settings \
 	com.android.settings.intelligence \
-	com.android.settings.overlay.cmcc \
 	com.android.settings.overlay.common \
 	com.android.shell \
 	com.android.storagemanager \
 	com.android.systemui \
-	com.android.systemui.overlay.cmcc \
-	com.android.systemui.overlay.ct \
-	com.android.systemui.theme.dark \
 	com.android.traceur \
 	com.android.vpndialogs \
 	com.google.android.configupdater \

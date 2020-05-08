@@ -13,8 +13,6 @@ non_revocable_dangerous_permissions_from_packages = \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.bluetooth \
 	android.permission.RECEIVE_SMS-from-com.android.cellbroadcastreceiver \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.android.companiondevicemanager \
-	android.permission.READ_EXTERNAL_STORAGE-from-com.android.defcontainer \
-	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.defcontainer \
 	android.permission.CALL_PHONE-from-com.android.emergency \
 	android.permission.READ_CONTACTS-from-com.android.emergency \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.externalstorage \
