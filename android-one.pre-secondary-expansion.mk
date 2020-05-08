@@ -25,6 +25,7 @@ automatically-provision-android-one: \
 	disable-google-packages \
 	revoke-revocable-special-accesses-from-all-packages \
 	revoke-dangerous-permissions-from-all-packages \
+	clear-package-com.android.chrome \
 	disable-nfc \
 	; $(info Assumption: Android One systems are similar across Original Equipment Manufacturers)
 
@@ -58,7 +59,6 @@ google_packages_not_to_be_disabled = \
 	com.android.bluetooth \
 	com.android.cellbroadcastreceiver \
 	com.android.certinstaller \
-	com.android.chrome \
 	com.android.documentsui \
 	com.android.emergency \
 	com.android.externalstorage \
@@ -93,7 +93,8 @@ google_packages_not_to_be_disabled = \
 	com.google.android.dialer \
 	com.google.android.gms \
 	com.google.android.gsf \
-	com.google.android.packageinstaller
+	com.google.android.packageinstaller \
+	com.google.android.webview
 google_packages_to_be_disabled = \
 	com.android.vending \
 	$(filter-out $(google_packages_not_to_be_disabled),$(call filter_packages_by_prefix,com.android,$(packages))) \
