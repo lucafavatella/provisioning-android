@@ -1,11 +1,9 @@
 ## Messages
 
-Settings
-- Suggestions in chat
-  - (Should) Untoggle "Smart Reply"
-  - (Should) Untoggle "Suggested actions"
-- Automatic previews
-  - (Should) Untoggle "Show only web link previews"
-- Advanced
+Settings > General
+- General
+  - Automatic previews
+    - (Must) Untoggle "Show only web link previews"
+- Per-SIM
   - Spam protection
     - (Must) Untoggle "Enable spam protection"

@@ -16,7 +16,6 @@ automatically-provision-android-one: \
 	install-logcat \
 	install-mail \
 	install-maps \
-	install-messaging \
 	install-messaging-extra \
 	install-notes \
 	install-org.fdroid.fdroid.apk \
@@ -92,6 +91,7 @@ google_packages_not_to_be_disabled = \
 	com.android.systemui \
 	com.android.traceur \
 	com.android.vpndialogs \
+	com.google.android.apps.messaging \
 	com.google.android.configupdater \
 	com.google.android.contacts \
 	com.google.android.deskclock \
@@ -805,9 +805,6 @@ configure-mail-extra:
 
 .PHONY: install-maps
 install-maps: install-net.osmand.plus.apk ;
-
-.PHONY: install-messaging
-install-messaging: install-com.simplemobiletools.smsmessenger.apk ;
 
 .PHONY: configure-messaging
 configure-messaging: prompt-configuring-smsc ;
