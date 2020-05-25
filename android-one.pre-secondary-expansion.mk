@@ -807,7 +807,7 @@ configure-mail-extra:
 install-maps: install-net.osmand.plus.apk ;
 
 .PHONY: install-messaging
-install-messaging: install-org.smssecure.smssecure.apk ;
+install-messaging: install-com.simplemobiletools.smsmessenger.apk ;
 
 .PHONY: configure-messaging
 configure-messaging: prompt-configuring-smsc ;

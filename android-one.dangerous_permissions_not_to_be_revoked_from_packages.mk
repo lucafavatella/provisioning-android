@@ -27,10 +27,7 @@ dangerous_permissions_not_to_be_revoked_from_packages = \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-net.sourceforge.opencamera \
 	android.permission.READ_EXTERNAL_STORAGE-from-org.mozilla.fennec_fdroid \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-org.mozilla.fennec_fdroid \
-	android.permission.READ_CONTACTS-from-org.smssecure.smssecure \
-	android.permission.READ_PHONE_STATE-from-org.smssecure.smssecure \
-	android.permission.RECEIVE_MMS-from-org.smssecure.smssecure \
-	android.permission.RECEIVE_SMS-from-org.smssecure.smssecure \
-	android.permission.SEND_SMS-from-org.smssecure.smssecure \
-	android.permission.WRITE_CONTACTS-from-org.smssecure.smssecure \
+	android.permission.READ_CONTACTS-from-com.simplemobiletools.smsmessenger \
+	android.permission.READ_SMS-from-com.simplemobiletools.smsmessenger \
+	android.permission.SEND_SMS-from-com.simplemobiletools.smsmessenger \
 	
