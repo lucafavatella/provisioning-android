@@ -11,7 +11,7 @@ clean: \
 
 work_dir = var/cache/whatsapp
 .PHONY: clean-cache
-clean-cache: ; rm -r $(work_dir)
+clean-cache: ; rm -rf $(work_dir)
 
 $(work_dir)/$(package).apk: $(work_dir)/$(package).url
 	cat $<
