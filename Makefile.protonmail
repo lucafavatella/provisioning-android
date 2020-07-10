@@ -1,0 +1,26 @@
+.DEFAULT_GOAL = clean
+
+.DELETE_ON_ERROR:
+
+package = ch.protonmail.android
+
+.PHONY: clean
+clean: \
+	clean-cache \
+	;
+
+work_dir = var/cache/protonmail
+.PHONY: clean-cache
+clean-cache: ; rm -rf $(work_dir)
+
+# From https://protonmail.com/support/knowledge-base/android-permissions/#comment-10834
+# via https://protonapps.com
+apk_url = https://protonmail.com/download/MailAndroid/ProtonMail-Android.apk
+
+get = curl -sSf -o $(3) --create-dirs $(2) $(1)
+
+$(work_dir)/$(package).apk: ; $(call get,$(apk_url),,$@)
+
+.PHONY: $(work_dir)/$(package).apk-if-modified
+$(work_dir)/$(package).apk-if-modified: %-if-modified:
+	$(call get,$(apk_url),-z $*,$*)

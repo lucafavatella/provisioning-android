@@ -792,14 +792,14 @@ configure-com.fsck.k9.apk: configure-%.apk:
 .PHONY: install-mail-extra
 install-mail-extra: install-ch.protonmail.android.apk ;
 
-# From https://protonmail.com/support/knowledge-base/android-permissions/#comment-10834
-install-ch.protonmail.android.apk: u = https://protonapps.com
-install-ch.protonmail.android.apk: install-%.apk:
-	$(adb_wakeup)
-	$(ADB) shell am start -a android.intent.action.VIEW -d "$(u)"
-	@echo "Once you install application from $(u), press the enter key."
-	@head -n 1
-	$(MAKE) is-package-$*-enabled
+.PHONY: install-ch.protonmail.android.apk
+install-ch.protonmail.android.apk: \
+	var/cache/protonmail/ch.protonmail.android.apk
+	$(ADB) install --user current $<
+
+.PHONY: var/cache/protonmail/ch.protonmail.android.apk
+var/cache/protonmail/ch.protonmail.android.apk:
+	$(MAKE) -f Makefile.protonmail $@-if-modified
 
 .PHONY: is-mail-extra-enabled
 is-mail-extra-enabled: is-package-ch.protonmail.android-enabled ;
