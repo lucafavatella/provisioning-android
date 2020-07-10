@@ -1,4 +1,6 @@
 dangerous_permissions_not_to_be_revoked_from_packages = \
+	android.permission.READ_EXTERNAL_STORAGE-from-ch.protonmail.android \
+	android.permission.WRITE_EXTERNAL_STORAGE-from-ch.protonmail.android \
 	android.permission.READ_CONTACTS-from-com.fsck.k9 \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.fsck.k9 \
 	android.permission.WRITE_CONTACTS-from-com.fsck.k9 \

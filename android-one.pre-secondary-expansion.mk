@@ -45,6 +45,7 @@ is-android-one-provisioned: \
 	are-revocable-special-permissions-revoked-from-all-packages \
 	is-special-access-data_saver-revoked-from-all-packages \
 	are-dangerous-permissions-revoked-from-all-packages \
+	is-mail-extra-enabled \
 	is-password-manager-enabled \
 	; $(warning This target performs only partial checks)
 
@@ -789,13 +790,19 @@ configure-com.fsck.k9.apk: configure-%.apk:
 	@head -n 1
 
 .PHONY: install-mail-extra
+install-mail-extra: install-ch.protonmail.android.apk ;
+
 # From https://protonmail.com/support/knowledge-base/android-permissions/#comment-10834
-install-mail-extra: u = https://protonapps.com
-install-mail-extra:
+install-ch.protonmail.android.apk: u = https://protonapps.com
+install-ch.protonmail.android.apk: install-%.apk:
 	$(adb_wakeup)
 	$(ADB) shell am start -a android.intent.action.VIEW -d "$(u)"
 	@echo "Once you install application from $(u), press the enter key."
 	@head -n 1
+	$(MAKE) is-package-$*-enabled
+
+.PHONY: is-mail-extra-enabled
+is-mail-extra-enabled: is-package-ch.protonmail.android-enabled ;
 
 .PHONY: configure-mail-extra
 configure-mail-extra:
