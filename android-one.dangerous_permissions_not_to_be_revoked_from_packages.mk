@@ -6,6 +6,14 @@ dangerous_permissions_not_to_be_revoked_from_packages = \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.fsck.k9 \
 	android.permission.WRITE_CONTACTS-from-com.fsck.k9 \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.fsck.k9 \
+	android.permission.CALL_PHONE-from-com.google.android.apps.messaging \
+	android.permission.READ_CONTACTS-from-com.google.android.apps.messaging \
+	android.permission.READ_PHONE_STATE-from-com.google.android.apps.messaging \
+	android.permission.READ_SMS-from-com.google.android.apps.messaging \
+	android.permission.RECEIVE_MMS-from-com.google.android.apps.messaging \
+	android.permission.RECEIVE_SMS-from-com.google.android.apps.messaging \
+	android.permission.SEND_SMS-from-com.google.android.apps.messaging \
+	android.permission.WRITE_CONTACTS-from-com.google.android.apps.messaging \
 	android.permission.CALL_PHONE-from-com.google.android.contacts \
 	android.permission.GET_ACCOUNTS-from-com.google.android.contacts \
 	android.permission.READ_CONTACTS-from-com.google.android.contacts \
