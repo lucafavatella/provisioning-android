@@ -867,7 +867,7 @@ install-com.x8bit.bitwarden.apk: install-%.apk:
 		"$(r)"
 	@echo "Once you add the repo and install application $*, press the enter key."
 	@head -n 1
-	$(MAKE) is-password-manager-enabled
+	$(MAKE) is-package-$*-enabled
 
 .PHONY: is-password-manager-enabled
 is-password-manager-enabled: is-package-com.x8bit.bitwarden-enabled ;
