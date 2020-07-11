@@ -17,6 +17,7 @@ automatically-provision-android-one: \
 	install-mail \
 	install-mail-extra \
 	install-maps \
+	install-memorization \
 	install-messaging-extra \
 	install-notes \
 	install-org.fdroid.fdroid.apk \
@@ -812,6 +813,9 @@ configure-mail-extra:
 
 .PHONY: install-maps
 install-maps: install-net.osmand.plus.apk ;
+
+.PHONY: install-memorization
+install-memorization: install-com.ichi2.anki.apk ;
 
 .PHONY: configure-messaging
 configure-messaging: prompt-configuring-smsc ;
