@@ -15,6 +15,7 @@ automatically-provision-android-one: \
 	install-keyboard \
 	install-logcat \
 	install-mail \
+	install-mail-extra \
 	install-maps \
 	install-messaging-extra \
 	install-notes \
@@ -29,7 +30,6 @@ automatically-provision-android-one: \
 
 .PHONY: manually-provision-android-one
 manually-provision-android-one: \
-	install-mail-extra \
 	install-password-manager \
 	configure-keyboard \
 	configure-mail \
