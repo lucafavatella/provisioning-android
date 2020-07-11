@@ -35,6 +35,7 @@ manually-provision-android-one: \
 	configure-keyboard \
 	configure-mail \
 	configure-mail-extra \
+	configure-memorization \
 	configure-password-manager \
 	prompt-managing-special-accesses \
 	prompt-managing-default-apps \
@@ -816,6 +817,16 @@ install-maps: install-net.osmand.plus.apk ;
 
 .PHONY: install-memorization
 install-memorization: install-com.ichi2.anki.apk ;
+
+.PHONY: configure-memorization
+configure-memorization: configure-com.ichi2.anki.apk ;
+
+.PHONY: configure-com.ichi2.anki.apk
+configure-com.ichi2.anki.apk: configure-%.apk:
+	$(adb_wakeup)
+	@echo "Once you configure application $*, press the enter key."
+	@echo "* Decks > + > Get shared decks"
+	@head -n 1
 
 .PHONY: configure-messaging
 configure-messaging: prompt-configuring-smsc ;
