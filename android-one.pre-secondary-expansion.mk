@@ -101,6 +101,7 @@ google_packages_not_to_be_disabled = \
 	com.google.android.dialer \
 	com.google.android.gms \
 	com.google.android.gsf \
+	com.google.android.ims \
 	com.google.android.modulemetadata \
 	com.google.android.overlay.gmsconfig \
 	com.google.android.overlay.gmsgsaconfig \
