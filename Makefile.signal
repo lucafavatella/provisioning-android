@@ -18,7 +18,7 @@ $(work_dir)/$(package).apk: $(work_dir)/$(package).url
 	curl -sSf -o $@ "$$(cat $<)"
 
 $(work_dir)/$(package).url: $(work_dir)/latest.json
-	sed -n -e 's/^.*\(https:\/\/updates\.signal\.org\/android\/Signal-website-universal-release-[1-9][0-9]*.[1-9][0-9]*.[1-9][0-9]*\.apk\).*$$/\1/p' < $< >$@
+	sed -n -e 's/^.*\(https:\/\/updates\.signal\.org\/android\/Signal-Android-website-prod-universal-release-[1-9][0-9]*.[0-9][0-9]*.[0-9][0-9]*\.apk\).*$$/\1/p' < $< >$@
 
 $(work_dir)/latest.json:
 	curl -sSf https://updates.signal.org/android/latest.json -o $@ --create-dirs
