@@ -6,12 +6,12 @@ package = org.thoughtcrime.securesms
 
 .PHONY: clean
 clean: \
-	clean-apk \
+	clean-cache \
 	;
 
 work_dir = var/cache/signal
-.PHONY: clean-apk
-clean-apk: ; rm $(work_dir)/$(package).apk
+.PHONY: clean-cache
+clean-cache: ; rm -rf $(work_dir)
 
 $(work_dir)/$(package).apk: $(work_dir)/$(package).url
 	cat $<
