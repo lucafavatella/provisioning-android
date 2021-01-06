@@ -877,9 +877,9 @@ var/cache/whatsapp/com.whatsapp.apk: ; $(MAKE) -f Makefile.whatsapp $@
 install-messaging-extra-2: install-org.thoughtcrime.securesms.apk
 
 .PHONY: install-org.thoughtcrime.securesms.apk
-install-org.thoughtcrime.securesms.apk: \
+install-org.thoughtcrime.securesms.apk: install-%.apk: \
 	var/cache/signal/org.thoughtcrime.securesms.apk
-	$(ADB) install --user current $<
+	$(ADB) install --user current --pkg $* $<
 
 var/cache/signal/org.thoughtcrime.securesms.apk:
 	$(MAKE) -f Makefile.signal $@
