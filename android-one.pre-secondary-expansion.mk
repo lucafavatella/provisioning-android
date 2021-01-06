@@ -19,6 +19,7 @@ automatically-provision-android-one: \
 	install-maps \
 	install-memorization \
 	install-messaging-extra \
+	install-messaging-extra-2 \
 	install-notes \
 	install-org.fdroid.fdroid.apk \
 	install-sensor-stats \
@@ -871,6 +872,17 @@ install-com.whatsapp.apk: var/cache/whatsapp/com.whatsapp.apk
 
 .SECONDARY: var/cache/whatsapp/com.whatsapp.apk
 var/cache/whatsapp/com.whatsapp.apk: ; $(MAKE) -f Makefile.whatsapp $@
+
+.PHONY: install-messaging-extra-2
+install-messaging-extra-2: install-org.thoughtcrime.securesms.apk
+
+.PHONY: install-org.thoughtcrime.securesms.apk
+install-org.thoughtcrime.securesms.apk: \
+	var/cache/signal/org.thoughtcrime.securesms.apk
+	$(ADB) install --user current $<
+
+var/cache/signal/org.thoughtcrime.securesms.apk:
+	$(MAKE) -f Makefile.signal $@
 
 .PHONY: install-notes
 install-notes: install-com.simplemobiletools.notes.pro.apk ;
