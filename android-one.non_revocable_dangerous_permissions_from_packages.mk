@@ -104,6 +104,14 @@ non_revocable_dangerous_permissions_from_packages = \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.google.android.gms \
 	android.permission.ACCESS_FINE_LOCATION-from-com.google.android.gms \
 	android.permission.ACTIVITY_RECOGNITION-from-com.google.android.gms \
+	android.permission.ACCESS_FINE_LOCATION-from-com.google.android.ims \
+	android.permission.CALL_PHONE-from-com.google.android.ims \
+	android.permission.CAMERA-from-com.google.android.ims \
+	android.permission.PROCESS_OUTGOING_CALLS-from-com.google.android.ims \
+	android.permission.READ_CALL_LOG-from-com.google.android.ims \
+	android.permission.READ_CONTACTS-from-com.google.android.ims \
+	android.permission.RECORD_AUDIO-from-com.google.android.ims \
+	android.permission.WRITE_CALL_LOG-from-com.google.android.ims \
 	android.permission.READ_EXTERNAL_STORAGE-from-org.codeaurora.bluetooth \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-org.codeaurora.bluetooth \
 	android.permission.CAMERA-from-org.codeaurora.ims \
