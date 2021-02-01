@@ -9,6 +9,7 @@ include sprout.extra_non_revocable_dangerous_permissions_from_packages.mk
 EXTRA_NON_REVOCABLE_PERMISSIONS_FROM_PACKAGES = \
 	$(non_revocable_dangerous_permissions_from_qualcomm_packages) \
 	$(extra_non_revocable_dangerous_permissions_from_packages)
+# See also https://github.com/Sid127/Nokia-Debloater/blob/b9bebce63cc28a714810dae5951864d0da093fec/shell-script.sh#L111-L194
 sprout_packages_to_be_disabled = \
 	$(call filter_packages_by_prefix,com.hmdglobal,$(packages)) \
 	com.wos.face.service
