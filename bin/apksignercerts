@@ -1,0 +1,37 @@
+#!/bin/sh
+
+T="docker-apksignercerts"
+
+F="${1:?}"
+
+{ docker build \
+         -q \
+         -t "${T:?}" \
+         - \
+         >/dev/null <<"EOF"
+FROM debian:bullseye
+## Refs:
+## - [apt-get best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#apt-get).
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    apksigner \
+ && rm -rf /var/lib/apt/lists/*
+WORKDIR /workdir
+## Refs:
+## - https://android.stackexchange.com/questions/9312/how-can-i-verify-the-authenticity-of-an-apk-file-i-downloaded
+##   It also has alternative solution using `keytool -printcert`
+##   but it tricky becauce certificate path is not always at `META-INF/CERT.RSA`.
+## - https://developer.android.com/studio/command-line/apksigner
+ENTRYPOINT ["sh", "-c", "cat - > \"${1:?}\" && apksigner verify --print-certs -v \"${1:?}\"", "apksigner"]
+EOF
+} && {
+    # shellcheck disable=SC2094
+    docker run \
+           -i \
+           -a stdin \
+           -a stdout \
+           -a stderr \
+           --network none \
+           --rm \
+           "${T:?}" \
+           "$(basename "${F:?}")" \
+           < "${F:?}"; }
