@@ -2,8 +2,6 @@
 
 T="docker-emulator"
 
-F="${1:?}"
-
 { docker build \
          -q \
          -t "${T:?}" \
@@ -33,6 +31,4 @@ EOF
            -a stderr \
            --network none \
            --rm \
-           "${T:?}" \
-           "$(basename "${F:?}")" \
-           < "${F:?}"; }
+           "${T:?}"; }
