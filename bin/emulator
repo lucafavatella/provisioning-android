@@ -22,7 +22,7 @@ WORKDIR /workdir
 ##   It also has alternative solution using `keytool -printcert`
 ##   but it is tricky because certificate path is not always at `META-INF/CERT.RSA`.
 ## - https://developer.android.com/studio/command-line/apksigner
-ENTRYPOINT ["sh", "-c", "cat - > \"${1:?}\" && apksigner verify --print-certs -v \"${1:?}\"", "apksigner"]
+ENTRYPOINT ["sdkmanager"]
 EOF
 } && {
     # shellcheck disable=SC2094
