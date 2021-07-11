@@ -1,6 +1,6 @@
 #!/bin/sh
 
-T="docker-apksignercerts"
+T="docker-emulator"
 
 F="${1:?}"
 
@@ -9,7 +9,7 @@ F="${1:?}"
          -t "${T:?}" \
          - \
          >/dev/null <<"EOF"
-FROM debian:bullseye
+FROM debian:buster
 ## Refs:
 ## - [apt-get best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#apt-get).
 RUN apt-get update && apt-get install -y --no-install-recommends \
