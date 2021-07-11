@@ -13,6 +13,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     jq \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /workdir
+
+# https://mirror.f-droid.org/android-free/repository/
+# https://gitlab.com/fdroid/sdkmanager/-/blob/0.3/sdkmanager.py#L320
+# https://gitlab.com/fdroid/android-sdk-transparency-log/-/blob/4df3056ed86639f1fcd469bcdc64ee7a1ae1e4c4/checksums.json#L2697-2704
 ADD https://mirror.f-droid.org/android-free/repository/emulator-30-linux.zip emulator-30-linux.zip
 {"https://mirror.f-droid.org/android-free/repository/emulator-30-linux.zip":[{"source.properties":"Pkg.Revision=30\nPkg.Path=emulator"}]}
 
