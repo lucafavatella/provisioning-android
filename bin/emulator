@@ -1,0 +1,38 @@
+#!/bin/sh
+
+T="docker-emulator"
+
+{ docker build \
+         -q \
+         -t "${T:?}" \
+         - \
+         >/dev/null <<"EOF"
+FROM debian:buster
+ARG SDKMANAGER_VERSION=0.3
+ARG EMULATOR_VERSION=30
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3-pip \
+    python3-setuptools \
+ && rm -rf /var/lib/apt/lists/*
+RUN pip3 install sdkmanager==${SDKMANAGER_VERSION}
+# [sdkmanager packages repo](https://mirror.f-droid.org/android-free/repository/) has emulator.
+# sdkmanager.py expects file with certain
+# [name](https://gitlab.com/fdroid/sdkmanager/-/blob/0.3/sdkmanager.py#L42),
+# location and
+# [format](https://gitlab.com/fdroid/android-sdk-transparency-log/-/blob/4df3056ed86639f1fcd469bcdc64ee7a1ae1e4c4/checksums.json#L2697-2704).
+RUN mkdir -p ~/.cache/sdkmanager \
+ && printf '%s\n' "{\"https://mirror.f-droid.org/android-free/repository/emulator-${EMULATOR_VERSION}-linux.zip\":[{\"source.properties\":\"Pkg.Revision=${EMULATOR_VERSION}\nPkg.Path=emulator\"}]}" > ~/.cache/sdkmanager/checksums.json
+RUN sdkmanager.py emulator
+WORKDIR /workdir
+ENTRYPOINT ["/opt/android-sdk/emulator/emulator"]
+EOF
+} && {
+    docker run \
+           -i \
+           -a stdin \
+           -a stdout \
+           -a stderr \
+           --network none \
+           --rm \
+           "${T:?}" \
+           "$@"; }
