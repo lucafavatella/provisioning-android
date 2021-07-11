@@ -18,7 +18,8 @@ RUN pip3 install sdkmanager==0.3
 # [name](https://gitlab.com/fdroid/sdkmanager/-/blob/0.3/sdkmanager.py#L42),
 # location and
 # [format](https://gitlab.com/fdroid/android-sdk-transparency-log/-/blob/4df3056ed86639f1fcd469bcdc64ee7a1ae1e4c4/checksums.json#L2697-2704).
-RUN echo '{"https://mirror.f-droid.org/android-free/repository/emulator-30-linux.zip":[{"source.properties":"Pkg.Revision=30\nPkg.Path=emulator"}]}' > ~/.cache/sdkmanager/checksums.json
+RUN mkdir -p ~/.cache/sdkmanager \
+ && echo '{"https://mirror.f-droid.org/android-free/repository/emulator-30-linux.zip":[{"source.properties":"Pkg.Revision=30\nPkg.Path=emulator"}]}' > ~/.cache/sdkmanager/checksums.json
 RUN sdkmanager.py emulator
 WORKDIR /workdir
 ENTRYPOINT ["which", "emulator"]
