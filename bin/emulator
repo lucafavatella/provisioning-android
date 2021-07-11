@@ -12,6 +12,7 @@ FROM debian:buster
 ## - [apt-get best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#apt-get).
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip \
+    python3-setuptools \
  && rm -rf /var/lib/apt/lists/*
 RUN pip3 install sdkmanager==0.3
 WORKDIR /workdir
