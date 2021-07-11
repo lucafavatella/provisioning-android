@@ -7,9 +7,17 @@ T="docker-emulator"
          -t "${T:?}" \
          - \
          >/dev/null <<"EOF"
+FROM debian:buster AS builder
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    jq \
+ && rm -rf /var/lib/apt/lists/*
+WORKDIR /workdir
+ADD https://mirror.f-droid.org/android-free/repository/emulator-30-linux.zip emulator-30-linux.zip
+{"https://mirror.f-droid.org/android-free/repository/emulator-30-linux.zip":[{"source.properties":"Pkg.Revision=30\nPkg.Path=emulator"}]}
+
+
 FROM debian:buster
-## Refs:
-## - [apt-get best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#apt-get).
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-pip \
     python3-setuptools \
