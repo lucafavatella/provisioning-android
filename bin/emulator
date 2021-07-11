@@ -16,11 +16,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/*
 RUN pip3 install sdkmanager==0.3
 WORKDIR /workdir
-## Refs:
-## - https://android.stackexchange.com/questions/9312/how-can-i-verify-the-authenticity-of-an-apk-file-i-downloaded
-##   It also has alternative solution using `keytool -printcert`
-##   but it is tricky because certificate path is not always at `META-INF/CERT.RSA`.
-## - https://developer.android.com/studio/command-line/apksigner
 ENTRYPOINT ["find", "/", "-name", "sdkmanager"]
 EOF
 } && {
