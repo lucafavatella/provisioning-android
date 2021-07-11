@@ -13,8 +13,9 @@ FROM debian:buster
 ## Refs:
 ## - [apt-get best practices](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#apt-get).
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    apksigner \
+    python3-pip \
  && rm -rf /var/lib/apt/lists/*
+pip install sdkmanager==0.3
 WORKDIR /workdir
 ## Refs:
 ## - https://android.stackexchange.com/questions/9312/how-can-i-verify-the-authenticity-of-an-apk-file-i-downloaded
