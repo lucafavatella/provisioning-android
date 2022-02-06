@@ -72,8 +72,6 @@ google_packages_not_to_be_disabled = \
 	com.android.launcher3 \
 	com.android.localtransport \
 	com.android.location.fused \
-	com.android.networkstack.inprocess \
-	com.android.networkstack.permissionconfig \
 	com.android.networkstack.tethering.inprocess \
 	com.android.nfc \
 	com.android.ons \
