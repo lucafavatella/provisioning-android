@@ -60,6 +60,7 @@ google_packages_not_to_be_disabled = \
 	com.android.bips \
 	com.android.bluetooth \
 	com.android.cellbroadcastreceiver \
+	com.android.cellbroadcastservice \
 	com.android.certinstaller \
 	com.android.dynsystem \
 	com.android.documentsui \
