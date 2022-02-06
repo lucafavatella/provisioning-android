@@ -65,7 +65,6 @@ google_packages_not_to_be_disabled = \
 	com.android.dynsystem \
 	com.android.emergency \
 	com.android.externalstorage \
-	com.android.hotspot2 \
 	com.android.hotspot2.osulogin \
 	com.android.htmlviewer \
 	com.android.inputdevices \
