@@ -86,6 +86,7 @@ google_packages_not_to_be_disabled = \
 	com.android.providers.downloads \
 	com.android.providers.downloads.ui \
 	com.android.providers.media \
+	com.android.providers.media.module \
 	com.android.providers.settings \
 	com.android.providers.telephony \
 	com.android.phone \
