@@ -99,6 +99,7 @@ google_packages_not_to_be_disabled = \
 	com.android.systemui \
 	com.android.traceur \
 	com.android.vpndialogs \
+	com.android.wifi.resources \
 	com.google.android.apps.messaging \
 	com.google.android.configupdater \
 	com.google.android.contacts \
