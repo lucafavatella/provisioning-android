@@ -63,7 +63,6 @@ google_packages_not_to_be_disabled = \
 	com.android.cellbroadcastservice \
 	com.android.certinstaller \
 	com.android.dynsystem \
-	com.android.documentsui \
 	com.android.emergency \
 	com.android.externalstorage \
 	com.android.hotspot2 \
