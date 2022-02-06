@@ -109,7 +109,6 @@ google_packages_not_to_be_disabled = \
 	com.google.android.overlay.modules.ext.services \
 	com.google.android.overlay.modules.permissioncontroller \
 	com.google.android.overlay.modules.permissioncontroller.forframework \
-	com.google.android.overlay.searchlauncherconfig \
 	com.google.android.packageinstaller \
 	com.google.android.permissioncontroller \
 	com.google.android.projection.gearhead \
