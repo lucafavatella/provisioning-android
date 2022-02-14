@@ -809,12 +809,9 @@ var/cache/protonmail/ch.protonmail.android.apk:
 is-mail-extra-enabled: is-package-ch.protonmail.android-enabled ;
 
 .PHONY: configure-mail-extra
-configure-mail-extra: configure-ch.protonmail.android.apk
-
-.PHONY: configure-ch.protonmail.android.apk
-configure-ch.protonmail.android.apk: configure-%.apk:
+configure-mail-extra:
 	$(adb_wakeup)
-	@echo "Once you configure application $*, press the enter key."
+	@echo "Once you configure application mail extra, press the enter key."
 	@head -n 1
 
 .PHONY: install-maps
