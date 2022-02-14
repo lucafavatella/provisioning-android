@@ -101,6 +101,7 @@ google_packages_not_to_be_disabled = \
 	com.google.android.contacts \
 	com.google.android.deskclock \
 	com.google.android.dialer \
+	com.google.android.documentsui \
 	com.google.android.gms \
 	com.google.android.gsf \
 	com.google.android.modulemetadata \
