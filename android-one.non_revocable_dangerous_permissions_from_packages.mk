@@ -1,17 +1,28 @@
 non_revocable_dangerous_permissions_from_packages = \
 	android.permission.GET_ACCOUNTS-from-android \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.android.bluetooth \
+	android.permission.ACCESS_FINE_LOCATION-from-com.android.bluetooth \
 	android.permission.GET_ACCOUNTS-from-com.android.bluetooth \
 	android.permission.READ_CALL_LOG-from-com.android.bluetooth \
 	android.permission.READ_CONTACTS-from-com.android.bluetooth \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.bluetooth \
+	android.permission.READ_PHONE_STATE-from-com.android.bluetooth \
 	android.permission.READ_SMS-from-com.android.bluetooth \
 	android.permission.RECEIVE_SMS-from-com.android.bluetooth \
 	android.permission.SEND_SMS-from-com.android.bluetooth \
 	android.permission.WRITE_CALL_LOG-from-com.android.bluetooth \
 	android.permission.WRITE_CONTACTS-from-com.android.bluetooth \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.bluetooth \
+	android.permission.READ_PHONE_STATE-from-com.android.carrierconfig \
+	android.permission.READ_CELL_BROADCASTS-from-com.android.cellbroadcastreceiver \
+	android.permission.READ_PHONE_STATE-from-com.android.cellbroadcastreceiver \
+	android.permission.READ_SMS-from-com.android.cellbroadcastreceiver \
 	android.permission.RECEIVE_SMS-from-com.android.cellbroadcastreceiver \
+	android.permission.ACCESS_COARSE_LOCATION-from-com.android.cellbroadcastservice \
+	android.permission.ACCESS_FINE_LOCATION-from-com.android.cellbroadcastservice \
+	android.permission.READ_CELL_BROADCASTS-from-com.android.cellbroadcastservice \
+	android.permission.READ_PHONE_STATE-from-com.android.cellbroadcastservice \
+	android.permission.RECEIVE_SMS-from-com.android.cellbroadcastservice \
 	android.permission.ACCESS_BACKGROUND_LOCATION-from-com.android.companiondevicemanager \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.android.companiondevicemanager \
 	android.permission.ACCESS_FINE_LOCATION-from-com.android.companiondevicemanager \
@@ -20,19 +31,23 @@ non_revocable_dangerous_permissions_from_packages = \
 	android.permission.READ_CONTACTS-from-com.android.emergency \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.externalstorage \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.externalstorage \
+	android.permission.ACCESS_BACKGROUND_LOCATION-from-com.android.location.fused \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.android.location.fused \
 	android.permission.ACCESS_FINE_LOCATION-from-com.android.location.fused \
+	android.permission.READ_PHONE_STATE-from-com.android.managedprovisioning \
 	android.permission.READ_SMS-from-com.android.mms.service \
 	android.permission.READ_CONTACTS-from-com.android.nfc \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.nfc \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.nfc \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.android.phone \
+	android.permission.ACCESS_FINE_LOCATION-from-com.android.phone \
 	android.permission.CALL_PHONE-from-com.android.phone \
 	android.permission.GET_ACCOUNTS-from-com.android.phone \
 	android.permission.PROCESS_OUTGOING_CALLS-from-com.android.phone \
 	android.permission.READ_CALL_LOG-from-com.android.phone \
 	android.permission.READ_CONTACTS-from-com.android.phone \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.phone \
+	android.permission.READ_PHONE_STATE-from-com.android.phone \
 	android.permission.READ_SMS-from-com.android.phone \
 	android.permission.RECEIVE_SMS-from-com.android.phone \
 	android.permission.RECORD_AUDIO-from-com.android.phone \
@@ -51,8 +66,8 @@ non_revocable_dangerous_permissions_from_packages = \
 	android.permission.WRITE_CONTACTS-from-com.android.providers.contacts \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.providers.downloads \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.providers.downloads \
-	android.permission.READ_EXTERNAL_STORAGE-from-com.android.providers.media \
-	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.providers.media \
+	android.permission.READ_EXTERNAL_STORAGE-from-com.android.providers.media.module \
+	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.providers.media.module \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.providers.telephony \
 	android.permission.RECEIVE_SMS-from-com.android.providers.telephony \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.providers.telephony \
@@ -64,32 +79,40 @@ non_revocable_dangerous_permissions_from_packages = \
 	android.permission.ACCESS_FINE_LOCATION-from-com.android.settings \
 	android.permission.CALL_PHONE-from-com.android.settings \
 	android.permission.CAMERA-from-com.android.settings \
+	android.permission.READ_CALL_LOG-from-com.android.settings \
 	android.permission.READ_CONTACTS-from-com.android.settings \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.settings \
 	android.permission.READ_PHONE_STATE-from-com.android.settings \
 	android.permission.READ_SMS-from-com.android.settings \
 	android.permission.RECEIVE_SMS-from-com.android.settings \
 	android.permission.SEND_SMS-from-com.android.settings \
+	android.permission.WRITE_CALL_LOG-from-com.android.settings \
 	android.permission.WRITE_CONTACTS-from-com.android.settings \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.settings \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.sharedstoragebackup \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.sharedstoragebackup \
+	android.permission.ACCESS_BACKGROUND_LOCATION-from-com.android.shell \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.android.shell \
 	android.permission.ACCESS_FINE_LOCATION-from-com.android.shell \
 	android.permission.CALL_PHONE-from-com.android.shell \
+	android.permission.CAMERA-from-com.android.shell \
 	android.permission.GET_ACCOUNTS-from-com.android.shell \
 	android.permission.READ_CALENDAR-from-com.android.shell \
 	android.permission.READ_CONTACTS-from-com.android.shell \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.shell \
 	android.permission.READ_PHONE_STATE-from-com.android.shell \
 	android.permission.READ_SMS-from-com.android.shell \
+	android.permission.RECORD_AUDIO-from-com.android.shell \
 	android.permission.SEND_SMS-from-com.android.shell \
 	android.permission.WRITE_CALENDAR-from-com.android.shell \
 	android.permission.WRITE_CONTACTS-from-com.android.shell \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.shell \
+	android.permission.READ_EXTERNAL_STORAGE-from-com.android.soundpicker \
+	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.soundpicker \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.storagemanager \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.storagemanager \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.android.systemui \
+	android.permission.ACCESS_FINE_LOCATION-from-com.android.systemui \
 	android.permission.CAMERA-from-com.android.systemui \
 	android.permission.GET_ACCOUNTS-from-com.android.systemui \
 	android.permission.READ_CALL_LOG-from-com.android.systemui \
@@ -97,23 +120,25 @@ non_revocable_dangerous_permissions_from_packages = \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.systemui \
 	android.permission.READ_PHONE_STATE-from-com.android.systemui \
 	android.permission.RECORD_AUDIO-from-com.android.systemui \
-	android.permission.ACCESS_MEDIA_LOCATION-from-com.android.vending \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.android.vending \
+	android.permission.READ_PHONE_STATE-from-com.android.vending \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.android.vending \
+	android.permission.READ_PHONE_STATE-from-com.google.android.apps.restore \
+	android.permission.READ_PHONE_STATE-from-com.google.android.apps.work.oobconfig \
 	android.permission.ACCESS_BACKGROUND_LOCATION-from-com.google.android.gms \
 	android.permission.ACCESS_COARSE_LOCATION-from-com.google.android.gms \
 	android.permission.ACCESS_FINE_LOCATION-from-com.google.android.gms \
 	android.permission.ACTIVITY_RECOGNITION-from-com.google.android.gms \
-	android.permission.ACCESS_FINE_LOCATION-from-com.google.android.ims \
-	android.permission.CALL_PHONE-from-com.google.android.ims \
-	android.permission.CAMERA-from-com.google.android.ims \
-	android.permission.PROCESS_OUTGOING_CALLS-from-com.google.android.ims \
-	android.permission.READ_CALL_LOG-from-com.google.android.ims \
-	android.permission.READ_CONTACTS-from-com.google.android.ims \
-	android.permission.RECORD_AUDIO-from-com.google.android.ims \
-	android.permission.WRITE_CALL_LOG-from-com.google.android.ims \
-	android.permission.READ_EXTERNAL_STORAGE-from-org.codeaurora.bluetooth \
-	android.permission.WRITE_EXTERNAL_STORAGE-from-org.codeaurora.bluetooth \
+	android.permission.READ_PHONE_STATE-from-com.google.android.gms \
+	android.permission.READ_PHONE_STATE-from-com.google.android.gsf \
+	android.permission.READ_PHONE_STATE-from-com.google.android.ims \
+	android.permission.ACCESS_COARSE_LOCATION-from-com.google.android.networkstack \
+	android.permission.ACCESS_FINE_LOCATION-from-com.google.android.networkstack \
+	android.permission.READ_PHONE_STATE-from-com.google.android.networkstack \
+	android.permission.READ_PHONE_STATE-from-com.google.android.partnersetup \
+	android.permission.READ_PHONE_STATE-from-com.google.android.permissioncontroller \
+	android.permission.READ_PHONE_STATE-from-com.google.android.projection.gearhead \
+	android.permission.READ_PHONE_STATE-from-com.google.android.setupwizard \
 	android.permission.CAMERA-from-org.codeaurora.ims \
 	android.permission.READ_EXTERNAL_STORAGE-from-org.codeaurora.ims \
 	android.permission.READ_PHONE_STATE-from-org.codeaurora.ims \

@@ -5,7 +5,6 @@ extra_non_revocable_dangerous_permissions_from_packages = \
 	android.permission.ACCESS_MEDIA_LOCATION-from-com.hmdglobal.app.cdfinger \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.hmdglobal.app.cdfinger \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.hmdglobal.app.cdfinger \
-	android.permission.ACCESS_MEDIA_LOCATION-from-com.hmdglobal.app.customizationclient \
 	android.permission.PROCESS_OUTGOING_CALLS-from-com.hmdglobal.app.customizationclient \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.hmdglobal.app.customizationclient \
 	android.permission.READ_PHONE_STATE-from-com.hmdglobal.app.customizationclient \
@@ -20,6 +19,7 @@ extra_non_revocable_dangerous_permissions_from_packages = \
 	android.permission.READ_EXTERNAL_STORAGE-from-com.hmdglobal.app.midtest \
 	android.permission.READ_PHONE_STATE-from-com.hmdglobal.app.midtest \
 	android.permission.WRITE_EXTERNAL_STORAGE-from-com.hmdglobal.app.midtest \
+	android.permission.READ_PHONE_STATE-from-com.hmdglobal.app.myphonehelper \
 	android.permission.READ_PHONE_STATE-from-com.hmdglobal.app.omacp \
 	android.permission.RECEIVE_WAP_PUSH-from-com.hmdglobal.app.omacp \
 	android.permission.READ_PHONE_STATE-from-com.hmdglobal.app.sarauth \
