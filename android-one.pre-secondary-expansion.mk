@@ -104,6 +104,8 @@ google_packages_not_to_be_disabled = \
 	com.google.android.gms \
 	com.google.android.gsf \
 	com.google.android.modulemetadata \
+	com.google.android.networkstack \
+	com.google.android.networkstack.permissionconfig \
 	com.google.android.overlay.modules.ext.services \
 	com.google.android.overlay.modules.permissioncontroller \
 	com.google.android.overlay.modules.permissioncontroller.forframework \
