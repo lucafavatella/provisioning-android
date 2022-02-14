@@ -22,14 +22,14 @@ $(work_dir)/$(package).url: $(work_dir)/$(package).url.unchecked
 	test 1 -eq "$$(wc -l < $<)"
 	grep \
 		-q \
-		-e '^https://scontent\.whatsapp\.net/[^\?]*/WhatsApp.apk?[&=a-zA-Z0-9._-]*$$' \
+		-e '^https://scontent\.whatsapp\.net/.*$$' \
 		< $<
 	cp -p $< $@
 
 $(work_dir)/$(package).url.unchecked: $(work_dir)/android.html
 	{ xmllint \
 		--html \
-		--xpath "string(/html/body//div[@class='_whatsapp_www__block_action'][1]/a/@href)" \
+		--xpath "string(/html/body//div[@id='content-wrapper']//a[text()='Download now']/@href)" \
 		$< \
 		2>/dev/null \
 	&& printf "\n"; } \
