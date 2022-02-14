@@ -43,11 +43,12 @@ sprout.non_revocable_dangerous_permissions_from_qualcomm_packages.mk.tmp \
 	sprout.extra_non_revocable_dangerous_permissions_from_packages.mk.tmp: \
 	sprout.%.mk.tmp:
 	$(MAKE) -s list-devices # Make usage of make option `-k` more robust by attempting to detect the most common error - i.e. `adb` - before and after the make invocation.
-	# Sample exception line: `Security exception: Non-System UID cannot revoke system fixed permission android.permission.GET_ACCOUNTS for package android`
+	# Examples of exception line:
+	# * `Security exception: Non-System UID cannot revoke system fixed permission android.permission.GET_ACCOUNTS for package android`
+	# * `java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_FINE_LOCATION for package com.android.bluetooth`
 	{ printf "%b\n" '$* = \\' \
 		&& { $(MAKE) -k revoke-dangerous-permissions-from-all-packages 2>&1 \
-			| grep -B 1 -e '^Security exception: Non-System UID cannot revoke system fixed permission [^[:space:]]* for package [^[:space:]]*$$' \
-			| grep -e '^adb' | sed 's/^adb shell pm revoke \([^[:space:]]*\) \([^[:space:]]*\)$$/	\2-from-\1 \\/' \
+			| sed -n 's/^.*[Ss]ecurity *[Ee]xception: Non-System UID cannot revoke system fixed permission \([^[:space:]]*\) for package \([^[:space:]]*\)$$/	\1-from-\2 \\/p' \
 		; } \
 		&& printf "%b\n" '\t' \
 	; } > $@
