@@ -418,11 +418,6 @@ revoke-permission-android.permission.WRITE_SETTINGS-from-com.android.settings-pa
 	revoke-permission-%-package:
 	$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) default
 
-.PHONY: revoke-permission-android.permission.CHANGE_WIFI_STATE-from-com.google.android.gms-package
-revoke-permission-android.permission.CHANGE_WIFI_STATE-from-com.google.android.gms-package: \
-	revoke-permission-%-package:
-	$(ADB) shell appops set $(call revoke_pkg,$*) $(patsubst android.permission.%,%,$(call revoke_perm,$*)) default
-
 targets_for_not_revoking_non_revocable_permissions_from_packages = \
 	$(patsubst %,revoke-permission-%-package, \
 		$(non_revocable_permissions_from_packages) \
