@@ -6,3 +6,4 @@ An [alternative tool](https://github.com/MajeurAndroid/java-adb-remote-screen) e
 less maintained,
 in Java,
 not supporting macOS.
+See [ADB implementation](https://github.com/MajeurAndroid/java-adb-remote-screen/blob/195903dbd25daf2ec30c386d3d2a7a33fc18f3e6/src/main/java/com/majeur/ars/adb/AdbHelper.java).
