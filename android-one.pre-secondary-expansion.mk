@@ -177,6 +177,9 @@ adb_wakeup = $(ADB) shell input keyevent KEYCODE_WAKEUP
 # No built-in rules. Eases debugging.
 MAKEFLAGS = -r
 
+cur_makefile = android-one.pre-secondary-expansion.mk
+pre_and_post_secondary_expansion_makefile = android-one.mk
+
 comma = ,
 empty =
 space = $(empty) $(empty)
@@ -203,7 +206,7 @@ list-abis: get-prop-ro.product.cpu.abilist ;
 # Reference: https://developer.android.com/topic/generic-system-image/#device-compliance
 .PHONY: is-treble
 is-treble:
-	test true = $$($(MAKE) -s get-prop-ro.treble.enabled)
+	test true = $$($(MAKE) -f $(cur_makefile) -s get-prop-ro.treble.enabled)
 
 .PHONY: list-commands
 list-commands: ; $(ADB) shell cmd -l
@@ -348,7 +351,8 @@ list-permissions-requested-by-package-%:
 
 .PHONY: long-list-permissions-requested-by-package-%
 long-list-permissions-requested-by-package-%:
-	@X="$$($(MAKE) -s list-permissions-requested-by-package-$*)" \
+	@X="$$($(MAKE) -f $(cur_makefile) \
+		-s list-permissions-requested-by-package-$*)" \
 		&& { test -z "$${X?}" \
 			|| printf "%b %b:\n\t%b\n" \
 				"Permissions requested by package" \
@@ -459,7 +463,8 @@ is-permission-%-package:
 
 .PHONY: is-not-permission-%-package
 is-not-permission-%-package:
-	@! $(MAKE) -s is-permission-$(call revoked_perm,$*)$(revoked_perm_pkg_sep)$(call revoked_pkg,$*)-package > /dev/null 2> /dev/null
+	@! $(MAKE) -f $(cur_makefile) \
+		-s is-permission-$(call revoked_perm,$*)$(revoked_perm_pkg_sep)$(call revoked_pkg,$*)-package > /dev/null 2> /dev/null
 
 .PHONY: revoke-dangerous-permissions-from-all-packages
 revoke-dangerous-permissions-from-all-packages: \
@@ -483,7 +488,8 @@ list-dangerous-permissions-revoked-from-package-%:
 
 .PHONY: long-list-dangerous-permissions-revoked-from-package-%
 long-list-dangerous-permissions-revoked-from-package-%:
-	@X="$$($(MAKE) -s list-dangerous-permissions-revoked-from-package-$*)" \
+	@X="$$($(MAKE) -f $(cur_makefile) \
+		-s list-dangerous-permissions-revoked-from-package-$*)" \
 		&& { test -z "$${X?}" \
 			|| printf "%b %b:\n\t%b\n" \
 				"Dangerous permissions revoked from package" \
@@ -498,22 +504,23 @@ list-dangerous-permissions-revoked-from-enabled-packages: \
 android-one.non_revocable_dangerous_permissions_from_packages.mk:
 	$(warning This is a development-only target: you are on your own)
 	echo > $@
-	$(MAKE) $@.tmp
+	$(MAKE) -f $(cur_makefile) $@.tmp
 	mv $@.tmp $@
 
 android-one.non_revocable_dangerous_permissions_from_packages.mk.tmp: \
 	android-one.%.mk.tmp:
-	$(MAKE) -s list-devices # Make usage of make option `-k` more robust by attempting to detect the most common error - i.e. `adb` - before and after the make invocation.
+	$(MAKE) -f $(cur_makefile) -s list-devices # Make usage of make option `-k` more robust by attempting to detect the most common error - i.e. `adb` - before and after the make invocation.
 	# Examples of exception line:
 	# * `Security exception: Non-System UID cannot revoke system fixed permission android.permission.GET_ACCOUNTS for package android`
 	# * `java.lang.SecurityException: Non-System UID cannot revoke system fixed permission android.permission.ACCESS_FINE_LOCATION for package com.android.bluetooth`
 	{ printf "%b\n" '$* = \\' \
-		&& { $(MAKE) -k revoke-dangerous-permissions-from-all-packages 2>&1 \
+		&& { $(MAKE) -f $(pre_and_post_secondary_expansion_makefile) \
+			-k revoke-dangerous-permissions-from-all-packages 2>&1 \
 			| sed -n 's/^.*[Ss]ecurity *[Ee]xception: Non-System UID cannot revoke system fixed permission \([^[:space:]]*\) for package \([^[:space:]]*\)$$/	\1-from-\2 \\/p' \
 		; } \
 		&& printf "%b\n" '\t' \
 	; } > $@
-	$(MAKE) -s list-devices
+	$(MAKE) -f $(cur_makefile) -s list-devices
 
 # ---- List Special Accesses ----
 
@@ -678,7 +685,7 @@ dump-content-providers:
 # XXX Fragile.
 .PHONY: list-content-provider-authorities
 list-content-provider-authorities:
-	$(MAKE) -s dump-content-providers \
+	$(MAKE) -f $(cur_makefile) -s dump-content-providers \
 		| sed -n -e 's/^  \[\([^]]*\)\]:$$/\1/p'
 
 .PHONY: prompt-managing-default-apps
@@ -840,7 +847,7 @@ prompt-configuring-smsc:
 	$(adb_wakeup)
 	@echo "Once you ensure the screen is unlocked, press the enter key."
 	@head -n 1
-	$(MAKE) dial-hidden-code-4636
+	$(MAKE) -f $(cur_makefile) dial-hidden-code-4636
 	@echo "Select 'Phone information', scroll to 'SMSC', insert the number, tap on `Update`."
 
 # From https://www.xda-developers.com/codes-hidden-android/
