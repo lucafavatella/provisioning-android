@@ -293,7 +293,8 @@ enable-package-%: ; $(ADB) shell pm enable $*
 .PHONY: disable-google-packages
 disable-google-packages: \
 	$(patsubst %,disable-package-%,$(google_packages_to_be_disabled))
-	$(MAKE) are-google-packages-disabled-or-enabled-correctly
+	$(MAKE) -f $(cur_makefile) \
+		are-google-packages-disabled-or-enabled-correctly
 
 ifneq ($(strip $(filter-out $(packages),$(google_packages_to_be_disabled))),)
 $(warning Misconfigured package(s) to be disabled $(filter-out $(packages),$(google_packages_to_be_disabled)))
@@ -782,11 +783,12 @@ install-logcat: install-com.dp.logcatapp.apk ;
 install-com.dp.logcatapp.apk: \
 	install-%.apk: var/cache/fdroidcl/apks/%.apk
 	$(ADB) install --user current $<
-	$(MAKE) configure-$*.apk
+	$(MAKE) -f $(cur_makefile) configure-$*.apk
 
 .PHONY: configure-com.dp.logcatapp.apk
 configure-com.dp.logcatapp.apk: configure-%.apk:
-	$(MAKE) grant-permission-android.permission.READ_LOGS-to-$*-package
+	$(MAKE) -f $(cur_makefile) \
+		grant-permission-android.permission.READ_LOGS-to-$*-package
 
 .PHONY: install-mail
 install-mail: install-com.fsck.k9.apk ;
@@ -911,7 +913,7 @@ install-com.x8bit.bitwarden.apk: install-%.apk:
 		"$(r)"
 	@echo "Once you add the repo and install application $*, press the enter key."
 	@head -n 1
-	$(MAKE) is-package-$*-enabled
+	$(MAKE) -f $(cur_makefile) is-package-$*-enabled
 
 .PHONY: is-password-manager-enabled
 is-password-manager-enabled: is-package-com.x8bit.bitwarden-enabled ;
