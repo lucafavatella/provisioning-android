@@ -32,7 +32,7 @@ is-sprout-provisioned: \
 
 # ==== Internal Rules and Variables ====
 
-cur_makefile = sprout.mk
+cur_makefile = Makefile.sprout
 
 sprout.non_revocable_dangerous_permissions_from_qualcomm_packages.mk \
 	sprout.extra_non_revocable_dangerous_permissions_from_packages.mk:

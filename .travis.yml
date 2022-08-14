@@ -111,9 +111,9 @@ before_script:
   #
   - adb devices -l
 script:
-  - make -f android-one.mk list-devices
-  - make -f android-one.mk list-abis
+  - make -f Makefile.android-one list-devices
+  - make -f Makefile.android-one list-abis
   - |
-    ! make -f android-one.mk is-android-one-provisioned
-  - make -f android-one.mk automatically-provision-android-one
-  - make -f android-one.mk is-android-one-provisioned
+    ! make -f Makefile.android-one is-android-one-provisioned
+  - make -f Makefile.android-one automatically-provision-android-one
+  - make -f Makefile.android-one is-android-one-provisioned

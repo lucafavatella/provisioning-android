@@ -178,7 +178,7 @@ adb_wakeup = $(ADB) shell input keyevent KEYCODE_WAKEUP
 MAKEFLAGS = -r
 
 cur_makefile = android-one.pre-secondary-expansion.mk
-pre_and_post_secondary_expansion_makefile = android-one.mk
+pre_and_post_secondary_expansion_makefile = Makefile.android-one
 
 comma = ,
 empty =
