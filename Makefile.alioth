@@ -1,0 +1,24 @@
+.DEFAULT_GOAL = list-devices
+
+.PHONY: provision-alioth
+provision-alioth: \
+	automatically-provision-alioth \
+	manually-provision-alioth \
+	;
+
+.PHONY: automatically-provision-alioth
+automatically-provision-alioth: \
+	automatically-provision-lineageos \
+	;
+
+.PHONY: manually-provision-alioth
+manually-provision-alioth: \
+	manually-provision-lineageos \
+	;
+
+.PHONY: is-alioth-provisioned
+is-alioth-provisioned: \
+	is-lineageos-provisioned \
+	;
+
+include lineageos.pre-secondary-expansion.mk

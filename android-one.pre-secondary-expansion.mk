@@ -777,28 +777,9 @@ configure-com.dp.logcatapp.apk: configure-%.apk:
 	$(MAKE) -f $(cur_makefile) \
 		grant-permission-android.permission.READ_LOGS-to-$*-package
 
-.PHONY: configure-com.fsck.k9.apk
-configure-com.fsck.k9.apk: configure-%.apk:
-	$(adb_wakeup)
-	@echo "Once you configure application $*, press the enter key."
-	@echo "* Settings > General settings > Interaction > Confirm actions: Tick all"
-	@echo "* Settings > Account settings > Search > Enable server search: Tick (per-account)"
-	@head -n 1
+include install-packages.com.fsck.k9.mk
 
-.PHONY: install-ch.protonmail.android.apk
-install-ch.protonmail.android.apk: \
-	var/cache/protonmail/ch.protonmail.android.apk
-	$(ADB) install --user current $<
-
-.PHONY: var/cache/protonmail/ch.protonmail.android.apk
-var/cache/protonmail/ch.protonmail.android.apk:
-	$(MAKE) -f Makefile.protonmail $@-if-modified
-
-.PHONY: configure-ch.protonmail.android.apk
-configure-ch.protonmail.android.apk: configure-%.apk:
-	$(adb_wakeup)
-	@echo "Once you configure application $*, press the enter key."
-	@head -n 1
+include install-packages.ch.protonmail.android.mk
 
 .PHONY: configure-com.ichi2.anki.apk
 configure-com.ichi2.anki.apk: configure-%.apk:
@@ -855,26 +836,7 @@ install-org.thoughtcrime.securesms.apk: install-%.apk: \
 var/cache/signal/org.thoughtcrime.securesms.apk:
 	$(MAKE) -f Makefile.signal $@
 
-.PHONY: install-com.x8bit.bitwarden.apk
-install-com.x8bit.bitwarden.apk: c = org.fdroid.fdroid
-# From https://github.com/bitwarden/mobile/blame/v2.3.1/README.md#L7
-install-com.x8bit.bitwarden.apk: r = https://mobileapp.bitwarden.com/fdroid/
-install-com.x8bit.bitwarden.apk: install-%.apk:
-	$(adb_wakeup)
-	$(ADB) shell am start \
-		-n $(c)/.views.main.MainActivity \
-		-a android.intent.action.VIEW \
-		"$(r)"
-	@echo "Once you add the repo and install application $*, press the enter key."
-	@head -n 1
-	$(MAKE) -f $(cur_makefile) is-package-$*-enabled
-
-.PHONY: configure-com.x8bit.bitwarden.apk
-configure-com.x8bit.bitwarden.apk: configure-%.apk:
-	$(adb_wakeup)
-	@echo "Once you configure application $*, press the enter key."
-	@echo "* Settings > Unlock with Biometrics"
-	@head -n 1
+include install-packages.com.x8bit.bitwarden.mk
 
 # XXX This shall be allowed.
 .PHONY: revoke-permission-android.permission.CHANGE_WIFI_STATE-from-com.vonglasow.michael.satstat-package
