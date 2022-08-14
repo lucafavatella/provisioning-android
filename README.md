@@ -1,5 +1,8 @@
 # provisioning-android
 
+Entry points are files `Makefile.*`
+(files `*.mk` are internal, meant to be included).
+
 ## alioth
 
 Install [LineageOS for microG](https://lineage.microg.org),
