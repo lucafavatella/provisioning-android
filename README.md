@@ -1,5 +1,9 @@
 # provisioning-android
 
+## alioth
+
+Install [LineageOS](https://wiki.lineageos.org/devices/alioth/install) (see also [forum](https://forum.xda-developers.com/t/rom-official-alioth-aliothin-12-1-lineageos-19-1.4418635/)).
+
 ## sprout
 
 ```
