@@ -9,6 +9,10 @@ Install [LineageOS for microG](https://lineage.microg.org),
 that recommends following [the official LineageOS installation guide](https://wiki.lineageos.org/devices/alioth/install)
 (see also [forum](https://forum.xda-developers.com/t/rom-official-alioth-aliothin-12-1-lineageos-19-1.4418635/)).
 
+```
+make -f Makefile.alioth provision-alioth
+```
+
 ## sprout
 
 ```
