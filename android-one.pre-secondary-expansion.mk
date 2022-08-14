@@ -3,26 +3,45 @@
 ADB = adb
 ADB_USER_ID = 0
 
+browser = org.mozilla.fennec_fdroid
+calculator = com.simplemobiletools.calculator
+calendar = com.simplemobiletools.calendar.pro
+camera = net.sourceforge.opencamera
+docs_pdf = com.artifex.mupdf.viewer.app
+file_manager = com.simplemobiletools.filemanager.pro
+gallery = com.simplemobiletools.gallery.pro
+keyboard = com.menny.android.anysoftkeyboard
+logcat = com.dp.logcatapp
+mail = com.fsck.k9
+mail_extra = ch.protonmail.android
+maps = net.osmand.plus
+memorization = com.ichi2.anki
+messaging_extra = com.whatsapp
+messaging_extra_2 = org.thoughtcrime.securesms
+notes = com.simplemobiletools.notes.pro
+password_manager = com.x8bit.bitwarden
+sensor_stats = com.vonglasow.michael.satstat
+
 .PHONY: automatically-provision-android-one
 automatically-provision-android-one: \
-	install-browser \
-	install-calculator \
-	install-calendar \
-	install-camera \
-	install-docs-pdf \
-	install-file-manager \
-	install-gallery \
-	install-keyboard \
-	install-logcat \
-	install-mail \
-	install-mail-extra \
-	install-maps \
-	install-memorization \
-	install-messaging-extra \
-	install-messaging-extra-2 \
-	install-notes \
+	install-$(browser).apk \
+	install-$(calculator).apk \
+	install-$(calendar).apk \
+	install-$(camera).apk \
+	install-$(docs_pdf).apk \
+	install-$(file_manager).apk \
+	install-$(gallery).apk \
+	install-$(keyboard).apk \
+	install-$(logcat).apk \
+	install-$(mail).apk \
+	install-$(mail_extra).apk \
+	install-$(maps).apk \
+	install-$(memorization).apk \
+	install-$(messaging_extra).apk \
+	install-$(messaging_extra_2).apk \
+	install-$(notes).apk \
 	install-org.fdroid.fdroid.apk \
-	install-sensor-stats \
+	install-$(sensor_stats).apk \
 	disable-google-packages \
 	revoke-revocable-special-accesses-from-all-packages \
 	revoke-dangerous-permissions-from-all-packages \
@@ -32,12 +51,12 @@ automatically-provision-android-one: \
 
 .PHONY: manually-provision-android-one
 manually-provision-android-one: \
-	install-password-manager \
-	configure-keyboard \
-	configure-mail \
-	configure-mail-extra \
-	configure-memorization \
-	configure-password-manager \
+	install-$(password_manager).apk \
+	configure-$(keyboard).apk \
+	configure-$(mail).apk \
+	configure-$(mail_extra).apk \
+	configure-$(memorization).apk \
+	configure-$(password_manager).apk \
 	prompt-managing-special-accesses \
 	prompt-managing-default-apps \
 	;
@@ -48,8 +67,8 @@ is-android-one-provisioned: \
 	are-revocable-special-permissions-revoked-from-all-packages \
 	is-special-access-data_saver-revoked-from-all-packages \
 	are-dangerous-permissions-revoked-from-all-packages \
-	is-mail-extra-enabled \
-	is-password-manager-enabled \
+	is-package-$(mail_extra)-enabled \
+	is-package-$(password_manager)-enabled \
 	; $(warning This target performs only partial checks)
 
 # ==== Internal Rules and Variables ====
@@ -712,33 +731,6 @@ prompt-updating-system:
 
 # ---- Install Packages ----
 
-.PHONY: install-browser
-install-browser: install-org.mozilla.fennec_fdroid.apk ;
-
-.PHONY: install-calculator
-install-calculator: install-com.simplemobiletools.calculator.apk ;
-
-.PHONY: install-calendar
-install-calendar: install-com.simplemobiletools.calendar.pro.apk ;
-
-.PHONY: install-camera
-install-camera: install-net.sourceforge.opencamera.apk ;
-
-.PHONY: install-docs-pdf
-install-docs-pdf: install-com.artifex.mupdf.viewer.app.apk ;
-
-.PHONY: install-file-manager
-install-file-manager: install-com.simplemobiletools.filemanager.pro.apk ;
-
-.PHONY: install-gallery
-install-gallery: install-com.simplemobiletools.gallery.pro.apk ;
-
-.PHONY: install-keyboard
-install-keyboard: install-com.menny.android.anysoftkeyboard.apk ;
-
-.PHONY: configure-keyboard
-configure-keyboard: configure-com.menny.android.anysoftkeyboard.apk ;
-
 .PHONY: configure-com.menny.android.anysoftkeyboard.apk
 configure-com.menny.android.anysoftkeyboard.apk: configure-%.apk:
 	$(adb_wakeup)
@@ -776,9 +768,6 @@ configure-com.menny.android.anysoftkeyboard.apk: configure-%.apk:
 				); do echo "."; sleep 1; done \
 		; )
 
-.PHONY: install-logcat
-install-logcat: install-com.dp.logcatapp.apk ;
-
 .PHONY: install-com.dp.logcatapp.apk
 install-com.dp.logcatapp.apk: \
 	install-%.apk: var/cache/fdroidcl/apks/%.apk
@@ -790,12 +779,6 @@ configure-com.dp.logcatapp.apk: configure-%.apk:
 	$(MAKE) -f $(cur_makefile) \
 		grant-permission-android.permission.READ_LOGS-to-$*-package
 
-.PHONY: install-mail
-install-mail: install-com.fsck.k9.apk ;
-
-.PHONY: configure-mail
-configure-mail: configure-com.fsck.k9.apk
-
 .PHONY: configure-com.fsck.k9.apk
 configure-com.fsck.k9.apk: configure-%.apk:
 	$(adb_wakeup)
@@ -803,9 +786,6 @@ configure-com.fsck.k9.apk: configure-%.apk:
 	@echo "* Settings > General settings > Interaction > Confirm actions: Tick all"
 	@echo "* Settings > Account settings > Search > Enable server search: Tick (per-account)"
 	@head -n 1
-
-.PHONY: install-mail-extra
-install-mail-extra: install-ch.protonmail.android.apk ;
 
 .PHONY: install-ch.protonmail.android.apk
 install-ch.protonmail.android.apk: \
@@ -816,23 +796,11 @@ install-ch.protonmail.android.apk: \
 var/cache/protonmail/ch.protonmail.android.apk:
 	$(MAKE) -f Makefile.protonmail $@-if-modified
 
-.PHONY: is-mail-extra-enabled
-is-mail-extra-enabled: is-package-ch.protonmail.android-enabled ;
-
-.PHONY: configure-mail-extra
-configure-mail-extra:
+.PHONY: configure-ch.protonmail.android.apk
+configure-ch.protonmail.android.apk: configure-%.apk:
 	$(adb_wakeup)
-	@echo "Once you configure application mail extra, press the enter key."
+	@echo "Once you configure application $*, press the enter key."
 	@head -n 1
-
-.PHONY: install-maps
-install-maps: install-net.osmand.plus.apk ;
-
-.PHONY: install-memorization
-install-memorization: install-com.ichi2.anki.apk ;
-
-.PHONY: configure-memorization
-configure-memorization: configure-com.ichi2.anki.apk ;
 
 .PHONY: configure-com.ichi2.anki.apk
 configure-com.ichi2.anki.apk: configure-%.apk:
@@ -873,19 +841,13 @@ dial-hidden-code-%:
 # > ...
 # > ... Whenever a group member leaves, all group participants clear
 # > their `Sender Key` and start over.
-.PHONY: install-messaging-extra
-install-messaging-extra: install-com.whatsapp.apk
-	$(info How to start a conversation without contacts permission: "https://api.whatsapp.com/send?phone=4412345" - relying on default setting "Default apps > Opening links > WhatsApp > Supported links")
-
 .PHONY: install-com.whatsapp.apk
 install-com.whatsapp.apk: var/cache/whatsapp/com.whatsapp.apk
 	$(ADB) install --user current $<
+	$(info How to start a conversation without contacts permission: "https://api.whatsapp.com/send?phone=4412345" - relying on default setting "Default apps > Opening links > WhatsApp > Supported links")
 
 .SECONDARY: var/cache/whatsapp/com.whatsapp.apk
 var/cache/whatsapp/com.whatsapp.apk: ; $(MAKE) -f Makefile.whatsapp $@
-
-.PHONY: install-messaging-extra-2
-install-messaging-extra-2: install-org.thoughtcrime.securesms.apk
 
 .PHONY: install-org.thoughtcrime.securesms.apk
 install-org.thoughtcrime.securesms.apk: install-%.apk: \
@@ -894,12 +856,6 @@ install-org.thoughtcrime.securesms.apk: install-%.apk: \
 
 var/cache/signal/org.thoughtcrime.securesms.apk:
 	$(MAKE) -f Makefile.signal $@
-
-.PHONY: install-notes
-install-notes: install-com.simplemobiletools.notes.pro.apk ;
-
-.PHONY: install-password-manager
-install-password-manager: install-com.x8bit.bitwarden.apk ;
 
 .PHONY: install-com.x8bit.bitwarden.apk
 install-com.x8bit.bitwarden.apk: c = org.fdroid.fdroid
@@ -915,21 +871,12 @@ install-com.x8bit.bitwarden.apk: install-%.apk:
 	@head -n 1
 	$(MAKE) -f $(cur_makefile) is-package-$*-enabled
 
-.PHONY: is-password-manager-enabled
-is-password-manager-enabled: is-package-com.x8bit.bitwarden-enabled ;
-
-.PHONY: configure-password-manager
-configure-password-manager: configure-com.x8bit.bitwarden.apk ;
-
 .PHONY: configure-com.x8bit.bitwarden.apk
 configure-com.x8bit.bitwarden.apk: configure-%.apk:
 	$(adb_wakeup)
 	@echo "Once you configure application $*, press the enter key."
 	@echo "* Settings > Unlock with Biometrics"
 	@head -n 1
-
-.PHONY: install-sensor-stats
-install-sensor-stats: install-com.vonglasow.michael.satstat.apk ;
 
 # XXX This shall be allowed.
 .PHONY: revoke-permission-android.permission.CHANGE_WIFI_STATE-from-com.vonglasow.michael.satstat-package
