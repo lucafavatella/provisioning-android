@@ -1,3 +1,5 @@
+.DEFAULT_GOAL = list-devices
+
 include android-one.pre-secondary-expansion.mk
 
 .SECONDEXPANSION:

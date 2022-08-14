@@ -1,3 +1,5 @@
+.DEFAULT_GOAL = list-devices
+
 .PHONY: provision-sprout
 provision-sprout: \
 	automatically-provision-sprout \

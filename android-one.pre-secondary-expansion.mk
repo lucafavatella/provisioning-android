@@ -1,5 +1,3 @@
-.DEFAULT_GOAL = list-devices
-
 ADB = adb
 ADB_USER_ID = 0
 
