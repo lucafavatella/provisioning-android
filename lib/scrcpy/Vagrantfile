@@ -1,0 +1,48 @@
+$usage = <<-USAGE
+Helper to remotely control the graphical UI of a USB connected Android device.
+
+The Android device is meant to be with USB debugging enabled and allowed.
+
+The tool used for remotely controlling the Android device
+is [scrcpy](https://github.com/Genymobile/scrcpy).
+
+The tool scrcpy is installed on a VirtualBox VM - rather than natively -
+so not to require native installation of dependencies.
+([Docker does not support USB passthrough](https://docs.docker.com/desktop/faqs/general/#can-i-pass-through-a-usb-device-to-a-container).)
+
+USB passthrough configuration requires stopping the VM
+and [selecting the USB device](https://forum.xda-developers.com/t/how-to-adb-via-virtualbox-usb-passthrough-windows-host-to-ubuntu-guest.570452/).
+
+The graphical UI of the VM host is reached
+via VNC server port published on `localhost:5900`
+(e.g. on macOS run `open vnc://localhost:5900`).
+USAGE
+# References:
+# * [`vnc` URI scheme](https://www.rfc-editor.org/rfc/rfc7869#section-2.1).
+
+$provision_script = <<-SCRIPT
+apt-get update \
+  && apt-get install --no-install-recommends --quiet --yes tightvncserver xfonts-base konsole \
+  && apt-get install --no-install-recommends --quiet --yes scrcpy adb
+SCRIPT
+
+# [Alternative X servers serving VNC](https://packages.debian.org/bullseye/xserver).
+$vnc_server_script = <<-SCRIPT
+mkdir -p ~/.vnc \
+  && { printf "secret" | tightvncpasswd -f > ~/.vnc/passwd; } \
+  && chmod 600 ~/.vnc/passwd \
+  && tightvncserver :1 -rfbport 5901 -rfbauth ~/.vnc/passwd
+SCRIPT
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "debian/bullseye64"
+  config.vm.provision "shell", inline: $provision_script
+
+  config.trigger.after :up do |trigger|
+    trigger.run_remote = {inline: $vnc_server_script}
+  end
+
+  config.vm.network "forwarded_port", guest: 5901, host: 5900
+
+  config.vm.post_up_message $usage
+end
