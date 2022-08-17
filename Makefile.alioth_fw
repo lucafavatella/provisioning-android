@@ -1,0 +1,58 @@
+# Reference: https://wiki.lineageos.org/devices/alioth/fw_update
+FW_URL = https://bigota.d.miui.com/V13.0.6.0.SKHEUXM/miui_ALIOTHEEAGlobal_V13.0.6.0.SKHEUXM_c393876947_12.0.zip
+PAYLOAD_DUMPER_VERSION = eb13ef8f181077b69c9e39703e96dc3ad0bbfd96
+PAYLOAD_DUMPER_DOCKERFILE_URL = https://raw.githubusercontent.com/ssut/payload-dumper-go/$(PAYLOAD_DUMPER_VERSION)/Dockerfile
+
+.DEFAULT_GOAL = clean
+
+.DELETE_ON_ERROR:
+
+cur_makefile = Makefile.alioth_fw
+
+.PHONY: clean
+clean: \
+	clean-dockerfile-in \
+	clean-dockerfile-sed-out \
+	clean-dockerfile-out \
+	clean-fw-files \
+	;
+
+work_dir = var/cache/alioth_fw
+in_dir = $(work_dir)/in
+out_dir = $(work_dir)/out
+out_fw_files_dir = $(out_dir)/fw_files
+
+.PHONY: clean-dockerfile-in
+clean-dockerfile-in: ; -rm $(in_dir)/Dockerfile.$(PAYLOAD_DUMPER_VERSION)
+
+.PHONY: clean-dockerfile-sed-out
+clean-dockerfile-sed-out: ; -rm $(out_dir)/Dockerfile.sed
+
+.PHONY: clean-dockerfile-out
+clean-dockerfile-out: ; -rm $(out_dir)/Dockerfile
+
+.PHONY: clean-fw-files
+clean-fw-files: ; -rm -r $(out_fw_files_dir)
+
+.PHONY: fw-files
+fw-files: $(out_dir)/Dockerfile
+	DOCKER_BUILDKIT=1 docker build -f $< -o $(out_fw_files_dir) .
+
+$(out_dir)/Dockerfile: \
+	$(in_dir)/Dockerfile.$(PAYLOAD_DUMPER_VERSION) \
+	$(out_dir)/Dockerfile.sed \
+	| $(out_dir)
+	sed -f $(word 2, $^) $< >$@
+
+$(out_dir)/Dockerfile.sed: \
+	lib/alioth_fw/templates/Dockerfile.$(PAYLOAD_DUMPER_VERSION).sed \
+	$(cur_makefile) \
+	$(out_dir)
+	sed -e 's|{{ fw_url }}|$(FW_URL)|' $< >$@
+
+$(out_dir): ; mkdir $@
+
+get = curl -sSf -o $(3) --create-dirs $(2) $(1)
+
+$(in_dir)/Dockerfile.$(PAYLOAD_DUMPER_VERSION):
+	$(call get,$(PAYLOAD_DUMPER_DOCKERFILE_URL),,$@)
