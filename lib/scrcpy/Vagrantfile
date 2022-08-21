@@ -35,14 +35,14 @@ mkdir -p ~/.vnc \
 SCRIPT
 
 Vagrant.configure("2") do |config|
+  config.vm.post_up_message = $usage
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--usb", "on"]
+  end
+  config.vm.network "forwarded_port", guest: 5901, host: 5900
   config.vm.box = "debian/bullseye64"
   config.vm.provision "shell", inline: $provision_script
-
   config.trigger.after :up do |trigger|
     trigger.run_remote = {inline: $vnc_server_script}
   end
-
-  config.vm.network "forwarded_port", guest: 5901, host: 5900
-
-  config.vm.post_up_message = $usage
 end
