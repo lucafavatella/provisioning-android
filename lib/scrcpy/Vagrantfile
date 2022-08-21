@@ -36,12 +36,22 @@ SCRIPT
 
 Vagrant.configure("2") do |config|
   config.vm.post_up_message = $usage
+
+  # USB passthrough requires VM configuration and - potentially - ADB key.
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--usb", "on"]
   end
+  config.vm.synced_folder ".", "/vagrant"
+
+  # Reaching the VNC server requires publishing port.
   config.vm.network "forwarded_port", guest: 5901, host: 5900
+
+  # Provisioning.
   config.vm.box = "debian/bullseye64"
   config.vm.provision "shell", inline: $provision_script
+
+  # Starting of VNC server.
+  # This is fragile e.g. what happens calling `up` twice in a row?
   config.trigger.after :up do |trigger|
     trigger.run_remote = {inline: $vnc_server_script}
   end
