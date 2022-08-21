@@ -25,7 +25,7 @@ In summary:
 * From VirtualBox, select USB device.
 * `vagrant up`.
 * If needed, `cp -pR ~/.android .`.
-* If needed, `ADB_VENDOR_KEYS=/vagrant/.android/adbkey vagrant ssh -c 'scrcpy --turn-screen-off --stay-awake'`.
+* If needed, `vagrant ssh -c 'ADB_VENDOR_KEYS=/vagrant/.android/adbkey scrcpy --turn-screen-off --stay-awake'`.
   Otherwise, `vagrant ssh -c 'scrcpy --turn-screen-off --stay-awake'`.
 * Open VNC client e.g. on macOS `open vnc://localhost:5900?VncPassword=secret`.
 USAGE
