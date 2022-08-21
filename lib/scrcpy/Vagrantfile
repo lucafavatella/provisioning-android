@@ -35,7 +35,7 @@ USAGE
 $provision_script = <<-SCRIPT
 apt-get update \
   && apt-get install --no-install-recommends --quiet --yes tightvncserver xfonts-base konsole \
-  && apt-get install --no-install-recommends --quiet --yes scrcpy adb
+  && apt-get install --no-install-recommends --quiet --yes scrcpy adb usbutils
 SCRIPT
 
 # [Alternative X servers serving VNC](https://packages.debian.org/bullseye/xserver).
