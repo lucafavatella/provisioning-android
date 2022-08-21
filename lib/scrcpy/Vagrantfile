@@ -16,6 +16,18 @@ and [selecting the USB device](https://forum.xda-developers.com/t/how-to-adb-via
 The graphical UI of the VM host is reached
 via VNC server port published on `localhost:5900`
 (e.g. on macOS run `open vnc://localhost:5900?VncPassword=secret`).
+
+In summary:
+* If needed, identify the ADB keys to use later e.g. `~/.android/adbkey{,.pub}`.
+* `cd` to the folder where this `Vagrantfile` file is.
+* `vagrant up`.
+* `vagrant halt`.
+* From VirtualBox, select USB device.
+* `vagrant up`.
+* If needed, `cp -pR ~/.android .`.
+* If needed, `ADB_VENDOR_KEYS=/vagrant/.android/adbkey vagrant ssh -c 'scrcpy --turn-screen-off --stay-awake'`.
+  Otherwise, `vagrant ssh -c 'scrcpy --turn-screen-off --stay-awake'`.
+* Open VNC client e.g. on macOS `open vnc://localhost:5900?VncPassword=secret`.
 USAGE
 # References:
 # * [`vnc` URI scheme](https://www.rfc-editor.org/rfc/rfc7869#section-2.1).
