@@ -15,7 +15,7 @@ and [selecting the USB device](https://forum.xda-developers.com/t/how-to-adb-via
 
 The graphical UI of the VM host is reached
 via VNC server port published on `localhost:5900`
-(e.g. on macOS run `open vnc://localhost:5900`).
+(e.g. on macOS run `open vnc://localhost:5900?VncPassword=secret`).
 USAGE
 # References:
 # * [`vnc` URI scheme](https://www.rfc-editor.org/rfc/rfc7869#section-2.1).
