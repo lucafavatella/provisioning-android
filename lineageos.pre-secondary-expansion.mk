@@ -1,6 +1,7 @@
 ADB = adb
 
 docs_pdf = com.artifex.mupdf.viewer.app
+file_manager = com.simplemobiletools.filemanager.pro
 mail = com.fsck.k9
 mail_extra = ch.protonmail.android
 maps = net.osmand.plus
@@ -10,6 +11,7 @@ password_manager = com.x8bit.bitwarden
 .PHONY: automatically-provision-lineageos
 automatically-provision-lineageos: \
 	install-$(docs_pdf).apk \
+	install-$(file_manager).apk \
 	install-$(mail).apk \
 	install-$(mail_extra).apk \
 	install-$(maps).apk \
