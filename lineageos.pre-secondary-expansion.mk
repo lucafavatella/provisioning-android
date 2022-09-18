@@ -1,7 +1,9 @@
 ADB = adb
+ADB_USER_ID = 0
 
 docs_pdf = com.artifex.mupdf.viewer.app
 file_manager = com.simplemobiletools.filemanager.pro
+logcat = com.dp.logcatapp
 mail = com.fsck.k9
 mail_extra = ch.protonmail.android
 maps = net.osmand.plus
@@ -12,6 +14,7 @@ password_manager = com.x8bit.bitwarden
 automatically-provision-lineageos: \
 	install-$(docs_pdf).apk \
 	install-$(file_manager).apk \
+	install-$(logcat).apk \
 	install-$(mail).apk \
 	install-$(mail_extra).apk \
 	install-$(maps).apk \
@@ -35,6 +38,15 @@ is-lineageos-provisioned: \
 	; $(warning This target performs only partial checks)
 
 # ==== Internal Rules and Variables ====
+
+# ---- Android Variables: Permissions ----
+
+revocable_special_permissions = \
+	android.permission.SYSTEM_ALERT_WINDOW \
+	android.permission.WRITE_SETTINGS \
+	android.permission.ACCESS_NOTIFICATIONS \
+	android.permission.REQUEST_INSTALL_PACKAGES \
+	android.permission.CHANGE_WIFI_STATE
 
 # ---- Android Variables: ADB Library ----
 
@@ -68,6 +80,19 @@ list-enabled-packages: ; @echo $(enabled_packages)
 .PHONY: is-package-%-enabled
 is-package-%-enabled: ; $(if $(filter $*,$(enabled_packages)),@true,@false)
 
+# ---- Revoke Permissions ----
+
+grant_perm_pkg_sep = -to-
+grant_pkg = $(word 2,$(subst $(grant_perm_pkg_sep), ,$(1)))
+grant_perm = $(word 1,$(subst $(grant_perm_pkg_sep), ,$(1)))
+
+.PHONY: grant-permission-%-package
+grant-permission-%-package:
+	$(if \
+		$(filter $(revocable_special_permissions),$(call grant_perm,$*)), \
+		$(error Granting appop unimplemented), \
+		$(ADB) shell pm grant --user $(ADB_USER_ID) $(call grant_pkg,$*) $(call grant_perm,$*))
+
 # ---- Misc ----
 
 .PHONY: disable-nfc
@@ -75,6 +100,8 @@ disable-nfc:
 	$(ADB) shell svc nfc disable
 
 # ---- Install Packages ----
+
+include install-packages.com.dp.logcatapp.mk
 
 include install-packages.com.fsck.k9.mk
 
