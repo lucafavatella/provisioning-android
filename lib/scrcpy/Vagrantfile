@@ -36,11 +36,19 @@ USAGE
 # References:
 # * [`vnc` URI scheme](https://www.rfc-editor.org/rfc/rfc7869#section-2.1).
 
-$provision_script = <<-SCRIPT
+$ssh_username = "vagrant"
+
+# [ADB requires `plugdev` group](https://developer.android.com/studio/run/device#setting-up).
+$scrcpy_provision_script = <<-SCRIPT
 echo 'deb http://deb.debian.org/debian bullseye-backports main' > /etc/apt/sources.list.d/bullseye-backports.list \
   && apt-get update \
-  && apt-get install --no-install-recommends --quiet --yes tightvncserver xfonts-base konsole \
-  && apt-get install --no-install-recommends --quiet --yes scrcpy adb/bullseye-backports usbutils
+  && apt-get install --no-install-recommends --quiet --yes scrcpy adb/bullseye-backports usbutils \
+  && usermod -aG plugdev #{$ssh_username}
+SCRIPT
+
+$vnc_server_provision_script = <<-SCRIPT
+apt-get update \
+  && apt-get install --no-install-recommends --quiet --yes tightvncserver xfonts-base konsole
 SCRIPT
 
 # [Alternative X servers serving VNC](https://packages.debian.org/bullseye/xserver).
@@ -65,11 +73,14 @@ Vagrant.configure("2") do |config|
 
   # Provisioning.
   config.vm.box = "debian/bullseye64"
-  config.vm.provision "shell", inline: $provision_script
+  config.vm.provision "shell", inline: $vnc_server_provision_script
+  config.vm.provision "shell", inline: $scrcpy_provision_script
 
   # Starting of VNC server.
   # This is fragile e.g. what happens calling `up` twice in a row?
   config.trigger.after :up do |trigger|
     trigger.run_remote = {inline: $vnc_server_script}
   end
+
+  config.ssh.username = $ssh_username
 end
