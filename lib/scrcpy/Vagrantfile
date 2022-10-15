@@ -18,6 +18,7 @@ via VNC server port published on `localhost:5900`
 (e.g. on macOS run `open vnc://localhost:5900?VncPassword=secret`).
 
 In summary:
+* (If needed, clear state by running `vagrant destroy` and `vagrant box update`.)
 * If needed, identify the ADB keys to use later e.g. `~/.android/adbkey{,.pub}`.
 * `cd` to the folder where this `Vagrantfile` file is.
 * `vagrant up`.
