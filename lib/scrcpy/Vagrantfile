@@ -33,9 +33,10 @@ USAGE
 # * [`vnc` URI scheme](https://www.rfc-editor.org/rfc/rfc7869#section-2.1).
 
 $provision_script = <<-SCRIPT
-apt-get update \
+echo 'deb http://deb.debian.org/debian bullseye-backports main' > /etc/apt/sources.list.d/bullseye-backports.list \
+  && apt-get update \
   && apt-get install --no-install-recommends --quiet --yes tightvncserver xfonts-base konsole \
-  && apt-get install --no-install-recommends --quiet --yes scrcpy adb usbutils
+  && apt-get install --no-install-recommends --quiet --yes scrcpy adb/bullseye-backports usbutils
 SCRIPT
 
 # [Alternative X servers serving VNC](https://packages.debian.org/bullseye/xserver).
