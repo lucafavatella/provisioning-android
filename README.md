@@ -1,9 +1,23 @@
 # provisioning-android
 
-Entry points are files `Makefile.*`
-(files `*.mk` are internal, meant to be included).
+Structure of the repository:
+* `/Makefile.*`:
+  Entry points for provisioning of Android devices.
+  Details below.
+* `/*.mk`:
+  Internal files, meant to be included by `Makefile.*` files.
+  Ignore these.
+* `/Makefile.android-one.contacts`:
+  Entry point for exporting raw contacts.
+* `/lib/scrcpy/`:
+  Utility for accessing GUI of Android device via USB.
+  Wrapper of tool `scrcpy` in case unable to install deps natively.
+* `/doc`:
+  Notes.
 
-## alioth
+## Provisioning of Android Devices
+
+### alioth
 
 Install [LineageOS for microG](https://lineage.microg.org),
 that recommends following [the official LineageOS installation guide](https://wiki.lineageos.org/devices/alioth/install)
@@ -13,7 +27,7 @@ that recommends following [the official LineageOS installation guide](https://wi
 make -f Makefile.alioth provision-alioth
 ```
 
-## sprout
+### sprout
 
 ```
 make -f Makefile.sprout provision-sprout
@@ -21,11 +35,11 @@ make -f Makefile.sprout provision-sprout
 
 For documentation of published security patches please see "Nokia 6.2" at https://www.nokia.com/phones/en_int/security-updates
 
-## Troubleshooting
+### Troubleshooting
 
-### CA certificates
+#### CA certificates
 
-#### Symptom
+##### Symptom
 
 ```
 curl: (60) SSL certificate problem: certificate has expired
