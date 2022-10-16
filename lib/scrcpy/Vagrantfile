@@ -31,8 +31,8 @@ In summary:
 * Connect USB device.
 * Open VNC client e.g. on macOS `open vnc://localhost:5900?VncPassword=secret`.
 * In terminal over VNC:
-  if needed, `ADB_VENDOR_KEYS=/vagrant/.android/adbkey scrcpy --turn-screen-off --stay-awake`;
-  otherwise, `scrcpy --turn-screen-off --stay-awake`.
+  if needed, `ADB_VENDOR_KEYS=/vagrant/.android/adbkey scrcpy --render-driver=software --turn-screen-off --stay-awake`;
+  otherwise, `scrcpy --render-driver=software --turn-screen-off --stay-awake`.
 USAGE
 # References:
 # * [`vnc` URI scheme](https://www.rfc-editor.org/rfc/rfc7869#section-2.1).
