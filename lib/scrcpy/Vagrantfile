@@ -67,8 +67,8 @@ SCRIPT
 Vagrant.configure("2") do |config|
   config.vm.post_up_message = $usage
 
-  # USB passthrough requires VM configuration and - potentially - ADB key.
   config.vm.provider "virtualbox" do |vb|
+    # USB passthrough requires VM configuration and - potentially - ADB key.
     vb.customize ["modifyvm", :id, "--usb", "on"]
   end
   config.vm.synced_folder ".", "/vagrant"
