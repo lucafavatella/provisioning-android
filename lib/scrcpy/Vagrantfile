@@ -38,11 +38,16 @@ USAGE
 
 $ssh_username = "vagrant"
 
-# [ADB requires `plugdev` group](https://developer.android.com/studio/run/device#setting-up).
+# [ADB requires](https://developer.android.com/studio/run/device#setting-up):
+# * `plugdev` group.
+# * udev rules - in package `android-sdk-platform-tools-common`.
 $scrcpy_provision_script = <<-SCRIPT
 echo 'deb http://deb.debian.org/debian bullseye-backports main' > /etc/apt/sources.list.d/bullseye-backports.list \
   && apt-get update \
-  && apt-get install --no-install-recommends --quiet --yes scrcpy adb/bullseye-backports usbutils \
+  && apt-get install --no-install-recommends --quiet --yes \
+  scrcpy \
+  adb/bullseye-backports android-sdk-platform-tools-common \
+  usbutils \
   && usermod -aG plugdev #{$ssh_username}
 SCRIPT
 
