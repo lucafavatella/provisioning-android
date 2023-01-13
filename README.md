@@ -53,3 +53,24 @@ E.g. if you use Homebrew you may use:
 ```
 SSL_CERT_FILE="$(brew --prefix)/etc/ca-certificates/cert.pem" make ...
 ```
+
+#### Apps not receiving push messages on LineageOS for microG
+
+From [NanoDroid](https://gitlab.com/Nanolx/NanoDroid/-/blob/feb90370c130c6255d6e920e3facceb640ce8f20/doc/Issues.md#L136-142):
+>   * go to microG Settings / Google Cloud Messaging and check if it is connected
+>   * ensure you don't have an adblocker blocking the domain `mtalk.google.com` it is required for GCM to work
+>   * when using Titanium Backup or OAndBackupX first install the app only (without data) and start it, this will register the app, afterwards restore it's data
+>   * when restoring the ROM from a TWRP backup GCM registration for apps is sometimes broken. You may use the following command to reset GCM/FCM connection(s). App(s) will re-register when launched afterwards:
+>      * `nutl -r APPID` (eg.: APPID = `com.nianticlabs.pokemongo`) or `nutl -r` (for all applications)
+
+[i.e.](https://gitlab.com/Nanolx/NanoDroid/-/blob/feb90370c130c6255d6e920e3facceb640ce8f20/Full/system/bin/nanodroid-util#L55-57):
+```
+		find /data/data/${1}/shared_prefs -name com.google.android.gms.*.xml -delete
+```
+or:
+```
+		find /data/data/*/shared_prefs -name com.google.android.gms.*.xml -delete
+```
+
+>   * if you can't make any app registering for Google Cloud Messaging, try the following
+>      * open the Phone app and dial the following: `*#*#2432546#*#*` (or ` *#*#CHECKIN#*#*`)
