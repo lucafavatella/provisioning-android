@@ -19,9 +19,12 @@ Structure of the repository:
 
 ### alioth
 
-Install [LineageOS for microG](https://lineage.microg.org),
-that recommends following [the official LineageOS installation guide](https://wiki.lineageos.org/devices/alioth/install)
-(see also [forum](https://forum.xda-developers.com/t/rom-official-alioth-aliothin-12-1-lineageos-19-1.4418635/)).
+Install [LineageOS for microG](https://lineage.microg.org):
+* Follow the installation instructions.
+  They recommend following [the official LineageOS installation guide](https://wiki.lineageos.org/devices/alioth/install)
+  (see also [forum](https://forum.xda-developers.com/t/rom-official-alioth-aliothin-12-1-lineageos-19-1.4418635/)).
+* Follow the post-install instructions.
+  Also enable Google cloud messaging (before installing apps); this requires also registering the device to Google services.
 
 ```
 make -f Makefile.alioth provision-alioth
