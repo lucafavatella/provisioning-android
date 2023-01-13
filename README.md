@@ -47,7 +47,7 @@ curl: (60) SSL certificate problem: certificate has expired
 
 #### Treatment
 
-Set environment variable [`SSL_CERT_FILE`](https://manpages.debian.org/experimental/openssl/openssl-env.7ssl.en.html).
+Set environment variable [`SSL_CERT_FILE`](https://manpages.debian.org/testing/openssl/openssl-env.7ssl.en.html).
 
 E.g. if you use Homebrew you may use:
 ```
