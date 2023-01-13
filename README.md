@@ -74,3 +74,5 @@ or:
 
 >   * if you can't make any app registering for Google Cloud Messaging, try the following
 >      * open the Phone app and dial the following: `*#*#2432546#*#*` (or ` *#*#CHECKIN#*#*`)
+
+Secret code `2432546` seems confirmed running [app Secret Codes](https://f-droid.org/packages/fr.simon.marquis.secretcodes/).
