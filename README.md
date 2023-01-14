@@ -26,6 +26,8 @@ Install [LineageOS for microG](https://lineage.microg.org):
 * Follow the post-install instructions.
   Also enable Google cloud messaging (before installing apps); this requires also registering the device to Google services.
 
+Then:
+
 ```
 make -f Makefile.alioth provision-alioth
 ```
