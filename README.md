@@ -25,6 +25,11 @@ Install [LineageOS for microG](https://lineage.microg.org):
   (see also [forum](https://forum.xda-developers.com/t/rom-official-alioth-aliothin-12-1-lineageos-19-1.4418635/)).
 * Follow the post-install instructions.
   Also enable Google cloud messaging (before installing apps); this requires also registering the device to Google services.
+  * ([Push notifications do not require account registration.](https://github.com/microg/GmsCore/wiki/Helpful-Information))
+* In the microG settings app,
+  eye-ball that the device has status registed.
+* In the microG settings app,
+  eye-ball that cloud messaging has status connected.
 
 Then:
 
@@ -61,10 +66,28 @@ SSL_CERT_FILE="$(brew --prefix)/etc/ca-certificates/cert.pem" make ...
 
 #### Apps not receiving push messages on LineageOS for microG
 
+From [microG wiki](https://github.com/microg/GmsCore/wiki/Helpful-Information):
+> * ...
+>   Push notifications do not require account registration.
+> * ...
+> * Apps that use Firebase Cloud Messaging must be installed after GmsCore ...
+> * If you are using AdAway, make sure to put mtalk.google.com on your whitelist ...
+> * If your device is having trouble registering with Firebase Cloud Messaging,
+>   you may need to open the system phone app and dial `*#*#2432546#*#*` (or `*#*#CHECKIN#*#*`)
+
+Secret code `2432546` seems confirmed running [app Secret Codes](https://f-droid.org/packages/fr.simon.marquis.secretcodes/).
+
+>   to manually register the device as described [here](https://github.com/microg/android_packages_apps_GmsCore/issues/439#issuecomment-433018720).
+>   if typing via the keypad does not work, [check this out](https://github.com/microg/android_packages_apps_GmsCore/issues/660):
+>   (execute as root)
+>   `adb shell am broadcast -a android.provider.Telephony.SECRET_CODE -d android_secret_code://2432546 --receiver-include-background`
+> * If you tried everything above ..., try the following steps ...:
+>   1. disable both cloud messaging and Google device registration and reboot
+>   2. enable only Google device registration and reboot
+>   3. enable Cloud messaging and reboot
+
 From [NanoDroid](https://gitlab.com/Nanolx/NanoDroid/-/blob/feb90370c130c6255d6e920e3facceb640ce8f20/doc/Issues.md#L136-142):
->   * go to microG Settings / Google Cloud Messaging and check if it is connected
->   * ensure you don't have an adblocker blocking the domain `mtalk.google.com` it is required for GCM to work
->   * when using Titanium Backup or OAndBackupX first install the app only (without data) and start it, this will register the app, afterwards restore it's data
+>   * ...
 >   * when restoring the ROM from a TWRP backup GCM registration for apps is sometimes broken. You may use the following command to reset GCM/FCM connection(s). App(s) will re-register when launched afterwards:
 >      * `nutl -r APPID` (eg.: APPID = `com.nianticlabs.pokemongo`) or `nutl -r` (for all applications)
 
@@ -77,7 +100,4 @@ or:
 		find /data/data/*/shared_prefs -name com.google.android.gms.*.xml -delete
 ```
 
->   * if you can't make any app registering for Google Cloud Messaging, try the following
->      * open the Phone app and dial the following: `*#*#2432546#*#*` (or ` *#*#CHECKIN#*#*`)
-
-Secret code `2432546` seems confirmed running [app Secret Codes](https://f-droid.org/packages/fr.simon.marquis.secretcodes/).
+>   * ...
