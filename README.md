@@ -74,13 +74,13 @@ From [microG wiki](https://github.com/microg/GmsCore/wiki/Helpful-Information):
 > * If you are using AdAway, make sure to put mtalk.google.com on your whitelist ...
 > * If your device is having trouble registering with Firebase Cloud Messaging,
 >   you may need to open the system phone app and dial `*#*#2432546#*#*` (or `*#*#CHECKIN#*#*`)
-
-Secret code `2432546` seems confirmed running [app Secret Codes](https://f-droid.org/packages/fr.simon.marquis.secretcodes/).
-
 >   to manually register the device as described [here](https://github.com/microg/android_packages_apps_GmsCore/issues/439#issuecomment-433018720).
 >   if typing via the keypad does not work, [check this out](https://github.com/microg/android_packages_apps_GmsCore/issues/660):
 >   (execute as root)
 >   `adb shell am broadcast -a android.provider.Telephony.SECRET_CODE -d android_secret_code://2432546 --receiver-include-background`
+
+Secret code `2432546` seems confirmed running [app Secret Codes](https://f-droid.org/packages/fr.simon.marquis.secretcodes/).
+
 > * If you tried everything above ..., try the following steps ...:
 >   1. disable both cloud messaging and Google device registration and reboot
 >   2. enable only Google device registration and reboot
