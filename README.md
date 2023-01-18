@@ -99,3 +99,7 @@ or:
 ```
 		find /data/data/*/shared_prefs -name com.google.android.gms.*.xml -delete
 ```
+
+Clean storage of app `com.google.android.gms`
+(app mentioned in [NanoDroid re push messages](https://gitlab.com/Nanolx/NanoDroid/-/blob/feb90370c130c6255d6e920e3facceb640ce8f20/Full/system/bin/nanodroid-util#L55-57))
+i.e. app "microG Services Core".
