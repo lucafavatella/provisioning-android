@@ -87,7 +87,6 @@ Secret code `2432546` seems confirmed running [app Secret Codes](https://f-droid
 >   3. enable Cloud messaging and reboot
 
 From [NanoDroid](https://gitlab.com/Nanolx/NanoDroid/-/blob/feb90370c130c6255d6e920e3facceb640ce8f20/doc/Issues.md#L136-142):
->   * ...
 >   * when restoring the ROM from a TWRP backup GCM registration for apps is sometimes broken. You may use the following command to reset GCM/FCM connection(s). App(s) will re-register when launched afterwards:
 >      * `nutl -r APPID` (eg.: APPID = `com.nianticlabs.pokemongo`) or `nutl -r` (for all applications)
 
@@ -100,5 +99,3 @@ or:
 ```
 		find /data/data/*/shared_prefs -name com.google.android.gms.*.xml -delete
 ```
-
->   * ...
