@@ -103,3 +103,16 @@ or:
 Clean storage of app `com.google.android.gms`
 (app mentioned in [NanoDroid re push messages](https://gitlab.com/Nanolx/NanoDroid/-/blob/feb90370c130c6255d6e920e3facceb640ce8f20/Full/system/bin/nanodroid-util#L55-57))
 i.e. app "microG Services Core".
+
+From https://developers.google.com/cloud-messaging
+> The GCM server and client APIs were removed on May 29, 2019,
+> and currently any calls to those APIs can be expected to fail.
+>
+> ...
+> For equivalent functionality,
+> use [Firebase Cloud Messaging (FCM)](https://firebase.google.com/docs/cloud-messaging/),
+> ...
+
+From https://github.com/microg/GmsCore/issues/1871
+on 21st Jan 2023:
+> MicroG appears to not be registering itself to Google anymore.
