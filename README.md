@@ -127,4 +127,3 @@ on Jan 14th 2023:
 > 3. Grant the permission to access the network
 >
 > IMO this is still a valid bug, the workaround shown above should not be necessary - and definitely not in a "LineageOS with Microg" ROM.
-> 
