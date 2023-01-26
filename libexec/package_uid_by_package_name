@@ -1,0 +1,24 @@
+#!/bin/sh
+
+ls() {
+    adb shell pm list packages -U "${1:?}"
+}
+
+filter_by_package_name() {
+    grep "^package:${1:?} uid:"
+}
+
+package_uid() {
+    sed -n \
+        "s/^package:${1:?} uid:\(.*\)$/\1/p"
+}
+
+PackageName="${1:?}"
+
+List="$(ls "${PackageName:?}")" || exit 1
+{ test 1 -eq $(echo "${List:?}" \
+                   | filter_by_package_name "${PackageName}" \
+                   | wc -l); } || exit 1
+echo "${List:?}" \
+    | filter_by_package_name "${PackageName}" \
+    | package_uid "${PackageName:?}"

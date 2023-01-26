@@ -33,6 +33,7 @@ manually-provision-lineageos: \
 
 .PHONY: is-lineageos-provisioned
 is-lineageos-provisioned: \
+	is-special-access-data_saver-granted-to-package-com.google.android.gms \
 	is-package-$(mail_extra)-enabled \
 	is-package-$(password_manager)-enabled \
 	; $(warning This target performs only partial checks)
@@ -80,6 +81,9 @@ list-enabled-packages: ; @echo $(enabled_packages)
 .PHONY: is-package-%-enabled
 is-package-%-enabled: ; $(if $(filter $*,$(enabled_packages)),@true,@false)
 
+uid_by_package = \
+	$(shell $(CURDIR)/libexec/package_uid_by_package_name $(1))
+
 # ---- Revoke Permissions ----
 
 grant_perm_pkg_sep = -to-
@@ -92,6 +96,20 @@ grant-permission-%-package:
 		$(filter $(revocable_special_permissions),$(call grant_perm,$*)), \
 		$(error Granting appop unimplemented), \
 		$(ADB) shell pm grant --user $(ADB_USER_ID) $(call grant_pkg,$*) $(call grant_perm,$*))
+
+# ---- List Special Accesses ----
+
+data_background_whitelist_package_uids = \
+	$(sort $(shell $(CURDIR)/libexec/net_background_whitelist))
+.PHONY: list-data_saver-whitelist-package-uids
+list-data_saver-whitelist-package-uids:
+	@echo $(data_background_whitelist_package_uids)
+
+# ---- Revoke Special Accesses: Automatic ----
+
+.PHONY: is-special-access-data_saver-granted-to-package-%
+is-special-access-data_saver-granted-to-package-%:
+	$(if $(filter $(call uid_by_package,$*),$(data_background_whitelist_package_uids)),@true,@false)
 
 # ---- Misc ----
 
