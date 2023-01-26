@@ -116,3 +116,15 @@ From https://developers.google.com/cloud-messaging
 From https://github.com/microg/GmsCore/issues/1871
 on 21st Jan 2023:
 > MicroG appears to not be registering itself to Google anymore.
+
+From https://github.com/microg/GmsCore/issues/1861#issuecomment-1382719080
+on Jan 14th 2023:
+> The root cause seems to be a missing permission.
+> ... I had to manually grant the "access network" permission in the app settings.
+>
+> 1. Long press on the microg icon and open the app info
+> 2. Click on Network and WiFi
+> 3. Grant the permission to access the network
+>
+> IMO this is still a valid bug, the workaround shown above should not be necessary - and definitely not in a "LineageOS with Microg" ROM.
+> 
