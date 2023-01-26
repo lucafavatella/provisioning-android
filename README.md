@@ -25,7 +25,7 @@ Install [LineageOS for microG](https://lineage.microg.org):
   (see also [forum](https://forum.xda-developers.com/t/rom-official-alioth-aliothin-12-1-lineageos-19-1.4418635/)).
 * Follow the post-install instructions.
   * Self-check.
-  * Enable Google cloud messaging (before installing apps);
+  * Enable Google cloud messaging;
     this requires also registering the device to Google services.
     * ([Push notifications do not require account registration.](https://github.com/microg/GmsCore/wiki/Helpful-Information))
 
