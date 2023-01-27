@@ -28,18 +28,20 @@ Install [LineageOS for microG](https://lineage.microg.org):
   * Enable Google cloud messaging;
     this requires also registering the device to Google services.
     * ([Push notifications do not require account registration.](https://github.com/microg/GmsCore/wiki/Helpful-Information))
+* Ensure that the microG app,
+  i.e. the `com.google.android.gms` app,
+  in the app info (long press the app icon)
+  has network access enabled.
+* In the microG settings app,
+  eye-ball that the device has status registed.
+* In the microG settings app,
+  eye-ball that cloud messaging has status connected.
 
 Then:
 
 ```
 make -f Makefile.alioth provision-alioth
 ```
-
-Finally:
-* In the microG settings app,
-  eye-ball that the device has status registed.
-* In the microG settings app,
-  eye-ball that cloud messaging has status connected.
 
 ### sprout
 
