@@ -1,4 +1,6 @@
-https://faq.whatsapp.com/618575946635920/?cms_platform=android
+## Instructions
+
+From https://faq.whatsapp.com/618575946635920/?cms_platform=android
 
 > # How to restore your chat history
 >
@@ -39,3 +41,26 @@ https://faq.whatsapp.com/618575946635920/?cms_platform=android
 >    Don't change the number of the crypt extension.
 > 4. Uninstall and reinstall WhatsApp.
 > 5. Tap RESTORE when prompted.
+
+## Notes
+
+The location where the backup is stored is not permitted on non-rooted devices.
+And WhatsApp is not debuggable so `run-as com.whatsapp` does not work.
+At least until Android 11, backup the whole app
+(file name seems [constrained to `backup.ab`](https://stackoverflow.com/questions/34482042/adb-backup-does-not-work#comment89950275_34482042):
+
+```
+adb backup -f backup.ab -noapk com.whatsapp
+```
+
+From https://android.stackexchange.com/questions/28296/how-to-fully-backup-non-rooted-devices/28315#28315
+```
+adb backup [-f <file>] [-apk|-noapk] [-obb|-noobb] [-shared|-noshared] [-all] [-system|nosystem] [-keyvalue|-nokeyvalue] [<packages...>]
+```
+
+Ensure that app `com.android.backupconfirm` is enabled:
+```
+adb shell pm enable com.android.backupconfirm
+```
+
+The resulting backup is 47B so recent com.whatsapp may be preventing backups.
