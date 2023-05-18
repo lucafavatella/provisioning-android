@@ -801,6 +801,22 @@ dial-hidden-code-%:
 # > Important: End-to-end encryption is always activated. There's no
 # > way to turn off end-to-end encryption.
 #
+# From https://faq.whatsapp.com/820124435853543/
+# > WhatsApp's end-to-end encryption is used when you chat with
+# > another person using WhatsApp Messenger.
+# > ...
+# > All of this happens automatically: no need to turn on any special
+# > settings to secure your messages.
+# >
+# > ...
+# > End-to-end encrypted chats between you and one other person have
+# > their own security code used to verify that the calls and the
+# > messages you send to that chat are end-to-end encrypted.
+# > Note: The verification process is optional for end-to-end
+# > encrypted chats, and only used to confirm that the messages and
+# > calls you send are end-to-end encrypted.
+# > This code can be found in the contact info screen ...
+#
 # From
 # https://www.whatsapp.com/security/WhatsApp-Security-Whitepaper.pdf
 # (Dec 2017) (via https://www.whatsapp.com/security/ ):
