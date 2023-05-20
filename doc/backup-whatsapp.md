@@ -47,7 +47,7 @@ From https://faq.whatsapp.com/618575946635920/?cms_platform=android
 The location where the backup is stored is not permitted on non-rooted devices.
 And WhatsApp is not debuggable so `run-as com.whatsapp` does not work.
 At least until Android 11, backup the whole app
-(file name seems [constrained to `backup.ab`](https://stackoverflow.com/questions/34482042/adb-backup-does-not-work#comment89950275_34482042):
+(file name seems [constrained to `backup.ab`)](https://stackoverflow.com/questions/34482042/adb-backup-does-not-work#comment89950275_34482042):
 
 ```
 adb backup -f backup.ab -noapk com.whatsapp
