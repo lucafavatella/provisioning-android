@@ -13,6 +13,13 @@ work_dir = var/cache/signal
 .PHONY: clean-cache
 clean-cache: ; rm -rf $(work_dir)
 
+# From https://www.signal.org/blog/phone-number-privacy-usernames/
+# > We’re also introducing a setting that lets you control who can
+# > find you by your phone number on Signal. Up until today, anyone
+# > who had your phone number ... could look you up on Signal by phone
+# > number and message you. You can now restrict this by going to
+# > Settings > Privacy > Phone Number > Who can find me by my number
+# > and setting it to “Nobody.”
 $(work_dir)/$(package).apk: $(work_dir)/$(package).url
 	cat $<
 	curl -sSf -o $@ "$$(cat $<)"
