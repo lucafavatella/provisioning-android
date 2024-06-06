@@ -797,10 +797,6 @@ dial-hidden-code-%:
 	$(ADB) shell am start -a android.intent.action.DIAL
 	@echo "Type hidden code '*#*#$*#*#*'."
 
-# From https://faq.whatsapp.com/en/android/28030015/
-# > Important: End-to-end encryption is always activated. There's no
-# > way to turn off end-to-end encryption.
-#
 # From https://faq.whatsapp.com/820124435853543/
 # > WhatsApp's end-to-end encryption is used when you chat with
 # > another person using WhatsApp Messenger.
@@ -819,14 +815,19 @@ dial-hidden-code-%:
 #
 # From
 # https://www.whatsapp.com/security/WhatsApp-Security-Whitepaper.pdf
-# (Dec 2017) (via https://www.whatsapp.com/security/ ):
-# > Messages to WhatsApp groups build on the pairwise encrypted
-# > sessions outlined above to achieve efficient server-side fan-out
-# > for most messages sent to groups . This is accomplished using the
-# > “Sender Keys” component of the Signal Messaging Protocol.
+# (Sep 2023) (via https://www.whatsapp.com/security/ ):
+#
+# > Large attachments of any type (video, audio, images, or files) are also end-to-end
+# > encrypted: ...
 # > ...
-# > ... Whenever a group member leaves, all group participants clear
-# > their `Sender Key` and start over.
+# > End-to-end encryption of messages sent to WhatsApp groups utilize the
+# > established pairwise encrypted sessions ...
+# > ... to distribute the “Sender Key” component of the Signal
+# > Messaging Protocol.
+# > ... Whenever a group member leaves, all group participants clear their
+# > `Sender Key` and start over.
+# > ...
+# > WhatsApp voice and video calls are end-to-end encrypted. ...
 .PHONY: install-com.whatsapp.apk
 install-com.whatsapp.apk: var/cache/whatsapp/com.whatsapp.apk
 	$(ADB) install --user current $<
