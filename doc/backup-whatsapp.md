@@ -64,3 +64,9 @@ adb shell pm enable com.android.backupconfirm
 ```
 
 The resulting backup is 47B so recent com.whatsapp may be preventing backups.
+
+## Mitigation
+
+[Transfer](https://faq.whatsapp.com/209942271778103/?cms_platform=android)
+from a phone to another one.
+Then to another one?
