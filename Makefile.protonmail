@@ -13,9 +13,8 @@ work_dir = var/cache/protonmail
 .PHONY: clean-cache
 clean-cache: ; rm -rf $(work_dir)
 
-# From https://protonmail.com/support/knowledge-base/android-permissions/#comment-10834
-# via https://protonapps.com
-apk_url = https://protonmail.com/download/MailAndroid/ProtonMail-Android.apk
+# See also https://proton.me/download/calendar/android/ProtonCalendar-Android.apk
+apk_url = https://github.com/ProtonMail/android-mail/releases/download/v7.6.1/ProtonMail-7.6.1_15868.apk
 
 get = curl -sSf -o $(3) --create-dirs $(2) $(1)
 
