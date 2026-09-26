@@ -6,6 +6,10 @@ This document lists privacy-focused Web browsers for Android.
 
 Chromium/Blink based.
 
+[Source](https://github.com/brave/brave-core)
+([MPL-2.0](https://github.com/brave/brave-core/blob/064bd2441dd9fd03157da2f4e54a73080d8f5a8c/LICENSE))
+and [changelog](https://github.com/brave/brave-browser/blob/master/CHANGELOG_ANDROID.md).
+
 In [own](https://brave.com/blog/f-droid/) F-Droid repository.
 
 It has [partitioning](https://brave.com/privacy-features/):
