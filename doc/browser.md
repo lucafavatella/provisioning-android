@@ -2,6 +2,8 @@
 
 This document lists privacy-focused Web browsers for Android.
 
+See also https://privacytests.org/android
+
 ## Brave
 
 Chromium/Blink based.
