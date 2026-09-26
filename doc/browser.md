@@ -83,6 +83,11 @@ Klar
 ([repo](https://github.com/ImranR98/apps.obtainium.imranr.dev/blob/2a62ed9288f9efe8e888f27be11d9f88e21df7a1/public/data/apps/complex/org.mozilla.klar.json)
 /[website](https://apps.obtainium.imranr.dev/apps?categoryMode=inclusive&sort=popular&q=firefox+klar)).
 
+### Security
+
+Performing well on https://privacytests.org/android
+(similarly to Brave).
+
 ## Cromite
 
 Chromium/Blink based.
