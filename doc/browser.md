@@ -9,12 +9,21 @@ Chromium/Blink based.
 In [own](https://brave.com/blog/f-droid/) F-Droid repository.
 
 It has [partitioning](https://brave.com/privacy-features/):
+
 > * Brave improves upon the limited network-state partitioning that’s already in Chromium.
 >   Brave’s [DOM state partitioning](https://brave.com/privacy-updates/7-ephemeral-storage/)
 >   will partition each site you visit (knowingly or unknowingly),
 >   to prevent cross-site tracking.
+
+Brave used to block by default all third-party storage,
+potentially breaking sites.
+In 2021, Brave planned to enable "ephemeral site storage",
+sharing storage for all first-party instances of the same site (i.e., same eTLD+1),
+and clearing storage on last first-party document closure and on browser restart.
+
 > * Brave also expands that partitioning to other storage mechanisms in the browser,
 >   [a protection known as network-state partitioning](https://brave.com/privacy-updates/14-partitioning-network-state/).
+
 > * Likewise, Brave protects against
 >   [some sophisticated forms of pooled-resource attacks](https://brave.com/privacy-updates/13-pool-party-side-channels/).
 
