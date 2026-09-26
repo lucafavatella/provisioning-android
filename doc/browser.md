@@ -28,5 +28,5 @@ It has [private and isolated tabs](https://github.com/FaFre/WebLibre/blob/0ed115
 
 Chromium/Blink based.
 
-https://github.com/uazo/cromite/releases
-[Broken own](https://github.com/uazo/cromite/issues/2021) F-Droid repo.
+Releases in [GitHub](https://github.com/uazo/cromite/releases),
+not in [broken own](https://github.com/uazo/cromite/issues/2021) F-Droid repo.
