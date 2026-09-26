@@ -43,7 +43,7 @@ Firefox/Gecko.
 
 Klar [=](https://support.mozilla.org/en-US/kb/difference-between-firefox-focus-and-firefox-klar) German-language version of [Focus](https://play.google.com/store/apps/details?id=org.mozilla.focus).
 
-In F-Droid, [obsolete](https://gitlab.com/fdroid/fdroiddata/-/blob/e726cf0c14afca57168d450ecee21737f05da2c2/metadata/org.mozilla.klar.yml#L760).
+In F-Droid, [very obsolete](https://gitlab.com/fdroid/fdroiddata/-/blob/e726cf0c14afca57168d450ecee21737f05da2c2/metadata/org.mozilla.klar.yml#L760).
 Labelled with anti-feature
 [`Tracking`](https://gitlab.com/fdroid/fdroiddata/-/blob/e726cf0c14afca57168d450ecee21737f05da2c2/metadata/org.mozilla.klar.yml#L1-2)
 with [MR comment](https://gitlab.com/fdroid/fdroiddata/-/work_items/2289#note_513625558)
@@ -54,7 +54,15 @@ with [maintainer note](https://gitlab.com/fdroid/fdroiddata/-/blob/e726cf0c14afc
 > so should those newer versions be added the AntiFeature can be removed again.
 
 In Guardian Project F-Droid repo
-([index](https://gitlab.com/guardianproject/fdroid-repo/-/blob/b4bc4d5fad8faed2e7c8de18412cec91563d8b9c/fdroid/repo/index.xml#L29-42)).
+([index](https://gitlab.com/guardianproject/fdroid-repo/-/blob/b4bc4d5fad8faed2e7c8de18412cec91563d8b9c/fdroid/repo/index.xml#L29-42)) -
+obsolete
+(e.g. on 26th Sep 2026 [Klar 156.0 released on 15th Sep]
+not yet [retrieved](https://gitlab.com/guardianproject/wind/fdroid-metadata/-/blob/5c1f5b415fa5637531d0c35b779decb456b8c3b8/download-firefox-klar.py#L58)
+with [last apparent repo update on 14th Sep](https://gitlab.com/guardianproject/fdroid-repo/-/commits/b4bc4d5fad8faed2e7c8de18412cec91563d8b9c))
+with anti-feature
+[`NonFreeComp`](https://gitlab.com/guardianproject/wind/fdroid-metadata/-/blob/5c1f5b415fa5637531d0c35b779decb456b8c3b8/metadata/org.mozilla.klar/en-US/antifeatures/NonFreeComp.txt#L1):
+> Firefox Klar uses a number of proprietary Google Play Services libraries,
+> such as Google In-App Payments, Firebase Cloud Messaging and others.
 
 ## Cromite
 
