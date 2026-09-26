@@ -21,6 +21,9 @@ Firefox/Gecko based.
 
 In [own](https://ironfoxoss.org/download/#f-droid) F-Droid repo.
 
+It has [basic per-site process isolation](https://ironfoxoss.org/docs/features/)
+(_"Enables [Fission](https://wiki.mozilla.org/Project_Fission) (basic per-site process isolation) by default"_).
+
 On [security](https://ironfoxoss.org/docs/limitations/#security):
 > While we do as much as possible to improve the situation,
 > it should be noted that Firefox-based web browsers, including IronFox,
