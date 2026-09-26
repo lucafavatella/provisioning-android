@@ -23,7 +23,8 @@ Brave used to block by default all third-party storage,
 potentially breaking sites.
 In 2021, Brave planned to enable "ephemeral site storage",
 sharing storage for all first-party instances of the same site (i.e., same eTLD+1),
-and clearing storage on last first-party document closure and on browser restart.
+and clearing storage on last first-party document closure and on browser restart
+(browser [comparison](https://brave.com/privacy-updates/14-partitioning-network-state/#:~:text=the%20state%20of%20DOM%20storage%20partitioning%20in%20current%20popular%20browsers)).
 
 > * Brave also expands that partitioning to other storage mechanisms in the browser,
 >   [a protection known as network-state partitioning](https://brave.com/privacy-updates/14-partitioning-network-state/).
