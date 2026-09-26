@@ -35,11 +35,18 @@ and clearing storage on last first-party document closure and on browser restart
 > * Brave also expands that partitioning to other storage mechanisms in the browser,
 >   [a protection known as network-state partitioning](https://brave.com/privacy-updates/14-partitioning-network-state/).
 
-In 2022, planned to partition
+In 2022, Brave planned to partition
 "[network state](https://privacycg.github.io/storage-partitioning/)".
 
 > * Likewise, Brave protects against
 >   [some sophisticated forms of pooled-resource attacks](https://brave.com/privacy-updates/13-pool-party-side-channels/).
+
+In 2021, Brave planned to mitigate tracking by side channels
+created by limited-but-shared resources managed by - and specific to - the browser
+(e.g. WebSockets and limits on in-flight DNS requests)
+by making those attacks uncommon and costly
+lifting limits on high bandwidth resource pools
+and relying on Web users to stop visiting sites starving their user agent.
 
 ## Focus/Klar by Firefox
 
