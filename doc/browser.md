@@ -31,6 +31,9 @@ and clearing storage on last first-party document closure and on browser restart
 > * Brave also expands that partitioning to other storage mechanisms in the browser,
 >   [a protection known as network-state partitioning](https://brave.com/privacy-updates/14-partitioning-network-state/).
 
+In 2022, planned to partition
+"[network state](https://privacycg.github.io/storage-partitioning/)".
+
 > * Likewise, Brave protects against
 >   [some sophisticated forms of pooled-resource attacks](https://brave.com/privacy-updates/13-pool-party-side-channels/).
 
