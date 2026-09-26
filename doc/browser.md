@@ -56,7 +56,7 @@ with [maintainer note](https://gitlab.com/fdroid/fdroiddata/-/blob/e726cf0c14afc
 In Guardian Project F-Droid repo
 ([index](https://gitlab.com/guardianproject/fdroid-repo/-/blob/b4bc4d5fad8faed2e7c8de18412cec91563d8b9c/fdroid/repo/index.xml#L29-42)) -
 obsolete
-(e.g. on 26th Sep 2026 [Klar 156.0 released on 15th Sep]
+(e.g. on 26th Sep 2026 [Klar 156.0 released on 15th Sep](https://archive.mozilla.org/pub/focus/releases/156.0/android/focus-156.0-android-arm64-v8a/)
 not yet [retrieved](https://gitlab.com/guardianproject/wind/fdroid-metadata/-/blob/5c1f5b415fa5637531d0c35b779decb456b8c3b8/download-firefox-klar.py#L58)
 with [last apparent repo update on 14th Sep](https://gitlab.com/guardianproject/fdroid-repo/-/commits/b4bc4d5fad8faed2e7c8de18412cec91563d8b9c))
 with anti-feature
