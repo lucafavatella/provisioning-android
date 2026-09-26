@@ -37,6 +37,23 @@ In 2022, planned to partition
 > * Likewise, Brave protects against
 >   [some sophisticated forms of pooled-resource attacks](https://brave.com/privacy-updates/13-pool-party-side-channels/).
 
+## Focus/Klar by Firefox
+
+Firefox/Gecko.
+
+Klar [=](https://support.mozilla.org/en-US/kb/difference-between-firefox-focus-and-firefox-klar) German-language version of [Focus](https://play.google.com/store/apps/details?id=org.mozilla.focus).
+
+In Guardian Project F-Droid repo
+([index](https://gitlab.com/guardianproject/fdroid-repo/-/blob/b4bc4d5fad8faed2e7c8de18412cec91563d8b9c/fdroid/repo/index.xml#L29-42)).
+
+Anti-feature [`Tracking`](https://gitlab.com/fdroid/fdroiddata/-/blob/e726cf0c14afca57168d450ecee21737f05da2c2/metadata/org.mozilla.klar.yml#L1-2).
+[Commit](https://gitlab.com/fdroid/fdroiddata/-/commit/9bd4342504df2aae7848685ce88e9e2593e45faf)
+and [MR comment](https://gitlab.com/fdroid/fdroiddata/-/work_items/2289#note_513625558).
+[Maintainer note](https://gitlab.com/fdroid/fdroiddata/-/blob/e726cf0c14afca57168d450ecee21737f05da2c2/metadata/org.mozilla.klar.yml#L755):
+> Tracking AntiFeature as Telemetry is opt-out.
+> This was due to a bug and fixed with later versions we do not yet have,
+> so should those newer versions be added the AntiFeature can be removed again.
+
 ## Cromite
 
 Chromium/Blink based.
