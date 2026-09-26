@@ -21,6 +21,10 @@ Firefox/Gecko based.
 
 In [own](https://ironfoxoss.org/download/#f-droid) F-Droid repo.
 
+[Uses](https://ironfoxoss.org/docs/features/) configs
+[from](https://codeberg.org/celenity/Phoenix/wiki/features.md)
+[Phoenix](https://codeberg.org/celenity/Phoenix/wiki/features-android.md).
+
 It has [basic per-site process isolation](https://ironfoxoss.org/docs/features/)
 (_"Enables [Fission](https://wiki.mozilla.org/Project_Fission) (basic per-site process isolation) by default"_).
 
