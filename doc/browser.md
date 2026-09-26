@@ -12,7 +12,11 @@ Chromium/Blink based.
 ([MPL-2.0](https://github.com/brave/brave-core/blob/064bd2441dd9fd03157da2f4e54a73080d8f5a8c/LICENSE))
 and [changelog](https://github.com/brave/brave-browser/blob/master/CHANGELOG_ANDROID.md).
 
+### Releases
+
 In [own](https://brave.com/blog/f-droid/) F-Droid repository.
+
+### Security
 
 It has [partitioning](https://brave.com/privacy-features/):
 
@@ -43,6 +47,8 @@ Firefox/Gecko.
 
 Klar [=](https://support.mozilla.org/en-US/kb/difference-between-firefox-focus-and-firefox-klar) German-language version of [Focus](https://play.google.com/store/apps/details?id=org.mozilla.focus).
 
+### Releases
+
 In F-Droid, [very obsolete](https://gitlab.com/fdroid/fdroiddata/-/blob/e726cf0c14afca57168d450ecee21737f05da2c2/metadata/org.mozilla.klar.yml#L760).
 Labelled with anti-feature
 [`Tracking`](https://gitlab.com/fdroid/fdroiddata/-/blob/e726cf0c14afca57168d450ecee21737f05da2c2/metadata/org.mozilla.klar.yml#L1-2)
@@ -68,6 +74,8 @@ with anti-feature
 
 Chromium/Blink based.
 
+### Releases
+
 Releases in [GitHub](https://github.com/uazo/cromite/releases),
 not in [broken own](https://github.com/uazo/cromite/issues/2021) F-Droid repo.
 
@@ -75,7 +83,11 @@ not in [broken own](https://github.com/uazo/cromite/issues/2021) F-Droid repo.
 
 Firefox/Gecko based.
 
+### Releases
+
 In [own](https://ironfoxoss.org/download/#f-droid) F-Droid repo.
+
+### Security
 
 [Uses](https://ironfoxoss.org/docs/features/) configs
 [from](https://codeberg.org/celenity/Phoenix/wiki/features.md)
@@ -151,8 +163,12 @@ From [the article from GrapheneOS](https://grapheneos.org/usage#web-browsing):
 
 Firefox/Gecko based.
 
+### Releases
+
 https://f-droid.org/en/packages/eu.weblibre.gecko/
 ["Under active development"](https://github.com/FaFre/WebLibre/blob/0ed1155d356ffb7c51893aeb7419bd67bbbeea82/README.md#L31).
+
+### Security
 
 It has [private and isolated tabs](https://github.com/FaFre/WebLibre/blob/0ed1155d356ffb7c51893aeb7419bd67bbbeea82/README.md#L101):
 > - Open **Regular**, **Private**, or **Isolated** tabs. Each isolated tab has a separate session from every other tab. Unlike private tabs, isolated tabs remain open after you quit and reopen WebLibre.
